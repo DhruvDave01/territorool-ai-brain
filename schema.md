@@ -39,6 +39,7 @@ related:
 - `01`–`20` match the frontal-lobe TOC numbers.
 - Feature atoms live under `features/` as `01-…` through `17-…`.
 - File maps live under `code/` (`mobile-code-details.md`, `web-code-details.md`).
+- **Sub brains** (task hubs that link the maps): `brains/` — mobile-code, mobile-ui, web-code, web-design, api. Start at [brains/README.md](brains/README.md).
 - Lifecycles: `screens/how-it-works.md`. FormData + columns: `data/`. Env, decisions, bugs, flavors: `ops/`.
 - Mobile visual pack: `design/` (MINI first). Pixels live in the original Design-Brain Assets folder, not in this vault.
 - Web visual pack: `design-web/` (MINI first). Two stacks (classic AdminLTE vs manager React islands). Short stills in `design-web/03-Assets/stills/`.

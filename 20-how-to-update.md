@@ -18,3 +18,4 @@ When you change product behavior:
 3. Match that file’s pattern.
 4. Do not add Redux, NativeBase, nested navigators, or a second credit-calculation path.
 5. If chrome/tokens changed, patch [design/](design/README.md) (mobile) or [design-web/](design-web/README.md) (web) — do not invent UI for deferred Register/paywall/Android/HQ.
+6. If the change is a whole surface, also patch the matching [sub brain](brains/README.md).

@@ -9,6 +9,18 @@ Detailed notes split from the root frontal lobe. **Do not invent** product behav
 | Web root | `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool` |
 | How notes are structured | [schema.md](schema.md) |
 
+## Sub brains (task hubs)
+
+The frontal lobe + this vault stay the **main brain**. Open one of these first when the work is clearly one surface:
+
+1. [Mobile Code Brain](brains/mobile-code.md) — RN screens, `App.js`, Realm, FormData posts
+2. [Mobile UI Brain](brains/mobile-ui.md) — tokens, `CustomHeader`, footer, copy nearest screen
+3. [Web Code Brain](brains/web-code.md) — Laravel, `CompanylController`, MCP PHP
+4. [Web Design Brain](brains/web-design.md) — classic AdminLTE vs manager islands
+5. [Web and Mobile API Brain](brains/api.md) — JWT paths, web URLs, FormData keys
+
+Map: [brains/README.md](brains/README.md).
+
 ## Core (always read)
 
 1. [Project overview](01-project-overview.md)
