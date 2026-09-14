@@ -82,7 +82,15 @@
     svg { width: 100%; height: 100%; display: block; cursor: grab; }
     svg.is-panning { cursor: grabbing; }
     svg circle { cursor: pointer; }
-    .label { fill: #d7dcf0; font-size: 10px; pointer-events: none; }
+    .label {
+      fill: #eef1fb; font-size: 10px; pointer-events: none;
+      paint-order: stroke; stroke: #121428; stroke-width: 3px; stroke-linejoin: round;
+    }
+    .group-title {
+      fill: #d7dcf0; font-size: 13px; font-weight: 650; text-anchor: middle;
+      pointer-events: none; paint-order: stroke; stroke: #121428; stroke-width: 4px;
+    }
+    .hull { pointer-events: none; }
     .selected {
       position: absolute; left: 16px; bottom: 14px; margin: 0; max-width: calc(100% - 48px);
       color: #c9d0ee; background: rgba(18,20,40,.8); padding: 6px 10px; border-radius: 8px; z-index: 2;
@@ -132,7 +140,7 @@
     </aside>
     <div class="stage">
       <p class="title">Graph view</p>
-      <p class="hint">Scroll to zoom · drag empty space to pan · drag a node to move it</p>
+      <p class="hint">Each color is a folder · zoom in for more names · click a node to see its links</p>
       <div class="zoom-hud" aria-label="Zoom">
         <button type="button" id="chat-toggle" title="Ask the brain">Ask</button>
         <button type="button" id="zoom-in" title="Zoom in">+</button>
@@ -156,9 +164,10 @@
       </details>
       <details open>
         <summary>Display</summary>
+        <label class="row"><input id="cluster" type="checkbox" checked> Cluster by folder</label>
         <label class="row"><input id="arrows" type="checkbox"> Arrows</label>
-        <label>Text fade threshold <output id="fade-out">12</output>
-          <input id="fade" type="range" min="0" max="30" value="12">
+        <label>Label busy notes (links ≥) <output id="fade-out">10</output>
+          <input id="fade" type="range" min="0" max="30" value="10">
         </label>
         <label>Node size <output id="nsize-out">1.0</output>
           <input id="nsize" type="range" min="0.5" max="2" step="0.1" value="1">
@@ -171,17 +180,17 @@
       </details>
       <details>
         <summary>Forces</summary>
-        <label>Center force <output id="center-out">0.4</output>
-          <input id="center" type="range" min="0" max="1" step="0.05" value="0.4">
+        <label>Center force <output id="center-out">0.08</output>
+          <input id="center" type="range" min="0" max="1" step="0.05" value="0.08">
         </label>
-        <label>Repel force <output id="repel-out">55</output>
-          <input id="repel" type="range" min="10" max="160" step="5" value="55">
+        <label>Repel force <output id="repel-out">90</output>
+          <input id="repel" type="range" min="10" max="160" step="5" value="90">
         </label>
-        <label>Link force <output id="lforce-out">0.45</output>
-          <input id="lforce" type="range" min="0" max="1" step="0.05" value="0.45">
+        <label>Link force <output id="lforce-out">0.35</output>
+          <input id="lforce" type="range" min="0" max="1" step="0.05" value="0.35">
         </label>
-        <label>Link distance <output id="ldist-out">38</output>
-          <input id="ldist" type="range" min="12" max="120" step="2" value="38">
+        <label>Link distance <output id="ldist-out">52</output>
+          <input id="ldist" type="range" min="12" max="120" step="2" value="52">
         </label>
       </details>
     </aside>
@@ -224,6 +233,7 @@
   const nsizeEl = document.getElementById("nsize");
   const lthickEl = document.getElementById("lthick");
   const arrowsEl = document.getElementById("arrows");
+  const clusterEl = document.getElementById("cluster");
   const centerEl = document.getElementById("center");
   const repelEl = document.getElementById("repel");
   const lforceEl = document.getElementById("lforce");
@@ -261,13 +271,40 @@
     adj.get(e.t).add(e.s);
   });
 
-  let sim, linkSel, nodeSel, labelSel, viewport, zoom, worldW, worldH;
+  let sim, linkSel, nodeSel, labelSel, hullSel, groupTitleSel, viewport, zoom, worldW, worldH;
   let hoverId = null;
   let selectedId = null;
+  let zoomK = 1;
+  let clusterCenters = {};
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const GROUP_ORDER = Object.keys(COLORS);
 
   function radius(d) {
-    return (2.4 + Math.sqrt(d.deg + 0.2) * 1.7) * Number(nsizeEl.value);
+    return (2.6 + Math.sqrt(d.deg + 0.2) * 1.8) * Number(nsizeEl.value);
+  }
+  function isHub(d) {
+    return /(?:^|\/)(?:README|index|AI_BRAIN|MINI-DESIGN-BRAIN|MASTER-DESIGN-BRAIN)\.md$/.test(d.id);
+  }
+  function designSub(d) {
+    if (d.g !== "design") return null;
+    const m = d.id.match(/^design\/(\d{2}-[^/]+)\//);
+    return m ? m[1] : "root";
+  }
+  const DESIGN_SUBS = [
+    "01-Brand-Guidelines", "02-User-Interface", "03-Assets",
+    "04-User-Flows", "05-Design-System", "06-Coverage", "root"
+  ];
+  function nodeHome(d) {
+    const c = clusterCenters[d.g] || { x: worldW / 2, y: worldH / 2 };
+    const sub = designSub(d);
+    if (!sub) return c;
+    const i = Math.max(0, DESIGN_SUBS.indexOf(sub));
+    const ang = -Math.PI / 2 + (2 * Math.PI * i) / DESIGN_SUBS.length;
+    const r = 130;
+    return { x: c.x + Math.cos(ang) * r, y: c.y + Math.sin(ang) * r };
+  }
+  function titleFont() {
+    return Math.max(13, 17 / Math.max(zoomK, 0.18));
   }
   function visible(d) {
     if (!groupOn[d.g]) return false;
@@ -285,30 +322,57 @@
   function applyFilters() {
     if (!nodeSel) return;
     nodeSel.style("display", (d) => visible(d) ? null : "none");
-    labelSel.style("display", (d) => visible(d) && d.deg >= Number(fadeEl.value) ? null : "none");
+    refreshLabels();
     linkSel.style("display", (d) => {
-      const a = nodes.find((n) => n.id === sid(d));
-      const b = nodes.find((n) => n.id === tid(d));
+      const a = nodeById(sid(d));
+      const b = nodeById(tid(d));
       return a && b && visible(a) && visible(b) ? null : "none";
     });
     nodeSel.attr("r", radius);
-    linkSel.attr("stroke-width", Number(lthickEl.value));
+    linkSel.attr("stroke-width", (d) => {
+      const a = nodeById(sid(d));
+      const b = nodeById(tid(d));
+      const same = a && b && a.g === b.g;
+      return Number(lthickEl.value) * (same ? 1 : 0.55);
+    });
     linkSel.attr("marker-end", arrowsEl.checked ? "url(#agv-arrow)" : null);
     paintFocus();
+    drawClusters();
+  }
+
+  function labelVisible(d) {
+    if (!visible(d)) return false;
+    if (d.id === hoverId || d.id === selectedId) return true;
+    if (isHub(d)) return true;
+    const fade = Number(fadeEl.value);
+    if (d.deg >= fade) return true;
+    if (zoomK >= 1.7 && d.deg >= 4) return true;
+    if (zoomK >= 2.6) return true;
+    return false;
+  }
+  function refreshLabels() {
+    if (!labelSel) return;
+    labelSel.style("display", (d) => labelVisible(d) ? null : "none");
   }
 
   function paintFocus() {
     const focus = hoverId || selectedId;
     if (!focus) {
       nodeSel.attr("opacity", 1);
-      linkSel.attr("stroke", "rgba(180,190,220,0.18)");
+      linkSel.attr("stroke", (e) => {
+        const a = nodeById(sid(e));
+        const b = nodeById(tid(e));
+        return a && b && a.g === b.g ? "rgba(180,190,220,0.28)" : "rgba(180,190,220,0.045)";
+      });
+      refreshLabels();
       return;
     }
-    nodeSel.attr("opacity", (n) => connected(focus, n.id) ? 1 : 0.16);
+    nodeSel.attr("opacity", (n) => connected(focus, n.id) ? 1 : 0.14);
     linkSel.attr("stroke", (e) => {
       const s = sid(e), t = tid(e);
-      return s === focus || t === focus ? "rgba(255,255,255,0.5)" : "rgba(180,190,220,0.08)";
+      return s === focus || t === focus ? "rgba(255,255,255,0.55)" : "rgba(180,190,220,0.05)";
     });
+    refreshLabels();
   }
 
   function pick(d) {
@@ -325,13 +389,67 @@
     paintFocus();
   }
 
+  function hullPath(members) {
+    const pts = members.map((n) => [n.x, n.y]);
+    const pad = 28;
+    if (pts.length === 1) {
+      const r = radius(members[0]) + pad;
+      return `M ${pts[0][0] - r},${pts[0][1]} a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 ${-r * 2},0`;
+    }
+    const cx = d3.mean(pts, (p) => p[0]);
+    const cy = d3.mean(pts, (p) => p[1]);
+    const inflated = pts.map(([x, y]) => {
+      const dx = x - cx, dy = y - cy;
+      const len = Math.hypot(dx, dy) || 1;
+      return [x + (dx / len) * pad, y + (dy / len) * pad];
+    });
+    if (inflated.length === 2) {
+      inflated.push([cx, cy]);
+    }
+    const hull = d3.polygonHull(inflated);
+    if (!hull) return null;
+    return "M" + hull.map((p) => p.join(",")).join("L") + "Z";
+  }
+  function drawClusters() {
+    if (!hullSel) return;
+    const groups = GROUP_ORDER.map((g) => [g, nodes.filter((n) => n.g === g && visible(n))]).filter(([, pts]) => pts.length);
+    hullSel = hullSel.data(groups, (d) => d[0]).join("path")
+      .attr("class", "hull")
+      .attr("fill", (d) => COLORS[d[0]])
+      .attr("fill-opacity", 0.08)
+      .attr("stroke", (d) => COLORS[d[0]])
+      .attr("stroke-opacity", 0.4)
+      .attr("stroke-width", 1.2)
+      .attr("d", (d) => hullPath(d[1]));
+    groupTitleSel = groupTitleSel.data(groups, (d) => d[0]).join("text")
+      .attr("class", "group-title")
+      .text((d) => GROUP_LABEL[d[0]])
+      .attr("x", (d) => d3.mean(d[1], (n) => n.x))
+      .attr("y", (d) => d3.min(d[1], (n) => n.y) - 18)
+      .style("font-size", titleFont() + "px");
+  }
+
   function ticked() {
     if (!linkSel) return;
     linkSel
       .attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
       .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
     nodeSel.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
-    labelSel.attr("x", (d) => d.x + 6).attr("y", (d) => d.y + 3);
+    labelSel.attr("x", (d) => d.x + 7).attr("y", (d) => d.y + 3);
+    drawClusters();
+  }
+
+  function layoutClusters() {
+    const cx = worldW / 2, cy = worldH / 2;
+    const R = Math.min(worldW, worldH) * 0.42;
+    const out = {};
+    GROUP_ORDER.forEach((g, i) => {
+      const ang = -Math.PI / 2 + (2 * Math.PI * i) / GROUP_ORDER.length;
+      const count = DATA.nodes.filter((n) => n.g === g).length;
+      const bump = Math.min(70, Math.sqrt(count) * 8);
+      out[g] = { x: cx + Math.cos(ang) * (R + bump * 0.15), y: cy + Math.sin(ang) * (R + bump * 0.15) };
+    });
+    return out;
   }
 
   function applyForces() {
@@ -340,14 +458,39 @@
     const repel = Number(repelEl.value);
     const lforce = Number(lforceEl.value);
     const ldist = Number(ldistEl.value);
-    sim.force("link", d3.forceLink(links).id((d) => d.id).distance(ldist).strength(lforce));
-    sim.force("charge", d3.forceManyBody().strength((d) => d.deg === 0 ? -18 : -repel - d.deg * 1.4));
-    sim.force("center", d3.forceCenter(worldW / 2, worldH / 2).strength(center));
-    sim.force("collide", d3.forceCollide().radius((d) => radius(d) + 2));
-    sim.force("radial", d3.forceRadial(
-      (d) => d.deg === 0 ? Math.min(worldW, worldH) * 0.42 : 0,
-      worldW / 2, worldH / 2
-    ).strength((d) => d.deg === 0 && orphanEl.checked ? 0.9 : 0));
+    const clustered = clusterEl.checked;
+    clusterCenters = layoutClusters();
+    sim.force("link", d3.forceLink(links).id((d) => d.id)
+      .distance((d) => {
+        const a = d.source.g || nodeById(sid(d))?.g;
+        const b = d.target.g || nodeById(tid(d))?.g;
+        const hub = sid(d) === "index.md" || tid(d) === "index.md";
+        if (hub) return clustered ? 210 : ldist * 1.2;
+        return a === b ? ldist : ldist * (clustered ? 3.2 : 1.4);
+      })
+      .strength((d) => {
+        const a = d.source.g || nodeById(sid(d))?.g;
+        const b = d.target.g || nodeById(tid(d))?.g;
+        const hub = sid(d) === "index.md" || tid(d) === "index.md";
+        if (hub) return clustered ? 0.02 : lforce * 0.25;
+        if (a === b) return Math.min(0.85, lforce + 0.25);
+        return clustered ? 0.035 : lforce * 0.4;
+      }));
+    sim.force("charge", d3.forceManyBody().strength((d) => d.deg === 0 ? -22 : -repel - d.deg * 1.6));
+    sim.force("center", d3.forceCenter(worldW / 2, worldH / 2).strength(clustered ? Math.min(center, 0.12) : center));
+    sim.force("collide", d3.forceCollide().radius((d) => radius(d) + (isHub(d) ? 14 : 8)).iterations(2));
+    if (clustered) {
+      sim.force("x", d3.forceX((d) => nodeHome(d).x).strength((d) => d.g === "design" ? 0.22 : 0.14));
+      sim.force("y", d3.forceY((d) => nodeHome(d).y).strength((d) => d.g === "design" ? 0.22 : 0.14));
+      sim.force("radial", null);
+    } else {
+      sim.force("x", null);
+      sim.force("y", null);
+      sim.force("radial", d3.forceRadial(
+        (d) => d.deg === 0 ? Math.min(worldW, worldH) * 0.42 : 0,
+        worldW / 2, worldH / 2
+      ).strength((d) => d.deg === 0 && orphanEl.checked ? 0.9 : 0));
+    }
   }
 
   function sizeSvg() {
@@ -358,9 +501,9 @@
     return { width, height };
   }
 
-  function fitView(kPad) {
+  function fitView(kPad, instant) {
     const vis = nodes.filter(visible);
-    if (!vis.length) return;
+    if (!vis.length || !zoom) return;
     const { width, height } = sizeSvg();
     const xs = vis.map((n) => n.x);
     const ys = vis.map((n) => n.y);
@@ -370,12 +513,15 @@
     const maxY = Math.max.apply(null, ys);
     const bw = Math.max(40, maxX - minX);
     const bh = Math.max(40, maxY - minY);
-    const pad = 48;
+    const pad = 72;
     const k = Math.min((width - pad) / bw, (height - pad) / bh, 4) * (kPad || 0.92);
     const cx = (minX + maxX) / 2;
     const cy = (minY + maxY) / 2;
     const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-cx, -cy);
-    svg.transition().duration(reduce ? 0 : 350).call(zoom.transform, t);
+    zoomK = k;
+    if (viewport) viewport.attr("transform", t);
+    if (instant || reduce) svg.call(zoom.transform, t);
+    else svg.transition().duration(350).call(zoom.transform, t);
   }
 
   function zoomBy(factor) {
@@ -406,8 +552,14 @@
 
   function init() {
     const { width, height } = sizeSvg();
-    worldW = 1100;
-    worldH = 800;
+    worldW = 1800;
+    worldH = 1200;
+    clusterCenters = layoutClusters();
+    nodes.forEach((n) => {
+      const home = nodeHome(n);
+      n.x = home.x + (Math.random() - 0.5) * 36;
+      n.y = home.y + (Math.random() - 0.5) * 36;
+    });
 
     svg.selectAll("*").remove();
     svg.append("defs").append("marker")
@@ -423,9 +575,13 @@
       .attr("fill", "rgba(200,210,240,0.7)");
 
     viewport = svg.append("g").attr("class", "viewport");
+    const hullG = viewport.append("g").attr("class", "hulls");
     const linkG = viewport.append("g").attr("class", "links");
     const nodeG = viewport.append("g").attr("class", "nodes");
+    const titleG = viewport.append("g").attr("class", "group-titles");
     const textG = viewport.append("g").attr("class", "labels");
+    hullSel = hullG.selectAll("path");
+    groupTitleSel = titleG.selectAll("text");
 
     zoom = d3.zoom()
       .scaleExtent([0.12, 8])
@@ -437,7 +593,12 @@
       })
       .on("start", () => svgEl.classList.add("is-panning"))
       .on("end", () => svgEl.classList.remove("is-panning"))
-      .on("zoom", (event) => { viewport.attr("transform", event.transform); });
+      .on("zoom", (event) => {
+        viewport.attr("transform", event.transform);
+        zoomK = event.transform.k;
+        refreshLabels();
+        if (groupTitleSel) groupTitleSel.style("font-size", titleFont() + "px");
+      });
 
     svg.call(zoom);
     svg.on("dblclick.zoom", null);
@@ -485,13 +646,11 @@
     applyForces();
     sim.on("tick", ticked);
     sim.stop();
-    for (let i = 0; i < 220; i++) sim.tick();
+    for (let i = 0; i < 360; i++) sim.tick();
     ticked();
     applyFilters();
-
-    const k = Math.min(width / worldW, height / worldH) * 0.95;
-    const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-worldW / 2, -worldH / 2);
-    svg.call(zoom.transform, t);
+    fitView(0.88, true);
+    setTimeout(() => fitView(0.88, true), 200);
   }
 
   if (!window.d3) {
@@ -513,6 +672,15 @@
   lthickEl.addEventListener("input", () => {
     document.getElementById("lthick-out").textContent = Number(lthickEl.value).toFixed(1);
     applyFilters();
+  });
+  clusterEl.addEventListener("change", () => {
+    applyForces();
+    if (sim) {
+      nodes.forEach((n) => { n.fx = null; n.fy = null; });
+      sim.alpha(0.85).restart();
+    }
+    applyFilters();
+    setTimeout(() => fitView(0.9), reduce ? 0 : 700);
   });
   arrowsEl.addEventListener("change", applyFilters);
   searchEl.addEventListener("input", applyFilters);
