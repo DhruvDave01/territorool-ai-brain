@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/graph.html", "permanent": false }
+  ],
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 60,
+      "includeFiles": "**/*.md"
+    }
+  }
+}

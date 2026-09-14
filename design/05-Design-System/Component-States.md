@@ -1,0 +1,25 @@
+# Component states
+
+## AppButton
+
+Default / pressed (darker) / disabled / loading (spinner). Variants primary, danger (`#CF5B51`), neutral, dark (`#1a1a1a`), ghost.
+
+## Inputs
+
+Idle / focused (system) / placeholder / disabled / validation error (toast or red text locally).
+
+## Tabs / chips
+
+Unselected gray; selected primary blue; Find Leads teal; Map View gold.
+
+## Modals
+
+Hidden / visible + dim backdrop. Primary action may be danger (logout) or brand (Share). Submit may stay disabled (report reasons).
+
+## Lists
+
+Loading spinner; empty copy; populated cards; unread blue border; pagination (Address Book 1/N pager).
+
+## Maps
+
+Loading pill; idle with polyline; search; zoom.

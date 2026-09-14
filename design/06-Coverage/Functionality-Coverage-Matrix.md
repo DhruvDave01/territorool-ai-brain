@@ -1,0 +1,68 @@
+# Functionality coverage matrix
+
+Status: **Documented** = in Design Brain from code and/or capture. **Deferred** = skipped until assets. **Dead** = registered/referenced but not a live path. **Partial** = code documented, visual incomplete.
+
+This is **not** 100% visual coverage.
+
+| Feature | Screen found | Code found | UI documented | Flow documented | Screenshot/Video | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| Login | Login | Yes | Yes | Yes | IMG_4604 | Documented |
+| Register | Register | Yes | Stub | Stub | — | Deferred |
+| Paywall / gate | Subscription* | Yes | Stub | Stub | Settings buttons only | Deferred |
+| Splash | overlay | Yes | Partial | Partial | — | Deferred |
+| Dashboard hub | Dashboard | Yes | Yes | Yes | IMG_4563, 4605, VID1–3 | Documented |
+| Recent activity tab | Dashboard | Yes | Yes | Yes | IMG_4605 | Documented |
+| RecentActivity screen | RecentActivity | Yes | Partial | Partial | View All only | Partial |
+| Calendar | CalendarActivity | Yes | Yes | Yes | IMG_4608, VID3 | Documented |
+| QR | QrCodeScanner | Yes | Yes | Yes | IMG_4609 | Documented |
+| Notifications | Notifications | Yes | Yes | — | — | Dead |
+| Settings | EditStatus | Yes | Yes | Yes | IMG_4564, VID3 | Documented (purchase deferred) |
+| Referral | modal | Yes | Yes | Yes | IMG_4602 | Documented |
+| Logout | modal | Yes | Yes | Yes | IMG_4601 | Documented |
+| AI Find Leads | MultipleAIWaypoint | Yes | Yes | Yes | IMG_4565–71, 4603, VID1 | Documented |
+| Places Find Leads | MultipleWaypoint | Yes | Partial | Partial | chip only | Partial |
+| Create Route | CreateRoute | Yes | Yes | Yes | IMG_4572, VID1 | Documented |
+| Start/End | SelectStartEndPoints | Yes | Yes | Yes | IMG_4573 | Documented |
+| Publish loader | PublishRoute | Yes | Yes | Yes | IMG_4574, VID1 | Documented |
+| Route detail | BasicRouteDetail | Yes | Yes | Yes | IMG_4575, VID3, IMG_4611 | Documented |
+| Edit Route | EditRoute | Yes | Partial | Partial | — | Partial |
+| RouteSwipe | RouteSwipe | Yes | — | — | — | Dead |
+| ClusterList | missing | navigate yes | — | — | — | Dead/broken |
+| Lasso | LassoMap | Yes | Partial | Partial | — | Partial / no draw |
+| Active map | ActiveRouteMap | Yes | Yes | Yes | IMG_4577, VID3 | Documented |
+| WaypointDetail | WaypointDetail | Yes | Partial | Partial | similar to company | Partial |
+| Lists library | Lists | Yes | Yes | Yes | IMG_4591, VID3 | Documented |
+| Create List | CreateLists | Yes | Yes | Yes | IMG_4592–94, VID3 | Documented |
+| List detail | ListsDetail | Yes | Yes | Yes | IMG_4610 | Documented |
+| Edit List | EditLists | Yes | Partial | Partial | — | Partial |
+| Address Book | ListCompany | Yes | Yes | Yes | IMG_4595–96, VID3 | Documented |
+| View company book | ViewCompany | Yes | Yes | Yes | VID2 | Documented |
+| Company on route | CompanyView | Yes | Yes | Yes | IMG_4576, VID1, VID3 | Documented |
+| CustomCompany embed | CustomCompany | Yes | Yes | Yes | many | Documented |
+| Add/Edit company | Create/EditCompany | Yes | Yes | Yes | IMG_4587–88, VID2 | Documented |
+| Scan card | BusinessCard | Yes | Yes | Yes | IMG_4586, 4606–07 | Documented |
+| Contacts CRUD | Contacts* | Yes | Yes | Yes | IMG_4598–4600, VID3 | Documented |
+| Filter | FilterModule | Yes | Yes | Yes | IMG_4590, VID3 | Documented (status checkboxes partial) |
+| FilterList/Route stack | yes | unused | Yes | — | — | Dead |
+| Find Contacts | Cong/biz + modal | Yes | Yes | Yes | IMG_4581–85, VID1 | Documented |
+| Bulk Contact | Contact | Yes | Partial | Partial | — | Partial |
+| Share route/list | ShareEmailField | Yes | Yes | Yes | IMG_4611, VID3 | Documented |
+| Report company | ReportContactModal | Yes | Yes | Yes | IMG_4580 | Documented |
+| Credits pill | header | Yes | Yes | Yes | headers | Documented |
+| Footer tabs | CustomFooter | Yes | Yes | Yes | all module stills | Documented |
+| Session/crash | overlays | Yes | Partial | Partial | — | Partial |
+| HubSpot Error | Error | Yes | Partial | Partial | — | Partial |
+| FCM | helper | Yes | Partial | — | — | Partial |
+| Deep links | plist/config | Yes | Partial | — | — | NMV |
+| Permissions | manifests | Yes | Yes | Yes | Scan/QR imply camera | Partial denied UI |
+| Coaching/WhatsNew | modals | Yes | Partial | — | — | Deferred visual |
+| Android | — | Yes | Platform-Differences | — | — | Deferred visual |
+
+**Counts (Phase 3):**
+
+- Stack screens listed: **47**
+- Overlay UIs listed: **15+**
+- Shared components documented: **25+**
+- Flows in `04-User-Flows`: **18** files
+- Stills indexed: **48** PNGs
+- Videos indexed: **3**
