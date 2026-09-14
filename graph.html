@@ -9,7 +9,7 @@
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; background: #121428; color: #e8eaf4; font: 13px/1.4 system-ui, sans-serif; }
     .shell { display: grid; grid-template-columns: minmax(0,1fr) 280px; height: 100%; }
-    .shell.chat-open { grid-template-columns: minmax(280px, 340px) minmax(0,1fr) 280px; }
+    .shell.chat-open { grid-template-columns: minmax(300px, 400px) minmax(0,1fr) 280px; }
     .stage { position: relative; background: #121428; min-height: 0; overflow: hidden; }
     .title {
       position: absolute; top: 12px; left: 0; right: 0; margin: 0;
@@ -39,10 +39,38 @@
     .chat-head button { width: auto; margin: 0; padding: 4px 10px; background: #2a3154; color: #e8eaf4; }
     .chat-status { padding: 8px 14px; color: #8b93b5; font-size: 11px; }
     .chat-log { flex: 1; overflow: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
-    .chat-bubble { padding: 8px 10px; border-radius: 10px; max-width: 100%; white-space: pre-wrap; }
-    .chat-bubble.user { background: #124ac6; color: #fff; align-self: flex-end; }
-    .chat-bubble.assistant { background: #121428; color: #e8eaf4; }
-    .chat-bubble.error { background: #3a1c28; color: #fca5a5; }
+    .chat-bubble { padding: 10px 12px; border-radius: 12px; max-width: 100%; }
+    .chat-bubble.user { background: #124ac6; color: #fff; align-self: flex-end; white-space: pre-wrap; }
+    .chat-bubble.assistant { background: #121428; color: #e8eaf4; line-height: 1.5; }
+    .chat-bubble.error { background: #3a1c28; color: #fca5a5; white-space: pre-wrap; }
+    .chat-bubble.assistant p { margin: 0 0 0.55em; }
+    .chat-bubble.assistant p:last-child,
+    .chat-bubble.assistant ul:last-child,
+    .chat-bubble.assistant ol:last-child,
+    .chat-bubble.assistant .chat-md-table-wrap:last-child,
+    .chat-bubble.assistant pre:last-child { margin-bottom: 0; }
+    .chat-bubble.assistant strong { font-weight: 600; }
+    .chat-bubble.assistant em { font-style: italic; }
+    .chat-bubble.assistant h3, .chat-bubble.assistant h4 {
+      margin: 0.15em 0 0.45em; font-size: 13px; font-weight: 650;
+    }
+    .chat-bubble.assistant code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11.5px; background: #2a3154; padding: 1px 5px; border-radius: 4px;
+    }
+    .chat-bubble.assistant pre {
+      background: #0d0f1c; padding: 8px; border-radius: 8px; overflow-x: auto; margin: 0 0 0.6em;
+    }
+    .chat-bubble.assistant pre code { background: none; padding: 0; }
+    .chat-md-table-wrap { overflow-x: auto; margin: 0 0 0.7em; }
+    .chat-bubble.assistant table { border-collapse: collapse; width: 100%; font-size: 12px; }
+    .chat-bubble.assistant th, .chat-bubble.assistant td {
+      border: 1px solid #343c66; padding: 6px 8px; text-align: left; vertical-align: top;
+      word-break: break-word;
+    }
+    .chat-bubble.assistant th { background: #2a3154; font-weight: 600; white-space: nowrap; }
+    .chat-bubble.assistant ul, .chat-bubble.assistant ol { margin: 0 0 0.6em; padding-left: 1.25em; }
+    .chat-bubble.assistant li { margin: 0.15em 0; }
     .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #2a3154; }
     .chat-form textarea {
       flex: 1; resize: none; min-height: 44px; max-height: 120px;
@@ -519,10 +547,109 @@
   const chatInput = document.getElementById("chat-input");
   const chatHistory = [];
 
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+  function inlineMd(s) {
+    return s
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
+  }
+  function isTableSep(line) {
+    return /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(line.trim());
+  }
+  function splitCells(line) {
+    return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  }
+  function renderMarkdown(src) {
+    const fences = [];
+    const text = escapeHtml(src).replace(/```[\t ]*[\w-]*\n?([\s\S]*?)```/g, (_, code) => {
+      const i = fences.length;
+      fences.push("<pre><code>" + code.replace(/^\n+|\n+$/g, "") + "</code></pre>");
+      return "\n%%FENCE" + i + "%%\n";
+    });
+    const lines = text.split("\n");
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      const fence = line.trim().match(/^%%FENCE(\d+)%%$/);
+      if (fence) {
+        out.push(fences[Number(fence[1])]);
+        i += 1;
+        continue;
+      }
+      if (line.includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+        const header = splitCells(line);
+        i += 2;
+        const body = [];
+        while (i < lines.length && lines[i].includes("|") && !isTableSep(lines[i])) {
+          body.push(splitCells(lines[i]));
+          i += 1;
+        }
+        let html = '<div class="chat-md-table-wrap"><table><thead><tr>';
+        header.forEach((c) => { html += "<th>" + inlineMd(c) + "</th>"; });
+        html += "</tr></thead><tbody>";
+        body.forEach((row) => {
+          html += "<tr>";
+          header.forEach((_, idx) => { html += "<td>" + inlineMd(row[idx] || "") + "</td>"; });
+          html += "</tr>";
+        });
+        html += "</tbody></table></div>";
+        out.push(html);
+        continue;
+      }
+      if (/^\s*[-*] /.test(line)) {
+        out.push("<ul>");
+        while (i < lines.length && /^\s*[-*] /.test(lines[i])) {
+          out.push("<li>" + inlineMd(lines[i].replace(/^\s*[-*] /, "")) + "</li>");
+          i += 1;
+        }
+        out.push("</ul>");
+        continue;
+      }
+      if (/^\s*\d+\. /.test(line)) {
+        out.push("<ol>");
+        while (i < lines.length && /^\s*\d+\. /.test(lines[i])) {
+          out.push("<li>" + inlineMd(lines[i].replace(/^\s*\d+\. /, "")) + "</li>");
+          i += 1;
+        }
+        out.push("</ol>");
+        continue;
+      }
+      if (/^#{1,4}\s+/.test(line.trim())) {
+        const level = Math.min(4, line.trim().match(/^#+/)[0].length);
+        out.push("<h" + level + ">" + inlineMd(line.trim().replace(/^#{1,4}\s+/, "")) + "</h" + level + ">");
+        i += 1;
+        continue;
+      }
+      if (!line.trim()) {
+        i += 1;
+        continue;
+      }
+      const para = [];
+      while (i < lines.length && lines[i].trim() && !/^\s*[-*] /.test(lines[i]) && !/^\s*\d+\. /.test(lines[i]) && !/^%%FENCE/.test(lines[i].trim()) && !/^#{1,4}\s+/.test(lines[i].trim())) {
+        if (lines[i].includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) break;
+        para.push(lines[i]);
+        i += 1;
+      }
+      if (!para.length) {
+        out.push("<p>" + inlineMd(line) + "</p>");
+        i += 1;
+        continue;
+      }
+      out.push("<p>" + inlineMd(para.join(" ")) + "</p>");
+    }
+    return out.join("");
+  }
   function addBubble(role, text) {
     const el = document.createElement("div");
     el.className = "chat-bubble " + role;
-    el.textContent = text;
+    if (role === "assistant") el.innerHTML = renderMarkdown(text);
+    else el.textContent = text;
     chatLog.appendChild(el);
     chatLog.scrollTop = chatLog.scrollHeight;
   }
