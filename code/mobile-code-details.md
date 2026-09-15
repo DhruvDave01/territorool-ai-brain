@@ -25,7 +25,7 @@ Almost every screen is a **class component**. NativeBase is gone — use `Native
 TerriTool/
 ├── index.js, init.js, app.json, package.json
 ├── App/
-│   ├── App.js                      # stack navigator (~47 screens)
+│   ├── App.js                      # stack navigator (46 screens)
 │   ├── App.styles.js
 │   ├── SplashVisibilityContext.js
 │   ├── sessionExpiredEvent.js

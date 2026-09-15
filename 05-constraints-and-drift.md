@@ -25,7 +25,7 @@ Code wins over Prompts and old docs. When they disagree, add a row here.
 
 | Claim in old docs | Live truth |
 |-------------------|------------|
-| ~30 screens | `App/App.js` registers **~47** named screens |
+| ~30 screens | `App/App.js` registers **46** `Stack.Screen` names (Design Brain pack still says 47 — code wins) |
 | TikTok SDK / `TikTokHelper.js` | README/Prompts mention it; **file missing**. AI UI copy may say “Scanning TikTok” |
 | Redux | **None** |
 | Mobile route PDF | **No** in-app PDF; email share only. Web has TCPDF/dompdf |
@@ -35,6 +35,8 @@ Code wins over Prompts and old docs. When they disagree, add a row here.
 | Company statuses hard-coded in mobile | **Server-driven** `user_status` / `getuserstatusdetails` |
 | Prompts `App.tsx` | Entry is `App/App.js` (JS) |
 | package.json Android 4.2.7 | Gradle may be `4.4.70` |
+| “Name-only contact buy = 1 credit” | Live `contactBuyCredits.js`: `CONTACT_BUY_CREDITS_NAME_POSITION_ONLY` and `…_WITH_EMAIL_OR_PHONE` are both **2**. Claude/biz remains **1** (`CONTACT_BUY_CREDITS_BIZ_CLAUDE`) |
+| Design MINI “API in this tree points at staging” | Live `App/config/index.js` `URL_BASE` is **prod** `https://app.territool.com/index.php/api/`; staging is commented |
 
 ## 5.3 Do not
 

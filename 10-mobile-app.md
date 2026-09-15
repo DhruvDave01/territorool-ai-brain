@@ -25,6 +25,8 @@ Nav state key `@TerriTool_nav_state` is **not** restored as `initialState` (inte
 
 ## Registered screens (`App/App.js`)
 
+**Count:** 46 `Stack.Screen` entries. Design Brain still says 47 — [drift](05-constraints-and-drift.md).
+
 | Name | Import |
 |------|--------|
 | Login | `components/login/` |

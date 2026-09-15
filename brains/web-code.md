@@ -2,47 +2,78 @@
 
 Hub for Laravel + Blade + manager React islands + MCP PHP. Sibling: [Web Design Brain](web-design.md) · [API Brain](api.md). Parent: [sub brains](README.md).
 
-**Repo:** `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool`  
-**Do not cite the workspace folder as a source.**
+**Repo:** `webterritool/` (`composer.json` `laravel/framework` `^7.0`). Code wins.
 
 ## Read first
 
-1. This file (rules).
-2. [code/web-code-details.md](../code/web-code-details.md) — file map.
-3. The controller / Blade / MCP handler you will edit.
-4. New URL: [13-web-urls.md](../13-web-urls.md). New mobile JSON: [API Brain](api.md).
-5. If the page **looks** wrong: [Web Design Brain](web-design.md), then stay on the same stack (classic vs manager).
+1. This file.
+2. [code/web-code-details.md](../code/web-code-details.md).
+3. The controller / Blade / MCP handler.
+4. URLs: [13-web-urls.md](../13-web-urls.md). Mobile JSON: [API Brain](api.md).
+5. Pixels → [Web Design Brain](web-design.md). Stay on the **same stack**.
 
 ## Must follow
 
 | Rule | Do this |
 |------|---------|
-| Company / leads / contacts UI | `CompanylController` — extra **l**. Surgical edits; ~8500 LOC. |
-| Mobile JSON | `app/Api/V2/Controllers/` + `routes/api.php`. |
-| Helpers | `app/Helpers/helpers.php` → `App\Helpers\Helper`. Not `App\Globals\Helper`. |
+| Company / leads / contacts web UI | `app/Http/Controllers/CompanylController.php` — extra **l**. Surgical. |
+| Mobile JSON | `app/Api/V2/Controllers/` + `routes/api.php` version **`v2`**. JWT group middleware **`jwt.refresh`**. |
+| Helpers | Autoloaded `app/Helpers/helpers.php` → `App\Helpers\Helper`. Distinct from `App\Globals\Helper` (`app/Globals/Helper.php`). Helpers import Globals as `GlobalHelper`. |
 | Requests | CompanylController aliases `Request AS INPUT_REQUEST`. |
-| MCP | `app/UserMcp/config/territool_app.php` then `Services/Tools/*Tools.php`. Dispatch the same API; **do not fork credit math**. |
+| MCP | Config `app/UserMcp/config/territool_app.php`, handlers `app/UserMcp/Services/Tools/{Account,Companies,Contacts,Leads,Manager,Routes}Tools.php`. Dispatch the same API. **Do not fork credit math.** Client: `UserMcp/Services/CustomerApiClient.php` (`/api/v2`). |
 | Classic AJAX | `FormData` + `contentType: false` + `processData: false`. |
-| Tables | Address Book + Find Leads = **jqxGrid**. Routes/lists index = DataTables. Do not swap. |
+| Tables | Address Book + Find Leads = **jqxGrid**. Routes/lists **index** = DataTables. |
 | Roles | Spatie `HasRoles`. Manager scope = self + `users.parent_id`. |
-| HQ | `/hq/*` Backpack. Do not mix into `/manager` or classic app. |
+| HQ | `/hq/*` Backpack. Not `/manager`, not classic app. |
+| Cron | Public GET on `CronController`, not `Kernel::schedule()`. |
 
 ## Open first
 
 | Task | File |
-|------|--------|
+|------|------|
 | New web URL | `routes/web.php` |
 | Mobile v2 URI | `routes/api.php` |
-| AI Find Leads SSE | `AILeadFinderController` + `resources/views/front/route/findleads.blade.php` |
-| Manager portal | `Http/Controllers/Manager/` + `resources/views/front/manager/` + `resources/manager-portal/` |
-| User MCP | `app/UserMcp/` — HTTP `/ai/mcp` |
-| Admin MCP | `app/AdminMcp/` — `/ai/mcp-admin` |
-| Find MCP | `app/FindMcp/` — `/find-mcp/mcp` |
+| AI Find Leads SSE (classic) | `AILeadFinderController` + `resources/views/front/route/findleads.blade.php` |
+| Manager portal PHP | `app/Http/Controllers/Manager/` + `resources/views/front/manager/` |
+| Manager islands | `resources/manager-portal/` entry `main.jsx`, `api.js` |
+| User MCP HTTP | `{APP_URL}/ai/mcp` — `app/UserMcp/routes/app_mcp.php` (prefix `ai`, **not** defined in `routes/web.php`) |
+| Admin MCP | `/ai/mcp-admin` — `app/AdminMcp/` |
+| Find MCP | `/find-mcp/mcp` — `app/FindMcp/` (Sales Agent + BSA only, **not** Business Agent) |
 
-## Two products in one repo
+## V2 controllers (`app/Api/V2/Controllers/`)
 
-Classic Sales Agent / BSA = Blade + jQuery 2.2.0 + Bootstrap 3 AdminLTE.  
-Business Agent `/manager/*` = Vite + React 18 islands.  
-Do not convert a classic page into an island (or the reverse) unless that sibling page already did.
+`AuthController`, `CompanyController`, `RouteController`, `ListController`, `ContactSellController`, `WebhookController`, `SupportController`, `UserDataController`, `InviteController`, `ProfileController`, `CityController`.
 
-Full controller / V2 / MCP tables: [11-web-backend.md](../11-web-backend.md) · [14-mcp.md](../14-mcp.md).
+Giant web UI: `CompanylController`, `RoutesController`, `RouteController`, `SimpleRouteController`, `AdvancedRouteController`, `ListController`, `ContactController`, `SubscriptionController`, CRM (`SfdcController`, `HubSpotController`, `KarmaCrmController`).
+
+## Manager islands (`resources/manager-portal/`)
+
+Pages: `ManagerDashboard.jsx`, `ManagerActivity.jsx`, `Salespeople.jsx`, `SalespersonDetail.jsx`, `SalespersonForm.jsx`, `SalespersonRoutes.jsx`, `ConvertSalesperson.jsx`, `ManagerSettings.jsx`, `SupportTickets.jsx`, `SupportTicketForm.jsx`, `SupportTicketDetail.jsx`, `AIFindLeads.jsx`, `AIFindLeadsPage.jsx`, plus assign/modals.
+
+Mount roots (Blade + `main.jsx`):
+
+`#manager-dashboard-root`, `#manager-activity-root`, `#manager-salespeople-root`, `#manager-salesperson-detail-root`, `#manager-salesperson-form-root`, `#manager-salesperson-convert-root`, `#manager-salesperson-routes-root`, `#manager-settings-root`, `#manager-support-root`, `#manager-support-create-root`, `#manager-support-detail-root`, `#manager-ai-find-leads-root`, `#manager-toast-root`.
+
+## User MCP tools (do not invent)
+
+`search_companies`, `view_company`, `set_company_status`, `add_contact`, `add_company`, `get_credits`, `find_contacts`, `find_contacts_bulk`, `add_note`, `get_notes`, `find_ai_leads`, `resume_ai_lead_search`, `save_ai_leads`, `create_route`, `mark_visited`, `add_activity`, `buy_contacts`, `next_waypoint`, `get_ai_lead_search`, `view_lists`, `view_list`, `create_list`, `view_routes`, `view_route`, `get_active_route`, `create_route_from_list`, `view_activities`, `edit_activity`.
+
+**Manager-only catalog:** `list_team`, `get_team_dashboard`, `get_team_activity`. Many field tools also accept `salesperson_id` for managers (`manager_salesperson_id_tools` in `territool_app.php`); handlers ignore it for reps.
+
+Admin MCP (read-only HQ): `list_sales_agents`, `list_cancelled_subscribers`, `list_active_subscribers`, `list_active_trials`, `list_expired_trials`, `list_cancelled_trial_subscribers`, `list_user_credits`, `get_user_subscription_history`.
+
+Operating rules: [14-mcp.md](../14-mcp.md).
+
+## Two products
+
+Classic Sales Agent / BSA = Blade + jQuery **2.2.0** + Bootstrap **3.3.5** AdminLTE (`front/layout.blade.php`).  
+Business Agent `/manager/*` = Vite + React 18 islands; shells still `@extends('front.layout')` then `body.manager-portal` hides gutters.
+
+Do not convert a classic page into an island unless that sibling already did.
+
+## Trained if you can
+
+- Add a v2 URI inside `jwt.refresh` (or leave it public if it is login/citysearch/webhooks).
+- Edit company UI in `CompanylController` without “fixing” the class name.
+- Add a manager island with a `#manager-*-root` and `main.jsx` mount.
+- Call an existing MCP tool name only.
