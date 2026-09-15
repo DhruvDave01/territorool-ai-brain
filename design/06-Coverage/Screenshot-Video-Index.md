@@ -16,7 +16,26 @@ related:
 ---
 # Screenshot and video index
 
-**Capture set:** `/Users/dhruvdave/Downloads/Design-Brain/03-Assets/` (original Archive 2 stills + videos; not copied into this vault).  
+**Capture set:** `/Users/dhruvdave/Downloads/Design-Brain/03-Assets/` (stills + videos; not copied into this vault). Same PNGs split as:
+
+| Folder | Files |
+| --- | --- |
+| `/Users/dhruvdave/Downloads/Archive 2/` | `IMG_4563`–`IMG_4600` (no `IMG_4597`) |
+| `/Users/dhruvdave/Downloads/Archive 3/` | `IMG_4601`–`IMG_4604` |
+| `/Users/dhruvdave/Downloads/Archive 4/` | `IMG_4605`–`IMG_4611` |
+
+Splash / logo / app-icon stills (not TestFlight screenshots): `/Users/dhruvdave/Downloads/Archive/Assets/`.
+
+**2026-09-15 Maestro + Playwright pack** (not copied into this vault): `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/`
+
+| Subfolder | Trust | Use for |
+|-----------|-------|---------|
+| `ios/` | Live iOS Simulator via Maestro | Register/onboarding steps 1–4, login 42.31, populated Dashboard |
+| `web/desktop/` and `web/mobile/` | Live web (localhost:8888 / staging / prod) | Classic SA dashboard, auth split-panel, password reset, trial, subscription history, Upgrade |
+| `mobile/` | **HTML replicas** (`TerriTool/docs/User-Interface/screens.html`) | Do **not** treat as shipping UI |
+
+Maestro `11-qr-scan.png` is a **simulator camera placeholder**, not shipping QR chrome — prefer `IMG_4609`. `20-subscribe.png` is Goals with a box checked, not RevenueCat. `24-subscribe-preview.png` duplicates `23-register.png`.
+
 Device: iPhone TestFlight, screenshots 1170×2532, videos 1290×2796. Account Testim / Business Client.
 
 Original video names:
@@ -74,6 +93,16 @@ No `IMG_4597` in the archive.
 | IMG_4609 | Scan QR code | QrCodeScanner | `dashboard/QrCodeScannerScreen.js` | Dashboard |
 | IMG_4610 | List company 1/6 Mark | ListsDetail + CustomCompany | `list/basic`, `customcompany` | Lists |
 | IMG_4611 | Share Route | ShareEmailField | `common/ShareEmailField.js` | Routes |
+| *(not IMG)* Archive `Assets/splash/Image_splash.png` | JS splash background | AnimatedSplashScreen | `splash/AnimatedSplashScreen.js` + `App/assets/lottie/Image_splash.png` | App-Launch |
+| Maestro `ios/00-onboarding.png` | Goals step 1/6, Continue disabled | PostSignupPaywallFlow | `register/postSignupPaywallFlow.js` | Onboarding |
+| Maestro `ios/01-login.png` | Login 42.31 | Login | `login/` | Authentication |
+| Maestro `ios/02-home.png` | Dashboard populated, referral banner | Dashboard | `dashboard/index.js` | Dashboard |
+| Maestro `ios/19-splash.png` | Native solid `#124ac6` | Launch | storyboard / windowBackground | App-Launch |
+| Maestro `ios/20-subscribe.png` | Goals, one box checked | PostSignupPaywallFlow | same | Onboarding |
+| Maestro `ios/21-subscribe-role.png` | Role step 2/6 | same | same | Onboarding |
+| Maestro `ios/22-subscribe-cost.png` | Tools step 3/6 | same | same | Onboarding |
+| Maestro `ios/23-register.png` | Sign Up step 4/6 (+ dev buttons) | Register | `register/index_register_split.js` | Onboarding |
+| Maestro `ios/24-subscribe-preview.png` | Duplicate of 23 | Register | same | Onboarding |
 
 ---
 

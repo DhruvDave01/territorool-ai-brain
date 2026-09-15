@@ -18,5 +18,7 @@ To look like TerriTool **today**:
 8. Copy DIN Condensed; do not introduce Inter.
 9. Match **Mark vs Add To** to `parent_screen`.
 10. Do not “fix” teal/gold chips or mixed reds — copy the sibling screen.
+11. Do not reuse the splash poster (`Image_splash.png`) as an authenticated screen background.
+12. Register/onboarding copies `PostSignupPaywallFlow`, not `CustomHeader`.
 
 Deferred: do not restyle Register/paywall until that pack is in scope.

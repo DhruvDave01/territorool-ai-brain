@@ -23,3 +23,25 @@ Stills live in [03-Assets/stills/](03-Assets/stills/). ~1.5 MB total.
 Not captured (see [Deferred-Scope.md](Deferred-Scope.md)): Sales Agent dashboard, SA PNG sidebar, login, register/paywall, HQ, manager team CRUD.
 
 Local QA data (rep names, emails, credits) appears in stills. Do not copy per-rep values into other brain notes.
+
+---
+
+## 2026-09-15 Playwright pack
+
+Path: `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/web/` (desktop 1440×900 + some phone-viewport public pages). Live web, **Sales Agent** PNG sidebar on authenticated pages. Do not copy names, emails, credit balances, or invoice rows.
+
+| File | URL (from capture script) | What it proves |
+|------|---------------------------|----------------|
+| `desktop/login.png` | `/login` | Split-panel auth: blue left (TERRITOOL wordmark, “The AI Sales App For Field Reps”, QR) + white right. **Welcome** with wave emoji. Remember Me, Forgot, filled Login, outline Create Account. Page bg light gray, not AdminLTE |
+| `desktop/register.png` | `/register` | Same shell. **Step 1 of 3** (not mobile’s 6). Same goals checkboxes as mobile. Left copy mentions 7-day trial + 60 lead credits. Testimonial card under the panel. Continue washed until a pick |
+| `desktop/b2b.png` | `/b2b` | Same chrome as register step 1 in this still |
+| `desktop/trial.png` | `/trial` | Same shell, **Create your account** (Name, Phone, Email, Password, reCAPTCHA, Start Free Trial). No step bar |
+| `desktop/password-reset.png` | `/password/reset` | **Not** split-panel. Classic header (logo, QR, store badges, Login/Register) + gray content, Email + Send Password Reset Link |
+| `desktop/dashboard.png` and `onboarding.png` | `/dashboard` | **Sales Agent** hub (filename `onboarding` is misleading). PNG sidebar. Welcome + tiles: Find Leads, Routes, Recently Added, Address Book, Lists, Upload Excel/CSV, Activity (empty “No upcoming notes.”), Tutorial. **0 Credits** pill |
+| `desktop/settings.png` | `/salesperson/edit` | SA Settings: MCP pills, statuses + hex, Cancel (red) / Upgrade (blue), classic boxes |
+| `desktop/subscription.png` | `/subscription*` | AdminLTE **history** tables (packages + add-ons), not the Upgrade cards |
+| `desktop/subscription-subscribe.png` | Upgrade | “Upgrade Your Plan”: Pro $99 / Base $69 / credit add-ons, **Pay Now** near-black. Web only — do not copy onto iOS RevenueCat |
+
+Phone-viewport twins exist under `web/mobile/` for login, register, trial, b2b, password-reset.
+
+`screenshots/mobile/` next to this pack is **not** web — HTML replicas of the native app. Ignore for web chrome.

@@ -23,7 +23,10 @@ Match the nearest page on the **same stack**. Do not average.
 | Sidebar width | `--sidebar-w: 260px` in `manager-portal.css` | Responsive fallback `220px` | Copy the file you edit |
 | Find Leads engines | Classic city/ZIP + jqxGrid | Manager Places circles + JSON | Two products |
 | Circle palette | `--blue #124ac6` | `COLORS` `#2563eb`, `#10b981`, … | `AIFindLeads.jsx` |
-| Fonts | Classic Source Sans + DIN 2014 | Manager DM Sans / Space Grotesk | Register (deferred) uses Inter |
+| Fonts | Classic Source Sans + DIN 2014 | Manager DM Sans / Space Grotesk | Register Blade uses Inter — keep Inter on that auth shell only |
+| Emoji | Web login **Welcome** wave emoji | Mobile product UI has **no emoji** | Do not add emoji to native screens |
+| Register length | Web **3** steps | Mobile PostSignup **6** steps | Do not unify |
+| Auth shell vs reset | Split-panel login/register/trial | Password reset is classic header + gray content | Copy the matching URL |
 | Double sidebar `<a>` | Icon link + `.text-dark` | Would be “cleaner” as one link | Leave it |
 | BA on `/company` | Page is Address Book | Sidebar is BA (Home/Salespeople/…), not SA PNGs | Role chrome ≠ page |
 | Reports | `/manager/reports` in nav APIs | Blade “Coming soon”, no `#manager-reports-root` | |

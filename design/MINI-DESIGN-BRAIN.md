@@ -95,7 +95,7 @@ Many screens still set raw `fontWeight: "600"/"700"` on top of DIN — condensed
 
 ### Logo
 
-Code uses `TerriTool_logo_NEW.jpg` (~300×110, `resizeMode="contain"`) for Login/Dashboard/WhatsNew. **TestFlight captures instead show a 3D "TT cube" mark** at Login and Dashboard header — which asset actually ships is **Needs Manual Verification**, don't assume one over the other.
+Code uses `TerriTool_logo_NEW.jpg` for Login/Dashboard/WhatsNew. That file **is** the isometric TT cube on white. Login styles box it at ~300×110 `contain` (`IMG_4604` matches). `TT_NO_BG.png` is the same mark on black. Marketing lockup `TerriTool.png` (cube + word + route trail) is not the Login `require`.
 
 ---
 
@@ -120,7 +120,7 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 ## 4. Navigation architecture
 
 - Root: `@react-navigation/native` + `native-stack` v7. Nav-state persistence key `@TerriTool_nav_state`, but restore **clears `initialState`** — cold start never reopens the last deep screen.
-- **Cold start:** native `#124ac6` window → JS splash (Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (code live; **pixels** deferred) or Dashboard.
+- **Cold start:** native `#124ac6` window → JS splash (`Image_splash.png` + Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (code live; **pixels** deferred) or Dashboard. Splash still: `/Users/dhruvdave/Downloads/Archive/Assets/splash/Image_splash.png`. Do not reuse that full-bleed poster on authenticated screens.
 - **Footer targets:** 1 Dashboard (navigate) · 2 push `MultipleAIWaypoint` · 3 `ListCompany` (navigate) · 4 `Routes` (navigate) · 5 `Lists` (navigate) · 6 push `EditStatus`. Already-on-tab and offline both show a toast.
 - Gesture-back is disabled on Login and Dashboard.
 
@@ -141,8 +141,9 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 
 | Module | Screens | Status |
 | --- | --- | --- |
-| Auth | Login | Documented |
-| Auth (pixels skipped) | Register, SubscriptionScreen, SubscriptionGate | Code live; no stills |
+| Auth | Login | Documented (`IMG_4604`, Maestro `01-login`) |
+| Auth | Register / PostSignupPaywallFlow | Steps 1–4 documented; 5–6 **deferred** |
+| Auth (pixels skipped) | SubscriptionScreen, SubscriptionGate | Code live; no stills |
 | Hub | Dashboard (no footer), RecentActivity, CalendarActivity, EditStatus (= Settings), QrCodeScanner | Documented |
 | Hub | Notifications | **Dead** |
 | Lists | Lists, CreateLists, ListsDetail, SelectStartEndPointsList | Documented |
@@ -222,7 +223,7 @@ Not every screen has a skeleton loader — don't assume one exists where it isn'
 
 **Do:** use `#124ac6` for headers/CTAs/links · DIN Condensed Bold (titles/CTAs) + Regular (body) · gradient header + curved `#F6F7FB` 25pt body · `CustomFooter` for module switching (Dashboard excluded) · `AppConfirmModal` for confirms · top `Toast` for async · outline-Cancel + filled-primary on dual-action sheets · short centered gray empty copy.
 
-**Do not:** add a React Navigation tab/drawer navigator · introduce a dark app theme · use the Inter TTFs · use `icon_lists.png` for the Lists tab (live asset is `Supply3.png`) · assume Address Book and route-stop company CTAs match · silently "fix" mixed teal/green/gold chips or the two danger reds — copy the nearest existing screen instead.
+**Do not:** add a React Navigation tab/drawer navigator · introduce a dark app theme · use the Inter TTFs · use `icon_lists.png` for the Lists tab (live asset is `Supply3.png`) · assume Address Book and route-stop company CTAs match · silently "fix" mixed teal/green/gold chips or the two danger reds — copy the nearest existing screen instead · reuse the splash poster on logged-in screens · restyle Register/onboarding to CustomHeader · treat `screenshots/mobile/` HTML replicas as the app.
 
 ---
 
@@ -236,7 +237,7 @@ Not every screen has a skeleton loader — don't assume one exists where it isn'
 | Teal naming | `primaryDark` token is actually teal (`#00A99D`); several near-teal hexes used interchangeably |
 | Map View chip | Gold `#FFB800`, outside the primary palette |
 | Font weight | DIN family alongside leftover numeric `fontWeight` 600/700 |
-| Login logo | JPG wordmark (~300×110) in styles vs TT cube seen in TestFlight capture |
+| Login logo box | `loginLogo` 300×110 contain vs a square cube JPG — letterboxed, not a second mark |
 | App version | `package.json` marketing 7.1.49 vs TestFlight build 42.30/42.31 |
 | `HIDE_SUBSCRIPTION_ACTIONS_ON_ANDROID` | Comment implies hiding; value is currently `false` (shows on both platforms) |
 | `COLOR_PRIMARY` import | `bizContactScreens.styles.js` imports it; current `config/index.js` doesn't export it — **Needs Manual Verification** it isn't crashing at runtime |
@@ -247,11 +248,11 @@ Full list: [`05-Design-System/Token-Inconsistencies.md`](05-Design-System/Token-
 
 ## 11. Deferred scope
 
-Not visually documented anywhere in the Design Brain (code exists, no captures) — **do not invent UI for these**: Register + `PostSignupPaywallFlow`, `SubscriptionScreen` (RevenueCat), `SubscriptionGate`, `SettingsPlanPaywall`, the Cancel/Upgrade/Buy-extra-credits *purchase* flows (the Settings buttons themselves **are** captured), `CancelAccountConfirmModal`, first-signup onboarding, Android UI (Archive 2 is iOS-only), native splash/Lottie timing, `WhatsNewModal`, spotlight/coaching sheets, HubSpot `Error` screen, lasso drawing, `Notifications`/`RouteSwipe`/`ClusterList` (dead/broken anyway), Edit Route/Edit List full screens, the forgot-password web page. Full list: [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md).
+Not visually documented (code exists, no captures) — **do not invent UI for these**: PostSignup **steps 5–6** (Configuring + RevenueCat `SubscriptionScreen`), `SubscriptionGate`, `SettingsPlanPaywall`, Cancel/Upgrade/Buy-extra-credits *purchase* flows (Settings buttons **are** captured), `CancelAccountConfirmModal`, Android UI, JS splash **Lottie overlay** (native blue `19-splash.png` is captured), `WhatsNewModal`, spotlight/coaching sheets, HubSpot `Error` screen, lasso drawing, `Notifications`/`RouteSwipe`/`ClusterList` (dead/broken anyway), Edit Route/Edit List full screens. Register questionnaire steps 1–4: [Onboarding.md](04-User-Flows/Onboarding.md). Full list: [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md).
 
 ## 12. Top "Needs Manual Verification" items
 
-Login logo (cube vs JPG) · who actually sees "Rate the app" · Dynamic Link behavior post-install · Scan Card's post-save destination screen · Filter "By Status" checkboxes (below the fold in capture) · Android visual parity (no Android archive at all) · the `COLOR_PRIMARY` import above. Full list: [`06-Coverage/Needs-Manual-Verification.md`](06-Coverage/Needs-Manual-Verification.md).
+JS splash Lottie vs still · who actually sees "Rate the app" · Dynamic Link behavior post-install · Scan Card's post-save destination screen · Filter "By Status" checkboxes (below the fold in capture) · Android visual parity (no Android archive at all) · the `COLOR_PRIMARY` import above. Full list: [`06-Coverage/Needs-Manual-Verification.md`](06-Coverage/Needs-Manual-Verification.md).
 
 ---
 

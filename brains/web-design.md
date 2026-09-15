@@ -42,7 +42,7 @@ Hub for **as-shipped** web pixels. Two stacks — do not mix. Sibling: [Web Code
 | Sidebar | Duplicate icon + text `<a>` pairs in `resources/views/front/inc/sidebar.blade.php`. Do not clean up. |
 | Vite Bootstrap 5 | In `package.json`; manager JSX **does not import it**. |
 | Manager map circles | `AIFindLeads.jsx` uses `['#2563eb', '#10b981', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4']` — **not** `--blue`. |
-| Register / paywall / HQ | [Deferred-Scope.md](../design-web/Deferred-Scope.md). |
+| Register / paywall / HQ | Login/trial/SA dashboard captured. Register web steps 2–3 + HQ still deferred: [Deferred-Scope.md](../design-web/Deferred-Scope.md). |
 
 ## New page recipe
 

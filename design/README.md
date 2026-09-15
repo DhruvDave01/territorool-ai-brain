@@ -16,7 +16,17 @@ related:
 ---
 # Design pack (mobile UI as it ships)
 
-Imported from the **Design Brain** pack (iOS TestFlight Archive 2 + `TerriTool` `theme.js`). This is **not** a redesign brief. Code still wins over captures.
+Imported from the **Design Brain** pack (iOS TestFlight stills + `TerriTool` `theme.js`). This is **not** a redesign brief. Code still wins over captures.
+
+**Local packs (binaries not copied here):**
+
+| Pack | Path | Role |
+|------|------|------|
+| Brand book HTML + splash/logo/icon | `/Users/dhruvdave/Downloads/Archive/` | Viewer. Open `Brand-Guidelines/index.html`. Kit mock shows a footer on Dashboard — **live Dashboard has none**. `ICON_HOME_ACTIVE` is imported in footer JS but **not used**. |
+| Stills `IMG_4563`–`IMG_4600` (no `IMG_4597`) | `/Users/dhruvdave/Downloads/Archive 2/` | Same set as Design-Brain Archive-2 |
+| Stills `IMG_4601`–`IMG_4604` | `/Users/dhruvdave/Downloads/Archive 3/` | Logout, Share, AI chips, Login |
+| Stills `IMG_4605`–`IMG_4611` | `/Users/dhruvdave/Downloads/Archive 4/` | Dashboard populated, Scan Card, Calendar, QR, list stop, Share Route |
+| Maestro iOS + web Playwright pack | `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/` | `ios/` live Simulator. `web/` live classic web. **`mobile/` = HTML replicas — ignore for shipping chrome** |
 
 **Read first:** [MINI-DESIGN-BRAIN.md](MINI-DESIGN-BRAIN.md)  
 **Full index:** [MASTER-DESIGN-BRAIN.md](MASTER-DESIGN-BRAIN.md)
@@ -29,7 +39,8 @@ Product / API / credits stay in the rest of `AI_BRAIN/` and the root frontal lob
 |---|---|
 | All 57 markdown notes (brand, UI, flows, tokens, coverage) | 48 stills + video frames + 3 MP4s (~290 MB) + TTF/logo copies |
 
-Captures: `/Users/dhruvdave/Downloads/Design-Brain/03-Assets/`  
+Captures: `/Users/dhruvdave/Downloads/Archive 2`–`4` or `/Users/dhruvdave/Downloads/Design-Brain/03-Assets/`  
+Brand stills (splash, logos, app icon): `/Users/dhruvdave/Downloads/Archive/`  
 Live fonts/icons: `TerriTool/App/assets/fonts/` and `TerriTool/App/images/`
 
 Screenshot filenames in these notes (`IMG_4563`, VID1, …) refer to that Assets folder. Do not invent missing pixels.

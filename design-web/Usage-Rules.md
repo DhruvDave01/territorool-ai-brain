@@ -22,6 +22,7 @@ To look like TerriTool **today**, pick a stack first. Never mix.
 8. Do not load `manager-portal.css` or DM Sans unless the sibling (Address Book / Routes list / Lists list) already scopes `--tt-*` on a page id.
 9. Leave `inc/sidebar.blade.php` duplicates alone.
 10. Copy the nearest classic sibling. Do not restyle leftover `#16aa9d` to manager teal.
+11. Auth split-panel (`/login`, `/register`, `/trial`) is **not** AdminLTE dashboard chrome. Password reset **is** classic header. Web Register is **3** steps; mobile is **6**. Do not unify.
 
 ## Manager (`/manager/*`)
 

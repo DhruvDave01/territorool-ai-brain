@@ -25,7 +25,7 @@ related:
 
 Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.md). Parent: [sub brains](README.md).
 
-**Repo:** `TerriTool/` pixels + `App/styles/theme.js`. Stills/videos: `Downloads/Design-Brain/03-Assets/` (not in this vault). Not a redesign. APIs: [API Brain](api.md).
+**Repo:** `TerriTool/` pixels + `App/styles/theme.js`. Stills: `Downloads/Archive 2`–`4`, `Downloads/Design-Brain/03-Assets/`, and Maestro `untitled folder/screenshots/ios/` (live Simulator). **`screenshots/mobile/` is HTML replicas — ignore.** Brand book HTML: `Downloads/Archive/`. Not a redesign. APIs: [API Brain](api.md).
 
 ## Read first
 
@@ -45,7 +45,10 @@ Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.m
 | Type | DIN Condensed: `dinBold` / `dinLight`. Inter ttf in Assets is **unused**. |
 | Dark mode | None app-wide (QR scanner / some map polylines may go dark — NMV). |
 | Footer | Six icon-only tabs. Lists = `Supply3.png`. Dashboard **has no footer**. Settings on Dashboard is a header pill `testID="footer.tab.settings"`. |
-| Deferred pixels | Register, paywall, Android: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). JS is live. |
+| Logo | Isometric TT cube = `TerriTool_logo_NEW.jpg` (Login/Dashboard). Same mark on black = `TT_NO_BG.png`. Not a wide wordmark. |
+| Splash | Native `#124ac6` → JS `Image_splash.png` + Lottie (~3s). Do not reuse that poster on logged-in screens. |
+| Onboarding chrome | Light questionnaire + 6-segment bar. **Not** CustomHeader + footer. Copy [Onboarding.md](../04-User-Flows/Onboarding.md). |
+| Deferred pixels | RevenueCat subscribe, SubscriptionGate, Android: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). |
 
 ## Tokens (`App/styles/theme.js`) — do not average
 
@@ -80,6 +83,7 @@ Active tint `#124ac6` on `#eeeeee`; inactive `#9B9B9B`. Icons 28×28. Mapping: [
 | New thing | Copy |
 |-----------|------|
 | Logged-in list/settings chrome | Settings / Address Book (`EditStatus`, `company/list.js`) |
+| Register / onboarding | PostSignupPaywallFlow (light questionnaire, 6-step bar). Do not restyle to Dashboard. |
 | Modal confirm | Any `AppConfirmModal` caller |
 | CTA | `AppButton` variants already on that screen |
 | Map | `activeroutemap` / `findLeads` — do not restyle map circles to a single teal |
@@ -89,3 +93,4 @@ Active tint `#124ac6` on `#eeeeee`; inactive `#9B9B9B`. Icons 28×28. Mapping: [
 - Build a new list screen with gradient header + 25pt `#F6F7FB` body.
 - Leave both danger reds and the teal family untouched.
 - Not put CustomFooter on Dashboard or AI Find Leads V2.
+- Use the TT cube JPG for in-app chrome, not the marketing `TerriTool.png` lockup.

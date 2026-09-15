@@ -10,10 +10,10 @@ This is **not** 100% visual coverage.
 
 | Feature | Screen found | Code found | UI documented | Flow documented | Screenshot/Video | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| Login | Login | Yes | Yes | Yes | IMG_4604 | Documented |
-| Register | Register | Yes | Stub | Stub | — | Deferred |
+| Login | Login | Yes | Yes | Yes | IMG_4604, Maestro `01-login` | Documented |
+| Register | Register + PostSignup | Yes | Yes (steps 1–4) | Yes | Maestro `00`, `20`–`24` | Partial (5–6 deferred) |
 | Paywall / gate | Subscription* | Yes | Stub | Stub | Settings buttons only | Deferred |
-| Splash | overlay | Yes | Partial | Partial | — | Deferred |
+| Splash | overlay / native | Yes | Partial | Yes | Asset still + Maestro `19-splash` native blue | Partial; Lottie NMV |
 | Dashboard hub | Dashboard | Yes | Yes | Yes | IMG_4563, 4605, VID1–3 | Documented |
 | Recent activity tab | Dashboard | Yes | Yes | Yes | IMG_4605 | Documented |
 | RecentActivity screen | RecentActivity | Yes | Partial | Partial | View All only | Partial |

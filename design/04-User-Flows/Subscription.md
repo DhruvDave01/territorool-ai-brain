@@ -1,11 +1,25 @@
 ---
 id: Subscription
 parent: design
+sources:
+  - App/components/register/subscribe.js
+  - App/components/register/SubscriptionGate.js
+  - dashboard/editstatus.js
+related:
+  - design/04-User-Flows/Onboarding.md
+  - 09-credits-billing.md
+  - design/06-Coverage/Deferred-Scope.md
 ---
 # Subscription and payment
 
-**Visual pack skipped** per product request (2026-09-11). Code is live.
+Settings **buttons** are captured (`IMG_4564`, Maestro `07-settings.png`). Store/web **purchase and cancel flows** are still undocumented.
 
-Code exists: `SubscriptionGate`, `SubscriptionScreen`, RevenueCat, Settings Cancel / Upgrade / Buy extra credits (`IMG_4564` shows the buttons; the **purchase/cancel web or store flow** is not documented here).
+| Surface | Visual |
+|---------|--------|
+| PostSignup steps 1–4 | Captured — [Onboarding.md](Onboarding.md) |
+| Step 5 Configuring | Code only |
+| Step 6 `SubscriptionScreen` / RevenueCat | **No still** |
+| `SubscriptionGate` (cold-start block) | **No still** |
+| `SettingsPlanPaywall` / CancelAccountConfirmModal | **No still** |
 
-When assets arrive, extend this file — do not guess RevenueCat offering copy.
+Do not guess RevenueCat offering copy or prices from the web Upgrade page (`subscription-subscribe.png` is **classic web**, not the iOS paywall).

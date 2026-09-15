@@ -17,7 +17,7 @@ sources:
 | Map View chip | gold `#FFB800` | not in primary palette usage |
 | `styles/index.js` | claims config re-exports `COLOR_*` | **current `config/index.js` does not**; `bizContactScreens.styles.js` still imports `COLOR_PRIMARY` |
 | Font weight | DIN family | leftover `fontWeight` 600/700 |
-| Login logo | JPG ~300×110 wordmark in styles | TestFlight cube (`IMG_4604`) |
+| Login logo box | `loginLogo` 300×110 contain | Asset is the isometric TT cube (`IMG_4604` matches) |
 | Activity date | formatter in code | `Invalid Date PT` on some stills |
 | App version | package.json 7.1.49 | TestFlight 42.30 / 42.31 |
 | Inter TTF | on disk | not in theme |

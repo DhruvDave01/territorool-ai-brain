@@ -134,7 +134,7 @@ Full: [Navigation.md](Navigation.md).
 
 | URL | View | Stack | Notes |
 |-----|------|-------|-------|
-| `/dashboard` | `front.dashboard` | Classic | SA/BSA: “Welcome {name}” + recent-activity panel. **BA redirected to manager** — SA still **not captured** |
+| `/dashboard` | `front.dashboard` | Classic | SA/BSA: “Welcome {name}” + tiles + Activity + Tutorial. Still: `untitled folder/screenshots/web/desktop/dashboard.png`. **BA redirected to manager** |
 | `/company` | `front.company.listnewl` | Classic | Address Book + jqxGrid `#company_list`. Still: `04-classic-company-list.png` |
 | `/findleads` | `front.route.findleads` | Classic | City/ZIP AI search + jqxGrid. Still: `05-classic-findleads.png` |
 | `/routes` | `front.route.list` | Classic | DataTables, Published/Draft. Still: `06-classic-routes-list.png` |
@@ -143,8 +143,10 @@ Full: [Navigation.md](Navigation.md).
 | `/manager/dashboard` | `#manager-dashboard-root` | Manager island | KPI cards + territory map. Still: `01-manager-dashboard.png` |
 | `/manager/ai-find-leads` | `#manager-ai-find-leads-root` | Manager island | Places **circles**, not classic city/ZIP. Stills: `02` / `03` |
 | Other `/manager/*` | see [Page-Inventory.md](Page-Inventory.md) | Islands | salespeople, activity, settings, support, reports (placeholder) |
-| `/login` | `auth.login` | Classic chrome hidden | Split-panel; login-only blues `#2a5bef` / `#1740c7` — **no still** |
-| `/register`, `/trial`, `/b2b`, paywall | auth Blade | — | **Deferred** (Inter on register) |
+| `/login` | `auth.login` | Split-panel (header/sidebar hidden) | Still: `web/desktop/login.png`. Login-only blues + **emoji** on Welcome |
+| `/register` | `auth.register` | Same shell, **3** web steps | Step 1 captured. Inter in Blade — do not put Inter on classic app pages |
+| `/trial` | `auth.freetrial` | Create account + reCAPTCHA | `trial.png` |
+| `/b2b` | `auth.b2b` | Same as register step 1 in this still | `b2b.png` |
 | `/hq/*` | `backpack::layout` | Backpack | **Deferred** |
 
 Manager mounts (from `main.jsx`): `#manager-toast-root`, `#manager-ai-find-leads-root`, `#manager-dashboard-root`, `#manager-activity-root`, `#manager-salespeople-root`, `#manager-salesperson-detail-root`, `#manager-settings-root`, `#manager-salesperson-routes-root`, `#manager-support-root`, `#manager-support-create-root`, `#manager-support-detail-root`, `#manager-salesperson-form-root`, `#manager-salesperson-convert-root`.
@@ -155,7 +157,7 @@ Manager mounts (from `main.jsx`): `#manager-toast-root`, `#manager-ai-find-leads
 
 **Do:** `@extends('front.layout')` for new classic pages · FormData + `contentType: false` for classic multipart · jqxGrid on Find Leads / Address Book · new manager UI as a React island on `_portal_layout` · `#124ac6` primary · copy the nearest sibling on **that** stack.
 
-**Do not:** mix AdminLTE into manager islands (beyond the existing hidden parent layout) · add DM Sans to classic chrome · replace `#16aa9d` with `#00a99d` “to be consistent” · delete duplicate sidebar `<a>` tags · replace jqxGrid with a React table on `/findleads` · build manager AI Find Leads as a Blade copy of `/findleads` · invent Register / paywall / HQ UI.
+**Do not:** mix AdminLTE into manager islands (beyond the existing hidden parent layout) · add DM Sans to classic chrome · replace `#16aa9d` with `#00a99d` “to be consistent” · delete duplicate sidebar `<a>` tags · replace jqxGrid with a React table on `/findleads` · build manager AI Find Leads as a Blade copy of `/findleads` · copy the web split-panel login onto mobile · copy mobile’s 6-step Register onto web (web is **3** steps) · invent HQ UI.
 
 ---
 
@@ -179,7 +181,7 @@ Full: [Token-Inconsistencies.md](Token-Inconsistencies.md).
 
 ## 8. Deferred visual scope
 
-Do **not** invent UI for: Register / trial / B2B (Inter), onboarding, subscription/paywall/RevenueCat purchase, HQ Backpack pages, Sales Agent dashboard still (this Archive used a **Business Agent** session; `/dashboard` redirects). Same rule as mobile Register/paywall. [Deferred-Scope.md](Deferred-Scope.md).
+Do **not** invent UI for: web Register **steps 2–3**, HQ Backpack, iOS RevenueCat, manager team CRUD (thin Archive). Login, trial, SA dashboard, password reset, subscription history, and Upgrade **are** captured — [Screenshot-Index.md](Screenshot-Index.md). [Deferred-Scope.md](Deferred-Scope.md).
 
 ---
 

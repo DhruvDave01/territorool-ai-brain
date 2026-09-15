@@ -11,6 +11,8 @@ related:
 
 **Source of truth:** `App/styles/theme.js` plus `screenCurvedBody.js`, `fonts.js`, `TEXT_SIZES`, `AppButton` variant hexes.
 
+Machine dump of the same tokens (viewer pack): `/Users/dhruvdave/Downloads/Archive/Brand-Guidelines/tokens.json`. If that JSON and `theme.js` disagree, **theme.js wins**.
+
 Full color tables: [../01-Brand-Guidelines/Colors.md](../01-Brand-Guidelines/Colors.md).
 
 ## Colors (summary)

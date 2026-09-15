@@ -12,16 +12,15 @@ This is **visual scope**, not missing product code. Live JS: `PostSignupPaywallF
 
 | Area | Code | Why skipped |
 | --- | --- | --- |
-| Register | `register/index_register_split.js` | No captures |
-| PostSignupPaywallFlow | Goals → Role → Cost → Configuring → Welcome | Payment/onboarding |
-| SubscriptionScreen | RevenueCat | Payment |
-| SubscriptionGate | Cold-start gate | Payment |
+| Register / PostSignup steps 1–4 | `register/` + `postSignupPaywallFlow.js` | Captured Maestro `00`, `20`–`24` |
+| PostSignup Configuring (step 5) | same | No still |
+| SubscriptionScreen / SubscriptionGate | RevenueCat | Payment UI still uncaptured |
 | SettingsPlanPaywall | Settings | Payment |
-| Cancel / Upgrade / Buy extra credits **flows** | Settings buttons **are** visible in `IMG_4564` | Store/web purchase not recorded |
+| Cancel / Upgrade / Buy extra credits **flows** | Settings buttons **are** visible in `IMG_4564` | Store/web purchase not recorded on mobile |
 | CancelAccountConfirmModal | Settings | Payment-adjacent |
-| First-signup AI onboarding flag | `MultipleAIWaypoint` | No first-run capture |
-| Android UI | — | Archive 2 is iOS only |
-| Native splash / Lottie | `AnimatedSplashScreen` | No capture |
+| First-signup AI hunt flag | `MultipleAIWaypoint` | No dedicated first-run hunt still (normal AI screen) |
+| Android UI | — | Stills are iOS only |
+| Native splash **Lottie overlay** | `AnimatedSplashScreen` | Maestro `19-splash.png` is solid `#124ac6` native window only |
 | WhatsNewModal | | No capture |
 | Spotlight / first-route coaching | | No capture |
 | HubSpot `Error` screen | | No capture |
@@ -31,6 +30,6 @@ This is **visual scope**, not missing product code. Live JS: `PostSignupPaywallF
 | ClusterList | Broken nav | |
 | Session expired / crash fallback | | No capture |
 | Edit Route / Edit List full screens | | No dedicated stills |
-| Forgot-password **web** page | External | Out of app |
+| Forgot-password **web** page | External | Captured: `untitled folder/screenshots/web/desktop/password-reset.png` |
 
 When new archives arrive, extend flows and this matrix — do not invent UI.

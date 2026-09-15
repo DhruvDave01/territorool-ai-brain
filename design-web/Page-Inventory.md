@@ -21,7 +21,7 @@ Related: [13-web-urls.md](../13-web-urls.md) · [code/web-code-details.md](../co
 
 | URL | Controller | View | Table / chrome | Archive |
 |-----|------------|------|----------------|---------|
-| `/dashboard` | `HomeController@dashboard` | `front.dashboard` | Welcome + recent-activity (SA/BSA). BA **redirects** to manager | SA still **deferred** |
+| `/dashboard` | `HomeController@dashboard` | `front.dashboard` | Welcome tiles + Activity + Tutorial (SA/BSA). BA **redirects** to manager | `web/desktop/dashboard.png` |
 | `/company` | `CompanylController@index` | `front.company.listnewl` | jqxGrid `#company_list` + `company-list.css` | `04-classic-company-list.png` |
 | `/recent-company` | `CompanylController@recentCompany` | `front.company.recentList` | Same list tokens | |
 | `/company/{id}/edit` | `CompanylController@edit` | `front.company.editl` | `front.company.layout_main` | |
@@ -32,10 +32,10 @@ Related: [13-web-urls.md](../13-web-urls.md) · [code/web-code-details.md](../co
 | `/lists` | `ListController@index` | `front.list.list` | `list-list.css` | |
 | `/list/step1` | | `front.list.step1` | | |
 | `/contact` | `ContactController@index` | `front.contact.listl` | | |
-| `/salesperson/edit` | | `front.salesperson.edit` | Settings | |
-| `/support*` | `SupportController` | `front.support.*` | | |
-| `/subscription*` | `SubscriptionController` | `front.subscription.*` | Paywall **deferred** | |
-| CSV wizards | `uploadcompany/step1–4`, `uploadcontact/step1–4` | `front.company.step*` / `front.contact.step*` | FormData + `contentType: false` | |
+| `/salesperson/edit` | | `front.salesperson.edit` | Settings | `web/desktop/settings.png` |
+| `/support*` | `SupportController` | `front.support.*` | | extra stills `support.png` / `support-create.png` |
+| `/subscription*` | `SubscriptionController` | `front.subscription.*` | History + Upgrade | `subscription.png`, `subscription-subscribe.png` |
+| CSV wizards | `uploadcompany/step1–4`, `uploadcontact/step1–4` | `front.company.step*` / `front.contact.step*` | FormData + `contentType: false` | `upload-companies.png`, `upload-contacts.png` — open the still before copying a step |
 | Maps | `/company/viewmap*`, `/route` viewmap | `front.company.viewmap`, `front.route.viewmap` | | |
 
 `front.company.layout_main` / `front.hubspot.layout_main` are extra AdminLTE wrappers — still classic, not manager.
@@ -74,15 +74,15 @@ Duplicate route line in `web.php`: `GET /manager/ai-find-leads` registered twice
 
 ---
 
-## Auth / HQ / other (mostly deferred pixels)
+## Auth / HQ / other
 
 | URL | View | Stack |
 |-----|------|--------|
-| `/login` | `auth.login` | `front.layout` with header/sidebar CSS-hidden |
-| `/register` | `auth.register` | Inter — deferred |
-| `/trial` | `auth.freetrial` | deferred |
-| `/b2b` | `auth.b2b` | Inter — deferred |
-| `/onboarding` | `auth.post_registration_onboarding` | Classic sidebar skipped |
+| `/login` | `auth.login` | Split-panel; still `login.png` |
+| `/register` | `auth.register` | Inter; step 1 of 3 captured |
+| `/trial` | `auth.freetrial` | `trial.png` |
+| `/b2b` | `auth.b2b` | Same as register step 1 in this pack |
+| `/onboarding` | `auth.post_registration_onboarding` | Classic sidebar skipped — **no dedicated still** (pack file `onboarding.png` is dashboard) |
 | `/hq/*` | `vendor.backpack.base.*` | Backpack — deferred |
 | `/android`, `/payments-in-app` | `front.android`, `front.payments_in_app` | Mobile-web helpers |
 

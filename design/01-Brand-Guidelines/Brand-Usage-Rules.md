@@ -17,6 +17,7 @@ These rules are **descriptive**. They exist so a new screen matches TerriTool as
 - Keep maps as full-bleed content under a blue header; numbered stop pins; locate + zoom FABs
 - Keep empty copy centered, gray, with a short instructional sentence
 - Keep dual-action sheets as **outline Cancel + filled primary** (`Share Route`, `Create New List`, `Log out`)
+- Use `TerriTool_logo_NEW.jpg` (isometric TT cube) in-app; `TT_NO_BG.png` only where that screen already does
 
 ## Do not (based on current app)
 
@@ -26,14 +27,22 @@ These rules are **descriptive**. They exist so a new screen matches TerriTool as
 - Do not use `icon_lists.png` for the Lists tab — live asset is `Supply3.png`
 - Do not assume Address Book company CTAs match route-stop CTAs: **Add To** vs **Mark**
 - Do not silently “fix” mixed teal/green/gold chips or mixed danger hexes — copy the nearest screen
+- Do not copy the **full-bleed blue splash poster** (`Image_splash.png`) onto authenticated screens — those stay gradient header + `#F6F7FB` sheet
+- Do not restyle Register/onboarding to CustomHeader + footer — it is its own light questionnaire
+- Do not ship **Test crash screen** / treat HTML replicas in `untitled folder/screenshots/mobile/` as the app
+- Do not use the marketing lockup `TerriTool.png` as the Login/Dashboard mark
+- Do not follow the brand-kit HTML phone mock if it puts a footer on Dashboard or labeled tabs — live footer is **icon-only**; Dashboard has **no footer**
+- Do not swap Home to `icon_home_active.png` — footer imports `ICON_HOME_ACTIVE` but tints `icon_home.png`
 
 ## Voice / copy (from captures)
 
+- Tagline (splash still only): “Win the Game of Sales & expand your territory”
 - Headers: “AI Find Leads”, “Routes Library”, “Lists”, “Address Book”, “Settings”, “Scan Business Card”, “Calendar Activity”
-- CTAs: “Next step”, “Confirm Leads”, “Create Route”, “Save List”, “Add Company”, “Find Contacts”, “Mark Visited”
+- CTAs: “Next step”, “Confirm Leads”, “Create Route”, “Save List”, “Add Company”, “Find Contacts”, “Mark Visited”. Login capture is **Login** / **Register Here**, not all-caps
 - Empty: “No contacts found.” / “No activities yet.” / “No upcoming activities yet.”
 - Loaders: “LOADING.”, “Loading credits…”, “Loading lists…”, “Loading route on map…”, “Generating your sales route”, “Preparing Route…”
 - Fun fact on publish: “Smart route planning saves 12% of fuel” (`ROUTE_PUBLISHING_SALES_FUN_FACT`)
+- No emoji in product UI
 
 ## Deferred brand surfaces
 

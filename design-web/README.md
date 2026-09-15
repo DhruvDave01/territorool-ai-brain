@@ -35,16 +35,16 @@ Product / API / credits stay in the rest of `AI_BRAIN/` and the root frontal lob
 
 | In this vault | Not invented |
 |---|---|
-| MINI, tokens, page inventory, nav, usage, inconsistencies, deferred | Register / paywall / HQ pixels (no dedicated captures) |
-| Short Archive stills (~1.5 MB, 7 PNGs) | 264 MB videos — never |
+| MINI, tokens, page inventory, nav, usage, inconsistencies, deferred | HQ pixels; web Register steps 2–3; iOS RevenueCat |
+| Short Archive stills (~1.5 MB, 7 PNGs) + Playwright web pack | 264 MB videos — never |
 
-Stills: [03-Assets/stills/](03-Assets/stills/). Filenames in these notes refer to that folder. Do not invent missing pixels.
+Stills: [03-Assets/stills/](03-Assets/stills/) (BA Archive) plus `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/web/` (SA Playwright). Filenames in these notes refer to those folders. Do not invent missing pixels. Do not use `screenshots/mobile/` (HTML replicas).
 
 ## Ground rules
 
 - Match the **nearest existing page on the same stack**. Do not average classic leftover teal `#16aa9d` with manager `--teal: #00a99d`.
 - Do not “modernize” AdminLTE into a React SPA. Do not add a new AdminLTE page for a manager feature.
-- Register / paywall / HQ pixels are **deferred** — [Deferred-Scope.md](Deferred-Scope.md).
+- Register / remaining paywall / HQ pixels — [Deferred-Scope.md](Deferred-Scope.md).
 
 ## Folder map
 
@@ -56,5 +56,5 @@ Stills: [03-Assets/stills/](03-Assets/stills/). Filenames in these notes refer t
 | [Navigation.md](Navigation.md) | Role-split sidebars; duplicate links are live |
 | [Usage-Rules.md](Usage-Rules.md) | New classic page vs new manager island |
 | [Token-Inconsistencies.md](Token-Inconsistencies.md) | Live drift — do not normalize |
-| [Deferred-Scope.md](Deferred-Scope.md) | Register / paywall / HQ / SA dashboard still |
-| [Screenshot-Index.md](Screenshot-Index.md) | Archive stills from `http://127.0.0.1:8000/` |
+| [Deferred-Scope.md](Deferred-Scope.md) | HQ, web Register steps 2–3, iOS RevenueCat |
+| [Screenshot-Index.md](Screenshot-Index.md) | BA Archive + 2026-09-15 SA Playwright pack |

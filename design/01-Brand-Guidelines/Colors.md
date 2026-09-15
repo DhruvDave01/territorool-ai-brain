@@ -150,6 +150,6 @@ There is **no app-wide dark theme**. Chrome is light + blue header. Exceptions:
 
 | Topic | Token / code | Capture |
 | --- | --- | --- |
-| Login logo treatment | `TerriTool_logo_NEW.jpg` sized ~300×110 | `IMG_4604` shows a **3D TT cube**, not a wide wordmark |
+| Login logo treatment | `TerriTool_logo_NEW.jpg` in a 300×110 contain box | Same isometric TT cube as `IMG_4604` — not a second wordmark file |
 | Confirm Leads CTA | mix of primary vs `nearBlack` | `IMG_4567` Confirm Leads is **near-black**, not primary blue |
 | Settings Cancel | danger red | Matches `#E94A5D` family |

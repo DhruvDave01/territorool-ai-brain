@@ -29,7 +29,7 @@ These files describe **how TerriTool already looks**, not how it should be redes
 | --- | --- |
 | [Colors.md](Colors.md) | Brand, surface, text, semantic, gradient, overlay colors |
 | [Typography.md](Typography.md) | Custom DIN Condensed (+ file copies in `03-Assets/Fonts/`), sizes, weights, unused Inter |
-| [Logos.md](Logos.md) | Cube mark vs wordmark, app icon, splash |
+| [Logos.md](Logos.md) | Isometric TT cube, lockup, app icon, splash stills |
 | [Icons.md](Icons.md) | Tab, tile, map, vector-icon usage |
 | [Spacing.md](Spacing.md) | Theme spacing + scale baseline 393×852 |
 | [Shapes-and-Radius.md](Shapes-and-Radius.md) | Radii, curved screen body, button/card shapes |

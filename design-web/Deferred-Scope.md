@@ -10,24 +10,26 @@ related:
 ---
 # Deferred visual scope (web)
 
-Same rule as mobile [design/06-Coverage/Deferred-Scope.md](../design/06-Coverage/Deferred-Scope.md): **exists in code, no (or insufficient) captures — do not invent UI.**
+**Exists in code, no (or insufficient) captures — do not invent UI.**
 
-Archive pass 2026-09-14 used a logged-in **Business Agent** at `http://127.0.0.1:8000/`. `/dashboard` redirected to manager.
-
-| Area | Code | Why skipped |
-|------|------|-------------|
-| Register | `resources/views/auth/register.blade.php` (Inter) | No capture; same deferred family as mobile Register |
-| Trial / B2B | `auth.freetrial`, `auth.b2b` | Paywall-adjacent; Inter on B2B |
-| Onboarding | `auth.post_registration_onboarding`, `first_route_onboarding_sheet` | No first-run capture |
-| Subscription / paywall / RevenueCat purchase | `front.subscription.*`, `#revenuecatManagePlanModal` | Payment |
-| Login split-panel pixels | `auth.login` | Code tokens recorded; **no still** (session already authenticated) |
+| Area | Code | Status 2026-09-15 |
+|------|------|-------------------|
+| Login split-panel | `auth.login` | **Captured** `web/desktop/login.png` |
+| Register step 1 of 3 | `auth.register` | **Captured** (later steps in the 3-step web flow **not** stills) |
+| Trial | `auth.freetrial` | **Captured** `trial.png` |
+| B2B | `auth.b2b` | Still matches register step 1 in this pack |
+| Forgot password | Laravel reset | **Captured** `password-reset.png` (classic header, not split-panel) |
+| Sales Agent dashboard | `front.dashboard` | **Captured** `dashboard.png` (PNG sidebar) |
+| SA Settings | `front.salesperson.edit` | **Captured** `settings.png` |
+| Subscription **history** | `front.subscription.*` | **Captured** `subscription.png` |
+| Upgrade plan (web) | same | **Captured** `subscription-subscribe.png` — not iOS RevenueCat |
+| Register steps 2–3 | `auth.register` | No still |
+| `/onboarding` Blade | `auth.post_registration_onboarding` | Filename `onboarding.png` in the pack is **SA dashboard**, not this page |
 | HQ | `resources/views/vendor/backpack/` | No HQ capture |
-| Sales Agent dashboard | `front.dashboard` recent-activity / welcome | BA session cannot stay on `/dashboard` |
-| BSA PNG sidebar | `inc/sidebar.blade.php` BSA branch | Archive user was BA (Font Awesome rail) |
-| Forgot password | Laravel auth reset | Out of Archive |
-| CSV upload wizards | `uploadcompany/step*`, `uploadcontact/step*` | No stills |
-| Company detail / maps / list detail | many Blade files | Code-only until more stills |
-| Manager salespeople / activity / settings / support | islands exist | Not in the short Archive list |
+| BSA vs BA sidebar on same URL | `inc/sidebar.blade.php` | This pack is **SA PNG rail**; older Archive is **BA** |
+| CSV upload wizards | `uploadcompany/step*`, `uploadcontact/step*` | Extra stills exist (`upload-companies.png`, `upload-contacts.png`) — index if you open them; do not invent missing wizard steps |
+| Manager salespeople / activity / support | islands | Not in this Playwright list (older Archive has cockpit + AI Find Leads only) |
 | Manager reports | “Coming soon” Blade | Placeholder |
+| RevenueCat **iOS** paywall | mobile `SubscriptionScreen` | Still deferred on mobile |
 
 When new stills arrive, extend [Screenshot-Index.md](Screenshot-Index.md) — do not invent UI.

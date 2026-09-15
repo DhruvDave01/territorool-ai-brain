@@ -12,7 +12,9 @@ related:
 
 Runtime app assets live in the mobile repo (`App/images/`, `App/assets/`). **Binaries were not copied into this vault** (stills + ~264 MB videos). Open the original pack:
 
-`/Users/dhruvdave/Downloads/Design-Brain/03-Assets/`
+`/Users/dhruvdave/Downloads/Design-Brain/03-Assets/` (same stills also split as `Downloads/Archive 2`–`4`)
+
+Brand book (HTML + splash/logo/icon, not in this vault): `/Users/dhruvdave/Downloads/Archive/`
 
 This folder in the vault is **inventory markdown only**.
 

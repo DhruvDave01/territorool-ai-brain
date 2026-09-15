@@ -22,7 +22,7 @@ Entry point for designers, developers, and other agents. Describes the **existin
 - **Stack:** React Native 0.84.1, React 19.2.3, New Architecture
 - **Repo:** `TerriTool_Mobile` · entry `index.js` → `init.js` → `App/App.js`
 - **API in this tree:** staging `https://staging.territool.com/index.php/api/`
-- **Visual pack:** Archive 2 iOS TestFlight (48 stills + 3 videos) under [`03-Assets`](03-Assets/README.md)
+- **Visual pack:** TestFlight stills (`IMG_4563`–`IMG_4611`) + brand book `/Users/dhruvdave/Downloads/Archive/` under [`03-Assets`](03-Assets/README.md)
 - **Deferred:** Register, payment/paywall, Android pixels — [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md)
 
 ---
@@ -36,7 +36,7 @@ TerriTool is a **single native stack**. Module switching is a custom **six-icon 
 - Primary **`#124ac6`**
 - Body surface **`#F6F7FB`**, cards white, text `#111827` / `#6B7280`
 - Custom font **DIN Condensed** Regular + Bold — files in [`03-Assets/Fonts/`](03-Assets/Fonts/README.md) (Inter TTFs copied there too but unused)
-- Logo: code uses `TerriTool_logo_NEW.jpg`; TestFlight login/header show a **TT cube** — **Needs Manual Verification**
+- Logo: `TerriTool_logo_NEW.jpg` **is** the isometric TT cube (`IMG_4604`). `TT_NO_BG.png` is the same mark on black. Marketing lockup `TerriTool.png` is not Login.
 - No app-wide dark theme (QR scanner is dark)
 
 Details: [`01-Brand-Guidelines`](01-Brand-Guidelines/README.md)
@@ -113,4 +113,4 @@ Follow [`05-Design-System/Usage-Rules.md`](05-Design-System/Usage-Rules.md). Cop
 
 - Not a redesign
 - Not a license to change production code
-- Not complete visual coverage of Register, paywalls, Android, splash, lasso, HubSpot, crash, or coaching
+- Not complete visual coverage of Register **steps 5–6**, RevenueCat, Android, splash **Lottie**, lasso, HubSpot, crash, or coaching

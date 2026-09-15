@@ -28,8 +28,8 @@ Screenshot paths are relative to `Design-Brain/03-Assets/Screenshots/`.
 
 | Route | Source | Purpose | Visual | Notes |
 | --- | --- | --- | --- | --- |
-| `Login` | `App/components/login/` | Email/password, forgot (web), EULA, privacy, version | Captured `Archive-2/IMG_4604.PNG` | Cube logo vs JPG wordmark: **Needs Manual Verification** |
-| `Register` | `register/index_register_split.js` | Signup + `PostSignupPaywallFlow` | **Deferred** | |
+| `Login` | `App/components/login/` | Email/password, forgot (web), EULA, privacy, version | `IMG_4604` + Maestro `01-login.png` | Cube JPG; 42.30 vs 42.31 |
+| `Register` | `register/index_register_split.js` + `postSignupPaywallFlow.js` | Signup questionnaire 6 steps | Maestro `00`, `20`–`24` (steps 1–4) | Steps 5–6 uncaptured |
 | `SubscriptionScreen` | `register/subscribe.js` | RevenueCat paywall | **Deferred** | |
 | `SubscriptionGate` | `register/SubscriptionGate.js` | Blocked until subscribe | **Deferred** | Cold-start if trial inactive |
 
@@ -173,7 +173,7 @@ Filter fields: City Name, Zip Code, Industry Type, Company Revenue, Company Empl
 
 | UI | Source | Visual |
 | --- | --- | --- |
-| AnimatedSplashScreen | `splash/AnimatedSplashScreen.js` | No capture |
+| AnimatedSplashScreen | `splash/AnimatedSplashScreen.js` | Asset still + Maestro native-blue `19-splash.png`. No overlay video |
 | AppCrashFallback | `common/AppCrashFallback.js` | No capture |
 | Session Expired | `App.js` + `AppConfirmModal` | No capture |
 | Toast | `react-native-toast-message` | VID1/VID2 toasts |
@@ -196,10 +196,13 @@ Filter fields: City Name, Zip Code, Industry Type, Company Revenue, Company Empl
 ## Per-screen chrome notes (captured)
 
 ### Login
-Entry: cold start without JWT. Exit: Dashboard or SubscriptionGate (**deferred**). No footer. Fields Email / Password. Forgot Password → web reset. Register Here (**deferred**). Footer EULA + version + Privacy.
+Entry: cold start without JWT. Exit: Dashboard or SubscriptionGate (**no still**). No footer. Fields Email / Password. Forgot Password → web reset (`password-reset.png`). Register Here → onboarding step 1. Footer EULA + version + Privacy.
+
+### Register / PostSignupPaywallFlow
+Light questionnaire, 6-step bar, no footer. Captured steps 1–4 ([Onboarding.md](../04-User-Flows/Onboarding.md)). Dev “Test crash screen” on step 4 — do not copy.
 
 ### Dashboard
-Entry: login / footer Home / JWT. Exit: tiles, QR, settings, calendar, recent, referral. Activity date: stills **“Invalid Date PT”** vs videos valid weekday string — document both.
+Entry: login / footer Home / JWT. Exit: tiles, QR, settings, calendar, recent, referral. Activity date: stills **“Invalid Date PT”** vs videos valid weekday string — document both. Maestro `02-home.png` is a populated hub (referral “Want 20 more credits?”) vs empty `IMG_4563`.
 
 ### Settings
 Profile, subscription Cancel/Upgrade/credits (**payment deferred** for those actions), Tags/Edit Status, Rate the app, version, logout confirm. Footer Settings selected.
