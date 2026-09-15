@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Rebuild the graph DATA block in graph.html from notes on disk."""
+"""Rebuild the graph DATA block in graph.html from notes on disk.
+
+Also writes graph-search.json (lowercase note text) so graph.html search
+matches bodies, not just filenames.
+"""
 from __future__ import annotations
 
 import json
@@ -8,13 +12,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GRAPH = ROOT / "graph.html"
+SEARCH = ROOT / "graph-search.json"
 SKIP = {".git", "api", "node_modules", "evals", "scripts", "__pycache__", ".vercel"}
 LINK = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
 HEADING = re.compile(r"^#\s+(.+)", re.M)
+WS = re.compile(r"\s+")
 
-COLORS = {
-    "frontal": "AI_BRAIN.md",
-}
 
 def group_for(rel: str) -> str:
     if rel == "AI_BRAIN.md":
@@ -51,6 +54,12 @@ def label_for(rel: str, body: str) -> str:
     return stem
 
 
+def search_blob(rel: str, label: str, body: str) -> str:
+    stem = Path(rel).stem.replace("-", " ")
+    text = f"{rel} {stem} {label} {body}"
+    return WS.sub(" ", text.lower()).strip()
+
+
 def resolve(src: Path, href: str) -> str | None:
     href = href.split("#", 1)[0].split("?", 1)[0].strip()
     if not href or href.startswith(("http://", "https://", "mailto:")):
@@ -76,6 +85,7 @@ def main() -> None:
     nodes = []
     ids = []
     bodies = {}
+    search = {}
     for path in sorted(ROOT.rglob("*.md")):
         if any(p in SKIP for p in path.parts):
             continue
@@ -83,10 +93,9 @@ def main() -> None:
         body = path.read_text(encoding="utf-8", errors="replace")
         ids.append(rel)
         bodies[rel] = body
-        nodes.append({"id": rel, "label": label_for(rel, body), "g": group_for(rel), "deg": 0})
-    if (ROOT.parent / "AI_BRAIN.md").is_file():
-        # Frontal lobe lives one level up; keep the existing node if present in graph.
-        pass
+        label = label_for(rel, body)
+        nodes.append({"id": rel, "label": label, "g": group_for(rel), "deg": 0})
+        search[rel] = search_blob(rel, label, body)
     adj = {i: set() for i in ids}
     links = []
     seen = set()
@@ -105,7 +114,6 @@ def main() -> None:
             adj[dest].add(rel)
     for n in nodes:
         n["deg"] = len(adj[n["id"]])
-    # Keep the frontal-lobe node from the previous graph if it is not in this folder.
     html = GRAPH.read_text(encoding="utf-8")
     m = re.search(r"const DATA = (\{.*?\});", html, re.S)
     if not m:
@@ -114,11 +122,20 @@ def main() -> None:
     for n in old.get("nodes", []):
         if n["id"] == "AI_BRAIN.md" and n["id"] not in adj:
             nodes.append(n)
+            frontal = ROOT.parent / "AI_BRAIN.md"
+            if frontal.is_file():
+                search["AI_BRAIN.md"] = search_blob(
+                    "AI_BRAIN.md", n.get("label") or "frontal lobe",
+                    frontal.read_text(encoding="utf-8", errors="replace"),
+                )
     data = {"nodes": nodes, "links": links}
     blob = json.dumps(data, separators=(",", ":"))
     html = html[: m.start(1)] + blob + html[m.end(1):]
     GRAPH.write_text(html, encoding="utf-8")
+    SEARCH.write_text(json.dumps(search, separators=(",", ":")), encoding="utf-8")
+    hits = sum(1 for text in search.values() if "clusterlist" in text)
     print(f"graph.html DATA: {len(nodes)} nodes, {len(links)} links")
+    print(f"graph-search.json: {len(search)} notes, ClusterList in {hits}")
 
 
 if __name__ == "__main__":

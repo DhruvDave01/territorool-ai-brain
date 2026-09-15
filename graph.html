@@ -8,7 +8,7 @@
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; background: #1a1a1a; color: #ececec; font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
-    .shell { display: grid; grid-template-columns: minmax(0,1fr) 280px; height: 100%; }
+    .shell { display: grid; grid-template-columns: minmax(0,1fr) 280px; height: 100%; min-height: 0; }
     .shell.chat-open { grid-template-columns: minmax(300px, 400px) minmax(0,1fr) 280px; }
     .stage { position: relative; background: #1a1a1a; min-height: 0; overflow: hidden; }
     .title { display: none; }
@@ -26,7 +26,7 @@
     .zoom-hud #chat-toggle { width: auto; padding: 0 8px; font-size: 12px; }
     .chat-drawer {
       display: none; flex-direction: column; background: #1c1f3a;
-      border-right: 1px solid #2a3154; min-height: 0;
+      border-right: 1px solid #2a3154; min-height: 0; overflow: hidden;
     }
     .shell.chat-open .chat-drawer { display: flex; }
     .chat-head {
@@ -35,7 +35,10 @@
     }
     .chat-head button { width: auto; margin: 0; padding: 4px 10px; background: #2a3154; color: #e8eaf4; }
     .chat-status { padding: 8px 14px; color: #8b93b5; font-size: 11px; }
-    .chat-log { flex: 1; overflow: auto; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .chat-log {
+      flex: 1 1 0; min-height: 0; overflow: auto; padding: 12px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
     .chat-bubble { padding: 10px 12px; border-radius: 12px; max-width: 100%; }
     .chat-bubble.user { background: #124ac6; color: #fff; align-self: flex-end; white-space: pre-wrap; }
     .chat-bubble.assistant { background: #121428; color: #e8eaf4; line-height: 1.5; }
@@ -69,17 +72,20 @@
     .chat-bubble.assistant th { background: #2a3154; font-weight: 600; white-space: nowrap; }
     .chat-bubble.assistant ul, .chat-bubble.assistant ol { margin: 0 0 0.6em; padding-left: 1.25em; }
     .chat-bubble.assistant li { margin: 0.15em 0; }
-    .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #2a3154; }
+    .chat-form {
+      display: flex; gap: 8px; padding: 12px; border-top: 1px solid #2a3154;
+      flex: none; background: #1c1f3a; position: relative; z-index: 3;
+    }
     .chat-form textarea {
       flex: 1; resize: none; min-height: 44px; max-height: 120px;
       background: #121428; color: #e8eaf4; border: 1px solid #343c66;
       border-radius: 8px; padding: 8px;
     }
     .chat-form button { width: auto; margin: 0; padding: 8px 14px; }
-    .chat-sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .chat-sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; position: relative; z-index: 1; }
     .chat-sources button {
       width: auto; margin: 0; padding: 3px 8px; font-size: 11px; font-weight: 500;
-      background: #2a3154; color: #c9d0ee; border-radius: 999px;
+      background: #2a3154; color: #c9d0ee; border-radius: 999px; position: relative; z-index: 1;
     }
     .chat-secret {
       display: none; gap: 8px; padding: 8px 14px 0;
@@ -167,7 +173,7 @@
       <details open>
         <summary>Filters</summary>
         <label>Search notes
-          <input id="search" type="search" placeholder="index, mcp, routes">
+          <input id="search" type="search" placeholder="ClusterList, credits, mcp">
         </label>
         <label class="row"><input id="orphans" type="checkbox" checked> Orphans</label>
       </details>
@@ -279,7 +285,7 @@
     groupsEl.appendChild(lab);
   });
 
-  const nodes = DATA.nodes.map((n) => ({ id: n.id, label: n.label, g: n.g, deg: n.deg }));
+  const nodes = DATA.nodes.map((n) => ({ id: n.id, label: n.label, g: n.g, deg: n.deg, t: "" }));
   const links = DATA.links.map((e) => ({ source: e.s, target: e.t }));
   const adj = new Map();
   nodes.forEach((n) => adj.set(n.id, new Set()));
@@ -330,12 +336,16 @@
   function titleFont() {
     return Math.max(13, 17 / Math.max(zoomK, 0.18));
   }
+  function searchHay(d) {
+    return (d.id + " " + d.label + " " + (d.t || "")).toLowerCase();
+  }
   function visible(d) {
     if (!groupOn[d.g]) return false;
-    if (!orphanEl.checked && d.deg === 0) return false;
+    if (!orphanEl.checked && d.deg === 0 && d.id !== selectedId) return false;
+    if (d.id === selectedId) return true;
     const q = searchEl.value.trim().toLowerCase();
     if (!q) return true;
-    return d.id.toLowerCase().includes(q) || d.label.toLowerCase().includes(q);
+    return q.split(/\s+/).every((term) => term && searchHay(d).includes(term));
   }
   function sid(e) { return e.source.id || e.source; }
   function tid(e) { return e.target.id || e.target; }
@@ -362,6 +372,7 @@
   function labelVisible(d) {
     if (!visible(d)) return false;
     if (d.id === hoverId || d.id === selectedId) return true;
+    if (searchEl.value.trim() && nodes.filter(visible).length <= 24) return true;
     const fade = Number(fadeEl.value);
     if (d.deg >= fade) return true;
     if (isHub(d)) return true;
@@ -556,10 +567,14 @@
     const maxX = Math.max.apply(null, xs);
     const minY = Math.min.apply(null, ys);
     const maxY = Math.max.apply(null, ys);
-    const bw = Math.max(40, maxX - minX);
-    const bh = Math.max(40, maxY - minY);
-    const pad = 72;
-    const k = Math.min((width - pad) / bw, (height - pad) / bh, 4) * (kPad || 0.92);
+    const few = vis.length <= 3;
+    const one = vis.length === 1;
+    const minBox = one ? 90 : few ? 48 : 40;
+    const bw = Math.max(minBox, maxX - minX);
+    const bh = Math.max(minBox, maxY - minY);
+    const pad = one ? 120 : few ? 96 : 72;
+    const kMax = one ? 2.6 : few ? 4 : 4;
+    const k = Math.min((width - pad) / bw, (height - pad) / bh, kMax) * (kPad || 0.92);
     const cx = (minX + maxX) / 2;
     const cy = (minY + maxY) / 2;
     const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-cx, -cy);
@@ -573,10 +588,27 @@
     svg.transition().duration(reduce ? 0 : 180).call(zoom.scaleBy, factor);
   }
 
-  function zoomToNode(d) {
+  function zoomToNode(d, scale) {
+    if (!d || d.x == null || !zoom) return;
     const { width, height } = sizeSvg();
-    const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(2.4).translate(-d.x, -d.y);
+    const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(scale || 2.6).translate(-d.x, -d.y);
     svg.transition().duration(reduce ? 0 : 280).call(zoom.transform, t);
+  }
+
+  function fitSearchHits() {
+    const vis = nodes.filter(visible);
+    const q = searchEl.value.trim();
+    if (!q) {
+      fitView(0.88);
+      return;
+    }
+    if (!vis.length) return;
+    if (vis.length === 1) {
+      pick(vis[0]);
+      fitView(0.9);
+      return;
+    }
+    fitView(vis.length <= 8 ? 0.72 : 0.88);
   }
 
   function dragged(event, d) {
@@ -703,6 +735,12 @@
     selectedEl.textContent = "Could not load D3. Check your network, then refresh.";
   } else {
     init();
+    fetch("graph-search.json").then((r) => r.ok ? r.json() : {}).then((blob) => {
+      const map = blob && typeof blob === "object" ? blob : {};
+      nodes.forEach((n) => { n.t = map[n.id] || ""; });
+      applyFilters();
+      if (searchEl.value.trim()) fitSearchHits();
+    }).catch(() => {});
     window.addEventListener("resize", () => {
       sizeSvg();
       fitView(0.88, true);
@@ -732,7 +770,12 @@
   });
   arrowsEl.addEventListener("change", applyFilters);
   hullsEl.addEventListener("change", () => { drawClusters(); });
-  searchEl.addEventListener("input", applyFilters);
+  let searchFitTimer;
+  searchEl.addEventListener("input", () => {
+    applyFilters();
+    clearTimeout(searchFitTimer);
+    searchFitTimer = setTimeout(fitSearchHits, 160);
+  });
   orphanEl.addEventListener("change", () => {
     applyForces();
     if (sim) sim.alpha(0.4).restart();
@@ -757,13 +800,22 @@
   document.getElementById("reset").addEventListener("click", resetHighlight);
   document.getElementById("zoom-in").addEventListener("click", () => zoomBy(1.25));
   document.getElementById("zoom-out").addEventListener("click", () => zoomBy(0.8));
-  document.getElementById("zoom-fit").addEventListener("click", () => fitView(0.92));
+  document.getElementById("zoom-fit").addEventListener("click", () => {
+    if (searchEl.value.trim()) fitSearchHits();
+    else fitView(0.92);
+  });
 
   const shell = document.getElementById("shell");
   const chatStatus = document.getElementById("chat-status");
   const chatLog = document.getElementById("chat-log");
   const chatInput = document.getElementById("chat-input");
   const chatHistory = [];
+
+  function scrollChatEnd() {
+    requestAnimationFrame(() => {
+      chatLog.scrollTop = chatLog.scrollHeight;
+    });
+  }
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({
@@ -869,7 +921,7 @@
     if (role === "assistant") el.innerHTML = renderMarkdown(text);
     else el.textContent = text;
     chatLog.appendChild(el);
-    chatLog.scrollTop = chatLog.scrollHeight;
+    scrollChatEnd();
     return el;
   }
   function renderSources(el, sources) {
@@ -883,11 +935,16 @@
       b.title = "Select this note on the graph";
       b.addEventListener("click", () => {
         const n = nodeById(path);
-        if (n) pick(n);
+        if (!n) return;
+        pick(n);
+        applyFilters();
+        zoomToNode(n, 2.6);
       });
       wrap.appendChild(b);
     });
     el.appendChild(wrap);
+    scrollChatEnd();
+    wrap.scrollIntoView({ block: "nearest", inline: "nearest" });
   }
   function chatHeaders() {
     const headers = { "content-type": "application/json" };
@@ -920,7 +977,7 @@
           if (ev.type === "delta" && ev.data) {
             text += ev.data;
             bubble.innerHTML = renderMarkdown(text);
-            chatLog.scrollTop = chatLog.scrollHeight;
+            scrollChatEnd();
           } else if (ev.type === "error") {
             bubble.className = "chat-bubble error";
             bubble.textContent = ev.data || "Chat error.";
