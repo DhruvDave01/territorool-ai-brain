@@ -7,10 +7,11 @@ related:
   - 05-constraints-and-drift.md
   - 19-testing-qa.md
   - ops/release-flavor-matrix.md
+  - screens/navigation-map.md
 ---
 # Known bugs / gaps / recurring issues
 
-Related: [05-constraints-and-drift](../05-constraints-and-drift.md) · [19-testing-qa](../19-testing-qa.md)
+Related: [05-constraints-and-drift](../05-constraints-and-drift.md) · [19-testing-qa](../19-testing-qa.md) · [screens/navigation-map](../screens/navigation-map.md)
 
 Code and QA docs — not a live ticket dump. App UI is the oracle vs MCP.
 
@@ -48,6 +49,9 @@ Even with `get_team_dashboard` / `get_team_activity` in config, remaining gaps i
 | Hermes IANA timezone | `companyActivityPayload.js` catches Invalid time value |
 | Version drift | See [release-flavor-matrix.md](release-flavor-matrix.md) |
 | Keys in source | Google/Gemini/Mapbox/RevenueCat/Facebook tokens live in JS/plist — rotate if leaked; never paste into this vault |
+| `ClusterList` | `navigate("ClusterList")` from `route/index.js` / `navigateToRouteDetail.js` — **no** `Stack.Screen` |
+| `Notifications`, `RouteSwipe`, `FilterList`, `FilterRoute` | Registered; no stack `navigate` to those names |
+| `CustomCompany` as stack | Embedded only |
 
 ## Agent anti-patterns that look like bugs
 

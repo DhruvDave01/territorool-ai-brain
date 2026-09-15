@@ -8,10 +8,12 @@ related:
   - 03-architecture.md
   - 09-credits-billing.md
   - 14-mcp.md
+  - screens/how-it-works.md
+  - screens/navigation-map.md
 ---
 # Feature: AI Find Leads
 
-Related: [03-architecture](../03-architecture.md) · [09-credits-billing](../09-credits-billing.md) · [14-mcp](../14-mcp.md)
+Related: [03-architecture](../03-architecture.md) · [09-credits-billing](../09-credits-billing.md) · [14-mcp](../14-mcp.md) · [navigation-map](../screens/navigation-map.md)
 
 ## What it does
 
@@ -39,9 +41,13 @@ Save     Helper::saveAILead → companies + used_credit
 Web SSE: `POST ai-lead-finder/start|stage1|stage2|stage3|complete`, `GET status`.  
 Keys: `GEMINI_API_KEY`, `GOOGLE_KEY`.
 
-Mobile: `MultipleAIWaypoint` / `aiFindLeads.js` — `getAILeadsV2` → `resumeAILeadSearch` / `getAiLeadData` → `saveAILeads`.
+Mobile: `MultipleAIWaypoint` / `aiFindLeads.js` — `getAILeadsV2` → `resumeAILeadSearch` / `getAiLeadData` → `saveAILeads`. Save needs **≥ 2** leads (`confirmLeadsMinModalVisible`). Post-save modal: add to a route, add to a list, or Dashboard (Address Book only). Onboarding skips that modal and goes to `CreateRoute`.
+
+Lists/Routes **Find Leads** buttons open classic `MultipleWaypoint` (Places), **not** AI V2. Do not mix the two engines.
 
 Realm cache `AIFindLeads`: website, city, territoryMode (`city`\|`zip`), sellDetails, aiResponse, aiLeads.
+
+Nav: [screens/navigation-map.md](../screens/navigation-map.md). Steps: [screens/how-it-works.md](../screens/how-it-works.md).
 
 ## Other lead surfaces
 

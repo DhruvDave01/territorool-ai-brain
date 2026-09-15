@@ -7,6 +7,7 @@ sources:
   - customcompany/index.js
   - list/create/select-start-end-points.js
 related:
+  - screens/navigation-map.md
   - code/mobile-code-details.md
   - data/formdata-dictionary.md
   - 18-cross-system-flows.md
@@ -14,9 +15,39 @@ related:
 ---
 # Per-screen how it works
 
-Related: [code/mobile-code-details](../code/mobile-code-details.md) · [data/formdata-dictionary.md](../data/formdata-dictionary.md) · [18-cross-system-flows](../18-cross-system-flows.md) · visual flows in [design/04-User-Flows](../design/04-User-Flows/README.md)
+Related: [navigation-map](navigation-map.md) · [code/mobile-code-details](../code/mobile-code-details.md) · [data/formdata-dictionary.md](../data/formdata-dictionary.md) · [18-cross-system-flows](../18-cross-system-flows.md) · visual flows in [design/04-User-Flows](../design/04-User-Flows/README.md)
 
-Lifecycle details agents still guess. Source: live JS/PHP, not Prompts.
+Lifecycle details agents still guess. Source: live JS, not Prompts. Screen-to-screen map: [navigation-map.md](navigation-map.md).
+
+## Rep happy path (AI → route → company → contacts)
+
+| Step | Screen | User | API / result |
+|------|--------|------|----------------|
+| 1 | Dashboard or footer Find Leads | Open hunt | Expired sub may gate; dashboard region US/IN/NZ/AU |
+| 2 | `MultipleAIWaypoint` (`aiFindLeads.js`) | City/ZIP + ideal customer → Search | `getusercredit`; `getAILeadsV2` → poll `resumeAILeadSearch` |
+| 3 | Same | Select **≥ 2** leads → Next → Confirm Leads | `saveAILeads` — **1 credit each**. Min 2 (`confirmLeadsMinModalVisible`) |
+| 4a | Post-save modal | Add to a **route** (create or existing) | `CreateRoute` / edit path |
+| 4b | Post-save modal | Add to a **list** | `CreateLists` / Lists |
+| 4c | Post-save modal | Return to Dashboard | Address Book only |
+| 5 | `CreateRoute` → `SelectStartEndPoints` | Name, ≥2 waypoints, start ≠ end | `checkroutename` optional |
+| 6 | `PublishRoute` | Auto on mount | `createroute` → poll `simplerouteview` until `route_status === "published"` |
+| 7 | `BasicRouteDetail` | Tap company or Map | `simplerouteview`; map → `ActiveRouteMap` → `WaypointDetail` |
+| 8 | `CompanyView` / `ViewCompany` / `WaypointDetail` | Shared `CustomCompany` | `companydetail` / `getactiveroutecompany`, `companycontactlist`, `getcompanyactivities` |
+| 9 | Find Contacts | Primary then Claude/biz | `fetchAllContacts` free; empty → `fetchClaudeContact` → `bizContacts`. Buy: **2** paid / **1** Claude. Manual: `ContactsCreate` / `addcontact` free |
+| 10 | Activity / Mark | Log or visit | `addcompanyactivity`; visit `companymarkedvisited` + `addcompanyvisittime`; unmark `companyvisitremove` |
+
+**Onboarding:** Register/Login skips the post-save modal; AI screen goes straight to `CreateRoute` with `firstSignUpOnboarding`. Completes in `PublishRoute` via `setFirstSignUpOnboardingComplete()`.
+
+**Not AI:** Lists/Routes **Find Leads** open `MultipleWaypoint` (`findLeads/index.js`) — Places, not `getAILeadsV2`.
+
+```
+Dashboard → MultipleAIWaypoint → save ≥2
+  → CreateRoute → SelectStartEndPoints → PublishRoute → BasicRouteDetail
+  → CompanyView (CustomCompany) → CongContact / bizContacts
+  → activity / mark visited → next stop or ActiveRouteMap
+```
+
+List-first branch: post-save → list → `SelectStartEndPointsList` → `PublishRoute` (`generateroute` or `createroute`).
 
 ## Login (`login/index.js`)
 

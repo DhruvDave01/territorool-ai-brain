@@ -4,6 +4,7 @@ parent: ops
 related:
   - design/README.md
   - screens/how-it-works.md
+  - screens/navigation-map.md
   - data/formdata-dictionary.md
   - data/database-columns.md
   - ops/env-inventory.md
@@ -15,8 +16,9 @@ related:
 
 | File | What |
 |------|------|
-| [design/README.md](../design/README.md) | Mobile UI pack (tokens, 47 screens, flows). Pixels not in this vault |
+| [design/README.md](../design/README.md) | Mobile UI pack (tokens, 46 screens, flows). Pixels not in this vault |
 | [screens/how-it-works.md](../screens/how-it-works.md) | Login, publish poll, AI V2, contacts, HubSpot flight, MCP save |
+| [screens/navigation-map.md](../screens/navigation-map.md) | Footer, paywall, orphans, `ClusterList` |
 | [data/formdata-dictionary.md](../data/formdata-dictionary.md) | Endpoint → FormData keys |
 | [data/database-columns.md](../data/database-columns.md) | Eloquent `$fillable` |
 | [env-inventory.md](env-inventory.md) | Secret **names** only |

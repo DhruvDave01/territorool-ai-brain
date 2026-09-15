@@ -30,6 +30,7 @@ When you change product behavior:
 2. Open the real file you will edit (mobile class screen vs Laravel controller vs MCP handler).
 3. Match that file’s pattern.
 4. Do not add Redux, NativeBase, nested navigators, or a second credit-calculation path.
-5. If chrome/tokens changed, patch [design/](design/README.md) (mobile) or [design-web/](design-web/README.md) (web) — do not invent UI for deferred Register/paywall/Android/HQ.
+5. If chrome/tokens changed, patch [design/](design/README.md) (mobile) or [design-web/](design-web/README.md) (web) — do not invent UI for deferred Register/paywall/Android/HQ stills (the JS is live).
 6. If the change is a whole surface, also patch the matching [sub brain](brains/README.md).
-7. Run `python3 evals/run.py` after retriever or note-structure changes. Rebuild the graph with `python3 scripts/build-graph.py`.
+7. Mobile from→to: [screens/navigation-map.md](screens/navigation-map.md). Screen APIs: [screens/how-it-works.md](screens/how-it-works.md).
+8. Run `python3 evals/run.py` after retriever or note-structure changes. Rebuild the graph with `python3 scripts/build-graph.py`.

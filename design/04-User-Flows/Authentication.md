@@ -6,7 +6,7 @@ sources:
 ---
 # Authentication (in-scope)
 
-Register is **deferred**.
+Register is **visual-deferred** (no stills). Live `PostSignupPaywallFlow` is in Register. Code map: [screens/navigation-map.md](../../screens/navigation-map.md).
 
 ## Login
 
@@ -17,7 +17,7 @@ Login
   → enter email/password
   → tap Login (AppButton primary, minHeight 54)
       → loading on button
-      → success → Dashboard (or SubscriptionGate if trial inactive — deferred)
+      → success → Dashboard (or SubscriptionGate if trial inactive — visual deferred, code live)
       → error → Toast
   → Forgot Password? → Safari/Chrome `{API host}/password/reset`
   → Register Here → Register (deferred)

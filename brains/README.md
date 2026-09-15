@@ -22,7 +22,7 @@ The **main brain** is this vault plus the frontal lobe `../AI_BRAIN.md`. These f
 
 | Sub brain | Use when | Deep notes |
 |-----------|----------|------------|
-| [1. Mobile Code Brain](mobile-code.md) | RN screen, navigator, Realm, `API.post` | [code/mobile-code-details.md](../code/mobile-code-details.md) · [10-mobile-app.md](../10-mobile-app.md) |
+| [1. Mobile Code Brain](mobile-code.md) | RN screen, navigator, Realm, `API.post` | [code/mobile-code-details.md](../code/mobile-code-details.md) · [10-mobile-app.md](../10-mobile-app.md) · [screens/navigation-map.md](../screens/navigation-map.md) |
 | [2. Mobile UI Brain](mobile-ui.md) | Chrome, tokens, footer | [design/MINI-DESIGN-BRAIN.md](../design/MINI-DESIGN-BRAIN.md) |
 | [3. Web Code Brain](web-code.md) | Laravel, `CompanylController`, MCP PHP, islands | [code/web-code-details.md](../code/web-code-details.md) · [11-web-backend.md](../11-web-backend.md) |
 | [4. Web Design Brain](web-design.md) | Classic AdminLTE vs manager pixels | [design-web/MINI-DESIGN-BRAIN.md](../design-web/MINI-DESIGN-BRAIN.md) |

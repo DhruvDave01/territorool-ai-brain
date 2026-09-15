@@ -15,10 +15,12 @@ related:
   - 04-style-guide.md
   - appendix-c-footer-tabs.md
   - 05-constraints-and-drift.md
+  - screens/navigation-map.md
+  - screens/how-it-works.md
 ---
 # 10. Mobile app
 
-Related: [02-commands](02-commands.md) · [04-style-guide](04-style-guide.md) · [appendix-c-footer-tabs](appendix-c-footer-tabs.md)
+Related: [02-commands](02-commands.md) · [04-style-guide](04-style-guide.md) · [appendix-c-footer-tabs](appendix-c-footer-tabs.md) · [screens/navigation-map](screens/navigation-map.md)
 
 ## Stack (live `package.json`)
 
@@ -39,7 +41,9 @@ React Native **0.84.1**, React **19.2.3**, Navigation 7.x, Realm **20.2.0**, Map
 
 **`gestureEnabled: false`:** Login, SubscriptionGate, Dashboard, PublishRoute, EditPublishRoute, LassoMap, MultipleWaypoint, SelectStartEndPointsList.
 
-Nav state key `@TerriTool_nav_state` is **not** restored as `initialState` (intentional).
+Nav state key `@TerriTool_nav_state` is **not** restored as `initialState` (intentional). Full from→to map: [screens/navigation-map.md](screens/navigation-map.md).
+
+**Stack orphans / broken:** `CustomCompany` is embedded (do not push). `FilterModule` is inline. `FilterList`, `FilterRoute`, `RouteSwipe`, `Notifications` have no `navigate("…")`. `ClusterList` is called but **not** a screen.
 
 ## Registered screens (`App/App.js`)
 

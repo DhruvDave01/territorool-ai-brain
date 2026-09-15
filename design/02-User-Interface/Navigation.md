@@ -20,7 +20,7 @@ flowchart TD
   B -->|Yes| C[RevenueCat identify]
   C --> D[GET_CREDIT_INFO trial]
   D --> E{trial inactive + sub not active?}
-  E -->|Yes| G[SubscriptionGate - DEFERRED]
+  E -->|Yes| G[SubscriptionGate - code live, pixels skipped]
   E -->|No or error| H[Dashboard]
 ```
 

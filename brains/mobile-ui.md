@@ -19,6 +19,7 @@ related:
   - design/02-User-Interface/Screen-Inventory.md
   - design/05-Design-System/Token-Inconsistencies.md
   - design/06-Coverage/Deferred-Scope.md
+  - screens/navigation-map.md
 ---
 # 2. Mobile UI Brain
 
@@ -44,7 +45,7 @@ Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.m
 | Type | DIN Condensed: `dinBold` / `dinLight`. Inter ttf in Assets is **unused**. |
 | Dark mode | None app-wide (QR scanner / some map polylines may go dark — NMV). |
 | Footer | Six icon-only tabs. Lists = `Supply3.png`. Dashboard **has no footer**. Settings on Dashboard is a header pill `testID="footer.tab.settings"`. |
-| Deferred | Register, paywall, Android pixels: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). |
+| Deferred pixels | Register, paywall, Android: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). JS is live. |
 
 ## Tokens (`App/styles/theme.js`) — do not average
 

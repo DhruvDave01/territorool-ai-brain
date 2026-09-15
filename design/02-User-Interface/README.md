@@ -17,7 +17,7 @@ Inventory of screens, chrome, components, states, forms, overlays, maps.
 
 | File | Contents |
 | --- | --- |
-| [Screen-Inventory.md](Screen-Inventory.md) | All 47 stack screens + overlays |
+| [Screen-Inventory.md](Screen-Inventory.md) | All 46 stack screens + overlays |
 | [Components.md](Components.md) | Shared components |
 | [Navigation.md](Navigation.md) | Stack, footer, mermaid map |
 | [States.md](States.md) | Loading / empty / error / disabled |

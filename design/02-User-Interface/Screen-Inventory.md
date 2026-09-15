@@ -16,7 +16,7 @@ related:
 ---
 # Screen inventory
 
-Architecture: one **native stack** (`App/App.js`), `headerShown: false`. Overlay UI is not a stack route.
+Architecture: one **native stack** (`App/App.js`), **46** `Stack.Screen` names, `headerShown: false`. Overlay UI is not a stack route. From→to: [screens/navigation-map.md](../../screens/navigation-map.md).
 
 **Visual status keys:** Captured = Archive 2 still and/or video. Code-only = documented from source. Deferred = user asked to skip until later. Dead = registered or referenced but not a live destination.
 

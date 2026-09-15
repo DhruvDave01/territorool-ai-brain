@@ -15,6 +15,8 @@ related:
   - features/03-companies.md
   - 15-voice-policy.md
   - appendix-c-footer-tabs.md
+  - screens/navigation-map.md
+  - ops/known-bugs.md
 ---
 # Feature: Routes and driving
 
@@ -45,6 +47,8 @@ Needs at least two stops for a useful run.
 **No in-app PDF** on mobile (email share only). Web has TCPDF/dompdf.
 
 `createOFFLINERoute` has **no call sites**; list still **reads** the Realm blob.
+
+`route/index.js` and `utils/navigateToRouteDetail.js` call `navigate("ClusterList")` for cluster types, but **`ClusterList` is not a `Stack.Screen`**. Do not add a nested navigator unless a human asks. [known-bugs](../ops/known-bugs.md) · [navigation-map](../screens/navigation-map.md).
 
 ## APIs
 

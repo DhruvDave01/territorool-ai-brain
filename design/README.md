@@ -53,7 +53,7 @@ Screenshot filenames in these notes (`IMG_4563`, VID1, …) refer to that Assets
 | Folder | Contents |
 |--------|---------|
 | [01-Brand-Guidelines](01-Brand-Guidelines/README.md) | Colors, DIN, spacing, radius, shadows, logos, icons |
-| [02-User-Interface](02-User-Interface/README.md) | 47 screens, components, nav, states, forms, maps, iOS vs Android |
+| [02-User-Interface](02-User-Interface/README.md) | 46 screens, components, nav, states, forms, maps, iOS vs Android |
 | [03-Assets](03-Assets/README.md) | Inventory only (binaries not copied) |
 | [04-User-Flows](04-User-Flows/README.md) | `Start → action → screen → result` |
 | [05-Design-System](05-Design-System/README.md) | Tokens, usage checklist, inconsistencies |

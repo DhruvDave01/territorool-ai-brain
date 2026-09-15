@@ -8,7 +8,7 @@ sources:
 
 The owner asked to **skip Register, payment, and other missing packs** until they provide captures.
 
-Documented as **exists in code, out of visual scope**:
+This is **visual scope**, not missing product code. Live JS: `PostSignupPaywallFlow`, `SubscriptionScreen`, `SubscriptionGate`, `firstSignUpOnboarding`. Map: [screens/navigation-map.md](../../screens/navigation-map.md).
 
 | Area | Code | Why skipped |
 | --- | --- | --- |

@@ -17,6 +17,7 @@ related:
   - code/mobile-code-details.md
   - data/formdata-dictionary.md
   - screens/how-it-works.md
+  - screens/navigation-map.md
   - 05-constraints-and-drift.md
   - 10-mobile-app.md
 ---
@@ -35,6 +36,7 @@ Code wins. Do not cite the workspace folder.
 4. New payload → [API Brain](api.md) + [formdata-dictionary](../data/formdata-dictionary.md).
 5. Chrome/tokens → [Mobile UI Brain](mobile-ui.md).
 6. Lifecycle (publish, AI V2, login) → [screens/how-it-works.md](../screens/how-it-works.md).
+7. Who navigates where → [screens/navigation-map.md](../screens/navigation-map.md).
 
 ## Must follow
 

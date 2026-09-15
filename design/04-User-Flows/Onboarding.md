@@ -4,6 +4,6 @@ parent: design
 ---
 # Onboarding
 
-**Deferred.** First-signup onboarding lives on `MultipleAIWaypoint` (`firstSignUpOnboarding`) and Register `PostSignupPaywallFlow` (Goals → Role → Cost → Configuring → Subscribe → Welcome).
+**Visual pack skipped** (no Archive stills). Live JS: `firstSignUpOnboarding` on `MultipleAIWaypoint` and Register `PostSignupPaywallFlow` (Goals → Role → Cost → Configuring → Subscribe → Welcome). Map: [screens/navigation-map.md](../../screens/navigation-map.md).
 
-No Archive 2 coverage. Do not invent step UI.
+Do not invent step UI from this note.

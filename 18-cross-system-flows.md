@@ -5,10 +5,12 @@ related:
   - 03-architecture.md
   - 14-mcp.md
   - features/07-ai-find-leads.md
+  - screens/how-it-works.md
+  - screens/navigation-map.md
 ---
 # 18. Cross-system flows
 
-Related: [03-architecture](03-architecture.md) · [14-mcp](14-mcp.md) · [features/07-ai-find-leads.md](features/07-ai-find-leads.md)
+Related: [03-architecture](03-architecture.md) · [14-mcp](14-mcp.md) · [features/07-ai-find-leads.md](features/07-ai-find-leads.md) · [screens/navigation-map.md](screens/navigation-map.md)
 
 ## Login
 
@@ -30,6 +32,8 @@ Related: [03-architecture](03-architecture.md) · [14-mcp](14-mcp.md) · [featur
 8. Visit → `mark_visited` + `add_activity`.
 
 If companies are already saved in that city: skip find/save → `search_companies` → route.
+
+Mobile screen graph (footer, paywall, orphans, `ClusterList`): [screens/navigation-map.md](screens/navigation-map.md). Step/API table: [screens/how-it-works.md](screens/how-it-works.md).
 
 ## Enrichment waterfall
 

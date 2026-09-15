@@ -7,10 +7,12 @@ sources:
 related:
   - 04-style-guide.md
   - 20-how-to-update.md
+  - screens/navigation-map.md
+  - ops/known-bugs.md
 ---
 # 5. Durable facts, constraints, known drift
 
-Related: [04-style-guide](04-style-guide.md) · [20-how-to-update](20-how-to-update.md)
+Related: [04-style-guide](04-style-guide.md) · [20-how-to-update](20-how-to-update.md) · [screens/navigation-map](screens/navigation-map.md)
 
 Code wins over Prompts and old docs. When they disagree, add a row here.
 
@@ -36,6 +38,10 @@ Code wins over Prompts and old docs. When they disagree, add a row here.
 | Claim in old docs | Live truth |
 |-------------------|------------|
 | ~30 screens | `App/App.js` registers **46** `Stack.Screen` names (Design Brain pack still says 47 — code wins) |
+| Realm “schema 20” | npm package is Realm **20.2.0**; `App/storage/realm.js` **`schemaVersion: 18`**. `fcm.realm` is version **1** |
+| Mobile JWT refresh | **None** in `App/utils/API.js` — Bearer from Realm `"1"` only. Web Dingo still has `jwt.refresh` |
+| Onboarding / paywall “deferred” | **Visual pack skipped captures.** Live JS: Register `PostSignupPaywallFlow`, `SubscriptionGate`, `firstSignUpOnboarding` → `MultipleAIWaypoint`. Map: [screens/navigation-map.md](screens/navigation-map.md) |
+| `ClusterList` | `route/index.js` and `navigateToRouteDetail.js` `navigate("ClusterList")` — **not registered** in `App.js` |
 | TikTok SDK / `TikTokHelper.js` | README/Prompts mention it; **file missing**. AI UI copy may say “Scanning TikTok” |
 | Redux | **None** |
 | Mobile route PDF | **No** in-app PDF; email share only. Web has TCPDF/dompdf |

@@ -61,7 +61,7 @@ See [`05-Design-System/Design-Tokens.md`](05-Design-System/Design-Tokens.md) and
 
 ## 6. Navigation architecture
 
-Flat stack, 47 screens. Footer map and mermaid: [`02-User-Interface/Navigation.md`](02-User-Interface/Navigation.md). Dead: Notifications, RouteSwipe, stack filters. Broken: `ClusterList`.
+Flat stack, **46** screens (pack previously said 47). Footer map and mermaid: [`02-User-Interface/Navigation.md`](02-User-Interface/Navigation.md). Dead: Notifications, RouteSwipe, stack filters. Broken: `ClusterList`. Code map: [`../screens/navigation-map.md`](../screens/navigation-map.md).
 
 ## 7. Screen inventory
 

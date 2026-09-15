@@ -13,14 +13,14 @@ related:
 ---
 # 04 — User flows
 
-Only flows that exist in code. Register, paywall, and in-app purchase actions are **stubs** ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)).
+Only flows that exist in code. Register, paywall, and in-app purchase **pixels** are skipped ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)) — the JS is live (`PostSignupPaywallFlow`, `SubscriptionGate`, `firstSignUpOnboarding`). Screen graph: [screens/navigation-map.md](../../screens/navigation-map.md).
 
 | File | Flow |
 | --- | --- |
 | [App-Launch.md](App-Launch.md) | Splash → JWT → Login/Dashboard |
 | [Authentication.md](Authentication.md) | Login, forgot password, logout |
-| [Onboarding.md](Onboarding.md) | Deferred first-signup |
-| [Subscription.md](Subscription.md) | Deferred |
+| [Onboarding.md](Onboarding.md) | First-signup AI hunt (code live; no stills) |
+| [Subscription.md](Subscription.md) | Gate + RevenueCat (code live; no stills) |
 | [Main-Navigation.md](Main-Navigation.md) | Footer + dashboard tiles |
 | [Dashboard.md](Dashboard.md) | Hub, activity, referral, QR, calendar |
 | [Find-Leads.md](Find-Leads.md) | AI Find Leads → route/list |

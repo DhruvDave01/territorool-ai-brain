@@ -29,7 +29,7 @@ One-file distillation of the full [Design Brain](README.md). Read this first; fo
 
 ## 1. App in one paragraph
 
-TerriTool is a field-sales app (routes, lists, companies, contacts, AI leads, maps). RN 0.84.1 / React 19.2.3, New Architecture. Entry `index.js` → `init.js` → `App/App.js`. It is **one flat native stack** (`@react-navigation/native-stack` v7, `headerShown: false`, no bottom-tabs/drawer) with **47 screens**. Module switching is a custom **six-icon `CustomFooter`**, not React Navigation tabs. **Dashboard is a tile hub with no footer.** State is class-component local + Realm JWT + AsyncStorage — no Redux. Styling tokens live in `App/styles/theme.js`, with many leftover raw hexes outside it. API in this tree points at staging.
+TerriTool is a field-sales app (routes, lists, companies, contacts, AI leads, maps). RN 0.84.1 / React 19.2.3, New Architecture. Entry `index.js` → `init.js` → `App/App.js`. It is **one flat native stack** (`@react-navigation/native-stack` v7, `headerShown: false`, no bottom-tabs/drawer) with **46** `Stack.Screen` names (older pack said 47). Module switching is a custom **six-icon `CustomFooter`**, not React Navigation tabs. **Dashboard is a tile hub with no footer.** State is class-component local + Realm JWT + AsyncStorage — no Redux. Styling tokens live in `App/styles/theme.js`, with many leftover raw hexes outside it. Live `App/config/index.js` `URL_BASE` is **prod**; staging is the commented block.
 
 ---
 
@@ -120,7 +120,7 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 ## 4. Navigation architecture
 
 - Root: `@react-navigation/native` + `native-stack` v7. Nav-state persistence key `@TerriTool_nav_state`, but restore **clears `initialState`** — cold start never reopens the last deep screen.
-- **Cold start:** native `#124ac6` window → JS splash (Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (deferred) or Dashboard.
+- **Cold start:** native `#124ac6` window → JS splash (Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (code live; **pixels** deferred) or Dashboard.
 - **Footer targets:** 1 Dashboard (navigate) · 2 push `MultipleAIWaypoint` · 3 `ListCompany` (navigate) · 4 `Routes` (navigate) · 5 `Lists` (navigate) · 6 push `EditStatus`. Already-on-tab and offline both show a toast.
 - Gesture-back is disabled on Login and Dashboard.
 
@@ -142,7 +142,7 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 | Module | Screens | Status |
 | --- | --- | --- |
 | Auth | Login | Documented |
-| Auth (deferred) | Register, SubscriptionScreen, SubscriptionGate | Deferred |
+| Auth (pixels skipped) | Register, SubscriptionScreen, SubscriptionGate | Code live; no stills |
 | Hub | Dashboard (no footer), RecentActivity, CalendarActivity, EditStatus (= Settings), QrCodeScanner | Documented |
 | Hub | Notifications | **Dead** |
 | Lists | Lists, CreateLists, ListsDetail, SelectStartEndPointsList | Documented |
@@ -165,7 +165,7 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 | Filters | `FilterList`, `FilterRoute` (stack) | **Dead/unused** |
 | System | `Error` (HubSpot sync errors — **not** a crash page) | Code-only |
 
-Stack total per source: **47 screens** + **15+** overlay UIs (not stack routes — see §8).
+Stack total per source: **46 screens** + **15+** overlay UIs (not stack routes — see §8). Code map: [`screens/navigation-map.md`](../screens/navigation-map.md).
 
 ---
 

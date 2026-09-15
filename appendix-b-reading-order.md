@@ -15,6 +15,8 @@ related:
   - 14-mcp.md
   - 15-voice-policy.md
   - brains/mobile-ui.md
+  - screens/navigation-map.md
+  - screens/how-it-works.md
 ---
 # Appendix B — Reading order for a new agent
 
@@ -24,3 +26,4 @@ related:
 4. Feature folder or giant controller for the task, plus the matching note under [features/](features/).
 5. If spoken/MCP behavior: [14-mcp.md](14-mcp.md) and [15-voice-policy.md](15-voice-policy.md).
 6. If the task is **how a screen looks**: [brains/mobile-ui.md](brains/mobile-ui.md) then [design/MINI-DESIGN-BRAIN.md](design/MINI-DESIGN-BRAIN.md), or [brains/web-design.md](brains/web-design.md) then [design-web/MINI-DESIGN-BRAIN.md](design-web/MINI-DESIGN-BRAIN.md). Product APIs still come from the [API brain](brains/api.md), not the visual pack. Do not mix classic AdminLTE with manager islands.
+7. If the task is **who navigates where** on mobile: [screens/navigation-map.md](screens/navigation-map.md) then [screens/how-it-works.md](screens/how-it-works.md).

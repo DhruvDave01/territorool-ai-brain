@@ -12,6 +12,8 @@ related:
   - brains/api.md
   - brains/README.md
   - 01-project-overview.md
+  - screens/navigation-map.md
+  - screens/how-it-works.md
 ---
 # TerriTool AI Brain — knowledge vault
 
@@ -92,7 +94,7 @@ Map: [brains/README.md](brains/README.md).
 Imported from the Design Brain pack. **Read [design/MINI-DESIGN-BRAIN.md](design/MINI-DESIGN-BRAIN.md) first.** Do not redesign; match the nearest existing screen. Stills/videos stay on disk under `Downloads/Design-Brain/03-Assets/`.
 
 - [Design pack index](design/README.md)
-- [Screen inventory (47 screens)](design/02-User-Interface/Screen-Inventory.md)
+- [Screen inventory (46 stack screens)](design/02-User-Interface/Screen-Inventory.md)
 - [User flows](design/04-User-Flows/README.md)
 - [Usage rules for a new screen](design/05-Design-System/Usage-Rules.md)
 - [Token inconsistencies (do not normalize)](design/05-Design-System/Token-Inconsistencies.md)
@@ -113,6 +115,7 @@ Two stacks — do not mix. **Read [design-web/MINI-DESIGN-BRAIN.md](design-web/M
 ## Screens / data / ops
 
 - [Per-screen how it works](screens/how-it-works.md)
+- [Mobile navigation map](screens/navigation-map.md)
 - [FormData dictionary](data/formdata-dictionary.md)
 - [Database columns](data/database-columns.md)
 - [Env inventory (names only)](ops/env-inventory.md)
