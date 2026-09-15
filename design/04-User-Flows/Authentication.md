@@ -1,3 +1,9 @@
+---
+id: Authentication
+parent: design
+sources:
+  - App/components/login/
+---
 # Authentication (in-scope)
 
 Register is **deferred**.

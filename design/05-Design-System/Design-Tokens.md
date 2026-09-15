@@ -1,3 +1,12 @@
+---
+id: Design-Tokens
+parent: design
+sources:
+  - App/styles/theme.js
+related:
+  - design/01-Brand-Guidelines/Colors.md
+  - design/03-Assets/Fonts/README.md
+---
 # Design tokens
 
 **Source of truth:** `App/styles/theme.js` plus `screenCurvedBody.js`, `fonts.js`, `TEXT_SIZES`, `AppButton` variant hexes.

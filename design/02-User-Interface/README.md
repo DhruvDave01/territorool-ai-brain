@@ -1,3 +1,16 @@
+---
+id: README
+parent: design
+related:
+  - design/02-User-Interface/Screen-Inventory.md
+  - design/02-User-Interface/Components.md
+  - design/02-User-Interface/Navigation.md
+  - design/02-User-Interface/States.md
+  - design/02-User-Interface/Forms.md
+  - design/02-User-Interface/Modals-and-Popups.md
+  - design/02-User-Interface/Feedback-and-Notifications.md
+  - design/02-User-Interface/Maps.md
+---
 # 02 — User Interface
 
 Inventory of screens, chrome, components, states, forms, overlays, maps.

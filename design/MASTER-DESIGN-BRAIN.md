@@ -1,3 +1,19 @@
+---
+id: MASTER-DESIGN-BRAIN
+parent: design
+sources:
+  - App/App.js
+  - App/styles/theme.js
+related:
+  - design/03-Assets/README.md
+  - design/06-Coverage/Deferred-Scope.md
+  - design/03-Assets/Fonts/README.md
+  - design/01-Brand-Guidelines/README.md
+  - design/05-Design-System/Design-Tokens.md
+  - design/05-Design-System/Token-Inconsistencies.md
+  - design/02-User-Interface/Navigation.md
+  - design/02-User-Interface/Screen-Inventory.md
+---
 # TerriTool Mobile — Master Design Brain
 
 Entry point for designers, developers, and other agents. Describes the **existing** app. Do not redesign from this document.

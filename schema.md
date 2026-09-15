@@ -1,3 +1,13 @@
+---
+id: schema
+parent: core
+sources:
+  - TerriTool/
+  - webterritool/
+related:
+  - 05-constraints-and-drift.md
+  - brains/README.md
+---
 # Schema — how this vault is structured
 
 Companion to the root `AI_BRAIN.md` (frontal lobe). That file stays as-is. This folder is the **atomic knowledge vault**.
@@ -12,7 +22,9 @@ Companion to the root `AI_BRAIN.md` (frontal lobe). That file stays as-is. This 
 | Prefer tables | Per-rep data (names, balances, live routes) |
 | Code wins over old Prompts/docs | Mention workspaces that are not mobile or web source |
 
-## Frontmatter convention (optional)
+## Frontmatter convention
+
+Used by `scripts/backfill-frontmatter.py` and stripped before BM25 scoring. Keep `id`, `parent`, `sources` (real code paths), and `related`.
 
 ```yaml
 ---

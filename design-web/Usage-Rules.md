@@ -1,3 +1,11 @@
+---
+id: Usage-Rules
+parent: design-web
+sources:
+  - inc/sidebar.blade.php
+  - resources/manager-portal/main.jsx
+  - public/js/manager-portal.js
+---
 # Usage rules — new web page
 
 To look like TerriTool **today**, pick a stack first. Never mix.

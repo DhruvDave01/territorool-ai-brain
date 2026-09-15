@@ -1,3 +1,12 @@
+---
+id: decision-log
+parent: ops
+sources:
+  - App/config/index.js
+related:
+  - 04-style-guide.md
+  - 05-constraints-and-drift.md
+---
 # Decision log
 
 Related: [04-style-guide](../04-style-guide.md) · [05-constraints-and-drift](../05-constraints-and-drift.md)

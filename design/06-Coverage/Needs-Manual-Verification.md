@@ -1,3 +1,7 @@
+---
+id: Needs-Manual-Verification
+parent: design
+---
 # Needs Manual Verification
 
 Do not guess. Items below are uncertain even after code + Archive 2.

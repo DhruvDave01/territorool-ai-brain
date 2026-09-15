@@ -1,3 +1,19 @@
+---
+id: README
+parent: brains
+sources:
+  - TerriTool/
+  - webterritool/
+related:
+  - brains/mobile-code.md
+  - code/mobile-code-details.md
+  - 10-mobile-app.md
+  - brains/mobile-ui.md
+  - design/MINI-DESIGN-BRAIN.md
+  - brains/web-code.md
+  - code/web-code-details.md
+  - 11-web-backend.md
+---
 # Sub brains
 
 The **main brain** is this vault plus the frontal lobe `../AI_BRAIN.md`. These five hubs do not replace it. They are the first stop when the task is clearly one surface.

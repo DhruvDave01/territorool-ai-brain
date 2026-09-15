@@ -1,3 +1,19 @@
+---
+id: Tokens
+parent: design-web
+sources:
+  - webterritool/
+  - resources/views/front/layout.blade.php
+  - resources/views/front/inc/menu.blade.php
+  - config/backpack/base.php
+  - resources/views/front/manager/_portal_layout.blade.php
+  - resources/manager-portal/AIFindLeads.jsx
+  - utils/googleMapsCircle.js
+  - resources/views/auth/login.blade.php
+related:
+  - design-web/MINI-DESIGN-BRAIN.md
+  - design-web/Token-Inconsistencies.md
+---
 # Web design tokens
 
 Extracted from live CSS/Blade/JS. **Do not average stacks.** Related: [MINI](MINI-DESIGN-BRAIN.md) · [Token-Inconsistencies.md](Token-Inconsistencies.md).

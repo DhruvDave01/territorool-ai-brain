@@ -1,3 +1,9 @@
+---
+id: Usage-Rules
+parent: design
+sources:
+  - App/App.js
+---
 # Usage rules for a new screen
 
 To look like TerriTool **today**:

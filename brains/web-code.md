@@ -1,3 +1,23 @@
+---
+id: web-code
+parent: brains
+sources:
+  - webterritool/
+  - app/Http/Controllers/CompanylController.php
+  - app/Api/V2/Controllers/
+  - routes/api.php
+  - app/Globals/Helper.php
+  - app/UserMcp/config/territool_app.php
+  - "app/UserMcp/Services/Tools/{Account,Companies,Contacts,Leads,Manager,Routes}Tools.php"
+  - UserMcp/Services/CustomerApiClient.php
+related:
+  - brains/web-design.md
+  - brains/api.md
+  - brains/README.md
+  - code/web-code-details.md
+  - 13-web-urls.md
+  - 14-mcp.md
+---
 # 3. Web Code Brain
 
 Hub for Laravel + Blade + manager React islands + MCP PHP. Sibling: [Web Design Brain](web-design.md) · [API Brain](api.md). Parent: [sub brains](README.md).

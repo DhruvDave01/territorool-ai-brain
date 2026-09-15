@@ -1,3 +1,7 @@
+---
+id: Settings
+parent: design
+---
 # Settings
 
 `EditStatus` titled **Settings**. Captures `IMG_4564`, VID3 `v3_009_72s`.

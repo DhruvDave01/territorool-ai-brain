@@ -1,3 +1,18 @@
+---
+id: 02-commands
+parent: core
+sources:
+  - TerriTool/package.json
+  - TerriTool/.maestro/
+  - webterritool/package.json
+  - app/UserMcp/Console/
+related:
+  - 10-mobile-app.md
+  - 11-web-backend.md
+  - 19-testing-qa.md
+  - 05-constraints-and-drift.md
+  - 13-web-urls.md
+---
 # 2. Commands
 
 Related: [10-mobile-app](10-mobile-app.md) · [11-web-backend](11-web-backend.md) · [19-testing-qa](19-testing-qa.md)

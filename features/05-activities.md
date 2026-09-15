@@ -1,3 +1,11 @@
+---
+id: 05-activities
+parent: features
+related:
+  - features/03-companies.md
+  - features/04-notes.md
+  - 15-voice-policy.md
+---
 # Feature: Activities and meetings
 
 Related: [03-companies](03-companies.md) · [04-notes](04-notes.md) · [15-voice-policy](../15-voice-policy.md)

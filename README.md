@@ -1,3 +1,9 @@
+---
+id: README
+parent: core
+related:
+  - index.md
+---
 # TerriTool AI Brain
 
 Product knowledge vault plus an [Obsidian-style graph](https://territorool-ai-brain.vercel.app) you can search and chat with.

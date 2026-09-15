@@ -1,3 +1,14 @@
+---
+id: 12-manager-portal
+parent: features
+sources:
+  - webterritool/package.json
+related:
+  - 06-users-and-roles.md
+  - features/07-ai-find-leads.md
+  - 14-mcp.md
+  - design-web/MINI-DESIGN-BRAIN.md
+---
 # Feature: Manager portal
 
 Related: [06-users-and-roles](../06-users-and-roles.md) · [07-ai-find-leads](07-ai-find-leads.md) · [14-mcp](../14-mcp.md)

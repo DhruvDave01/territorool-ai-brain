@@ -1,3 +1,15 @@
+---
+id: 15-maps-and-geo
+parent: features
+sources:
+  - App/customPackage/react-native-map-clustering
+  - route/lassoMap.js
+  - "Models/MongoDB/{City,Country,Location,TestModel}.php"
+related:
+  - features/09-routes.md
+  - features/07-ai-find-leads.md
+  - 17-integrations.md
+---
 # Feature: Maps and geo
 
 Related: [09-routes](09-routes.md) · [07-ai-find-leads](07-ai-find-leads.md) · [17-integrations](../17-integrations.md)

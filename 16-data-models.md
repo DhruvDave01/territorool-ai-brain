@@ -1,3 +1,15 @@
+---
+id: 16-data-models
+parent: core
+sources:
+  - "Models/MongoDB/{City,Country,Location,TestModel}.php"
+  - App/storage/realm.js
+  - App/storage/fcmrealm.js
+related:
+  - 10-mobile-app.md
+  - 11-web-backend.md
+  - 09-credits-billing.md
+---
 # 16. Data models
 
 Related: [10-mobile-app](10-mobile-app.md) · [11-web-backend](11-web-backend.md) · [09-credits-billing](09-credits-billing.md)

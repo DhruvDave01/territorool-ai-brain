@@ -1,3 +1,13 @@
+---
+id: README
+parent: design
+sources:
+  - App/images/
+  - App/assets/
+related:
+  - design/03-Assets/Asset-Inventory.md
+  - design/06-Coverage/Screenshot-Video-Index.md
+---
 # 03 — Assets
 
 Runtime app assets live in the mobile repo (`App/images/`, `App/assets/`). **Binaries were not copied into this vault** (stills + ~264 MB videos). Open the original pack:

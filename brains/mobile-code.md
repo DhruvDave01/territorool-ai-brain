@@ -1,3 +1,25 @@
+---
+id: mobile-code
+parent: brains
+sources:
+  - TerriTool/
+  - App/App.js
+  - App/components/
+  - splash/AnimatedSplashScreen.js
+  - App/components/customfooter/index.js
+  - App/utils/Global.js
+  - App/utils/NativeBaseCompat.js
+  - App/utils/API.js
+related:
+  - brains/mobile-ui.md
+  - brains/api.md
+  - brains/README.md
+  - code/mobile-code-details.md
+  - data/formdata-dictionary.md
+  - screens/how-it-works.md
+  - 05-constraints-and-drift.md
+  - 10-mobile-app.md
+---
 # 1. Mobile Code Brain
 
 Hub for the React Native app. Sibling: [Mobile UI Brain](mobile-ui.md) · [API Brain](api.md). Parent: [sub brains](README.md).

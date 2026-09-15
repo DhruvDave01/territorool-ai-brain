@@ -1,3 +1,19 @@
+---
+id: 03-companies
+parent: features
+sources:
+  - company/list.js
+  - company/view.js
+  - company/create/index.js
+  - company/edit.js
+  - customcompany/index.js
+  - company/businessCard/index.js
+related:
+  - features/04-notes.md
+  - features/06-contacts.md
+  - 07-vocabulary.md
+  - 12-mobile-api.md
+---
 # Feature: Companies (Address Book)
 
 Related: [04-notes](04-notes.md) · [06-contacts](06-contacts.md) · [07-vocabulary](../07-vocabulary.md) · [12-mobile-api](../12-mobile-api.md)

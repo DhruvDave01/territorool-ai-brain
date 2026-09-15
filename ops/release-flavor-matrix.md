@@ -1,3 +1,12 @@
+---
+id: release-flavor-matrix
+parent: ops
+sources:
+  - App/config/index.js
+related:
+  - 02-commands.md
+  - ops/env-inventory.md
+---
 # Release / flavor matrix
 
 Related: [02-commands](../02-commands.md) · [ops/env-inventory.md](env-inventory.md)

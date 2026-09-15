@@ -1,3 +1,14 @@
+---
+id: Page-Inventory
+parent: design-web
+sources:
+  - webterritool/routes/web.php
+  - resources/manager-portal/main.jsx
+  - public/js/manager-portal.js
+related:
+  - 13-web-urls.md
+  - code/web-code-details.md
+---
 # Web page inventory
 
 Routes from `webterritool/routes/web.php` + `return view(` in controllers + manager mounts from `resources/manager-portal/main.jsx`. Not every POST/AJAX endpoint.

@@ -1,3 +1,17 @@
+---
+id: how-it-works
+parent: screens
+sources:
+  - login/index.js
+  - findLeads/aiFindLeads.js
+  - customcompany/index.js
+  - list/create/select-start-end-points.js
+related:
+  - code/mobile-code-details.md
+  - data/formdata-dictionary.md
+  - 18-cross-system-flows.md
+  - design/04-User-Flows/README.md
+---
 # Per-screen how it works
 
 Related: [code/mobile-code-details](../code/mobile-code-details.md) · [data/formdata-dictionary.md](../data/formdata-dictionary.md) · [18-cross-system-flows](../18-cross-system-flows.md) · visual flows in [design/04-User-Flows](../design/04-User-Flows/README.md)

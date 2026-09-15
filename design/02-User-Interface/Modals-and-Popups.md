@@ -1,3 +1,7 @@
+---
+id: Modals-and-Popups
+parent: design
+---
 # Modals and popups
 
 Centered cards follow `AppConfirmModal` (radius 16, white, hairline, strong iOS shadow). Sheets/filters are taller white cards over dimmed content.

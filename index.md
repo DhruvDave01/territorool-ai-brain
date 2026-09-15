@@ -1,3 +1,18 @@
+---
+id: index
+parent: core
+sources:
+  - App/components
+related:
+  - schema.md
+  - brains/mobile-code.md
+  - brains/mobile-ui.md
+  - brains/web-code.md
+  - brains/web-design.md
+  - brains/api.md
+  - brains/README.md
+  - 01-project-overview.md
+---
 # TerriTool AI Brain — knowledge vault
 
 Detailed notes split from the root frontal lobe. **Do not invent** product behavior that is not in these notes or the cited source files.

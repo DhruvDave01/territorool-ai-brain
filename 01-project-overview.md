@@ -1,3 +1,15 @@
+---
+id: 01-project-overview
+parent: core
+sources:
+  - TerriTool/App/config/index.js
+related:
+  - 06-users-and-roles.md
+  - 03-architecture.md
+  - 07-vocabulary.md
+  - 12-mobile-api.md
+  - 14-mcp.md
+---
 # 1. Project overview
 
 Related: [06-users-and-roles](06-users-and-roles.md) · [03-architecture](03-architecture.md) · [07-vocabulary](07-vocabulary.md)

@@ -1,3 +1,23 @@
+---
+id: MINI-DESIGN-BRAIN
+parent: design-web
+sources:
+  - webterritool/resources/views/front/layout.blade.php
+  - inc/menu.blade.php
+  - vendor/adminlte/plugins/jQuery/jQuery-2.2.0.min.js
+  - public/js/manager-portal.js
+  - inc/sidebar.blade.php
+  - inc/stickybar.blade.php
+related:
+  - design-web/Tokens.md
+  - design-web/Navigation.md
+  - design-web/Page-Inventory.md
+  - design-web/Token-Inconsistencies.md
+  - design-web/Deferred-Scope.md
+  - design-web/Usage-Rules.md
+  - design-web/Screenshot-Index.md
+  - 13-web-urls.md
+---
 # TerriTool Web — Mini Design Brain
 
 One-file distillation. Read this first; follow the linked files only when you need a source citation or a screenshot.

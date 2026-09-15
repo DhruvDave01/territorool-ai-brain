@@ -1,3 +1,11 @@
+---
+id: 15-voice-policy
+parent: core
+related:
+  - 07-vocabulary.md
+  - 14-mcp.md
+  - 04-style-guide.md
+---
 # 15. Voice agent policy
 
 Related: [07-vocabulary](07-vocabulary.md) · [14-mcp](14-mcp.md) · [04-style-guide](04-style-guide.md)

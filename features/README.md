@@ -1,3 +1,16 @@
+---
+id: README
+parent: features
+related:
+  - index.md
+  - features/01-auth-and-account.md
+  - features/02-dashboard.md
+  - features/03-companies.md
+  - features/04-notes.md
+  - features/05-activities.md
+  - features/06-contacts.md
+  - features/07-ai-find-leads.md
+---
 # Features
 
 Atomic product notes. Each file is one feature. Index: [../index.md](../index.md).

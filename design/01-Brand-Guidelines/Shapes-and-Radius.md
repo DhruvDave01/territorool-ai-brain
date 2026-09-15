@@ -1,3 +1,7 @@
+---
+id: Shapes-and-Radius
+parent: design
+---
 # Shapes and radius
 
 **Token source:** `theme.radius` (`scaledSize`).

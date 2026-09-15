@@ -1,3 +1,17 @@
+---
+id: 08-lists
+parent: features
+sources:
+  - list/index.js
+  - list/create.js
+  - list/edit.js
+  - list/basic/index.js
+  - list/filter.js
+  - list/create/select-start-end-points.js
+related:
+  - features/09-routes.md
+  - features/03-companies.md
+---
 # Feature: Lists
 
 Related: [09-routes](09-routes.md) · [03-companies](03-companies.md)

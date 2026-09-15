@@ -1,3 +1,16 @@
+---
+id: README
+parent: design
+related:
+  - design/06-Coverage/Deferred-Scope.md
+  - design/04-User-Flows/App-Launch.md
+  - design/04-User-Flows/Authentication.md
+  - design/04-User-Flows/Onboarding.md
+  - design/04-User-Flows/Subscription.md
+  - design/04-User-Flows/Main-Navigation.md
+  - design/04-User-Flows/Dashboard.md
+  - design/04-User-Flows/Find-Leads.md
+---
 # 04 — User flows
 
 Only flows that exist in code. Register, paywall, and in-app purchase actions are **stubs** ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)).

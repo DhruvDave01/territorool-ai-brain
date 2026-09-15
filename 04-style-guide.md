@@ -1,3 +1,20 @@
+---
+id: 04-style-guide
+parent: core
+sources:
+  - App/utils/NativeBaseCompat.js
+  - App/storage/realm.js
+  - App/config/index.js
+  - app/Helpers/helpers.php
+related:
+  - 05-constraints-and-drift.md
+  - 10-mobile-app.md
+  - 11-web-backend.md
+  - design/MINI-DESIGN-BRAIN.md
+  - design-web/MINI-DESIGN-BRAIN.md
+  - 09-credits-billing.md
+  - 15-voice-policy.md
+---
 # 4. Style guide
 
 Related: [05-constraints-and-drift](05-constraints-and-drift.md) · [10-mobile-app](10-mobile-app.md) · [11-web-backend](11-web-backend.md)

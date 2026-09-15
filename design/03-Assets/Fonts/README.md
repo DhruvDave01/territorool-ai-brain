@@ -1,3 +1,11 @@
+---
+id: README
+parent: design
+sources:
+  - App/assets/fonts/
+related:
+  - design/01-Brand-Guidelines/Typography.md
+---
 # Fonts (copies)
 
 Canonical files remain in `App/assets/fonts/`. Linked via `react-native.config.js` (`assets: ["./App/assets/fonts"]`) + `npx react-native-asset`.

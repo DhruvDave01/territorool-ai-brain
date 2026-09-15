@@ -1,3 +1,9 @@
+---
+id: database-columns
+parent: data
+related:
+  - 16-data-models.md
+---
 # Database column lists
 
 Related: [16-data-models](../16-data-models.md)

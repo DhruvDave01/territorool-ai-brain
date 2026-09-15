@@ -1,3 +1,13 @@
+---
+id: Deferred-Scope
+parent: design-web
+sources:
+  - resources/views/auth/register.blade.php
+  - inc/sidebar.blade.php
+related:
+  - design/06-Coverage/Deferred-Scope.md
+  - design-web/Screenshot-Index.md
+---
 # Deferred visual scope (web)
 
 Same rule as mobile [design/06-Coverage/Deferred-Scope.md](../design/06-Coverage/Deferred-Scope.md): **exists in code, no (or insufficient) captures — do not invent UI.**

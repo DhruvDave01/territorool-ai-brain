@@ -1,3 +1,14 @@
+---
+id: 07-ai-find-leads
+parent: features
+sources:
+  - webterritool/docs/MCP-Manager-Portal-Feature-Gap.md
+  - findLeads/index.js
+related:
+  - 03-architecture.md
+  - 09-credits-billing.md
+  - 14-mcp.md
+---
 # Feature: AI Find Leads
 
 Related: [03-architecture](../03-architecture.md) · [09-credits-billing](../09-credits-billing.md) · [14-mcp](../14-mcp.md)

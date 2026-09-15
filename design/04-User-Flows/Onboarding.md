@@ -1,3 +1,7 @@
+---
+id: Onboarding
+parent: design
+---
 # Onboarding
 
 **Deferred.** First-signup onboarding lives on `MultipleAIWaypoint` (`firstSignUpOnboarding`) and Register `PostSignupPaywallFlow` (Goals → Role → Cost → Configuring → Subscribe → Welcome).

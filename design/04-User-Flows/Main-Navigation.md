@@ -1,3 +1,9 @@
+---
+id: Main-Navigation
+parent: design
+related:
+  - design/04-User-Flows/Dashboard.md
+---
 # Main navigation
 
 ## Dashboard tiles

@@ -1,3 +1,21 @@
+---
+id: 10-mobile-app
+parent: core
+sources:
+  - App/App.js
+  - register/index_register_split.js
+  - register/subscribe.js
+  - route/basic/goswipe.js
+  - route/basic/company-view.js
+  - customcompany/index.js
+  - findLeads/index.js
+  - findLeads/aiFindLeads.js
+related:
+  - 02-commands.md
+  - 04-style-guide.md
+  - appendix-c-footer-tabs.md
+  - 05-constraints-and-drift.md
+---
 # 10. Mobile app
 
 Related: [02-commands](02-commands.md) · [04-style-guide](04-style-guide.md) · [appendix-c-footer-tabs](appendix-c-footer-tabs.md)

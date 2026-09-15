@@ -1,3 +1,14 @@
+---
+id: 06-contacts
+parent: features
+sources:
+  - "contacts/create\\|update\\|view.js"
+  - App/utils/contactBuyCredits.js
+related:
+  - features/03-companies.md
+  - 09-credits-billing.md
+  - 14-mcp.md
+---
 # Feature: Contacts
 
 Related: [03-companies](03-companies.md) · [09-credits-billing](../09-credits-billing.md) · [14-mcp](../14-mcp.md)

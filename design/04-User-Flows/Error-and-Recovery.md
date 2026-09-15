@@ -1,3 +1,7 @@
+---
+id: Error-and-Recovery
+parent: design
+---
 # Error and recovery
 
 | Path | UI | Capture |

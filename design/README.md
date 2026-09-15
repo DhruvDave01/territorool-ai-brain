@@ -1,3 +1,19 @@
+---
+id: README
+parent: design
+sources:
+  - TerriTool/App/assets/fonts/
+  - TerriTool/App/images/
+related:
+  - design/MINI-DESIGN-BRAIN.md
+  - design/MASTER-DESIGN-BRAIN.md
+  - screens/how-it-works.md
+  - 09-credits-billing.md
+  - design/06-Coverage/Needs-Manual-Verification.md
+  - design/06-Coverage/Deferred-Scope.md
+  - design/01-Brand-Guidelines/README.md
+  - design/02-User-Interface/README.md
+---
 # Design pack (mobile UI as it ships)
 
 Imported from the **Design Brain** pack (iOS TestFlight Archive 2 + `TerriTool` `theme.js`). This is **not** a redesign brief. Code still wins over captures.

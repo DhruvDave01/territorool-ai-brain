@@ -1,3 +1,9 @@
+---
+id: Maps
+parent: design
+sources:
+  - App/config
+---
 # Maps
 
 Libraries: `react-native-maps`, clustering helper, Mapbox token for polylines, Google Places/Directions keys in `App/config`.

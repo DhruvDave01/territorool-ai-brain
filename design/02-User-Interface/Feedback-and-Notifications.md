@@ -1,3 +1,10 @@
+---
+id: Feedback-and-Notifications
+parent: design
+sources:
+  - App/App.js
+  - App/utils/FCMHelper.js
+---
 # Feedback and notifications
 
 ## Toast

@@ -1,3 +1,13 @@
+---
+id: 06-users-and-roles
+parent: core
+related:
+  - 01-project-overview.md
+  - 14-mcp.md
+  - features/12-manager-portal.md
+  - features/13-admin-hq.md
+  - 09-credits-billing.md
+---
 # 6. Users and roles
 
 Related: [01-project-overview](01-project-overview.md) · [14-mcp](14-mcp.md) · [features/12-manager-portal.md](features/12-manager-portal.md) · [features/13-admin-hq.md](features/13-admin-hq.md)

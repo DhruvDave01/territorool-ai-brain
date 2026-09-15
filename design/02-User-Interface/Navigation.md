@@ -1,3 +1,7 @@
+---
+id: Navigation
+parent: design
+---
 # Navigation
 
 ## Root

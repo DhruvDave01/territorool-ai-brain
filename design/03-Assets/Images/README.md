@@ -1,3 +1,9 @@
+---
+id: README
+parent: design
+sources:
+  - App/images/
+---
 # Images folder
 
 Canonical files remain in `App/images/`.

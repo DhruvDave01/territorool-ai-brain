@@ -1,3 +1,10 @@
+---
+id: env-inventory
+parent: ops
+related:
+  - ops/release-flavor-matrix.md
+  - 17-integrations.md
+---
 # Env / secrets inventory (names only)
 
 Related: [ops/release-flavor-matrix.md](release-flavor-matrix.md) · [17-integrations](../17-integrations.md)
@@ -45,6 +52,10 @@ Staging vs prod is **not** `.env`: uncomment the STAGING `URL_BASE` block and co
 ### MCP
 
 `TERRITOOL_APP_MCP_*`, `TERRITOOL_FIND_MCP_*`, `MCP_OAUTH_*`, `MCP_PATH`, `MCP_API_KEY`, `MCP_READ_DB_CONNECTION`, `MCP_WRITE_DB_CONNECTION`, `MCP_OAUTH_EXTRA_REDIRECT_URIS`.
+
+### AI Brain graph chat (`AI_BRAIN/.env` / Vercel)
+
+`ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`, `ANTHROPIC_VERSION`, `GRAPH_CHAT_SECRET` (optional lock on Ask), `GRAPH_CHAT_PORT`.
 
 ### Trials / sheets / TikTok config keys
 

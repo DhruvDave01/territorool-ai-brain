@@ -1,3 +1,7 @@
+---
+id: Platform-Differences
+parent: design
+---
 # Platform differences
 
 Archive 2 is **iOS TestFlight only**. Android UI is code-inferred.

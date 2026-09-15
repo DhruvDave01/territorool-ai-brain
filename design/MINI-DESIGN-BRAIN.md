@@ -1,3 +1,21 @@
+---
+id: MINI-DESIGN-BRAIN
+parent: design
+sources:
+  - App/App.js
+  - App/styles/theme.js
+  - App/assets/fonts/
+  - App/images/fetchSources/
+related:
+  - design/README.md
+  - design/01-Brand-Guidelines/Colors.md
+  - design/02-User-Interface/Screen-Inventory.md
+  - design/02-User-Interface/Components.md
+  - design/05-Design-System/Token-Inconsistencies.md
+  - design/06-Coverage/Deferred-Scope.md
+  - design/06-Coverage/Needs-Manual-Verification.md
+  - design/01-Brand-Guidelines/README.md
+---
 # TerriTool Mobile — Mini Design Brain
 
 One-file distillation of the full [Design Brain](README.md). Read this first; follow the linked files only when you need a source citation, a screenshot reference, or detail this file compresses away.

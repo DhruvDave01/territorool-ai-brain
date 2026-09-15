@@ -1,3 +1,22 @@
+---
+id: web-code-details
+parent: code
+sources:
+  - app/Api/V2/Controllers/
+  - routes/api.php
+  - routes/web.php
+  - app/UserMcp/config/territool_app.php
+  - "Services/Tools/*Tools.php"
+  - resources/views/front/route/findleads.blade.php
+  - app/Helpers/helpers.php
+  - app/Globals/Helper.php
+related:
+  - 11-web-backend.md
+  - 13-web-urls.md
+  - 14-mcp.md
+  - 16-data-models.md
+  - design-web/MINI-DESIGN-BRAIN.md
+---
 # Web / backend code details
 
 Related: [11-web-backend](../11-web-backend.md) · [13-web-urls](../13-web-urls.md) · [14-mcp](../14-mcp.md) · [16-data-models](../16-data-models.md)

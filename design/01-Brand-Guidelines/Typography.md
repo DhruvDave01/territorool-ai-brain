@@ -1,3 +1,17 @@
+---
+id: Typography
+parent: design
+sources:
+  - App/assets/fonts/DIN-Condensed-Bold.ttf
+  - App/assets/fonts/DIN-Condensed-Regular.ttf
+  - App/assets/fonts/Inter-Medium.ttf
+  - App/assets/fonts/Inter-Regular.ttf
+  - App/styles/fonts.js
+  - App/utils/commonFunctions.ts
+  - App/styles/platformText.js
+related:
+  - design/03-Assets/Fonts/README.md
+---
 # Typography
 
 TerriTool uses a **custom font: DIN Condensed**. It is not a system font. New screens and design mockups must use these files, not Arial/San Francisco/Inter.

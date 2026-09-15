@@ -1,3 +1,7 @@
+---
+id: App-Launch
+parent: design
+---
 # App launch
 
 ```mermaid

@@ -1,3 +1,15 @@
+---
+id: 01-auth-and-account
+parent: features
+sources:
+  - App/components/login/index.js
+  - register/subscribe.js
+  - dashboard/editstatus.js
+related:
+  - 06-users-and-roles.md
+  - 12-mobile-api.md
+  - 18-cross-system-flows.md
+---
 # Feature: Auth and account
 
 Related: [06-users-and-roles](../06-users-and-roles.md) · [12-mobile-api](../12-mobile-api.md) · [18-cross-system-flows](../18-cross-system-flows.md)

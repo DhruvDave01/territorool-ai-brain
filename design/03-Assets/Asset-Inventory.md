@@ -1,3 +1,16 @@
+---
+id: Asset-Inventory
+parent: design
+sources:
+  - App/assets/fonts/
+  - App/assets/lottie/
+  - App/images/
+  - App/config/index.js
+related:
+  - design/03-Assets/Fonts/README.md
+  - design/01-Brand-Guidelines/Icons.md
+  - design/01-Brand-Guidelines/Logos.md
+---
 # Runtime asset inventory
 
 Do not delete “unused” files. Mark only.

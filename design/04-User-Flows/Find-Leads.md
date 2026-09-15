@@ -1,3 +1,7 @@
+---
+id: Find-Leads
+parent: design
+---
 # Find Leads (AI)
 
 Primary capture: VID1 + `IMG_4565`–`4571`, `IMG_4603`.

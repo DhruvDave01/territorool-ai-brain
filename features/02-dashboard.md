@@ -1,3 +1,13 @@
+---
+id: 02-dashboard
+parent: features
+sources:
+  - App/components/dashboard/index.js
+related:
+  - appendix-c-footer-tabs.md
+  - features/16-notifications.md
+  - features/05-activities.md
+---
 # Feature: Dashboard and home
 
 Related: [appendix-c-footer-tabs](../appendix-c-footer-tabs.md) · [features/16-notifications.md](16-notifications.md) · [features/05-activities.md](05-activities.md)

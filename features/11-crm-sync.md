@@ -1,3 +1,14 @@
+---
+id: 11-crm-sync
+parent: features
+sources:
+  - app/McpClient/
+  - App/utils/hubspotSyncFlight.js
+related:
+  - 12-mobile-api.md
+  - 13-web-urls.md
+  - 17-integrations.md
+---
 # Feature: CRM sync
 
 Related: [12-mobile-api](../12-mobile-api.md) · [13-web-urls](../13-web-urls.md) · [17-integrations](../17-integrations.md)

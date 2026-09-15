@@ -1,3 +1,16 @@
+---
+id: README
+parent: ops
+related:
+  - design/README.md
+  - screens/how-it-works.md
+  - data/formdata-dictionary.md
+  - data/database-columns.md
+  - ops/env-inventory.md
+  - ops/decision-log.md
+  - ops/known-bugs.md
+  - ops/release-flavor-matrix.md
+---
 # Ops / data notes
 
 | File | What |

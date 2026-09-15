@@ -1,3 +1,7 @@
+---
+id: States
+parent: design
+---
 # UI states
 
 Documented from code + Archive 2. Do not assume a screen has a skeleton if none exists.

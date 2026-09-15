@@ -1,3 +1,23 @@
+---
+id: api
+parent: brains
+sources:
+  - TerriTool/App/config/index.js
+  - webterritool/routes/api.php
+  - routes/api.php
+  - webterritool/routes/web.php
+  - findLeads/aiFindLeads.js
+  - App/utils/contactBuyCredits.js
+related:
+  - brains/README.md
+  - brains/mobile-code.md
+  - brains/web-code.md
+  - 12-mobile-api.md
+  - 13-web-urls.md
+  - data/formdata-dictionary.md
+  - screens/how-it-works.md
+  - 09-credits-billing.md
+---
 # 5. Web and Mobile API Brain
 
 Hub for **what clients call**. Parent: [sub brains](README.md). Siblings: [Mobile Code](mobile-code.md) · [Web Code](web-code.md).

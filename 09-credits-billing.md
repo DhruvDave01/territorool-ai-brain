@@ -1,3 +1,11 @@
+---
+id: 09-credits-billing
+parent: core
+related:
+  - features/10-credits-subscription.md
+  - 14-mcp.md
+  - 16-data-models.md
+---
 # 9. Credits, packages, billing
 
 Related: [features/10-credits-subscription.md](features/10-credits-subscription.md) · [14-mcp](14-mcp.md) · [16-data-models](16-data-models.md)

@@ -1,3 +1,20 @@
+---
+id: mobile-code-details
+parent: code
+sources:
+  - App/App.js
+  - App/components/
+  - App/config/index.js
+  - App/utils/API.js
+  - App/components/customcompany/index.js
+  - App/utils/Global.js
+  - App/storage/realm.js
+  - App/styles/theme.js
+related:
+  - 10-mobile-app.md
+  - 04-style-guide.md
+  - 12-mobile-api.md
+---
 # Mobile code details
 
 Related: [10-mobile-app](../10-mobile-app.md) · [04-style-guide](../04-style-guide.md) · [12-mobile-api](../12-mobile-api.md)

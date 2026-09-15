@@ -1,3 +1,10 @@
+---
+id: appendix-a-google-source
+parent: core
+related:
+  - schema.md
+  - 05-constraints-and-drift.md
+---
 # Appendix A — Google AI Mode source
 
 User query: *how to create a "ai brain" of my code*  

@@ -1,3 +1,21 @@
+---
+id: 09-routes
+parent: features
+sources:
+  - route/index.js
+  - route/create.js
+  - route/edit.js
+  - basic/index.js
+  - basic/company-view.js
+  - basic/goswipe.js
+  - activeroutemap/index.js
+  - activeroutemap/waypointdetail.js
+related:
+  - features/08-lists.md
+  - features/03-companies.md
+  - 15-voice-policy.md
+  - appendix-c-footer-tabs.md
+---
 # Feature: Routes and driving
 
 Related: [08-lists](08-lists.md) · [03-companies](03-companies.md) · [15-voice-policy](../15-voice-policy.md) · [appendix-c-footer-tabs](../appendix-c-footer-tabs.md)

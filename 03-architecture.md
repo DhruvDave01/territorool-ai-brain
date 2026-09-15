@@ -1,3 +1,22 @@
+---
+id: 03-architecture
+parent: core
+sources:
+  - TerriTool/init.js
+  - TerriTool/App/App.js
+  - webterritool/docs/MCP-Manager-Portal-Feature-Gap.md
+  - "app/UserMcp/Services/Tools/{Account,Companies,Contacts,Leads,Manager,Routes}Tools.php"
+  - app/UserMcp
+related:
+  - 10-mobile-app.md
+  - 11-web-backend.md
+  - 14-mcp.md
+  - 18-cross-system-flows.md
+  - appendix-c-footer-tabs.md
+  - 07-vocabulary.md
+  - 09-credits-billing.md
+  - features/07-ai-find-leads.md
+---
 # 3. Architecture and data flows
 
 Related: [10-mobile-app](10-mobile-app.md) · [11-web-backend](11-web-backend.md) · [14-mcp](14-mcp.md) · [18-cross-system-flows](18-cross-system-flows.md)

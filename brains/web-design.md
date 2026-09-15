@@ -1,3 +1,20 @@
+---
+id: web-design
+parent: brains
+sources:
+  - webterritool/
+  - resources/views/front/layout.blade.php
+  - resources/views/front/manager/_portal_layout.blade.php
+related:
+  - brains/web-code.md
+  - brains/README.md
+  - design-web/MINI-DESIGN-BRAIN.md
+  - design-web/Tokens.md
+  - design-web/Page-Inventory.md
+  - design-web/Navigation.md
+  - design-web/Usage-Rules.md
+  - design-web/Deferred-Scope.md
+---
 # 4. Web Design Brain
 
 Hub for **as-shipped** web pixels. Two stacks — do not mix. Sibling: [Web Code Brain](web-code.md). Parent: [sub brains](README.md).

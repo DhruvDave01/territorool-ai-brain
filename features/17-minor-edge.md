@@ -1,3 +1,14 @@
+---
+id: 17-minor-edge
+parent: features
+sources:
+  - App/components/voiceAssistant.zip
+  - webterritool/config/prompts/claude_contact_finder_system_prompt.txt
+  - config/claude_contact_finder.php
+related:
+  - 05-constraints-and-drift.md
+  - 10-mobile-app.md
+---
 # Feature: Minor / edge
 
 Related: [05-constraints-and-drift](../05-constraints-and-drift.md) · [10-mobile-app](../10-mobile-app.md)

@@ -1,3 +1,15 @@
+---
+id: 11-web-backend
+parent: core
+sources:
+  - app/FindMcp/README.md
+  - "app/FindMcp/skills/*/SKILL.md"
+related:
+  - 02-commands.md
+  - 13-web-urls.md
+  - 14-mcp.md
+  - design-web/MINI-DESIGN-BRAIN.md
+---
 # 11. Web and backend
 
 Related: [02-commands](02-commands.md) · [13-web-urls](13-web-urls.md) · [14-mcp](14-mcp.md)

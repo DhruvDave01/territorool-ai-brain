@@ -1,3 +1,11 @@
+---
+id: 04-notes
+parent: features
+related:
+  - features/03-companies.md
+  - features/05-activities.md
+  - 07-vocabulary.md
+---
 # Feature: Notes
 
 Related: [03-companies](03-companies.md) · [05-activities](05-activities.md) · [07-vocabulary](../07-vocabulary.md)

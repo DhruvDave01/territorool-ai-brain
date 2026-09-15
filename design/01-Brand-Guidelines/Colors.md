@@ -1,3 +1,11 @@
+---
+id: Colors
+parent: design
+sources:
+  - App/styles/theme.js
+related:
+  - design/05-Design-System/Token-Inconsistencies.md
+---
 # Colors
 
 **Token source:** `App/styles/theme.js`  

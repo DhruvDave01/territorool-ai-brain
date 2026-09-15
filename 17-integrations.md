@@ -1,3 +1,11 @@
+---
+id: 17-integrations
+parent: core
+related:
+  - features/11-crm-sync.md
+  - features/15-maps-and-geo.md
+  - features/16-notifications.md
+---
 # 17. Integrations
 
 Related: [features/11-crm-sync.md](features/11-crm-sync.md) · [features/15-maps-and-geo.md](features/15-maps-and-geo.md) · [features/16-notifications.md](features/16-notifications.md)

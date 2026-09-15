@@ -1,3 +1,9 @@
+---
+id: Screenshot-Index
+parent: design-web
+related:
+  - design-web/Deferred-Scope.md
+---
 # Screenshot index (web Archive, short pass)
 
 Captured 2026-09-14 from `http://127.0.0.1:8000/` (local `php artisan serve`). Session: **Business Agent** (Cockpit). No videos.

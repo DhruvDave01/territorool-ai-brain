@@ -1,3 +1,7 @@
+---
+id: Functionality-Coverage-Matrix
+parent: design
+---
 # Functionality coverage matrix
 
 Status: **Documented** = in Design Brain from code and/or capture. **Deferred** = skipped until assets. **Dead** = registered/referenced but not a live path. **Partial** = code documented, visual incomplete.

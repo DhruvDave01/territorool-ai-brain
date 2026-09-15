@@ -1,3 +1,10 @@
+---
+id: Token-Inconsistencies
+parent: design
+sources:
+  - styles/index.js
+  - config/index.js
+---
 # Token inconsistencies (do not normalize)
 
 | Item | A | B |

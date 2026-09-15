@@ -1,3 +1,7 @@
+---
+id: Subscription
+parent: design
+---
 # Subscription and payment
 
 **Deferred** per product request (2026-09-11).

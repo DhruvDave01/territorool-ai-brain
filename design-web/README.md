@@ -1,3 +1,18 @@
+---
+id: README
+parent: design-web
+sources:
+  - resources/views/front/layout.blade.php
+related:
+  - design/README.md
+  - data/formdata-dictionary.md
+  - design-web/MINI-DESIGN-BRAIN.md
+  - design-web/Deferred-Scope.md
+  - design-web/Tokens.md
+  - design-web/Page-Inventory.md
+  - design-web/Navigation.md
+  - design-web/Usage-Rules.md
+---
 # Design pack (web UI as it ships)
 
 Sibling of the mobile pack at [`../design/`](../design/README.md). Extracted from **live** Blade, CSS, and manager islands the same way [FormData](../data/formdata-dictionary.md) was scanned from `formdata.append` — cite the file, do not invent.

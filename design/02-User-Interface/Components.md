@@ -1,3 +1,16 @@
+---
+id: Components
+parent: design
+sources:
+  - App/components/common/AppButton.js
+  - App/components/customheader/
+  - App/components/customheader/index.js
+  - App/components/customfooter/index.js
+  - common/SearchGlyph.js
+  - common/ShareEmailField.js
+  - common/ShareEmailError.js
+  - common/AppConfirmModal.js
+---
 # Shared components
 
 Sizes/colors from code. Screens listed are primary importers, not always exhaustive.

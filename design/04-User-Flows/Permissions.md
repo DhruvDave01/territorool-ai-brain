@@ -1,3 +1,7 @@
+---
+id: Permissions
+parent: design
+---
 # Permissions
 
 | Permission | When | iOS | Android |

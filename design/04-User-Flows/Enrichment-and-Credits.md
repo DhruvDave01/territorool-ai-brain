@@ -1,3 +1,7 @@
+---
+id: Enrichment-and-Credits
+parent: design
+---
 # Enrichment and credits
 
 VID1 + `IMG_4581`–`4585`.

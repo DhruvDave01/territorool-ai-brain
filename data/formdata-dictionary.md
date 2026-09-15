@@ -1,3 +1,10 @@
+---
+id: formdata-dictionary
+parent: data
+related:
+  - 12-mobile-api.md
+  - screens/how-it-works.md
+---
 # FormData field dictionary
 
 Related: [12-mobile-api](../12-mobile-api.md) · [screens/how-it-works.md](../screens/how-it-works.md)

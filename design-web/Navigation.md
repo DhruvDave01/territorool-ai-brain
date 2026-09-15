@@ -1,3 +1,15 @@
+---
+id: Navigation
+parent: design-web
+sources:
+  - resources/views/front/inc/sidebar.blade.php
+  - front/inc/menu.blade.php
+  - front/inc/stickybar.blade.php
+  - front/manager/_mgr_sidebar.blade.php
+  - front/layout.blade.php
+  - inc/sidebar.blade.php
+  - inc/menu.blade.php
+---
 # Web navigation
 
 Source: `resources/views/front/inc/sidebar.blade.php`, `front/inc/menu.blade.php`, `front/inc/stickybar.blade.php`, `front/manager/_mgr_sidebar.blade.php`, `front/layout.blade.php`.

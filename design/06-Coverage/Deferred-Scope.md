@@ -1,3 +1,9 @@
+---
+id: Deferred-Scope
+parent: design
+sources:
+  - register/index_register_split.js
+---
 # Deferred scope (2026-09-11)
 
 The owner asked to **skip Register, payment, and other missing packs** until they provide captures.

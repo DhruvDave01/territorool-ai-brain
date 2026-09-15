@@ -1,3 +1,10 @@
+---
+id: 13-admin-hq
+parent: features
+related:
+  - 06-users-and-roles.md
+  - 14-mcp.md
+---
 # Feature: Admin HQ
 
 Related: [06-users-and-roles](../06-users-and-roles.md) · [14-mcp](../14-mcp.md)

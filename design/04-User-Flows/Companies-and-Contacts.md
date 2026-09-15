@@ -1,3 +1,7 @@
+---
+id: Companies-and-Contacts
+parent: design
+---
 # Companies and contacts
 
 ## Address Book

@@ -1,3 +1,12 @@
+---
+id: 10-credits-subscription
+parent: features
+sources:
+  - register/subscribe.js
+related:
+  - 09-credits-billing.md
+  - features/01-auth-and-account.md
+---
 # Feature: Credits, subscription, referrals
 
 Related: [09-credits-billing](../09-credits-billing.md) · [01-auth-and-account](01-auth-and-account.md)

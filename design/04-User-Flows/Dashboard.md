@@ -1,3 +1,7 @@
+---
+id: Dashboard
+parent: design
+---
 # Dashboard
 
 Captures: `IMG_4563`, `IMG_4605`, VID1 start, VID2 start, VID3 loading.

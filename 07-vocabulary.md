@@ -1,3 +1,12 @@
+---
+id: 07-vocabulary
+parent: core
+sources:
+  - webterritool/config/activity_note_types.php
+related:
+  - 09-credits-billing.md
+  - 15-voice-policy.md
+---
 # 7. Vocabulary
 
 Related: [features/](features/) · [09-credits-billing](09-credits-billing.md) · [15-voice-policy](15-voice-policy.md)

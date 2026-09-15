@@ -1,3 +1,12 @@
+---
+id: Icons
+parent: design
+sources:
+  - App/images/
+  - App/config/index.js
+related:
+  - design/03-Assets/Asset-Inventory.md
+---
 # Icons
 
 Two systems: **PNG brand icons** (`App/images/` + `App/config/index.js` exports) and **Ionicons** (`react-native-vector-icons/Ionicons`) for chrome (back, search, add, call, etc.).

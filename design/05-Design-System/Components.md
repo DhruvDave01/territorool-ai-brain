@@ -1,3 +1,9 @@
+---
+id: Components
+parent: design
+related:
+  - design/02-User-Interface/Components.md
+---
 # Design-system components
 
 When adding UI, reuse in this order:

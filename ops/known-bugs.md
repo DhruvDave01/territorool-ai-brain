@@ -1,3 +1,13 @@
+---
+id: known-bugs
+parent: ops
+sources:
+  - config/app.php
+related:
+  - 05-constraints-and-drift.md
+  - 19-testing-qa.md
+  - ops/release-flavor-matrix.md
+---
 # Known bugs / gaps / recurring issues
 
 Related: [05-constraints-and-drift](../05-constraints-and-drift.md) · [19-testing-qa](../19-testing-qa.md)

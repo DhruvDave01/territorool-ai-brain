@@ -1,3 +1,12 @@
+---
+id: README
+parent: design
+related:
+  - design/06-Coverage/Functionality-Coverage-Matrix.md
+  - design/06-Coverage/Screenshot-Video-Index.md
+  - design/06-Coverage/Needs-Manual-Verification.md
+  - design/06-Coverage/Deferred-Scope.md
+---
 # Coverage
 
 Phase 2 documentation + Phase 3 cross-check live here.

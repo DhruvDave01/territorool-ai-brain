@@ -1,3 +1,12 @@
+---
+id: Logos
+parent: design
+sources:
+  - App/images/TerriTool_logo_NEW.jpg
+  - App/images/TT_NO_BG.png
+  - App/assets/lottie/
+  - App/images/
+---
 # Logos & branding
 
 ## Wordmark file (code)

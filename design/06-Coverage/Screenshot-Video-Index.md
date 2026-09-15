@@ -1,3 +1,19 @@
+---
+id: Screenshot-Video-Index
+parent: design
+sources:
+  - dashboard/index.js
+  - dashboard/editstatus.js
+  - findLeads/aiFindLeads.js
+  - route/create.js
+  - route/create/select-start-end-points.js
+  - route/common/RoutePublishingLoader.js
+  - route/basic/index.js
+  - route/basic/company-view.js
+related:
+  - design/06-Coverage/Needs-Manual-Verification.md
+  - design/05-Design-System/Token-Inconsistencies.md
+---
 # Screenshot and video index
 
 **Capture set:** `/Users/dhruvdave/Downloads/Design-Brain/03-Assets/` (original Archive 2 stills + videos; not copied into this vault).  

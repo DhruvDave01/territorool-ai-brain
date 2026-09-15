@@ -1,3 +1,18 @@
+---
+id: 14-mcp
+parent: core
+sources:
+  - webterritool/app/UserMcp/config/territool_app.php
+  - app/UserMcp/config/territool_app.php
+  - "Services/Tools/{Account,Companies,Contacts,Leads,Manager,Routes}Tools.php"
+  - app/AdminMcp/config/mcp.php
+  - app/FindMcp/README.md
+  - app/FindMcp/skills/find-leads/SKILL.md
+related:
+  - 06-users-and-roles.md
+  - 09-credits-billing.md
+  - 15-voice-policy.md
+---
 # 14. MCP servers and tools
 
 Related: [06-users-and-roles](06-users-and-roles.md) · [09-credits-billing](09-credits-billing.md) · [15-voice-policy](15-voice-policy.md)

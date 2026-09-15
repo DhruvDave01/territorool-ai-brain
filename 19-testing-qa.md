@@ -1,3 +1,15 @@
+---
+id: 19-testing-qa
+parent: core
+sources:
+  - "TerriTool/.maestro/*"
+  - App/config/index.js
+  - webterritool/docs/MCP-Agent-QA-Playbook.md
+  - webterritool/docs/qa-runs/
+related:
+  - 02-commands.md
+  - 14-mcp.md
+---
 # 19. Testing and QA
 
 Related: [02-commands](02-commands.md) · [14-mcp](14-mcp.md)

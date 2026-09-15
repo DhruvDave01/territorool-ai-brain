@@ -1,3 +1,10 @@
+---
+id: Token-Inconsistencies
+parent: design-web
+sources:
+  - auth/login.blade.php
+  - config/backpack/base.php
+---
 # Token inconsistencies (web) — do not normalize
 
 Match the nearest page on the **same stack**. Do not average.

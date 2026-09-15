@@ -1,3 +1,13 @@
+---
+id: 05-constraints-and-drift
+parent: core
+sources:
+  - App/App.js
+  - App/config/index.js
+related:
+  - 04-style-guide.md
+  - 20-how-to-update.md
+---
 # 5. Durable facts, constraints, known drift
 
 Related: [04-style-guide](04-style-guide.md) · [20-how-to-update](20-how-to-update.md)

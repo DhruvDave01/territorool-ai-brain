@@ -1,3 +1,12 @@
+---
+id: 12-mobile-api
+parent: core
+sources:
+  - TerriTool/App/config/index.js
+  - webterritool/routes/api.php
+related:
+  - 10-mobile-app.md
+---
 # 12. Mobile API catalog
 
 Related: [10-mobile-app](10-mobile-app.md) · [features/](features/)

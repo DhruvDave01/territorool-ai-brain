@@ -1,3 +1,7 @@
+---
+id: Scan-Business-Card
+parent: design
+---
 # Scan Business Card
 
 ```

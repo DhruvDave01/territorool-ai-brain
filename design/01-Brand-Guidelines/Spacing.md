@@ -1,3 +1,10 @@
+---
+id: Spacing
+parent: design
+sources:
+  - App/styles/theme.js
+  - customheader/index.js
+---
 # Spacing
 
 **Token source:** `theme.spacing` in `App/styles/theme.js` (all `scaledSize`).

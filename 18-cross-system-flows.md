@@ -1,3 +1,11 @@
+---
+id: 18-cross-system-flows
+parent: core
+related:
+  - 03-architecture.md
+  - 14-mcp.md
+  - features/07-ai-find-leads.md
+---
 # 18. Cross-system flows
 
 Related: [03-architecture](03-architecture.md) · [14-mcp](14-mcp.md) · [features/07-ai-find-leads.md](features/07-ai-find-leads.md)

@@ -1,3 +1,10 @@
+---
+id: appendix-c-footer-tabs
+parent: core
+related:
+  - 10-mobile-app.md
+  - features/02-dashboard.md
+---
 # Appendix C — Mobile footer tabs
 
 Related: [10-mobile-app](10-mobile-app.md) · [features/02-dashboard.md](features/02-dashboard.md)

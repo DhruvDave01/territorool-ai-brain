@@ -1,3 +1,10 @@
+---
+id: 16-notifications
+parent: features
+related:
+  - features/02-dashboard.md
+  - 17-integrations.md
+---
 # Feature: Notifications and analytics
 
 Related: [02-dashboard](02-dashboard.md) · [17-integrations](../17-integrations.md)

@@ -1,3 +1,13 @@
+---
+id: 13-web-urls
+parent: core
+sources:
+  - webterritool/routes/web.php
+related:
+  - 11-web-backend.md
+  - features/12-manager-portal.md
+  - features/13-admin-hq.md
+---
 # 13. Web URL catalog
 
 Related: [11-web-backend](11-web-backend.md) · [features/12-manager-portal.md](features/12-manager-portal.md) · [features/13-admin-hq.md](features/13-admin-hq.md)

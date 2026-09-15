@@ -1,3 +1,17 @@
+---
+id: README
+parent: code
+sources:
+  - TerriTool/
+  - webterritool/
+related:
+  - brains/mobile-code.md
+  - brains/web-code.md
+  - code/mobile-code-details.md
+  - code/web-code-details.md
+  - brains/api.md
+  - 14-mcp.md
+---
 # Code maps
 
 File-level maps of the two source repos. Task hubs: [Mobile Code Brain](../brains/mobile-code.md) · [Web Code Brain](../brains/web-code.md).

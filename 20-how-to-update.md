@@ -1,3 +1,16 @@
+---
+id: 20-how-to-update
+parent: core
+sources:
+  - App/config/index.js
+  - routes/api.php
+related:
+  - schema.md
+  - 05-constraints-and-drift.md
+  - design/README.md
+  - design-web/README.md
+  - brains/README.md
+---
 # 20. How to update this brain
 
 Related: [schema.md](schema.md) · [05-constraints-and-drift](05-constraints-and-drift.md)
@@ -19,3 +32,4 @@ When you change product behavior:
 4. Do not add Redux, NativeBase, nested navigators, or a second credit-calculation path.
 5. If chrome/tokens changed, patch [design/](design/README.md) (mobile) or [design-web/](design-web/README.md) (web) — do not invent UI for deferred Register/paywall/Android/HQ.
 6. If the change is a whole surface, also patch the matching [sub brain](brains/README.md).
+7. Run `python3 evals/run.py` after retriever or note-structure changes. Rebuild the graph with `python3 scripts/build-graph.py`.

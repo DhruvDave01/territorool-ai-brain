@@ -1,3 +1,25 @@
+---
+id: mobile-ui
+parent: brains
+sources:
+  - TerriTool/
+  - App/styles/theme.js
+  - App/components/customheader/index.js
+  - App/styles/screenCurvedBody.js
+  - App/components/common/AppConfirmModal.js
+  - App/components/customfooter/index.js
+  - App/styles/common.js
+  - App/components/splash/AnimatedSplashScreen.js
+related:
+  - brains/mobile-code.md
+  - brains/README.md
+  - brains/api.md
+  - design/MINI-DESIGN-BRAIN.md
+  - design/05-Design-System/Usage-Rules.md
+  - design/02-User-Interface/Screen-Inventory.md
+  - design/05-Design-System/Token-Inconsistencies.md
+  - design/06-Coverage/Deferred-Scope.md
+---
 # 2. Mobile UI Brain
 
 Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.md). Parent: [sub brains](README.md).

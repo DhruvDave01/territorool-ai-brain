@@ -1,3 +1,7 @@
+---
+id: Brand-Usage-Rules
+parent: design
+---
 # Brand usage rules (observed)
 
 These rules are **descriptive**. They exist so a new screen matches TerriTool as it ships today.

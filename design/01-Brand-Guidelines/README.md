@@ -1,3 +1,18 @@
+---
+id: README
+parent: design
+sources:
+  - App/styles/theme.js
+related:
+  - design/01-Brand-Guidelines/Colors.md
+  - design/01-Brand-Guidelines/Typography.md
+  - design/01-Brand-Guidelines/Logos.md
+  - design/01-Brand-Guidelines/Icons.md
+  - design/01-Brand-Guidelines/Spacing.md
+  - design/01-Brand-Guidelines/Shapes-and-Radius.md
+  - design/01-Brand-Guidelines/Shadows-and-Elevation.md
+  - design/01-Brand-Guidelines/Brand-Usage-Rules.md
+---
 # 01 — Brand Guidelines
 
 These files describe **how TerriTool already looks**, not how it should be redesigned.

@@ -1,3 +1,19 @@
+---
+id: Screen-Inventory
+parent: design
+sources:
+  - App/App.js
+  - App/components/login/
+  - register/index_register_split.js
+  - register/subscribe.js
+  - register/SubscriptionGate.js
+  - dashboard/index.js
+  - dashboard/RecentActivityScreen.js
+  - dashboard/CalendarActivityScreen.js
+related:
+  - design/04-User-Flows/README.md
+  - design/06-Coverage/Functionality-Coverage-Matrix.md
+---
 # Screen inventory
 
 Architecture: one **native stack** (`App/App.js`), `headerShown: false`. Overlay UI is not a stack route.
