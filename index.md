@@ -99,6 +99,9 @@ Imported from the Design Brain pack. **Read [design/MINI-DESIGN-BRAIN.md](design
 - [Usage rules for a new screen](design/05-Design-System/Usage-Rules.md)
 - [Token inconsistencies (do not normalize)](design/05-Design-System/Token-Inconsistencies.md)
 - [Deferred visual scope](design/06-Coverage/Deferred-Scope.md)
+- [Mobile screenshot flow (00–10 folders; pixels win)](design/06-Coverage/Mobile-Screenshot-Flow.md)
+- [Ingest log 2026-09-15](2026-09-15.md)
+- [Ingest log 2026-09-16](2026-09-16.md)
 
 ## Design (web UI as shipped)
 

@@ -13,6 +13,7 @@ related:
   - design/02-User-Interface/Components.md
   - design/05-Design-System/Token-Inconsistencies.md
   - design/06-Coverage/Deferred-Scope.md
+  - design/06-Coverage/Mobile-Screenshot-Flow.md
   - design/06-Coverage/Needs-Manual-Verification.md
   - design/01-Brand-Guidelines/README.md
 ---
@@ -23,7 +24,7 @@ One-file distillation of the full [Design Brain](README.md). Read this first; fo
 **Same ground rules as the full brain:**
 - Describes the app **as it ships today**. Not a redesign. Not a license to change production code.
 - Where tokens/screens are inconsistent, **match the nearest existing screen** — do not average or "fix" inconsistencies (see §10).
-- Register, payment/paywall, and Android pixels are **deferred** — documented as code-only, not visually (§11).
+- Cold-start `SubscriptionGate` **distinct** chrome, App Store Settings IAP, and Android pixels are **deferred** — documented as code-only, not visually (§11). Register steps 1–6, RevenueCat subscribe, coaching, HubSpot Error, Edit Route/List, and Notifications empty+405 **are** captured. Canonical still map: [`06-Coverage/Mobile-Screenshot-Flow.md`](06-Coverage/Mobile-Screenshot-Flow.md). **Pixels win over filenames.**
 
 ---
 
@@ -120,7 +121,7 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 ## 4. Navigation architecture
 
 - Root: `@react-navigation/native` + `native-stack` v7. Nav-state persistence key `@TerriTool_nav_state`, but restore **clears `initialState`** — cold start never reopens the last deep screen.
-- **Cold start:** native `#124ac6` window → JS splash (`Image_splash.png` + Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (code live; **pixels** deferred) or Dashboard. Splash still: `/Users/dhruvdave/Downloads/Archive/Assets/splash/Image_splash.png`. Do not reuse that full-bleed poster on authenticated screens.
+- **Cold start:** native `#124ac6` window → JS splash (`Image_splash.png` + Lottie, min ~3s) → JWT check → no JWT → Login; JWT → RevenueCat identify → credit/trial check → `SubscriptionGate` (code live; **no distinct still** — `ios/01-auth/08` is the subscribe paywall) or Dashboard. `ios/00-splash/00-splash.png` is native solid blue + status bar. Splash asset: `TerriTool/App/assets/lottie/Image_splash.png`. Do not reuse that full-bleed poster on authenticated screens.
 - **Footer targets:** 1 Dashboard (navigate) · 2 push `MultipleAIWaypoint` · 3 `ListCompany` (navigate) · 4 `Routes` (navigate) · 5 `Lists` (navigate) · 6 push `EditStatus`. Already-on-tab and offline both show a toast.
 - Gesture-back is disabled on Login and Dashboard.
 
@@ -128,9 +129,9 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 
 | Screen/path | Issue |
 | --- | --- |
-| `Notifications` | Registered, nothing ever navigates to it (not even the bell) |
-| `RouteSwipe` | Registered, never navigated |
-| `FilterList` / `FilterRoute` | Unused stack screens; the live pattern is the inline `FilterModule` |
+| `Notifications` | Registered. Still `ios/02-home/05`: empty **No notifications yet.** + toast **405**. No Dashboard-bell still |
+| `RouteSwipe` | Registered; still is a **stub**, not shipping chrome |
+| `FilterList` / `FilterRoute` | Captured as **legacy** teal/red stack (`ios/06-lists/03`, `ios/07-routes/05`). Live pattern is inline `FilterModule` — do not copy the stack screens |
 | `ClusterList` | Navigated to for cluster route types but **not registered** — crash risk |
 | FCM taps | Logged only, never routed to `Notifications` |
 | Referral Dynamic Link | Share copy only, not a JS router |
@@ -141,30 +142,28 @@ Reuse order for new UI: `CustomHeader` + `screenCurvedBodyStyles` → `CustomFoo
 
 | Module | Screens | Status |
 | --- | --- | --- |
-| Auth | Login | Documented (`IMG_4604`, Maestro `01-login`) |
-| Auth | Register / PostSignupPaywallFlow | Steps 1–4 documented; 5–6 **deferred** |
-| Auth (pixels skipped) | SubscriptionScreen, SubscriptionGate | Code live; no stills |
+| Auth | Login | Documented (`IMG_4604`, `ios/01-auth/00`) |
+| Auth | Register / PostSignupPaywallFlow | Steps 1–6 documented (`ios/01-auth/02`–`07` + Archive) |
+| Auth | SubscriptionScreen | Documented (RevenueCat $69 / 7-day trial; `ios/01-auth/09`) |
+| Auth (pixels skipped) | SubscriptionGate **distinct** | Code live; `08` is the same paywall as `09` |
 | Hub | Dashboard (no footer), RecentActivity, CalendarActivity, EditStatus (= Settings), QrCodeScanner | Documented |
-| Hub | Notifications | **Dead** |
-| Lists | Lists, CreateLists, ListsDetail, SelectStartEndPointsList | Documented |
-| Lists | EditLists | Partial (code-only) |
-| Routes | Routes, CreateRoute, BasicRouteDetail, SelectStartEndPoints, PublishRoute, CompanyView | Documented |
-| Routes | EditRoute, EditSelectStartEndPoints, EditPublishRoute, LassoMap | Partial / code-only |
-| Routes | RouteSwipe | **Dead** |
-| Routes | `Contact` (bulk contacts) | Partial — working-tree feature, code-only in Design Brain pass |
-| Companies | ListCompany, ViewCompany, CreateCompany, BusinessCard, CustomCompany | Documented |
-| Companies | EditCompany | Partial |
-| Contacts | ContactsCreate, ContactsView | Documented |
-| Contacts | ContactsUpdate | Partial (code-only) |
-| Map | ActiveRouteMap | Documented |
-| Map | WaypointDetail | Partial |
+| Hub | Notifications | Reachable empty + 405 (`ios/02-home/05`); no production bell |
+| Lists | Lists, CreateLists, EditLists, ListsDetail, SelectStartEndPointsList | Documented (`ios/06-lists/`) |
+| Routes | Routes (Published/Draft), CreateRoute, EditRoute, BasicRouteDetail, SelectStartEnd, EditSelectStartEnd, Publish **fail** cards, CompanyView | Documented (`ios/07-routes/`) |
+| Routes | LassoMap | Chrome documented; draw gesture missing |
+| Routes | RouteSwipe | **Dead** (stub still) |
+| Routes | `Contact` (bulk contacts) | Partial — Archive `20.08.59` quote UI |
+| Companies | ListCompany, ViewCompany, CreateCompany, BusinessCard, CustomCompany, EditCompany | Documented |
+| Contacts | ContactsCreate, ContactsView, ContactsUpdate | Documented (`ios/05-contacts/`) |
+| Map | ActiveRouteMap, WaypointDetail | Documented |
 | Find Leads | MultipleAIWaypoint | Documented |
-| Find Leads | MultipleWaypoint (Places) | Partial |
+| Find Leads | MultipleWaypoint (Places) | Documented (`ios/03-find-leads/08`) |
 | Enrichment | CongContact (primary), bizContacts (secondary) | Documented |
-| Enrichment | bizCompanies | Code-only |
+| Enrichment | bizCompanies | Documented empty (`ios/04-companies/20`) |
 | Filters | `FilterModule` (inline, live) | Documented |
-| Filters | `FilterList`, `FilterRoute` (stack) | **Dead/unused** |
-| System | `Error` (HubSpot sync errors — **not** a crash page) | Code-only |
+| Filters | `FilterList`, `FilterRoute` (stack) | **Legacy** stills — do not copy |
+| System | `Error` (HubSpot) | Documented empty (`ios/10-other/02`) |
+| System | AppCrashFallback | Documented (`19.28.39` + `ios/10-other/04`) |
 
 Stack total per source: **46 screens** + **15+** overlay UIs (not stack routes — see §8). Code map: [`screens/navigation-map.md`](../screens/navigation-map.md).
 
@@ -177,7 +176,7 @@ Stack total per source: **46 screens** + **15+** overlay UIs (not stack routes �
 | `AppButton` | Variants `primary` `#124ac6` (pressed `#0d4bb8`) / `danger` `#CF5B51` / `neutral` `#374151` / `dark` `#1a1a1a` / `ghost`. Radius 12, minHeight 50. Handles `loading` + `disabled`. Many screens still hand-roll `Pressable`/`TouchableOpacity` instead (Dashboard tiles, company action pills) — that's existing, not a bug to fix. |
 | `CustomHeader` | Gradient, white DIN-Bold title, back chevron, optional credits pill / custom right content. Toolbar 56 (72 with subtitle). |
 | `CustomFooter` | 6 icon tabs, offline toast, already-on-tab toast, subscription-expired intercept (deferred). |
-| `AppConfirmModal` | Centered card, radius 16, `primaryTone` `danger` or `brand`, backdrop opacity **0.45**. Use for every confirm — never native `Alert`. |
+| `AppConfirmModal` | Centered card, radius 16, `primaryTone` `danger` or `brand`, backdrop opacity **0.45**. Use for most confirms. Live exception: onboarding Residential block is a **system** alert (`19.35.14`). |
 | `Toast` (`react-native-toast-message`) | Mounted in `App.js`, **top** position, types success/error/info/`danger`. |
 | `FilterModule` | Modal: dropdowns + segmented A–Z + checkboxes; City/Zip/Industry/Revenue/Employees/Sort/Status. iOS control height 48, Android 42. |
 | `ShareEmailField` / `ShareEmailError` | Share Route / Share List forms. |
@@ -232,13 +231,13 @@ Not every screen has a skeleton loader — don't assume one exists where it isn'
 | Item | Two live values |
 | --- | --- |
 | Danger | Modal `#E94A5D` vs `AppButton` danger `#CF5B51` |
-| "Confirm Leads" CTA | Captured near-black, while most "Next step" CTAs are primary blue |
+| "Confirm Leads" CTA | Older stills near-black; **42.32** still is primary blue — both live |
 | Lists tab icon | Live `Supply3.png` vs unused `icon_lists.png` |
 | Teal naming | `primaryDark` token is actually teal (`#00A99D`); several near-teal hexes used interchangeably |
 | Map View chip | Gold `#FFB800`, outside the primary palette |
 | Font weight | DIN family alongside leftover numeric `fontWeight` 600/700 |
 | Login logo box | `loginLogo` 300×110 contain vs a square cube JPG — letterboxed, not a second mark |
-| App version | `package.json` marketing 7.1.49 vs TestFlight build 42.30/42.31 |
+| App version | `package.json` marketing 7.1.49 vs TestFlight 42.30 / 42.31 / **42.32** |
 | `HIDE_SUBSCRIPTION_ACTIONS_ON_ANDROID` | Comment implies hiding; value is currently `false` (shows on both platforms) |
 | `COLOR_PRIMARY` import | `bizContactScreens.styles.js` imports it; current `config/index.js` doesn't export it — **Needs Manual Verification** it isn't crashing at runtime |
 
@@ -248,11 +247,11 @@ Full list: [`05-Design-System/Token-Inconsistencies.md`](05-Design-System/Token-
 
 ## 11. Deferred scope
 
-Not visually documented (code exists, no captures) — **do not invent UI for these**: PostSignup **steps 5–6** (Configuring + RevenueCat `SubscriptionScreen`), `SubscriptionGate`, `SettingsPlanPaywall`, Cancel/Upgrade/Buy-extra-credits *purchase* flows (Settings buttons **are** captured), `CancelAccountConfirmModal`, Android UI, JS splash **Lottie overlay** (native blue `19-splash.png` is captured), `WhatsNewModal`, spotlight/coaching sheets, HubSpot `Error` screen, lasso drawing, `Notifications`/`RouteSwipe`/`ClusterList` (dead/broken anyway), Edit Route/Edit List full screens. Register questionnaire steps 1–4: [Onboarding.md](04-User-Flows/Onboarding.md). Full list: [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md).
+Not visually documented (code exists, no distinct captures) — **do not invent UI for these**: a distinct cold-start `SubscriptionGate` layout, Settings Upgrade when **App Store** billed, in-app credits IAP (this pack is Safari add-ons), Android UI, JS splash **Lottie overlay**, WhatsNew **changelog** (file is update sheet), lasso **finger-draw**, session-expired, publish **success** loader (this pack has fail cards), `RouteSwipe` shipping UI, `ClusterList`. Screenshot map: [`06-Coverage/Mobile-Screenshot-Flow.md`](06-Coverage/Mobile-Screenshot-Flow.md). Full list: [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md).
 
 ## 12. Top "Needs Manual Verification" items
 
-JS splash Lottie vs still · who actually sees "Rate the app" · Dynamic Link behavior post-install · Scan Card's post-save destination screen · Filter "By Status" checkboxes (below the fold in capture) · Android visual parity (no Android archive at all) · the `COLOR_PRIMARY` import above. Full list: [`06-Coverage/Needs-Manual-Verification.md`](06-Coverage/Needs-Manual-Verification.md).
+JS splash Lottie vs still · who actually sees "Rate the app" · Dynamic Link behavior post-install · Scan Card after Save Company & Contact · Calendar row tap · Android visual parity · FCM tap destination · distinct `SubscriptionGate` chrome. Full list: [`06-Coverage/Needs-Manual-Verification.md`](06-Coverage/Needs-Manual-Verification.md).
 
 ---
 
@@ -265,5 +264,5 @@ JS splash Lottie vs still · who actually sees "Rate the app" · Dynamic Link be
 | Raw screenshots / video frames / logos / icons / **custom font TTFs** | [`03-Assets/`](03-Assets/README.md) · [`03-Assets/Fonts/`](03-Assets/Fonts/README.md) |
 | Step-by-step flows per feature (`Start → action → screen → result`) | [`04-User-Flows/`](04-User-Flows/README.md) |
 | Component API detail, states, usage checklist, full inconsistency list | [`05-Design-System/`](05-Design-System/README.md) |
-| Coverage matrix, screenshot/video index, deferred scope, open questions | [`06-Coverage/`](06-Coverage/README.md) |
+| Coverage matrix, screenshot/video index, **numbered iOS flow pack**, deferred, NMV | [`06-Coverage/`](06-Coverage/README.md) · [`Mobile-Screenshot-Flow.md`](06-Coverage/Mobile-Screenshot-Flow.md) |
 | Everything above as originally written (longer, more links) | [`MASTER-DESIGN-BRAIN.md`](MASTER-DESIGN-BRAIN.md) |

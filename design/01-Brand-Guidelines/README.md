@@ -39,7 +39,7 @@ These files describe **how TerriTool already looks**, not how it should be redes
 ## Visual capture context
 
 - Device: iPhone, Dynamic Island, screenshots **1170×2532**, videos **1290×2796**
-- Build labels in captures: **42.30 (1)** then **42.31 (1)**
+- Build labels in captures: **42.30 (1)** then **42.31 (1)** then **42.32 (1)** (Simulator flow pack)
 - `package.json` marketing versions: iOS **7.1.49**, Android **4.2.7**
 
-Register, paywall, and in-app purchase UI are **deferred** (see `../06-Coverage/Deferred-Scope.md`).
+Register steps 1–6 and RevenueCat subscribe are captured. Distinct cold-start `SubscriptionGate` chrome and App Store Settings IAP remain deferred ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)). Stills: [Mobile-Screenshot-Flow](../06-Coverage/Mobile-Screenshot-Flow.md).

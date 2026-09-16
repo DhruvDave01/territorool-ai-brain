@@ -4,32 +4,25 @@ parent: design
 sources:
   - register/index_register_split.js
 ---
-# Deferred scope (2026-09-11)
+# Deferred scope (updated 2026-09-16, numbered iOS pack)
 
-The owner asked to **skip Register, payment, and other missing packs** until they provide captures.
+Visual scope only. Live JS is not “missing.” Map: [screens/navigation-map.md](../../screens/navigation-map.md). Screenshot map: [Mobile-Screenshot-Flow.md](Mobile-Screenshot-Flow.md).
 
-This is **visual scope**, not missing product code. Live JS: `PostSignupPaywallFlow`, `SubscriptionScreen`, `SubscriptionGate`, `firstSignUpOnboarding`. Map: [screens/navigation-map.md](../../screens/navigation-map.md).
-
-| Area | Code | Why skipped |
+| Area | Code | Status |
 | --- | --- | --- |
-| Register / PostSignup steps 1–4 | `register/` + `postSignupPaywallFlow.js` | Captured Maestro `00`, `20`–`24` |
-| PostSignup Configuring (step 5) | same | No still |
-| SubscriptionScreen / SubscriptionGate | RevenueCat | Payment UI still uncaptured |
-| SettingsPlanPaywall | Settings | Payment |
-| Cancel / Upgrade / Buy extra credits **flows** | Settings buttons **are** visible in `IMG_4564` | Store/web purchase not recorded on mobile |
-| CancelAccountConfirmModal | Settings | Payment-adjacent |
-| First-signup AI hunt flag | `MultipleAIWaypoint` | No dedicated first-run hunt still (normal AI screen) |
+| Register / PostSignup steps 1–6 | `register/` | **Captured** — `ios/01-auth/02`–`07` + Archive LoginRegistrationFlow |
+| `SubscriptionScreen` | RevenueCat | **Captured** — `ios/01-auth/09` (and `08`, same chrome) |
+| `SubscriptionGate` **distinct** layout | RevenueCat | **No distinct still** — `08-subscription-gate.png` is the subscribe paywall |
+| Settings Upgrade when **App Store** billed | Settings | **No still** (packs show web-billed “Manage your plan on the web”) |
+| Buy extra credits | Settings | **Web** Safari Credit Add-Ons (`ios/09-settings/04`) — not in-app IAP |
 | Android UI | — | Stills are iOS only |
-| Native splash **Lottie overlay** | `AnimatedSplashScreen` | Maestro `19-splash.png` is solid `#124ac6` native window only |
-| WhatsNewModal | | No capture |
-| Spotlight / first-route coaching | | No capture |
-| HubSpot `Error` screen | | No capture |
-| Lasso draw | `LassoMap` | Chip exists; no draw video |
-| Notifications screen | Dead nav | No capture |
-| RouteSwipe | Dead nav | |
-| ClusterList | Broken nav | |
-| Session expired / crash fallback | | No capture |
-| Edit Route / Edit List full screens | | No dedicated stills |
-| Forgot-password **web** page | External | Captured: `untitled folder/screenshots/web/desktop/password-reset.png` |
+| Native splash **Lottie overlay** | `AnimatedSplashScreen` | `ios/00-splash/00-splash.png` is solid `#124ac6` + status bar |
+| WhatsNew **changelog** | | `08-whats-new.png` is **New Update Available**, not a tour |
+| Lasso **finger-draw** | `LassoMap` | Chrome captured (`03`/`06`/`07`/`08` lasso stills); no draw video |
+| RouteSwipe | stack | Stub still only — not shipping chrome |
+| ClusterList | Broken nav | Skip |
+| Session expired | | No capture |
+| Publish **success** loader | PublishRoute | This numbered pack has **fail** cards; success still IMG_4574 / VID1 |
+| Forgot-password **web** | External | `ios/01-auth/01-login-forgot-password.png` (staging Safari) + web Playwright |
 
-When new archives arrive, extend flows and this matrix — do not invent UI.
+When new archives arrive, extend flows and this matrix — do not invent UI. Do not copy `FilterList` / `FilterRoute` stills into new screens.

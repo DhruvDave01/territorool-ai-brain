@@ -7,6 +7,8 @@ sources:
 ---
 # Feedback and notifications
 
+Parent: [02 — User Interface](README.md). Stills: [Mobile-Screenshot-Flow](../06-Coverage/Mobile-Screenshot-Flow.md) (`ios/02-home/05`).
+
 ## Toast
 
 - Library: `react-native-toast-message` mounted in `App/App.js`
@@ -15,16 +17,19 @@ sources:
 - Captured examples:
   - Partial add: “Some companies were not added as their dat…” (VID1)
   - Validation: “Please provide position.”
-  - Create company success (VID2)
+  - Create company success (VID2); Archive `19.52.11` “Company has been created and added succe…”
   - Mark visited success
   - Contact saved
+  - Login/register: “Please enter password”; “The email has already been taken.”
+  - Live copy quirks (do not normalize): “Please enter Enter Valid Password”; “Please enter Enter Valid Email Address”
+  - Route library: “Route Updated Successfully” (green left bar)
 - Footer: “Oops! You already on Current Screen.” / “No Internet Connection!!”
 
-Legacy NativeBase-style Toast calls still exist in some files.
+42.32 toasts use a **white card + orange (error) or green (success) left bar** at the top. Legacy NativeBase-style Toast calls still exist in some files.
 
 ## In-app notification screen
 
-`Notifications` is registered. **No navigation** from Dashboard bell, FCM, or footer. Treat as dead UI unless a later capture proves otherwise.
+`Notifications` is registered. Still `ios/02-home/05`: empty **No notifications yet.** + toast **405 Method Not Allowed**. No Dashboard-bell still; FCM does not route here. Treat as reachable but not production-wired.
 
 ## Unread badges
 
@@ -32,7 +37,7 @@ Dashboard Routes/Lists tiles show numeric badges (15 / 7 in `IMG_4563`). Copy �
 
 ## FCM / Notifee
 
-`App/utils/FCMHelper.js` requests permission, stores token, logs opens. Does not route into `Notifications`.
+`App/utils/FCMHelper.js` requests permission, stores token, logs opens. Does not route into `Notifications`. Native prompt captured on Login (`19.34.48`).
 
 ## Credits
 

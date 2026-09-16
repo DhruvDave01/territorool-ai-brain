@@ -4,6 +4,8 @@ parent: design
 ---
 # Component states
 
+Parent: [05 — Design system](README.md).
+
 ## AppButton
 
 Default / pressed (darker) / disabled / loading (spinner). Variants primary, danger (`#CF5B51`), neutral, dark (`#1a1a1a`), ghost.

@@ -20,7 +20,7 @@ flowchart TD
   B -->|Yes| C[RevenueCat identify]
   C --> D[GET_CREDIT_INFO trial]
   D --> E{trial inactive + sub not active?}
-  E -->|Yes| G[SubscriptionGate - code live, pixels skipped]
+  E -->|Yes| G[RevenueCat paywall - 08/09 same chrome]
   E -->|No or error| H[Dashboard]
 ```
 
@@ -94,8 +94,8 @@ flowchart TB
 
 | Name | Issue |
 | --- | --- |
-| Notifications | Registered, never navigated |
-| RouteSwipe | Registered, never navigated |
-| FilterList / FilterRoute / stack FilterModule | Unused; FilterModule is a component |
+| Notifications | Registered. Still empty + **405**. No Dashboard-bell still |
+| RouteSwipe | Registered; still is a stub, not shipping chrome |
+| FilterList / FilterRoute | **Legacy** stills exist; live filter is `FilterModule` — do not copy |
 | ClusterList | Navigated, **not registered** |
 | CustomCompany stack | Usually embedded |

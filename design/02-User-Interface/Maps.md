@@ -31,11 +31,11 @@ Libraries: `react-native-maps`, clustering helper, Mapbox token for polylines, G
 
 ## LassoMap
 
-`LassoMap` + `lasso_green.png` / `lasso_red.png` / `lasso-white.png`. Opened from Create Route/List **Map View**. **No screenshot/video** of drawing. Code-only.
+`LassoMap` + `lasso_green.png` / `lasso_red.png` / `lasso-white.png`. Opened from Create Route/List **Map View**. Chrome: `ios/08-maps/01` (**Lasso Selection**, Clear Lasso / Start Lasso / Next Step). **No screenshot of drawing.**
 
 ## Company Navigate
 
-`MapChooserPopup` chooses Apple/Google/etc. Not captured (VID2 used Call, not Navigate).
+`MapChooserPopup` — still `ios/04-companies/10`: **Get directions** Apple Maps / Google Maps / Not now.
 
 ## Dark mode
 

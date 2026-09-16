@@ -6,6 +6,8 @@ related:
 ---
 # Main navigation
 
+Stills: [Mobile screenshot flow](../06-Coverage/Mobile-Screenshot-Flow.md) (`ios/02-home/`).
+
 ## Dashboard tiles
 
 See [Dashboard.md](Dashboard.md). No footer on Dashboard.

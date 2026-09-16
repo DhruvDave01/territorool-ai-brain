@@ -13,14 +13,14 @@ related:
 ---
 # 04 — User flows
 
-Only flows that exist in code. Register questionnaire **steps 1–4** are captured; Configuring, RevenueCat subscribe, and in-app purchase pixels are still skipped ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)). JS is live. Screen graph: [screens/navigation-map.md](../../screens/navigation-map.md).
+Only flows that exist in code. Register questionnaire **steps 1–6** (including Configuring + RevenueCat subscribe) are in Archive `LoginRegistrationFlow/` and `ios/01-auth/`. Numbered still map: [Mobile-Screenshot-Flow](../06-Coverage/Mobile-Screenshot-Flow.md). Distinct `SubscriptionGate` chrome and App Store–billed Settings checkout are still skipped ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)). JS is live. Screen graph: [screens/navigation-map.md](../../screens/navigation-map.md).
 
 | File | Flow |
 | --- | --- |
 | [App-Launch.md](App-Launch.md) | Splash → JWT → Login/Dashboard |
 | [Authentication.md](Authentication.md) | Login, forgot password, logout |
-| [Onboarding.md](Onboarding.md) | PostSignupPaywallFlow steps 1–4 (stills); 5–6 code only |
-| [Subscription.md](Subscription.md) | Gate + RevenueCat (code live; no stills) |
+| [Onboarding.md](Onboarding.md) | PostSignupPaywallFlow steps 1–6 (stills) |
+| [Subscription.md](Subscription.md) | RevenueCat subscribe + Settings cancel / web-billed Upgrade |
 | [Main-Navigation.md](Main-Navigation.md) | Footer + dashboard tiles |
 | [Dashboard.md](Dashboard.md) | Hub, activity, referral, QR, calendar |
 | [Find-Leads.md](Find-Leads.md) | AI Find Leads → route/list |

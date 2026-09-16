@@ -22,7 +22,7 @@ Documented from code + Archive 2. Do not assume a screen has a skeleton if none 
 | Offline | CustomFooter top toast “No Internet Connection!!” |
 | Permission | Location for Find Leads / maps; camera/photos for Scan Card & QR |
 | Session expired | AppConfirmModal → Login (no capture) |
-| Crash | AppCrashFallback (no capture) |
+| Crash | AppCrashFallback (`ios/10-other/04`) |
 
 ## Screen-specific (captured)
 

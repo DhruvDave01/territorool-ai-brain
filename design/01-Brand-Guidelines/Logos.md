@@ -17,7 +17,7 @@ related:
 
 The mark is an **isometric TT** (two condensed T’s folded into a 3D block in `#124ac6`). There is no separate “cube file” vs “wordmark file” for Login.
 
-HTML brand book (viewer only): `/Users/dhruvdave/Downloads/Archive/Brand-Guidelines/index.html`. Code still wins.
+HTML brand book previously: `/Users/dhruvdave/Downloads/Archive/Brand-Guidelines/index.html` (path overwritten 2026-09-16 by the Simulator flow pack). Code still wins.
 
 ## In-app mark
 
@@ -39,9 +39,7 @@ Login styles (`common.js` `loginLogo`): box **300×110**, `resizeMode="contain"`
 
 ## App icon
 
-Same isometric TT, white ground. Catalog copies: `/Users/dhruvdave/Downloads/Archive/Assets/app-icon/` (`ios-1024.png`, Android launcher / round / foreground).
-
-Live: `ios/TerriTool/Images.xcassets/AppIcon.appiconset/`, `android/app/src/main/res/mipmap-*`.
+Same isometric TT, white ground. Catalog copies previously: `/Users/dhruvdave/Downloads/Archive/Assets/app-icon/` (overwritten 2026-09-16). Live: `ios/TerriTool/Images.xcassets/AppIcon.appiconset/`, `android/app/src/main/res/mipmap-*`.
 
 ## Splash (JS overlay — stills now in Archive)
 
@@ -55,10 +53,11 @@ Native launch is still **solid `#124ac6`** (iOS storyboard / Android window). JS
 | `splash.json` | In the lottie folder; **not** the JS overlay source |
 | `App/images/launchScreen.jpeg` | Similar marketing still (Register bubble, Excel/CSV, “Replace 20 Sales Tools”). **Not referenced** from JS requires |
 
-Stills + Lottie copies: `/Users/dhruvdave/Downloads/Archive/Assets/splash/`. Device motion vs native window is still **Needs Manual Verification**. Do not copy this full-bleed blue poster onto authenticated screens — those stay gradient header + `#F6F7FB` sheet.
+Stills + Lottie copies previously: `/Users/dhruvdave/Downloads/Archive/Assets/splash/` (folder overwritten 2026-09-16). Canonical: `App/assets/lottie/`. Device motion vs native window is still **Needs Manual Verification**. Do not copy this full-bleed blue poster onto authenticated screens — those stay gradient header + `#F6F7FB` sheet.
 
 ## Placement (observed)
 
 - **Login (`IMG_4604`):** cube on white, centered above Email / Password
 - **Dashboard header (`IMG_4563`, `IMG_4605`):** small cube, then first name, credits pill, QR, settings
-- **WhatsNew / cancel-account:** JPG / `TT_NO_BG` in code; no Archive 2 still
+- **WhatsNew:** `08-whats-new.png` is the **New Update Available** sheet, not a changelog. JPG / `TT_NO_BG` in code for the modal.
+- **Cancel subscription:** Archive `Setting/19.37.50` (cube mark on the sheet)

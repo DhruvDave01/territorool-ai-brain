@@ -4,6 +4,8 @@ parent: design
 ---
 # Shadows and elevation
 
+Parent: [01 — Brand Guidelines](README.md).
+
 **Token source:** `theme.shadows` (`theme.js`).
 
 | Token | iOS | Android |

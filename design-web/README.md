@@ -58,3 +58,4 @@ Stills: [03-Assets/stills/](03-Assets/stills/) (BA Archive) plus `/Users/dhruvda
 | [Token-Inconsistencies.md](Token-Inconsistencies.md) | Live drift — do not normalize |
 | [Deferred-Scope.md](Deferred-Scope.md) | HQ, web Register steps 2–3, iOS RevenueCat |
 | [Screenshot-Index.md](Screenshot-Index.md) | BA Archive + 2026-09-15 SA Playwright pack |
+| [03-Assets/README.md](03-Assets/README.md) | Web still inventory (PNG only) |

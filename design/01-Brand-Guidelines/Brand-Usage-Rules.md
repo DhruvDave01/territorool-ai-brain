@@ -4,6 +4,8 @@ parent: design
 ---
 # Brand usage rules (observed)
 
+Parent: [01 — Brand Guidelines](README.md). Hub: [MINI](../MINI-DESIGN-BRAIN.md).
+
 These rules are **descriptive**. They exist so a new screen matches TerriTool as it ships today.
 
 ## Do
@@ -46,4 +48,4 @@ These rules are **descriptive**. They exist so a new screen matches TerriTool as
 
 ## Deferred brand surfaces
 
-Register, RevenueCat paywall, SubscriptionGate, Settings plan paywall — **not documented visually** in this pass (`../06-Coverage/Deferred-Scope.md`).
+Register steps 1–6 and RevenueCat paywall are captured (`ios/01-auth/`). Distinct `SubscriptionGate` chrome and App Store Settings IAP remain deferred ([Deferred-Scope](../06-Coverage/Deferred-Scope.md)).

@@ -22,8 +22,8 @@ Entry point for designers, developers, and other agents. Describes the **existin
 - **Stack:** React Native 0.84.1, React 19.2.3, New Architecture
 - **Repo:** `TerriTool_Mobile` · entry `index.js` → `init.js` → `App/App.js`
 - **API in this tree:** staging `https://staging.territool.com/index.php/api/`
-- **Visual pack:** TestFlight stills (`IMG_4563`–`IMG_4611`) + brand book `/Users/dhruvdave/Downloads/Archive/` under [`03-Assets`](03-Assets/README.md)
-- **Deferred:** Register, payment/paywall, Android pixels — [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md)
+- **Visual pack:** TestFlight stills (`IMG_4563`–`IMG_4611`) + Simulator flow pack `/Users/dhruvdave/Downloads/Archive/` (249 PNGs) + numbered iOS pack `untitled folder/screenshots/ios/` (~93 PNGs). Map: [`06-Coverage/Mobile-Screenshot-Flow.md`](06-Coverage/Mobile-Screenshot-Flow.md). **Pixels win over filenames.**
+- **Deferred:** distinct `SubscriptionGate` chrome, App Store Settings IAP, Android pixels — [`06-Coverage/Deferred-Scope.md`](06-Coverage/Deferred-Scope.md)
 
 ---
 
@@ -61,7 +61,7 @@ See [`05-Design-System/Design-Tokens.md`](05-Design-System/Design-Tokens.md) and
 
 ## 6. Navigation architecture
 
-Flat stack, **46** screens (pack previously said 47). Footer map and mermaid: [`02-User-Interface/Navigation.md`](02-User-Interface/Navigation.md). Dead: Notifications, RouteSwipe, stack filters. Broken: `ClusterList`. Code map: [`../screens/navigation-map.md`](../screens/navigation-map.md).
+Flat stack, **46** screens (pack previously said 47). Footer map and mermaid: [`02-User-Interface/Navigation.md`](02-User-Interface/Navigation.md). Dead/stub: RouteSwipe. Legacy stack filters (`FilterList`/`FilterRoute`) — do not copy. Notifications reachable empty + 405. Broken: `ClusterList`. Code map: [`../screens/navigation-map.md`](../screens/navigation-map.md).
 
 ## 7. Screen inventory
 
@@ -113,4 +113,4 @@ Follow [`05-Design-System/Usage-Rules.md`](05-Design-System/Usage-Rules.md). Cop
 
 - Not a redesign
 - Not a license to change production code
-- Not complete visual coverage of Register **steps 5–6**, RevenueCat, Android, splash **Lottie**, lasso, HubSpot, crash, or coaching
+- Not complete visual coverage of a **distinct** cold-start `SubscriptionGate`, App Store Settings IAP, Android, splash **Lottie**, lasso draw, session-expired, or WhatsNew changelog. HubSpot Error (empty), coaching, and Notifications empty+405 **are** captured.

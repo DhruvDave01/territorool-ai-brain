@@ -34,7 +34,7 @@ Also duplicated under `android/app/src/main/assets/fonts/` by the asset linker. 
 
 JS splash (`AnimatedSplashScreen`): `Image_splash.png` background + `splash_icon.json` (iOS) / `splash_icon_android.json` (Android). `splash.json` sits in the folder but is **not** the overlay source. `Image_splash_.png` is a leftover sibling.
 
-Catalog copies (not in this vault): `/Users/dhruvdave/Downloads/Archive/Assets/splash/`.
+Catalog copies previously: `/Users/dhruvdave/Downloads/Archive/Assets/splash/` (overwritten 2026-09-16). Canonical: `App/assets/lottie/`.
 
 ## Images — `App/images/` (root)
 

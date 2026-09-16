@@ -24,17 +24,30 @@ related:
 | `/Users/dhruvdave/Downloads/Archive 3/` | `IMG_4601`–`IMG_4604` |
 | `/Users/dhruvdave/Downloads/Archive 4/` | `IMG_4605`–`IMG_4611` |
 
-Splash / logo / app-icon stills (not TestFlight screenshots): `/Users/dhruvdave/Downloads/Archive/Assets/`.
+Splash / logo / app-icon stills previously lived at `/Users/dhruvdave/Downloads/Archive/Assets/`. **As of 2026-09-16 that path is the Simulator flow pack below.** Runtime splash: `TerriTool/App/assets/lottie/Image_splash.png`. Brand-book HTML location after the overwrite is unknown — do not invent a path.
 
-**2026-09-15 Maestro + Playwright pack** (not copied into this vault): `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/`
+**2026-09-16 Simulator flow pack** (not copied into this vault): `/Users/dhruvdave/Downloads/Archive/` — iPhone 17 Pro Max, build **42.32 (1)**, 249 PNGs.
 
-| Subfolder | Trust | Use for |
-|-----------|-------|---------|
-| `ios/` | Live iOS Simulator via Maestro | Register/onboarding steps 1–4, login 42.31, populated Dashboard |
-| `web/desktop/` and `web/mobile/` | Live web (localhost:8888 / staging / prod) | Classic SA dashboard, auth split-panel, password reset, trial, subscription history, Upgrade |
-| `mobile/` | **HTML replicas** (`TerriTool/docs/User-Interface/screens.html`) | Do **not** treat as shipping UI |
+| Folder | Count | Use for |
+|--------|-------|---------|
+| `LoginRegistrationFlow/` | 21 | Login toasts, steps 1–6, crash fallback, RevenueCat, push prompt |
+| `Dashboard/` | 7 | Location, QR, referral, Invalid Date PT |
+| `Setting/` | 7 | Plan accordion, cancel sheet, web Upgrade, tags, logout |
+| `ActivityCalendar/` | 4 | Activity list + Calendar |
+| `AIFindLeadsFlow/` | 49 | Loading overlay, search %, Fetching, Confirm Leads, Start/End |
+| `ScanCardFlow/` | 11 | Intro, crop, OCR save |
+| `AddCompany/` | 9 | Search autocomplete, success toast |
+| `RouteFlow/` | 81 | Library, select-all, detail, bulk Find Contacts, Add Activity types |
+| `AddressBookFlow/` | 18 | Tabs, empty activity, delete confirm |
+| `List/` | 42 | Library, Lasso Selection, Filter By |
 
-Maestro `11-qr-scan.png` is a **simulator camera placeholder**, not shipping QR chrome — prefer `IMG_4609`. `20-subscribe.png` is Goals with a box checked, not RevenueCat. `24-subscribe-preview.png` duplicates `23-register.png`.
+Cite stills as `Folder/HH.MM.SS` (filename `Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at HH.MM.SS.png`). Do not copy the PNGs into git. Do not treat folder names as code screen names.
+
+**2026-09-16 numbered iOS flow pack** (not copied): `/Users/dhruvdave/Dhurv/Project_TerriTool/untitled folder/screenshots/ios/` — 00-splash … 10-other, ~93 PNGs. **Canonical map + filename mismatches:** [Mobile-Screenshot-Flow.md](Mobile-Screenshot-Flow.md).
+
+Older Maestro filenames (`00-onboarding.png`, `01-login.png`, …) from this same `ios/` folder were **replaced** by that numbered tree. Do not look for `19-splash.png` / `20-subscribe.png` there anymore.
+
+**Web Playwright** still lives under `untitled folder/screenshots/web/`. **`screenshots/mobile/`** = HTML replicas — ignore.
 
 Device: iPhone TestFlight, screenshots 1170×2532, videos 1290×2796. Account Testim / Business Client.
 
@@ -94,15 +107,23 @@ No `IMG_4597` in the archive.
 | IMG_4610 | List company 1/6 Mark | ListsDetail + CustomCompany | `list/basic`, `customcompany` | Lists |
 | IMG_4611 | Share Route | ShareEmailField | `common/ShareEmailField.js` | Routes |
 | *(not IMG)* Archive `Assets/splash/Image_splash.png` | JS splash background | AnimatedSplashScreen | `splash/AnimatedSplashScreen.js` + `App/assets/lottie/Image_splash.png` | App-Launch |
-| Maestro `ios/00-onboarding.png` | Goals step 1/6, Continue disabled | PostSignupPaywallFlow | `register/postSignupPaywallFlow.js` | Onboarding |
-| Maestro `ios/01-login.png` | Login 42.31 | Login | `login/` | Authentication |
-| Maestro `ios/02-home.png` | Dashboard populated, referral banner | Dashboard | `dashboard/index.js` | Dashboard |
-| Maestro `ios/19-splash.png` | Native solid `#124ac6` | Launch | storyboard / windowBackground | App-Launch |
-| Maestro `ios/20-subscribe.png` | Goals, one box checked | PostSignupPaywallFlow | same | Onboarding |
-| Maestro `ios/21-subscribe-role.png` | Role step 2/6 | same | same | Onboarding |
-| Maestro `ios/22-subscribe-cost.png` | Tools step 3/6 | same | same | Onboarding |
-| Maestro `ios/23-register.png` | Sign Up step 4/6 (+ dev buttons) | Register | `register/index_register_split.js` | Onboarding |
-| Maestro `ios/24-subscribe-preview.png` | Duplicate of 23 | Register | same | Onboarding |
+| `ios/00-splash/00-splash.png` | Native solid `#124ac6` + status bar | Launch | storyboard | App-Launch |
+| `ios/01-auth/01-login-forgot-password.png` | Safari staging Reset Password | web | `{API host}/password/reset` | Authentication |
+| `ios/01-auth/08` ≈ `09` | RevenueCat paywall (not a distinct gate) | SubscriptionScreen | `register/subscribe.js` | Subscription |
+| `ios/02-home/02-dashboard-add-menu.png` | **Address Book** HeaderAddMenu | ListCompany | `customheader/` | Companies |
+| `ios/02-home/05-notifications.png` | Empty + toast 405 | Notifications | `dashboard/NotificationsScreen.js` | Dashboard |
+| `ios/07-routes/14-route-swipe.png` | Stub, not shipping | RouteSwipe | `route/basic/goswipe.js` | Routes |
+| `ios/07-routes/17-first-route-coaching.png` | Coaching sheet | FirstRouteCoachingSheet | `route/basic/firstRouteCoaching/` | Routes |
+| `ios/09-settings/08-whats-new.png` | New Update Available | Preview App Update | Settings | Settings |
+| `ios/10-other/02-error.png` | HubSpot Error empty | Error | `components/error/` | Error-and-Recovery |
+| Numbered pack remainder | One still per stack/overlay | see folder map | — | [Mobile-Screenshot-Flow.md](Mobile-Screenshot-Flow.md) |
+| Archive `LoginRegistrationFlow/19.28.39` | AppCrashFallback | overlay | crash UI | Error-and-Recovery |
+| Archive `LoginRegistrationFlow/19.29.28` | Configuring step 5/6 | PostSignupPaywallFlow | `register/` | Onboarding |
+| Archive `LoginRegistrationFlow/19.29.34`–`19.29.49` | RevenueCat SubscriptionScreen | SubscriptionScreen | `register/subscribe.js` | Subscription |
+| Archive `Setting/19.37.50` | Cancel subscription sheet | CancelAccountConfirmModal | Settings | Subscription |
+| Archive `Setting/19.37.56` | Manage plan on the web | Upgrade handoff | Settings | Subscription |
+| Archive `List/20.33.08` | Lasso Selection | LassoMap | `LassoMap` | Lists / Routes |
+| Archive `List/20.34.41` | Filter By (status + visit) | FilterModule | `filterModule/` | Lists |
 
 ---
 

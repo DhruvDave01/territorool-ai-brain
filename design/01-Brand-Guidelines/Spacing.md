@@ -7,6 +7,8 @@ sources:
 ---
 # Spacing
 
+Parent: [01 — Brand Guidelines](README.md).
+
 **Token source:** `theme.spacing` in `App/styles/theme.js` (all `scaledSize`).
 
 | Token | Base (dp before scale) | Role |

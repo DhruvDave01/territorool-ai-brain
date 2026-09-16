@@ -27,4 +27,4 @@ Inventory of screens, chrome, components, states, forms, overlays, maps.
 | [Maps.md](Maps.md) | Markers, lasso, active route |
 | [Platform-Differences.md](Platform-Differences.md) | iOS vs Android |
 
-Register / payment screens are listed but **deferred** for visual detail.
+Stills: [Mobile-Screenshot-Flow](../06-Coverage/Mobile-Screenshot-Flow.md). Register / paywall **pixels** are captured; a distinct `SubscriptionGate` layout is not.

@@ -25,7 +25,7 @@ related:
 
 Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.md). Parent: [sub brains](README.md).
 
-**Repo:** `TerriTool/` pixels + `App/styles/theme.js`. Stills: `Downloads/Archive 2`–`4`, `Downloads/Design-Brain/03-Assets/`, and Maestro `untitled folder/screenshots/ios/` (live Simulator). **`screenshots/mobile/` is HTML replicas — ignore.** Brand book HTML: `Downloads/Archive/`. Not a redesign. APIs: [API Brain](api.md).
+**Repo:** `TerriTool/` pixels + `App/styles/theme.js`. Stills: `Downloads/Archive/` (42.32 flow pack), `Downloads/Archive 2`–`4`, `Downloads/Design-Brain/03-Assets/`, and Maestro `untitled folder/screenshots/ios/` (live Simulator). **`screenshots/mobile/` is HTML replicas — ignore.** Not a redesign. APIs: [API Brain](api.md).
 
 ## Read first
 
@@ -48,7 +48,7 @@ Hub for **as-shipped** mobile chrome. Sibling: [Mobile Code Brain](mobile-code.m
 | Logo | Isometric TT cube = `TerriTool_logo_NEW.jpg` (Login/Dashboard). Same mark on black = `TT_NO_BG.png`. Not a wide wordmark. |
 | Splash | Native `#124ac6` → JS `Image_splash.png` + Lottie (~3s). Do not reuse that poster on logged-in screens. |
 | Onboarding chrome | Light questionnaire + 6-segment bar. **Not** CustomHeader + footer. Copy [Onboarding.md](../04-User-Flows/Onboarding.md). |
-| Deferred pixels | RevenueCat subscribe, SubscriptionGate, Android: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). |
+| Deferred pixels | Distinct `SubscriptionGate`, App Store Settings IAP, Android: [Deferred-Scope](../design/06-Coverage/Deferred-Scope.md). Numbered stills: [Mobile-Screenshot-Flow](../design/06-Coverage/Mobile-Screenshot-Flow.md). **Pixels win over filenames.** Register 1–6 + RevenueCat subscribe **are** captured. |
 
 ## Tokens (`App/styles/theme.js`) — do not average
 

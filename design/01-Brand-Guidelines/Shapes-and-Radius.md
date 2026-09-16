@@ -4,6 +4,8 @@ parent: design
 ---
 # Shapes and radius
 
+Parent: [01 — Brand Guidelines](README.md).
+
 **Token source:** `theme.radius` (`scaledSize`).
 
 | Token | Base |
