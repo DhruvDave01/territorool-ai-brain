@@ -54,3 +54,5 @@ webterritool/
 ## Docs
 
 `Prompts/TerriTool_Web_OverView.md` (in the **mobile** repo), `docs/MCP-Agent-QA-Playbook.md`, `docs/MCP-Manager-QA-Playbook.md`, `docs/MCP-Manager-Portal-Feature-Gap.md`, `app/FindMcp/README.md`, `app/FindMcp/skills/*/SKILL.md`.
+
+Live dump (2026-09-17): [code/WEB_CODEBASE_BRAIN.md](code/WEB_CODEBASE_BRAIN.md). User MCP `territool-app` **1.4.1**, 33 tools.

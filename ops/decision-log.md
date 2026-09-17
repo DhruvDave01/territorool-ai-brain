@@ -32,5 +32,5 @@ Durable “why” so agents do not re-litigate. Reopen only with an explicit pro
 | Ongoing | Crons are HTTP GET | Not Laravel `schedule()`. |
 | Ongoing | Activity wall clock LA | `ACTIVITY_COMPARE_TIMEZONE = America/Los_Angeles`. |
 | Ongoing | Map polylines = Mapbox | File still named `googleDirections.js`. |
-| 2026 | Manager MCP extras | `list_team`, `get_team_dashboard`, `get_team_activity` + optional `salesperson_id`. Find MCP excludes Business Agent. |
+| 2026-09-17 | Manager MCP extras | User MCP **1.4.1**: `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard`, `get_team_activity` + optional `salesperson_id`. Find MCP excludes Business Agent. |
 | 2026 | `add_company` / `add_contact` on User MCP | QA playbook that says those tools are missing is **stale**. |

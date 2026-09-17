@@ -27,7 +27,7 @@ Hub for Laravel + Blade + manager React islands + MCP PHP. Sibling: [Web Design 
 ## Read first
 
 1. This file.
-2. [code/web-code-details.md](../code/web-code-details.md).
+2. [code/web-code-details.md](../code/web-code-details.md) · [code/WEB_CODEBASE_BRAIN.md](../code/WEB_CODEBASE_BRAIN.md).
 3. The controller / Blade / MCP handler.
 4. URLs: [13-web-urls.md](../13-web-urls.md). Mobile JSON: [API Brain](api.md).
 5. Pixels → [Web Design Brain](web-design.md). Stay on the **same stack**.
@@ -78,7 +78,7 @@ Mount roots (Blade + `main.jsx`):
 
 `search_companies`, `view_company`, `set_company_status`, `add_contact`, `add_company`, `get_credits`, `find_contacts`, `find_contacts_bulk`, `add_note`, `get_notes`, `find_ai_leads`, `resume_ai_lead_search`, `save_ai_leads`, `create_route`, `mark_visited`, `add_activity`, `buy_contacts`, `next_waypoint`, `get_ai_lead_search`, `view_lists`, `view_list`, `create_list`, `view_routes`, `view_route`, `get_active_route`, `create_route_from_list`, `view_activities`, `edit_activity`.
 
-**Manager-only catalog:** `list_team`, `get_team_dashboard`, `get_team_activity`. Many field tools also accept `salesperson_id` for managers (`manager_salesperson_id_tools` in `territool_app.php`); handlers ignore it for reps.
+**Manager-only catalog** (`manager_tools` in `territool_app.php` **v1.4.1**): `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard`, `get_team_activity`. Full User MCP catalog is **33** tools. Many field tools also accept `salesperson_id` for managers (`manager_salesperson_id_tools`); handlers ignore it for reps.
 
 Admin MCP (read-only HQ): `list_sales_agents`, `list_cancelled_subscribers`, `list_active_subscribers`, `list_active_trials`, `list_expired_trials`, `list_cancelled_trial_subscribers`, `list_user_credits`, `get_user_subscription_history`.
 

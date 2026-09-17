@@ -16,7 +16,7 @@ Related: [01-project-overview](01-project-overview.md) · [14-mcp](14-mcp.md) ·
 |------|---------|-----|--------|----------|-----------|----------|
 | Sales Agent | 1 | App | App | Field catalog | No | Yes |
 | Business Sales Agent | 4 | App (`parent_id`) | App | Field catalog | No | Yes |
-| Business Agent | 3 | App + `/manager/*` | App | Field + `list_team`, `get_team_dashboard`, `get_team_activity`; optional `salesperson_id` | No | **No** |
+| Business Agent | 3 | App + `/manager/*` | App | Field + `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard`, `get_team_activity`; optional `salesperson_id` | No | **No** |
 | Admin | HQ | `/hq/*` only | N/A | No | Yes, read-only | No |
 
 ## Gates

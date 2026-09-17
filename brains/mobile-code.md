@@ -31,7 +31,7 @@ Code wins. Do not cite the workspace folder.
 ## Read first
 
 1. This file.
-2. [code/mobile-code-details.md](../code/mobile-code-details.md) — full file map.
+2. [code/mobile-code-details.md](../code/mobile-code-details.md) — full file map. Live dump: [code/MOBILE_CODEBASE_BRAIN.md](../code/MOBILE_CODEBASE_BRAIN.md).
 3. The screen under `App/components/`.
 4. New payload → [API Brain](api.md) + [formdata-dictionary](../data/formdata-dictionary.md).
 5. Chrome/tokens → [Mobile UI Brain](mobile-ui.md).
@@ -49,7 +49,7 @@ Code wins. Do not cite the workspace folder.
 | State | Class local + `App/utils/Global.js`. **No Redux.** |
 | NativeBase | **Gone.** `App/utils/NativeBaseCompat.js`. |
 | API | `API.post(url, formdata, props, signal, options)` in `App/utils/API.js`. Multipart FormData. JWT header. 401/403 → session logout. |
-| Config | **Only** `App/config/index.js`. Active `URL_BASE` is **prod** `https://app.territool.com/index.php/api/`. Staging is the commented block `https://staging.territool.com/index.php/api/`. `IS_STAGING_OR_DEV_BUILD` = `URL_BASE` contains `"staging"`. `APP_VERSION` `'2.0'`. |
+| Config | **Only** `App/config/index.js`. **2026-09-17 live:** active `URL_BASE` is **staging** `https://staging.territool.com/index.php/api/` (`STAGING — temporary for screenshot login`). Prod `https://app.territool.com/index.php/api/` is commented. `IS_STAGING_OR_DEV_BUILD` = `URL_BASE` contains `"staging"`. `APP_VERSION` `'2.0'`. `COLOR_PRIMARY` is **not** exported (leftover import in `bizContactScreens.styles.js`). |
 | Persist | `App/storage/realm.js` `schemaVersion: 18`. JWT schema pk **`id`**, runtime row `"1"`. |
 | Errors | `captureSentryError(screen, action)`. |
 | Routes | `createroute` is not done until `simplerouteview` → `route_status === "published"` (`route/create/publish-route.js`). |

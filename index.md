@@ -11,6 +11,10 @@ related:
   - brains/web-design.md
   - brains/api.md
   - brains/README.md
+  - 2026-09-17.md
+  - prompts/generate-brain.md
+  - code/MOBILE_CODEBASE_BRAIN.md
+  - code/WEB_CODEBASE_BRAIN.md
   - 01-project-overview.md
   - screens/navigation-map.md
   - screens/how-it-works.md
@@ -87,7 +91,9 @@ Map: [brains/README.md](brains/README.md).
 ## Code maps (file-level)
 
 - [Mobile code details](code/mobile-code-details.md) — every `App/components` folder, utils, Realm, styles
+- [Mobile codebase brain](code/MOBILE_CODEBASE_BRAIN.md) — live 2026-09-17 dump of `TerriTool/`
 - [Web code details](code/web-code-details.md) — controllers, API V2, helpers, Blade, MCP modules
+- [Web codebase brain](code/WEB_CODEBASE_BRAIN.md) — live 2026-09-17 dump of `webterritool/`
 
 ## Design (mobile UI as shipped)
 
@@ -102,6 +108,7 @@ Imported from the Design Brain pack. **Read [design/MINI-DESIGN-BRAIN.md](design
 - [Mobile screenshot flow (00–10 folders; pixels win)](design/06-Coverage/Mobile-Screenshot-Flow.md)
 - [Ingest log 2026-09-15](2026-09-15.md)
 - [Ingest log 2026-09-16](2026-09-16.md)
+- [Ingest log 2026-09-17](2026-09-17.md) — live mobile + web scan; staging `URL_BASE`; User MCP 1.4.1
 
 ## Design (web UI as shipped)
 
@@ -131,3 +138,4 @@ Two stacks — do not mix. **Read [design-web/MINI-DESIGN-BRAIN.md](design-web/M
 - [A — Google AI Mode source](appendix-a-google-source.md)
 - [B — Reading order](appendix-b-reading-order.md)
 - [C — Mobile footer tabs](appendix-c-footer-tabs.md)
+- [Generator prompt for another project (vault + mobile scan in one file)](prompts/generate-brain.md)

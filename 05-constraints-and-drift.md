@@ -9,10 +9,13 @@ related:
   - 20-how-to-update.md
   - screens/navigation-map.md
   - ops/known-bugs.md
+  - code/MOBILE_CODEBASE_BRAIN.md
+  - code/WEB_CODEBASE_BRAIN.md
+  - 2026-09-17.md
 ---
 # 5. Durable facts, constraints, known drift
 
-Related: [04-style-guide](04-style-guide.md) · [20-how-to-update](20-how-to-update.md) · [screens/navigation-map](screens/navigation-map.md)
+Related: [04-style-guide](04-style-guide.md) · [20-how-to-update](20-how-to-update.md) · [screens/navigation-map](screens/navigation-map.md) · [MOBILE_CODEBASE_BRAIN](code/MOBILE_CODEBASE_BRAIN.md) · [WEB_CODEBASE_BRAIN](code/WEB_CODEBASE_BRAIN.md) · [ingest 2026-09-17](2026-09-17.md)
 
 Code wins over Prompts and old docs. When they disagree, add a row here.
 
@@ -52,7 +55,8 @@ Code wins over Prompts and old docs. When they disagree, add a row here.
 | Prompts `App.tsx` | Entry is `App/App.js` (JS) |
 | package.json Android 4.2.7 | Gradle may be `4.4.70` |
 | “Name-only contact buy = 1 credit” | Live `contactBuyCredits.js`: `CONTACT_BUY_CREDITS_NAME_POSITION_ONLY` and `…_WITH_EMAIL_OR_PHONE` are both **2**. Claude/biz remains **1** (`CONTACT_BUY_CREDITS_BIZ_CLAUDE`) |
-| Design MINI “API in this tree points at staging” | Live `App/config/index.js` `URL_BASE` is **prod** `https://app.territool.com/index.php/api/`; staging is commented |
+| Design MINI “API in this tree points at staging” / older notes “URL_BASE is prod” | **2026-09-17 live:** `URL_BASE` is **staging** `https://staging.territool.com/index.php/api/` (comment: `STAGING — temporary for screenshot login`). Prod block is commented. `IS_STAGING_OR_DEV_BUILD` is true while staging is active. |
+| User MCP `1.4.0` | Live `territool_app.php` version **`1.4.1`**. Extra manager-only tools: `get_team_territories`, `recommend_lead_distribution` (33 tools total). |
 
 ## 5.3 Do not
 

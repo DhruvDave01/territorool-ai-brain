@@ -28,6 +28,8 @@ React Native **0.84.1**, React **19.2.3**, Navigation 7.x, Realm **20.2.0**, Map
 
 **Not present:** Redux, native-base package, TikTok npm package.
 
+**Live config (2026-09-17):** `URL_BASE` is **staging** `https://staging.territool.com/index.php/api/`. Dump: [code/MOBILE_CODEBASE_BRAIN.md](code/MOBILE_CODEBASE_BRAIN.md).
+
 ## Entry and nav
 
 | File | Role |

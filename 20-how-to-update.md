@@ -34,3 +34,4 @@ When you change product behavior:
 6. If the change is a whole surface, also patch the matching [sub brain](brains/README.md).
 7. Mobile from→to: [screens/navigation-map.md](screens/navigation-map.md). Screen APIs: [screens/how-it-works.md](screens/how-it-works.md).
 8. Run `python3 evals/run.py` after retriever or note-structure changes. Rebuild the graph with `python3 scripts/build-graph.py`.
+9. After a live repo scan, write an ingest log (`YYYY-MM-DD.md`) and refresh [code/MOBILE_CODEBASE_BRAIN.md](code/MOBILE_CODEBASE_BRAIN.md) / [code/WEB_CODEBASE_BRAIN.md](code/WEB_CODEBASE_BRAIN.md). Check `App/config/index.js` for the active `URL_BASE`; do not assume prod.

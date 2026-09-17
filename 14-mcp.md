@@ -17,9 +17,9 @@ related:
 
 Related: [06-users-and-roles](06-users-and-roles.md) · [09-credits-billing](09-credits-billing.md) · [15-voice-policy](15-voice-policy.md)
 
-Do not invent tools that are not in `webterritool/app/UserMcp/config/territool_app.php`.
+Do not invent tools that are not in `webterritool/app/UserMcp/config/territool_app.php`. Live dump: [code/WEB_CODEBASE_BRAIN.md](code/WEB_CODEBASE_BRAIN.md).
 
-## 14.1 User MCP — `territool-app` v1.4.0
+## 14.1 User MCP — `territool-app` v1.4.1
 
 - Config: `app/UserMcp/config/territool_app.php`
 - Endpoint: `{APP_URL}/ai/mcp`
@@ -57,7 +57,7 @@ Do not invent tools that are not in `webterritool/app/UserMcp/config/territool_a
 | `create_route_from_list` | handler | Publishes |
 | `view_activities` / `edit_activity` | api | |
 
-**Manager-only:** `list_team`, `get_team_dashboard` (week\|month\|quarter), `get_team_activity`. Optional `salesperson_id` on listed tools; omit = self / record owner.
+**Manager-only** (`manager_tools`): `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard` (week\|month\|quarter), `get_team_activity`. Optional `salesperson_id` on hunt/route/list tools; omit = self / record owner. Full catalog is **33** tools.
 
 ### Agent operating rules
 
@@ -84,5 +84,7 @@ ChatGPT subsets: `chatgpt_tools` / `chatgpt_manager_tools` (truncated ~16 tools 
 `/find-mcp/mcp`. Sales Agent + BSA only (**not** Business Agent). README: `app/FindMcp/README.md`.
 
 Tools: `find_ai_leads`, `resume_ai_lead_search`, `save_ai_leads`, `search_companies`, `find_contacts`, `buy_contacts`, `get_credits`.
+
+Find `save_ai_leads` is a **direct** `saveAILeads` passthrough — **no** preview / `confirm_token` in this catalog (User MCP still requires preview).
 
 Skills: `app/FindMcp/skills/find-leads/SKILL.md`, `find-contacts/SKILL.md`.

@@ -37,7 +37,7 @@ Hub for **what clients call**. Parent: [sub brains](README.md). Siblings: [Mobil
 | Surface | Source |
 |---------|--------|
 | Mobile constants | `TerriTool/App/config/index.js` appended to `URL_BASE` |
-| Live mobile `URL_BASE` | **prod** `https://app.territool.com/index.php/api/` (staging commented) |
+| Live mobile `URL_BASE` | **2026-09-17 staging** `https://staging.territool.com/index.php/api/` (`STAGING — temporary for screenshot login`). Prod `https://app.territool.com/index.php/api/` is commented. |
 | All v2 URIs | `webterritool/routes/api.php` — `$api->version('v2')`. Config prefix `env('API_PREFIX', null)`. MCP client talks `/api/v2`. |
 | JWT group | middleware **`jwt.refresh`** in `routes/api.php` |
 | Web pages | `webterritool/routes/web.php` |
@@ -75,7 +75,7 @@ Everything else the app uses (`addcompany`, `createroute`, `simplerouteview`, `g
 | Admin | `/ai/mcp-admin` | HQ |
 | Find | `/find-mcp/mcp` | SA + BSA only (**not** BA) |
 
-User tool names (complete): see [Web Code Brain](web-code.md). Manager extras: `list_team`, `get_team_dashboard`, `get_team_activity`.
+User tool names (complete): see [Web Code Brain](web-code.md) and [WEB_CODEBASE_BRAIN.md](../code/WEB_CODEBASE_BRAIN.md). Manager extras: `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard`, `get_team_activity` (User MCP **1.4.1**, 33 tools).
 
 ## Two AI engines (do not mix)
 

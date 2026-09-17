@@ -45,7 +45,7 @@ There are **no** Android `productFlavors` observed. `applicationId` is always `c
 | iOS `MARKETING_VERSION` (pbxproj) | `42.31` (can disagree with package.json) |
 | iOS `CURRENT_PROJECT_VERSION` | `1` |
 | API check string `APP_VERSION` | `'2.0'` |
-| User MCP server | `territool-app` **1.4.0** |
+| User MCP server | `territool-app` **1.4.1** |
 | Web `version.json` | `versionName` `1.0.0` |
 
 When quoting “the app version” to QA, say **which file** you used.

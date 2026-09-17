@@ -30,7 +30,7 @@ One-file distillation of the full [Design Brain](README.md). Read this first; fo
 
 ## 1. App in one paragraph
 
-TerriTool is a field-sales app (routes, lists, companies, contacts, AI leads, maps). RN 0.84.1 / React 19.2.3, New Architecture. Entry `index.js` → `init.js` → `App/App.js`. It is **one flat native stack** (`@react-navigation/native-stack` v7, `headerShown: false`, no bottom-tabs/drawer) with **46** `Stack.Screen` names (older pack said 47). Module switching is a custom **six-icon `CustomFooter`**, not React Navigation tabs. **Dashboard is a tile hub with no footer.** State is class-component local + Realm JWT + AsyncStorage — no Redux. Styling tokens live in `App/styles/theme.js`, with many leftover raw hexes outside it. Live `App/config/index.js` `URL_BASE` is **prod**; staging is the commented block.
+TerriTool is a field-sales app (routes, lists, companies, contacts, AI leads, maps). RN 0.84.1 / React 19.2.3, New Architecture. Entry `index.js` → `init.js` → `App/App.js`. It is **one flat native stack** (`@react-navigation/native-stack` v7, `headerShown: false`, no bottom-tabs/drawer) with **46** `Stack.Screen` names (older pack said 47). Module switching is a custom **six-icon `CustomFooter`**, not React Navigation tabs. **Dashboard is a tile hub with no footer.** State is class-component local + Realm JWT + AsyncStorage — no Redux. Styling tokens live in `App/styles/theme.js`, with many leftover raw hexes outside it. Live `App/config/index.js` `URL_BASE` is **staging** `https://staging.territool.com/index.php/api/` (`STAGING — temporary for screenshot login`); prod is the commented block.
 
 ---
 

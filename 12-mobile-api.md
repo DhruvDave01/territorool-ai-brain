@@ -13,6 +13,8 @@ Related: [10-mobile-app](10-mobile-app.md) · [features/](features/)
 
 All paths are appended to `URL_BASE` (`…/index.php/api/`). JWT unless noted public. Source of constants: `TerriTool/App/config/index.js`. Source of **all** v2 URIs: `webterritool/routes/api.php`.
 
+**2026-09-17 live `URL_BASE`:** staging `https://staging.territool.com/index.php/api/` (comment `STAGING — temporary for screenshot login`). Prod is commented in the same file.
+
 `APP_VERSION` string for checks: `'2.0'`. `IS_STAGING_OR_DEV_BUILD` if `URL_BASE` contains `"staging"`.
 
 ## Auth / account

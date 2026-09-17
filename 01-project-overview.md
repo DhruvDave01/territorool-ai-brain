@@ -42,8 +42,8 @@ Details: [06-users-and-roles.md](06-users-and-roles.md).
 | Staging | `https://staging.territool.com` | `https://staging.territool.com/ai/mcp` |
 | Local web | `http://localhost:8888` (MAMP; `.env` `APP_URL`) | `{APP_URL}/ai/mcp` |
 
-**Mobile API base** (currently **prod** in `TerriTool/App/config/index.js`): `https://app.territool.com/index.php/api/`  
-Staging (commented in the same file): `https://staging.territool.com/index.php/api/`
+**Mobile API base** (currently **staging** in `TerriTool/App/config/index.js`, comment `STAGING — temporary for screenshot login`): `https://staging.territool.com/index.php/api/`  
+Prod (commented in the same file): `https://app.territool.com/index.php/api/`
 
 ## Auth at a glance
 
