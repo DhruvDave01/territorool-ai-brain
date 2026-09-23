@@ -127,6 +127,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [Screenshot 2026-09-15 at 9.56.30 AM.png](<../screenshots/feature-evidence/05-Find-Leads/evidence/Screenshot 2026-09-15 at 9.56.30 AM.png>)
 - 51 more stills are in `../screenshots/feature-evidence/05-Find-Leads/`.
 
+## Watched 2026-09-23
+
+Two mobile Find Leads chromes are in [the oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md). TestFlight says “AI Find Leads” and searches a city plus ideal businesses. App 42.32, opened from Address Book, says “Find Leads,” asks for a ZIP in “Find Leads by Zip Code,” and shows map pins. Its completion banner is “All data found for Coffee in this location.” A failed add toast starts “Some companies were not added as their dat…”
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)

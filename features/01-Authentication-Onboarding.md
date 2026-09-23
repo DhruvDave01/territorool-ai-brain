@@ -118,6 +118,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.27.16.png](<../screenshots/feature-evidence/01-Authentication-Onboarding/evidence/mobile/LoginRegistrationFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.27.16.png>)
 - 16 more stills are in `../screenshots/feature-evidence/01-Authentication-Onboarding/`.
 
+## Watched 2026-09-23
+
+Classic web on staging: `/trial` is “Create your account” with a 7-day trial and 60 lead credits. `/onboarding` step 2 of 2 asks “Which one’s you?” (I’m in the field / I lead a team) and “And who do you sell to?” (Businesses / Homeowners), then Finish setup. Detail: [oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md).
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)

@@ -91,6 +91,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.42.png](<../screenshots/feature-evidence/08-Lists/evidence/mobile/List/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.42.png>)
 - 40 more stills are in `../screenshots/feature-evidence/08-Lists/`.
 
+## Watched 2026-09-23
+
+Adding a company that is already on the list shows a red toast: “List Updated. Company is already exist.” The new-list wizard is `/list/step1`. Detail: [oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md).
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)

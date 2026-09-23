@@ -98,6 +98,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.38.01.png](<../screenshots/feature-evidence/14-Settings-Profile/evidence/mobile/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.38.01.png>)
 - [Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.38.27.png](<../screenshots/feature-evidence/14-Settings-Profile/evidence/mobile/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.38.27.png>)
 
+## Watched 2026-09-23
+
+Classic web Settings opens MCP Chat with the badge “not connected,” actions Fetch, Send, and Update, and Connect new MCP. The same page shows Free Package and Subscription Status Active. Detail: [oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md).
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)

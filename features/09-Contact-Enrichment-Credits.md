@@ -128,6 +128,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [Screenshot 2026-09-15 at 1.53.47 PM.png](<../screenshots/feature-evidence/09-Contact-Enrichment-Credits/evidence/Screenshot 2026-09-15 at 1.53.47 PM.png>)
 - 12 more stills are in `../screenshots/feature-evidence/09-Contact-Enrichment-Credits/`.
 
+## Watched 2026-09-23
+
+A TestFlight recording from 11 Sep 2026 shows an older Find Contacts screen: website search, “Search secondary database,” and source names SBA and LoopNet. That recording does not change the live provider table above. Detail: [oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md).
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)

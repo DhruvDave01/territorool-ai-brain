@@ -135,6 +135,10 @@ Open the image before drawing UI. The filename is a capture time, not a layout s
 - [IMG_4609.PNG](<../screenshots/feature-evidence/07-Routes/evidence/IMG_4609.PNG>)
 - 78 more stills are in `../screenshots/feature-evidence/07-Routes/`.
 
+## Watched 2026-09-23
+
+Classic web wizard: `/route/step1` names the route and selects companies. `/route/step2/{id}` picks start and end, then Save as Draft or Generate Route. The published table shows company quantity, distance, and time. Detail: [oversized-video watch](../reviews/oversized-video-watch-2026-09-23.md).
+
 ## Generate from this brain
 
 - UI rule: [UI/UX Guardian](../brains/ui-ux-guardian.md)
