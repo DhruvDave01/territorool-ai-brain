@@ -1,0 +1,13 @@
+/* ===== resources/views/vendor/backpack/crud/inc/show_tabbed_fields.blade.php · <style> block 1 of 1 ===== */
+.nav-tabs-custom {
+            box-shadow: none;
+        }
+        .nav-tabs-custom > .nav-tabs.nav-stacked > li {
+            margin-right: 0;
+        }
+
+        .tab-pane .form-group h1:first-child,
+        .tab-pane .form-group h2:first-child,
+        .tab-pane .form-group h3:first-child {
+            margin-top: 0;
+        }

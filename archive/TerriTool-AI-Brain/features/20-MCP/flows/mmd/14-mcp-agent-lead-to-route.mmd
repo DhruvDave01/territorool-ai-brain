@@ -1,0 +1,21 @@
+---
+title: MCP agent lead-to-route
+---
+flowchart TD
+  Ask[User asks for leads] --> Cred[get_credits]
+  Cred --> Search[find_ai_leads]
+  Search --> More{Still running?}
+  More -->|Yes| Resume[resume_ai_lead_search]
+  Resume --> Search
+  More -->|No| Preview[Preview hits - do not add_company]
+  Preview --> Confirm{User agrees to spend?}
+  Confirm -->|No| Stop[Stop]
+  Confirm -->|Yes| Save[save_ai_leads confirm_all + token]
+  Save --> Co[search_companies / view_company]
+  Co --> Next{User wants route or list?}
+  Next -->|List| AskL[Ask list name]
+  AskL --> List[create_list]
+  Next -->|Route| AskR[Ask start, end, route name]
+  AskR --> Route[create_route - publishes]
+  Route --> Url[Return route_url]
+  List --> FromList[create_route_from_list]

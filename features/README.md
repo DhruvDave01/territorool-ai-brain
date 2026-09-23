@@ -1,36 +1,33 @@
----
-id: README
-parent: features
-related:
-  - index.md
-  - features/01-auth-and-account.md
-  - features/02-dashboard.md
-  - features/03-companies.md
-  - features/04-notes.md
-  - features/05-activities.md
-  - features/06-contacts.md
-  - features/07-ai-find-leads.md
----
 # Features
 
-Atomic product notes. Each file is one feature. Index: [../index.md](../index.md).
+One page per product module. Behavior below is the module spec. Screenshots sit beside each page. Each page has a **Screens** block: per surface, the file, the still, the primary action, and the loading, empty, and error strings copied from code.
 
-| File | Feature |
-|------|--------|
-| [01-auth-and-account.md](01-auth-and-account.md) | Login, JWT, register, QR, tours |
-| [02-dashboard.md](02-dashboard.md) | Home tiles, activity, notifications |
-| [03-companies.md](03-companies.md) | Address Book |
-| [04-notes.md](04-notes.md) | Free-text company notes |
-| [05-activities.md](05-activities.md) | Call / visit / meeting |
-| [06-contacts.md](06-contacts.md) | Find / buy / add people |
-| [07-ai-find-leads.md](07-ai-find-leads.md) | AI + Yelp + classic map |
-| [08-lists.md](08-lists.md) | Named company buckets |
-| [09-routes.md](09-routes.md) | Driving runs |
-| [10-credits-subscription.md](10-credits-subscription.md) | Credits, IAP, referrals |
-| [11-crm-sync.md](11-crm-sync.md) | HubSpot, Salesforce, Karma, Pipedrive |
-| [12-manager-portal.md](12-manager-portal.md) | Business Agent `/manager` |
-| [13-admin-hq.md](13-admin-hq.md) | `/hq` + Admin MCP |
-| [14-support.md](14-support.md) | Tickets |
-| [15-maps-and-geo.md](15-maps-and-geo.md) | Maps, city search |
-| [16-notifications.md](16-notifications.md) | FCM, Sentry, PostHog |
-| [17-minor-edge.md](17-minor-edge.md) | OCR, filters, Zapier, archived zip |
+| Module | Page |
+|---|---|
+| 01 — Authentication, Registration, Onboarding | [01-Authentication-Onboarding](01-Authentication-Onboarding.md) |
+| 02 — Dashboard | [02-Dashboard](02-Dashboard.md) |
+| 03 — Company (Address Book) | [03-Company-AddressBook](03-Company-AddressBook.md) |
+| 04 — Contacts | [04-Contacts](04-Contacts.md) |
+| 05 — Find Leads (AI + Yelp) | [05-Find-Leads](05-Find-Leads.md) |
+| 06 — Recently Added | [06-Recently-Added](06-Recently-Added.md) |
+| 07 — Routes | [07-Routes](07-Routes.md) |
+| 08 — Lists | [08-Lists](08-Lists.md) |
+| 09 — Contact Enrichment and Credits | [09-Contact-Enrichment-Credits](09-Contact-Enrichment-Credits.md) |
+| 10 — Bulk Upload (Companies and Contacts) | [10-Bulk-Upload](10-Bulk-Upload.md) |
+| 11 — Maps and Geocoding | [11-Maps](11-Maps.md) |
+| 12 — Subscriptions and Payments | [12-Subscription-Payments](12-Subscription-Payments.md) |
+| 13 — CRM Integrations | [13-CRM-Integrations](13-CRM-Integrations.md) |
+| 14 — Settings and Profile | [14-Settings-Profile](14-Settings-Profile.md) |
+| 15 — Support and Notifications | [15-Support-Notifications](15-Support-Notifications.md) |
+| 16 — Manager Portal (Business Agent) | [16-Manager-Portal](16-Manager-Portal.md) |
+| 17 — Admin HQ | [17-Admin-HQ](17-Admin-HQ.md) |
+| 18 — One product, every client | [18-Clients](18-Clients.md) |
+| 19 — Background jobs and provider callbacks | [19-Cron-Jobs-Webhooks](19-Cron-Jobs-Webhooks.md) |
+| 20 — MCP and voice (Claude / Cursor / ChatGPT / voice) | [20-MCP](20-MCP.md) |
+| 21 — Business Team (older screens) | [21-Business-Team](21-Business-Team.md) |
+
+Full-flow sheets, one PNG per module and surface, with every step's shipped still and caption: [flows/README.md](flows/README.md).
+
+Shared rules: [product overview](../product/overview.md) · [brains](../brains/README.md).
+
+Review rewards (G2 30, Product Hunt 20) are part of [02 — Dashboard](02-Dashboard.md). Live pixels: the mobile sheet stills and the web unlock-credits stills linked from that page. The HTML files `dashboard-mobile.html`, `dashboard-review-credits.html`, `dashboard-review-credits-web.html`, and `dashboard-review-credits-email.html` are earlier layouts. When they disagree with those stills or with the live repos, the stills and the repos win.

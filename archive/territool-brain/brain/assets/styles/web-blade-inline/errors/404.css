@@ -1,0 +1,9 @@
+/* ===== resources/views/errors/404.blade.php · <style> block 1 of 1 ===== */
+.m-t-20{
+      display:none;
+    }
+    .error-message { text-align: center; }
+    .message-text { font-size: 24px; color: #666666; }
+    .message-text span { color: #16aa9d; }
+    .button-homepage { margin: 15px 20px; }
+    .button-homepage a { color: #ffffff;}

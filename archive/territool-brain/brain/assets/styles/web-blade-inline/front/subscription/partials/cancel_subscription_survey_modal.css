@@ -1,0 +1,166 @@
+/* ===== resources/views/front/subscription/partials/cancel_subscription_survey_modal.blade.php · <style> block 1 of 1 ===== */
+.tt-cancel-survey-modal{
+    z-index: 10000;
+}
+.tt-cancel-survey-modal .modal-dialog {
+    width: calc(100% - 24px);
+    max-width: 440px;
+    margin: 24px auto;
+}
+.tt-cancel-survey-modal .modal-content {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(15, 23, 42, 0.25);
+    padding: 0;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.tt-cancel-survey-modal .modal-body {
+    padding: 22px 22px 20px;
+}
+.tt-cancel-survey-modal .tt-cancel-survey-logo-wrap {
+    text-align: center;
+    margin-bottom: 14px;
+}
+.tt-cancel-survey-modal .tt-cancel-survey-logo {
+    max-height: 48px;
+    width: auto;
+    margin: 0 auto;
+}
+.tt-cancel-survey-modal .tt-cancel-survey-intro {
+    text-align: center;
+    color: #4b5563;
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 0 0 22px;
+}
+.tt-cancel-survey-modal .tt-cancel-survey-label {
+    display: block;
+    font-weight: 600;
+    color: #111827;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.tt-cancel-survey-modal .tt-cancel-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+}
+.tt-cancel-survey-modal .tt-cancel-option:hover {
+    border-color: #cbd5e1;
+}
+.tt-cancel-survey-modal .tt-cancel-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.tt-cancel-survey-modal .tt-cancel-option .tt-radio-ui {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #c4b5fd;
+    background: #fff;
+    position: relative;
+}
+.tt-cancel-survey-modal .tt-cancel-option .tt-radio-ui:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin: -4px 0 0 -4px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+}
+.tt-cancel-survey-modal .tt-cancel-option.tt-is-selected {
+    border: 2px solid #2563eb;
+    background: #eff6ff;
+}
+.tt-cancel-survey-modal .tt-cancel-option.tt-is-selected .tt-radio-ui {
+    border-color: #2563eb;
+    background: #2563eb;
+}
+.tt-cancel-survey-modal .tt-cancel-option.tt-is-selected .tt-radio-ui:after {
+    opacity: 1;
+}
+.tt-cancel-survey-modal .tt-cancel-option-text {
+    font-size: 15px;
+    color: #1f2937;
+    line-height: 1.35;
+}
+.tt-cancel-survey-modal .tt-cancel-field {
+    margin-top: 18px;
+}
+.tt-cancel-survey-modal .tt-cancel-field textarea {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 15px;
+    resize: vertical;
+    min-height: 88px;
+    color: #111827;
+}
+.tt-cancel-survey-modal .tt-cancel-field textarea::placeholder {
+    color: #9ca3af;
+}
+.tt-cancel-survey-modal .tt-cancel-submit {
+    width: 100%;
+    margin-top: 22px;
+    padding: 12px 16px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff !important;
+    background: #1d4ed8;
+    border: none;
+    border-radius: 12px;
+    transition: background 0.15s;
+}
+.tt-cancel-survey-modal .tt-cancel-submit:hover,
+.tt-cancel-survey-modal .tt-cancel-submit:focus {
+    background: #1e40af;
+    color: #fff !important;
+}
+.tt-cancel-survey-modal .tt-cancel-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+.tt-cancel-survey-modal .tt-cancel-nevermind {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    font-size: 15px;
+    color: #2563eb;
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: none;
+    width: 100%;
+    padding: 8px;
+}
+.tt-cancel-survey-modal .tt-cancel-nevermind:hover {
+    color: #1d4ed8;
+}
+.tt-cancel-survey-modal .tt-cancel-error {
+    color: #b91c1c;
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+}
+.tt-cancel-survey-modal .tt-cancel-error.tt-visible { display: block; }
+.tt-cancel-survey-modal .tt-cancel-tell-more-wrap {
+    display: none;
+}
+.tt-cancel-survey-modal .tt-cancel-tell-more-wrap.is-visible {
+    display: block;
+}

@@ -1,0 +1,21 @@
+---
+title: Lists
+---
+flowchart TD
+  In{Entry} -->|Saved leads modal| Named[Name new or pick existing]
+  In -->|Lists + Create| Named
+  Named --> Build[Select companies]
+  Build --> Map[Map / lasso / filter]
+  Map --> Build
+  Build --> Submit[Submit]
+  Submit --> Index[Lists index]
+  Index --> View[View detail]
+  Index --> Send[Send List]
+  Index --> CSV[Export CSV]
+  Index --> OnMap[View On Map]
+  Index --> Gen[Generate Route]
+  Index --> Edit[Edit]
+  Index --> Del[Delete]
+  View --> Convert[Convert to Route]
+  Convert --> RStep1[Route builder]
+  Gen --> RStep1

@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>TerriTool RevenueCat Subscriptions Guide</title>
+<style>
+@page { margin: 18mm 16mm; size: A4; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 11pt; line-height: 1.45; color: #111; }
+h1 { font-size: 22pt; border-bottom: 2px solid #1546C1; padding-bottom: 8px; page-break-after: avoid; }
+h2 { font-size: 15pt; color: #1546C1; margin-top: 22px; page-break-after: avoid; }
+h3 { font-size: 12pt; margin-top: 16px; page-break-after: avoid; }
+h4 { font-size: 11pt; margin-top: 12px; }
+code { background: #f4f6f8; padding: 1px 4px; border-radius: 3px; font-size: 9.5pt; }
+pre { background: #f4f6f8; padding: 10px; border-radius: 6px; font-size: 9pt; page-break-inside: avoid; white-space: pre-wrap; word-wrap: break-word; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 9pt; page-break-inside: avoid; }
+th, td { border: 1px solid #cbd5e1; padding: 6px 8px; text-align: left; vertical-align: top; }
+th { background: #eef2ff; }
+hr { border: none; border-top: 1px solid #e2e8f0; margin: 20px 0; }
+ul, ol { padding-left: 20px; }
+</style>
+</head>
+<body>
+<h1>TerriTool Mobile Subscriptions Guide</h1>
+<p><strong>RevenueCat · iOS · Android · Webhooks · Trials · Multi-Account</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Document version</strong></td>
+<td>1.0</td>
+</tr>
+<tr>
+<td><strong>Date</strong></td>
+<td>June 2026</td>
+</tr>
+<tr>
+<td><strong>App</strong></td>
+<td>TerriTool React Native</td>
+</tr>
+<tr>
+<td><strong>Backend</strong></td>
+<td>Laravel (<code>staging.territool.com</code> / <code>app.territool.com</code>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Table of contents</h2>
+<ol>
+<li><a href="#1-architecture-overview">Architecture overview</a></li>
+<li><a href="#2-revenuecat-identity--mobile-integration">RevenueCat identity &amp; mobile integration</a></li>
+<li><a href="#3-android-vs-ios-which-webhook-event-fires-when">Android vs iOS: which webhook event fires when?</a></li>
+<li><a href="#4-ten-accounts-one-device-one-payment-method">Ten accounts, one device, one payment method</a></li>
+<li><a href="#5-giving-a-trial-to-all-ten-emails">Giving a trial to all ten emails</a></li>
+<li><a href="#6-backend-webhook-implementation">Backend webhook implementation</a></li>
+<li><a href="#7-android-base--pro-upgrade-proration">Android Base → Pro upgrade (proration)</a></li>
+<li><a href="#8-security-idempotency--checklist">Security, idempotency &amp; checklist</a></li>
+<li><a href="#9-quick-reference-tables">Quick reference tables</a></li>
+</ol>
+<hr />
+<h2>1. Architecture overview</h2>
+<p>TerriTool monetizes mobile users through <strong>RevenueCat</strong> (<code>react-native-purchases</code>), which unifies <strong>Apple App Store</strong> and <strong>Google Play</strong> into one subscriber model. Your <strong>Laravel backend</strong> owns package names, credits, and trial flags—the mobile app reads that via <code>getusercredit</code> and <code>getuserstatus</code>.</p>
+<pre><code>User → TerriTool App → App Store / Play Store → RevenueCat → Webhook → Laravel DB
+                              ↑                                    ↓
+                         Purchase UI                    getusercredit / getuserstatus
+</code></pre>
+<p><strong>Principle:</strong> Webhook + subscriber sync is the <strong>source of truth</strong> for paid state. Client <code>revenuecate-success</code> is a optional fast-path nudge after purchase.</p>
+<h3>Key mobile files</h3>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>App/utils/RevenueCatService.js</code></td>
+<td>Configure RC, <code>identifyUser</code>, <code>app_user_id</code> format</td>
+</tr>
+<tr>
+<td><code>App/components/register/subscribe.js</code></td>
+<td>Purchase flow, Android proration, offerings</td>
+</tr>
+<tr>
+<td><code>App/components/register/SubscriptionGate.js</code></td>
+<td>Post-login paywall if trial inactive</td>
+</tr>
+<tr>
+<td><code>App/components/register/index_register_split.js</code></td>
+<td>Register → RC → <code>revenuecate-success</code></td>
+</tr>
+<tr>
+<td><code>App/components/dashboard/editstatus.js</code></td>
+<td>Settings plan change paywall</td>
+</tr>
+<tr>
+<td><code>App/utils/subscriptionGate.js</code></td>
+<td><code>free_trial_status</code> from <code>getusercredit</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Backend fields the app expects</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>App usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>package_name</code></td>
+<td><code>Free Package</code>, <code>Base Package</code>, <code>Pro Package</code>, etc.</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Monthly / yearly (<code>packageTier</code> in Settings)</td>
+</tr>
+<tr>
+<td><code>subscription_date</code></td>
+<td>Renewal / trial end display</td>
+</tr>
+<tr>
+<td><code>free_trial_status</code></td>
+<td>Gates <code>SubscriptionGate</code> on login</td>
+</tr>
+<tr>
+<td><code>is_subscription_expired</code></td>
+<td>Active vs expired badge</td>
+</tr>
+<tr>
+<td>Credit balance</td>
+<td>Lead/contact credits</td>
+</tr>
+</tbody>
+</table>
+<h3>RevenueCat offering IDs (mobile)</h3>
+<table>
+<thead>
+<tr>
+<th>Offering</th>
+<th>ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Register / subscribe paywall</td>
+<td><code>ofrng845104ada0</code></td>
+</tr>
+<tr>
+<td>Settings upgrade paywall</td>
+<td><code>TerriTool Monthly Non Free</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. RevenueCat identity &amp; mobile integration</h2>
+<h3>App user ID format</h3>
+<p>Each TerriTool user gets a <strong>unique</strong> RevenueCat customer:</p>
+<pre><code class="language-text">app_user_id = {numericUserId}_{email}
+</code></pre>
+<p>Example: <code>12345_user@example.com</code></p>
+<p>Set on register/login via <code>RevenueCatService.identifyUser()</code> → <code>Purchases.logIn(appUserId)</code>.</p>
+<p><strong>Webhook rule:</strong> Parse numeric user id from prefix before first <code>_</code> when the prefix is digits.</p>
+<h3>Current client → backend flows</h3>
+<table>
+<thead>
+<tr>
+<th>Flow</th>
+<th>Store purchase</th>
+<th>Backend call</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Register + first purchase</td>
+<td>Yes</td>
+<td><code>POST /api/revenuecate-success</code> (<code>app_user_id</code>)</td>
+</tr>
+<tr>
+<td>Login (inactive trial)</td>
+<td>—</td>
+<td><code>GET getusercredit</code> → SubscriptionGate</td>
+</tr>
+<tr>
+<td>Settings Base ↔ Pro</td>
+<td>Yes</td>
+<td><code>getuserstatus</code> + <code>getusercredit</code> only (no <code>revenuecate-success</code> today)</td>
+</tr>
+<tr>
+<td>Logout</td>
+<td>—</td>
+<td><code>Purchases.logOut()</code> → next login switches RC user</td>
+</tr>
+</tbody>
+</table>
+<h3>API keys (mobile)</h3>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Key prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS</td>
+<td><code>appl_…</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td><code>goog_…</code></td>
+</tr>
+</tbody>
+</table>
+<p>Use matching RevenueCat projects/environments for staging vs production.</p>
+<hr />
+<h2>3. Android vs iOS: which webhook event fires when?</h2>
+<p>RevenueCat sends the <strong>same event types</strong> for both stores. Payload includes:</p>
+<pre><code class="language-json">&quot;store&quot;: &quot;APP_STORE&quot;   // iOS
+&quot;store&quot;: &quot;PLAY_STORE&quot;  // Android
+</code></pre>
+<p><strong>Backend should not branch on store for package assignment</strong>—map by <code>product_id</code> and active entitlements. Store field is for logging/analytics only. <strong>Timing</strong> differs for some downgrades (especially Android deferred).</p>
+<h3>Event reference</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INITIAL_PURCHASE</code></td>
+<td>First subscription or trial started</td>
+</tr>
+<tr>
+<td><code>RENEWAL</code></td>
+<td>Auto-renewal billing cycle</td>
+</tr>
+<tr>
+<td><code>PRODUCT_CHANGE</code></td>
+<td>Upgrade, downgrade, or SKU change</td>
+</tr>
+<tr>
+<td><code>CANCELLATION</code></td>
+<td>Auto-renew turned off (access often until period end)</td>
+</tr>
+<tr>
+<td><code>UNCANCELLATION</code></td>
+<td>Auto-renew re-enabled before expiry</td>
+</tr>
+<tr>
+<td><code>EXPIRATION</code></td>
+<td>Subscription ended</td>
+</tr>
+<tr>
+<td><code>BILLING_ISSUE</code></td>
+<td>Payment failed</td>
+</tr>
+<tr>
+<td><code>TEST</code></td>
+<td>Sandbox / dashboard test ping</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>3.1 New user — start 7-day free trial (store trial)</h3>
+<p><strong>Flow:</strong> Register → SubscriptionGate → “Start 7-day free trial”</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Store</td>
+<td>App Store trial</td>
+<td>Play trial offer</td>
+</tr>
+<tr>
+<td>RC <code>store</code></td>
+<td><code>APP_STORE</code></td>
+<td><code>PLAY_STORE</code></td>
+</tr>
+<tr>
+<td>Typical event</td>
+<td><code>INITIAL_PURCHASE</code></td>
+<td><code>INITIAL_PURCHASE</code></td>
+</tr>
+<tr>
+<td><code>period_type</code></td>
+<td><code>TRIAL</code></td>
+<td><code>TRIAL</code></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Free/trial package, <code>free_trial_status</code> active, trial end date</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example iOS payload (simplified):</strong></p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;INITIAL_PURCHASE&quot;,
+  &quot;store&quot;: &quot;APP_STORE&quot;,
+  &quot;app_user_id&quot;: &quot;1_user1@example.com&quot;,
+  &quot;product_id&quot;: &quot;com.territool.base.monthly.trial&quot;,
+  &quot;period_type&quot;: &quot;TRIAL&quot;
+}
+</code></pre>
+<p><strong>Example Android payload:</strong></p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;INITIAL_PURCHASE&quot;,
+  &quot;store&quot;: &quot;PLAY_STORE&quot;,
+  &quot;app_user_id&quot;: &quot;2_user2@example.com&quot;,
+  &quot;product_id&quot;: &quot;territool_base_monthly_trial&quot;,
+  &quot;period_type&quot;: &quot;TRIAL&quot;
+}
+</code></pre>
+<hr />
+<h3>3.2 Trial ends → first paid charge (Base Monthly)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typical event</td>
+<td><code>RENEWAL</code></td>
+<td><code>RENEWAL</code></td>
+</tr>
+<tr>
+<td><code>period_type</code></td>
+<td><code>NORMAL</code></td>
+<td><code>NORMAL</code></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><code>Base Package</code>, <code>free_trial_status</code> inactive</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{ &quot;type&quot;: &quot;RENEWAL&quot;, &quot;store&quot;: &quot;PLAY_STORE&quot;, &quot;product_id&quot;: &quot;territool_base_monthly&quot; }
+</code></pre>
+<hr />
+<h3>3.3 Settings — Free trial → Pro Monthly (<code>free_to_paid</code>)</h3>
+<p>App uses <strong>new purchase</strong> (no Android subscription replacement).</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App call</td>
+<td><code>Purchases.purchasePackage(proPkg)</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Events</td>
+<td><code>INITIAL_PURCHASE</code> or <code>PRODUCT_CHANGE</code></td>
+<td>Same</td>
+</tr>
+<tr>
+<td>When Pro active</td>
+<td>Immediately after store confirm</td>
+<td>Immediately</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td><code>Pro Package</code>, credits for Pro</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>3.4 Settings — Base Monthly → Pro Monthly (paid upgrade)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App behavior</td>
+<td>Plain <code>purchasePackage</code> — Apple upgrades in subscription group</td>
+<td>Subscription <strong>replacement</strong> + <code>IMMEDIATE_AND_CHARGE_PRORATED_PRICE</code></td>
+</tr>
+<tr>
+<td>Typical event</td>
+<td><strong><code>PRODUCT_CHANGE</code></strong> (immediate)</td>
+<td><strong><code>PRODUCT_CHANGE</code></strong> (immediate)</td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Apple prorates</td>
+<td>Play charges prorated <strong>difference today</strong>; renewal date unchanged</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Set <code>Pro Package</code> <strong>immediately</strong> on event/sync</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example iOS:</strong></p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;PRODUCT_CHANGE&quot;,
+  &quot;store&quot;: &quot;APP_STORE&quot;,
+  &quot;app_user_id&quot;: &quot;5_user5@example.com&quot;,
+  &quot;product_id&quot;: &quot;com.territool.pro.monthly&quot;
+}
+</code></pre>
+<p><strong>Example Android:</strong></p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;PRODUCT_CHANGE&quot;,
+  &quot;store&quot;: &quot;PLAY_STORE&quot;,
+  &quot;app_user_id&quot;: &quot;5_user5@example.com&quot;,
+  &quot;product_id&quot;: &quot;territool_pro_monthly&quot;
+}
+</code></pre>
+<p>App success message: <em>“Upgraded to TerriTool Pro — Your Pro plan is active.”</em></p>
+<hr />
+<h3>3.5 Settings — Pro Monthly → Base Monthly (downgrade)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>App behavior</td>
+<td>Plain <code>purchasePackage</code></td>
+<td>Replacement with <strong><code>DEFERRED</code></strong></td>
+</tr>
+<tr>
+<td>User keeps Pro until</td>
+<td>Current period end</td>
+<td>Current period end</td>
+</tr>
+<tr>
+<td>Events</td>
+<td>1. <code>PRODUCT_CHANGE</code> when confirmed</td>
+<td>1. <code>PRODUCT_CHANGE</code> when confirmed</td>
+</tr>
+<tr>
+<td></td>
+<td>2. <code>RENEWAL</code> at next cycle with Base SKU</td>
+<td>2. <code>RENEWAL</code> at next cycle with Base SKU</td>
+</tr>
+<tr>
+<td>Backend at step 1</td>
+<td>Keep <code>Pro Package</code> until expiry</td>
+<td>Same</td>
+</tr>
+<tr>
+<td>Backend at step 2</td>
+<td>Set <code>Base Package</code></td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<p>App message: <em>“Plan change scheduled — switch to Base on your next billing date.”</em></p>
+<hr />
+<h3>3.6 User cancels subscription</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event</td>
+<td><code>CANCELLATION</code></td>
+<td><code>CANCELLATION</code></td>
+</tr>
+<tr>
+<td>Access</td>
+<td>Until <code>expiration_at</code></td>
+<td>Until <code>expiration_at</code></td>
+</tr>
+<tr>
+<td>Later</td>
+<td><code>EXPIRATION</code></td>
+<td><code>EXPIRATION</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{ &quot;type&quot;: &quot;CANCELLATION&quot;, &quot;store&quot;: &quot;APP_STORE&quot;, &quot;product_id&quot;: &quot;com.territool.pro.monthly&quot; }
+</code></pre>
+<hr />
+<h3>3.7 Subscription ends</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event</td>
+<td><code>EXPIRATION</code></td>
+<td><code>EXPIRATION</code></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Free/expired, gate to SubscriptionGate</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>3.8 Monthly auto-renew (no plan change)</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>iOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event</td>
+<td><code>RENEWAL</code> each cycle</td>
+<td><code>RENEWAL</code> each cycle</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Extend <code>subscription_date</code>, refresh credits</td>
+<td>Same</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>3.9 Side-by-side summary</h3>
+<table>
+<thead>
+<tr>
+<th>User action</th>
+<th>iOS event(s)</th>
+<th>Android event(s)</th>
+<th>Update backend when?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start store free trial</td>
+<td><code>INITIAL_PURCHASE</code></td>
+<td><code>INITIAL_PURCHASE</code></td>
+<td>Immediately</td>
+</tr>
+<tr>
+<td>Trial → paid Base</td>
+<td><code>RENEWAL</code></td>
+<td><code>RENEWAL</code></td>
+<td>On event</td>
+</tr>
+<tr>
+<td>Free → Pro (new paid)</td>
+<td><code>INITIAL_PURCHASE</code> / <code>PRODUCT_CHANGE</code></td>
+<td>Same</td>
+<td>Immediately</td>
+</tr>
+<tr>
+<td><strong>Base → Pro upgrade</strong></td>
+<td><strong><code>PRODUCT_CHANGE</code></strong></td>
+<td><strong><code>PRODUCT_CHANGE</code></strong></td>
+<td><strong>Immediately</strong></td>
+</tr>
+<tr>
+<td><strong>Pro → Base downgrade</strong></td>
+<td><code>PRODUCT_CHANGE</code> then <code>RENEWAL</code></td>
+<td>Same</td>
+<td><strong>At renewal</strong> (Pro until then)</td>
+</tr>
+<tr>
+<td>Cancel auto-renew</td>
+<td><code>CANCELLATION</code></td>
+<td><code>CANCELLATION</code></td>
+<td>Flag cancel; keep package</td>
+</tr>
+<tr>
+<td>Access ends</td>
+<td><code>EXPIRATION</code></td>
+<td><code>EXPIRATION</code></td>
+<td>Free/expired</td>
+</tr>
+<tr>
+<td>Monthly renew</td>
+<td><code>RENEWAL</code></td>
+<td><code>RENEWAL</code></td>
+<td>Extend date + credits</td>
+</tr>
+</tbody>
+</table>
+<h3>Backend rule on every webhook</h3>
+<pre><code class="language-text">1. Verify Authorization header
+2. Idempotency check on event.id
+3. GET RevenueCat subscriber for app_user_id
+4. Map active product_id → package_name + credits
+5. Write DB — subscriber snapshot wins over event type alone
+</code></pre>
+<hr />
+<h2>4. Ten accounts, one device, one payment method</h2>
+<p><strong>Question:</strong> Register emails user1@ … user10@ on the <strong>same device</strong> with the <strong>same payment method</strong> — what happens?</p>
+<h3>Short answer</h3>
+<ul>
+<li><strong>10 separate TerriTool accounts</strong> and <strong>10 RevenueCat customers</strong> are created.</li>
+<li><strong>One Apple ID / Google account</strong> (same device + card) controls <strong>store</strong> trials and <strong>paid</strong> subscriptions.</li>
+<li>Store <strong>intro trials do not repeat</strong> for accounts 2–10 on the same store account.</li>
+<li>A <strong>paid subscription</strong> belongs to the <strong>store account</strong>, linked in RevenueCat to <strong>whoever was logged in</strong> at purchase time—not automatically to all 10 emails.</li>
+</ul>
+<h3>Per-account isolation (app + RevenueCat)</h3>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Backend user id</th>
+<th>RevenueCat <code>app_user_id</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user1@…</td>
+<td>1</td>
+<td><code>1_user1@…</code></td>
+</tr>
+<tr>
+<td>user2@…</td>
+<td>2</td>
+<td><code>2_user2@…</code></td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>user10@…</td>
+<td>10</td>
+<td><code>10_user10@…</code></td>
+</tr>
+</tbody>
+</table>
+<p>On each login: <code>Purchases.logIn("{id}_{email}")</code>. Logout: <code>Purchases.logOut()</code>.</p>
+<p>Same <strong>device_token</strong> (FCM) is sent on every register/login—backend <em>may</em> use this for push or fraud detection (server-side).</p>
+<h3>What Apple / Google enforce</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Same device + same card</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Store account</td>
+<td>Usually <strong>one</strong> Apple ID / Google account</td>
+</tr>
+<tr>
+<td>Intro free trial</td>
+<td><strong>Once</strong> per subscription group / offer rules</td>
+</tr>
+<tr>
+<td>Paid subscription</td>
+<td>Typically <strong>one active sub</strong> per product group per store account</td>
+</tr>
+<tr>
+<td>TerriTool emails</td>
+<td><strong>Independent</strong> in your DB</td>
+</tr>
+</tbody>
+</table>
+<h3>Scenario A — each account tries store “7-day free trial”</h3>
+<pre><code class="language-text">user1@… → RC logIn(1_…) → Store trial → often SUCCESS
+user2@… → RC logIn(2_…) → Store trial → often DENIED (no intro)
+…
+user10@… → same
+</code></pre>
+<p>TerriTool may still create all accounts; <strong>billing trial</strong> is store-limited.</p>
+<h3>Scenario B — user1 pays Pro; user2 logs in</h3>
+<pre><code class="language-text">user1 paid → entitlement on RC customer 1_user1@…
+Logout → logIn(2_user2@…) → NO entitlement
+user2 must pay separately OR use Restore (see Scenario C)
+</code></pre>
+<h3>Scenario C — user2 taps “Restore purchases”</h3>
+<p>Restore uses the <strong>store account</strong> (same as user1). The store subscription may attach to <strong>current</strong> RC user (<code>2_user2@…</code>)—potential <strong>wrong-account entitlement</strong> if backend does not validate original purchaser.</p>
+<h3>Practical outcome table</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Email</th>
+<th>Store intro trial</th>
+<th>TerriTool (typical)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>user1@…</td>
+<td>Often works</td>
+<td>Free trial / Free Package</td>
+</tr>
+<tr>
+<td>2–10</td>
+<td>user2@…–user10@…</td>
+<td>Usually <strong>blocked</strong></td>
+<td>Account exists; paywall or full price</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>One paid sub on store</td>
+<td>One billing relationship</td>
+<td>Only linked RC <code>app_user_id</code> unless Restore moves it</td>
+</tr>
+</tbody>
+</table>
+<h3>Risks</h3>
+<ol>
+<li><strong>Trial farming</strong> — many emails, one device  </li>
+<li><strong>Restore hijacking</strong> — subscription restored onto wrong TerriTool user  </li>
+<li><strong>Duplicate device_token</strong> — 10 registrations from one device  </li>
+<li><strong>Webhook</strong> — must map purchase to correct <code>app_user_id</code> only  </li>
+</ol>
+<hr />
+<h2>5. Giving a trial to all ten emails</h2>
+<p><strong>Question:</strong> What if you want to give a trial to <strong>all 10</strong> emails?</p>
+<h3>What you cannot do</h3>
+<p><strong>Ten Apple/Google store intro trials</strong> on the <strong>same device + same payment method</strong> — <strong>not possible</strong>. Stores allow roughly <strong>one intro offer per store account</strong> per subscription group.</p>
+<p>The app button <strong>“Start 7-day free trial”</strong> calls <code>Purchases.purchasePackage</code> — that uses the <strong>store intro offer</strong>.</p>
+<h3>What you can do</h3>
+<p>Trials for all 10 must be <strong>TerriTool-controlled</strong> (backend or RevenueCat promotional)—not ten store intro offers.</p>
+<hr />
+<h3>Option A — Backend-only trial (recommended simplest)</h3>
+<p>Grant trial in <strong>your database on registration</strong> without store purchase.</p>
+<p><strong>On <code>mobileregistration</code> success:</strong></p>
+<ul>
+<li><code>package_name = "Free Package"</code></li>
+<li><code>free_trial_status = active</code> (1 / true)</li>
+<li><code>subscription_date</code> = today + 7 days</li>
+<li>Grant trial credits (e.g. 60)</li>
+<li>User enters app <strong>without</strong> completing IAP</li>
+</ul>
+<p><strong>When trial ends:</strong></p>
+<ul>
+<li>Set <code>free_trial_status = inactive</code></li>
+<li>App shows <strong>SubscriptionGate</strong></li>
+<li>User must complete <strong>real</strong> App Store / Play purchase</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Each email gets 7 days</td>
+<td>Not a store subscription until conversion</td>
+</tr>
+<tr>
+<td>Same device OK</td>
+<td>Fraud risk (10 × credits)</td>
+</tr>
+<tr>
+<td>No store trial limit</td>
+<td>Need device/abuse rules</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Option B — RevenueCat promotional entitlement</h3>
+<p>Backend calls <strong>RevenueCat REST API</strong> to grant time-limited entitlement per <code>app_user_id</code> without store intro:</p>
+<pre><code class="language-text">Register user3@… → logIn(3_user3@…) → Backend grants RC promotional entitlement 7 days
+→ Backend sets Free Package + credits
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clean per-user RC record</td>
+<td>Requires RC API integration</td>
+</tr>
+<tr>
+<td>Webhook-friendly</td>
+<td>More engineering</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Option C — Hybrid (production pattern)</h3>
+<table>
+<thead>
+<tr>
+<th>Account</th>
+<th>Trial source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First on device</td>
+<td>Store trial via paywall (current flow)</td>
+</tr>
+<tr>
+<td>Same device, emails 2–10</td>
+<td>Backend-only or RC promotional trial</td>
+</tr>
+</tbody>
+</table>
+<p>Backend checks <code>device_token</code> / device fingerprint:</p>
+<ul>
+<li>First registration → normal paywall  </li>
+<li>Additional accounts on same device → backend grants 7-day <code>Free Package</code> <strong>without</strong> store intro  </li>
+</ul>
+<hr />
+<h3>Changes required vs today</h3>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Today</th>
+<th>For 10 trials</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Register paywall</td>
+<td>Store purchase → “trial activated”</td>
+<td>Allow dashboard when <strong>backend</strong> grants trial</td>
+</tr>
+<tr>
+<td><code>revenuecate-success</code></td>
+<td>After store purchase</td>
+<td>Also from register API <strong>or</strong> not required for backend trials</td>
+</tr>
+<tr>
+<td><code>free_trial_status</code></td>
+<td>From <code>getusercredit</code></td>
+<td>Set <strong>active</strong> per new user (with rules)</td>
+</tr>
+<tr>
+<td>SubscriptionGate</td>
+<td>Blocks if inactive</td>
+<td>OK when backend sets active</td>
+</tr>
+<tr>
+<td>Abuse control</td>
+<td>Minimal</td>
+<td><strong>Required</strong> — limits per device</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3>Example: all 10 get backend trial</h3>
+<pre><code class="language-text">user1@…  → Free Package, 7 days, 60 credits, free_trial_status=1
+user2@…  → Same (same device_token OK)
+…
+user10@… → Same
+</code></pre>
+<p>After 7 days each user independently → inactive → must pay (one store sub per store account still applies at conversion).</p>
+<h3>Abuse controls (recommended)</h3>
+<ul>
+<li>Max N trials per <code>device_token</code>  </li>
+<li>Email verification before trial  </li>
+<li>Reduced credits for additional accounts on same device  </li>
+<li>Log <code>device_token</code> + <code>user_id</code> on registration  </li>
+</ul>
+<hr />
+<h2>6. Backend webhook implementation</h2>
+<h3>Webhook URLs</h3>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Example URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Staging</td>
+<td><code>https://staging.territool.com/index.php/api/revenuecat/webhook</code></td>
+</tr>
+<tr>
+<td>Production</td>
+<td><code>https://app.territool.com/index.php/api/revenuecat/webhook</code></td>
+</tr>
+</tbody>
+</table>
+<p>Configure <strong>Authorization secret</strong> in RevenueCat dashboard; verify on every request.</p>
+<h3>Events to enable</h3>
+<p><code>INITIAL_PURCHASE</code>, <code>RENEWAL</code>, <code>PRODUCT_CHANGE</code>, <code>CANCELLATION</code>, <code>UNCANCELLATION</code>, <code>EXPIRATION</code>, <code>BILLING_ISSUE</code>, optional <code>TEST</code>.</p>
+<h3>Product → package mapping (example)</h3>
+<pre><code class="language-php">// config/revenuecat_products.php
+'com.territool.base.monthly' =&gt; [
+    'package_name' =&gt; 'Base Package',
+    'duration' =&gt; 'monthly',
+    'credits_monthly' =&gt; 100,
+],
+'territool_pro_monthly' =&gt; [
+    'package_name' =&gt; 'Pro Package',
+    'duration' =&gt; 'monthly',
+    'credits_monthly' =&gt; 120,
+],
+// Add every iOS + Android product id from RevenueCat dashboard
+</code></pre>
+<h3>Handler outline (Laravel)</h3>
+<pre><code class="language-php">public function revenueCatWebhook(Request $request) {
+    // 1. Verify Authorization
+    // 2. Parse event; idempotency on event.id
+    // 3. Resolve user from app_user_id
+    // 4. GET subscriber from RevenueCat REST API
+    // 5. syncUserSubscriptionFromRevenueCat($userId, $subscriber)
+    // 6. Return 200
+}
+</code></pre>
+<h3>Refactor existing endpoint</h3>
+<p><code>POST /api/revenuecate-success</code> should call the <strong>same</strong> <code>syncUserSubscriptionFromRevenueCat()</code> as the webhook (client nudge after purchase).</p>
+<p><strong>Recommended mobile addition:</strong> Call <code>revenuecate-success</code> after Settings paywall success for faster UI refresh.</p>
+<hr />
+<h2>7. Android Base → Pro upgrade (proration)</h2>
+<p>For <strong>Base → Pro</strong> on Android, the app uses:</p>
+<pre><code class="language-javascript">Purchases.PRORATION_MODE.IMMEDIATE_AND_CHARGE_PRORATED_PRICE
+</code></pre>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IMMEDIATE</strong></td>
+<td>Pro access starts right away</td>
+</tr>
+<tr>
+<td><strong>CHARGE PRORATED PRICE</strong></td>
+<td>User pays price <strong>difference</strong> for remaining days in cycle</td>
+</tr>
+<tr>
+<td><strong>Same billing date</strong></td>
+<td>Renewal day unchanged (e.g. still the 1st each month)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example:</strong> Base ₹999/mo → Pro ₹1,999/mo, upgrade mid-cycle → ~₹484 charge today (illustrative) → full Pro ₹1,999 on next renewal.</p>
+<p><strong>Pro → Base</strong> uses <code>DEFERRED</code> — change at <strong>next billing date</strong>.</p>
+<p>iOS uses plain <code>purchasePackage</code>; Apple handles proration in the subscription group.</p>
+<hr />
+<h2>8. Security, idempotency &amp; checklist</h2>
+<h3>Security</h3>
+<ul>
+<li>Verify RevenueCat webhook Authorization header  </li>
+<li>RevenueCat secret API key <strong>server only</strong>  </li>
+<li>Never trust client-sent <code>package_name</code>  </li>
+<li>Validate Restore / transfer against original <code>app_user_id</code>  </li>
+</ul>
+<h3>Idempotency</h3>
+<ul>
+<li>Store <code>event.id</code> in <code>revenuecat_webhook_events</code> (unique index)  </li>
+<li>Re-fetch subscriber on every webhook  </li>
+<li>Prefer subscriber snapshot over event type when out-of-order  </li>
+</ul>
+<h3>QA checklist (iOS + Android)</h3>
+<ul>
+<li>[ ] New user store trial  </li>
+<li>[ ] Trial → paid Base  </li>
+<li>[ ] Base → Pro immediate upgrade  </li>
+<li>[ ] Pro → Base deferred downgrade  </li>
+<li>[ ] Cancel → active until expiration  </li>
+<li>[ ] Expiration → SubscriptionGate  </li>
+<li>[ ] Monthly renewal + credits  </li>
+<li>[ ] Ten accounts same device (store vs backend trial behavior)  </li>
+</ul>
+<hr />
+<h2>9. Quick reference tables</h2>
+<h3>Store vs TerriTool vs RevenueCat</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Store (Apple/Google)</th>
+<th>RevenueCat</th>
+<th>TerriTool backend</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owns billing</td>
+<td>Yes</td>
+<td>Syncs</td>
+<td>Credits + package label</td>
+</tr>
+<tr>
+<td>Per email account</td>
+<td>No (per store account)</td>
+<td>Per <code>app_user_id</code></td>
+<td>Per user id</td>
+</tr>
+<tr>
+<td>Intro trial limit</td>
+<td>1 per rules</td>
+<td>Reflects store</td>
+<td>Can override with backend trial</td>
+</tr>
+</tbody>
+</table>
+<h3>When to use which trial strategy</h3>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Strategy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Normal production signup</td>
+<td>Store trial + webhook + <code>revenuecate-success</code></td>
+</tr>
+<tr>
+<td>Multiple emails, one phone</td>
+<td>Backend trial (Option A) or hybrid (Option C)</td>
+</tr>
+<tr>
+<td>QA / internal testing</td>
+<td>RC sandbox + backend trial flags</td>
+</tr>
+<tr>
+<td>All 10 get 7 days</td>
+<td><strong>Backend or RC promotional</strong> — not 10 store intros</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Document end</h2>
+<p><strong>TerriTool</strong> — RevenueCat Subscriptions Guide v1.0<br />
+For questions: align product IDs in RevenueCat dashboard with <code>config/revenuecat_products.php</code> on the server and offering IDs in <code>subscribe.js</code> on mobile.</p>
+</body>
+</html>

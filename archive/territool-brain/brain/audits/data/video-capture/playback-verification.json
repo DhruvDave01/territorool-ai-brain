@@ -1,0 +1,146 @@
+[
+  {
+    "duration_seconds" : 114.54666666666667,
+    "file" : "03 Route Find Contacts Purchase.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 114.27166666666666,
+    "file" : "04 List Find Contacts Purchase.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 66.310000000000002,
+    "file" : "05 Create Company and Validation.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 55.876666666666665,
+    "file" : "06 Company Details and Edit.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 86.38666666666667,
+    "file" : "07 Contact Create Edit and Notes.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 58.228333333333332,
+    "file" : "08 Company Activity and Visit.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 98.12833333333333,
+    "file" : "09 List Create Search and Edit.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 85.351666666666674,
+    "file" : "10 List Search Filters Sharing and Map.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 61.960000000000001,
+    "file" : "11 Route Creation.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 84.671666666666667,
+    "file" : "12 Route Visits and Editing.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 100.25166666666667,
+    "file" : "13 Route Search Filters Sharing and Map.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 119.82666666666667,
+    "file" : "14 AI Find Leads Map and List Import.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 91.486666666666665,
+    "file" : "15 Find Leads Search and Import.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 61.333333333333336,
+    "file" : "16 Address Book Contacts Search and Purchase Verification.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 61.008333333333333,
+    "file" : "17 Business Card Gallery OCR and Save.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 15.853333333333333,
+    "file" : "18 QR and Camera Scanner Availability.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 29.843333333333334,
+    "file" : "19 Settings Tags and App Update.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 22.27,
+    "file" : "20 Current Package Modal Open and Close.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 89.723333333333329,
+    "file" : "21 Registration Until Payment Setup.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 76.913333333333327,
+    "file" : "22 Login Logout and Password Validation.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 26.405000000000001,
+    "file" : "23 Referral Forms and App Lifecycle.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 93.281666666666666,
+    "file" : "24 Contact Status and Test Data Deletion.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 42.886666666666663,
+    "file" : "25 Dashboard Activity and Calendar Final.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  },
+  {
+    "duration_seconds" : 156.68833333333333,
+    "file" : "26 AI Find Leads Search to Route Final.mov",
+    "first_midpoint_and_end_decoded" : true,
+    "thumbnail_written" : true
+  }
+]

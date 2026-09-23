@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Render still template — Settings plus a totals card</title>
+<style>
+@font-face{font-family:DINB;src:url(DIN-Condensed-Bold.ttf)}
+@font-face{font-family:Inter;src:url(Inter-Regular.ttf)}
+@font-face{font-family:InterM;src:url(Inter-Medium.ttf)}
+html,body{margin:0;padding:0}
+body{width:440px;height:956px;background:#F6F7FB;position:relative;overflow:hidden;font-family:Inter}
+.crop{position:absolute;left:0;width:440px;background:url(still.png) no-repeat;background-size:440px 956px}
+#top{top:0;height:591px;background-position:0 0}
+#tags{top:703px;height:73px;background-position:0 -595px}
+#preview{top:783px;height:77px;background-position:0 -684px}
+#footer{top:858px;height:98px;background-position:0 -858px}
+
+/* Totals card: same chrome as the Tags card */
+#totals{position:absolute;left:17px;top:595px;width:406px;height:96px;box-sizing:border-box;
+  background:#fff;border-radius:16px;border:1px solid #EDEFF3;display:flex;align-items:stretch;padding:0 4px}
+.stat{flex:1;display:flex;align-items:center;gap:10px;padding:0 10px;position:relative}
+.stat+.stat::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:1px;background:#E9ECF2}
+.ic{width:38px;height:38px;border-radius:19px;background:#E8EEFF;flex:none;display:flex;align-items:center;justify-content:center}
+.ic i{display:block;width:21px;height:21px;background:#124ac6;-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.txt{display:flex;flex-direction:column;line-height:1}
+.n{font-family:Inter;font-size:22px;color:#124ac6;letter-spacing:-.2px}
+.l{font-family:DINB;font-size:15px;color:#2E3238;margin-top:5px;letter-spacing:.1px}
+</style></head><body>
+<div id="top" class="crop"></div>
+<div id="totals">
+  <div class="stat"><div class="ic"><i style="--m:url(icon_company.png)"></i></div><div class="txt"><span class="n">128</span><span class="l">Companies</span></div></div>
+  <div class="stat"><div class="ic"><i style="--m:url(icon_routes.png)"></i></div><div class="txt"><span class="n">14</span><span class="l">Routes</span></div></div>
+  <div class="stat"><div class="ic"><i style="--m:url(Supply3.png)"></i></div><div class="txt"><span class="n">9</span><span class="l">Lists</span></div></div>
+</div>
+<div id="tags" class="crop"></div>
+<div id="preview" class="crop"></div>
+<div id="footer" class="crop"></div>
+</body></html>

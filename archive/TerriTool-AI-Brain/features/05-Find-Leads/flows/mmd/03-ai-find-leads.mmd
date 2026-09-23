@@ -1,0 +1,33 @@
+---
+title: AI Find Leads
+---
+flowchart TD
+  Open[Open AI Find Leads] --> Mode{Search Multiple or Search One}
+  Mode -->|Multiple| Loc[State + city]
+  Loc --> Type[Business type text]
+  Type --> AI[AI Ideal Prospects]
+  AI --> Search[Search - free]
+  Mode -->|One| Named[Named business lookup]
+  Named --> Search
+  Search --> Results{Leads found?}
+  Results -->|No| Empty[Empty / refine]
+  Empty --> Loc
+  Results -->|Yes| Table[Table or Map View]
+  Table --> Select[Check leads]
+  Select --> Next[Next Step]
+  Next --> Credits{Enough credits? 1 per lead}
+  Credits -->|No| Pay[Upgrade or credits add-on]
+  Credits -->|Yes| Save[Progress modal - keep tab open]
+  Save --> Debit[Debit N credits]
+  Debit --> Modal[Leads Added Successfully]
+  Modal --> A1[Create or add Route]
+  Modal --> A2[Create or add List]
+  Modal --> A3[Return to Dashboard]
+  Modal --> A4[Find More Leads]
+  A1 --> RNew{New or existing route}
+  RNew -->|New name| RBuild[Route builder step 1]
+  RNew -->|Existing| RAppend[Append + optional re-optimize]
+  A2 --> LNew{New or existing list}
+  LNew -->|New name| LBuild[List builder]
+  LNew -->|Existing| LAppend[Append companies]
+  A4 --> Open

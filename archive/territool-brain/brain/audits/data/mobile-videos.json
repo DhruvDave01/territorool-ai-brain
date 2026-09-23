@@ -1,0 +1,432 @@
+{
+  "generatedAt": "2026-09-16T11:04:08.440Z",
+  "source": "library",
+  "files": [
+    {
+      "id": "MV-01",
+      "module": "01 Dashboard",
+      "name": "Dashboard Activity and Calendar",
+      "flows": [
+        "F05",
+        "F14"
+      ],
+      "steps": "Recent and Upcoming tabs; calendar month/date navigation; full activity feed and scrolling.",
+      "sha256": "60eadf2bfc3159866d0679f340ab8fc8a9aab195dbd73ae6c867c7cbb17b5595",
+      "startsOnDashboard": true,
+      "seconds": 43,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 17411877,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/01 Dashboard/Dashboard Activity and Calendar.mov"
+    },
+    {
+      "id": "MV-02",
+      "module": "02 Companies",
+      "name": "Company Activity and Visit",
+      "flows": [
+        "F12",
+        "F14",
+        "F10"
+      ],
+      "steps": "Activity validation; create Visit activity; edit its note; activity tabs.",
+      "sha256": "33144cdaa8fe2b20be30bc3e63531ff0822d9d7b7041ef980502955fc038bc0b",
+      "startsOnDashboard": true,
+      "seconds": 58,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 23532685,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/02 Companies/Company Activity and Visit.mov"
+    },
+    {
+      "id": "MV-03",
+      "module": "02 Companies",
+      "name": "Company Details and Edit",
+      "flows": [
+        "F12"
+      ],
+      "steps": "Address Book search; company details and More Info; edit company name and industry; verify saved values.",
+      "sha256": "d247ca862d0cead7f9aba3fef6b5ed739110e8d6a5432588aba5ddb5933078e6",
+      "startsOnDashboard": true,
+      "seconds": 56,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 34569112,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/02 Companies/Company Details and Edit.mov"
+    },
+    {
+      "id": "MV-04",
+      "module": "02 Companies",
+      "name": "Contact Notes and Test Data Deletion",
+      "flows": [
+        "F13",
+        "F12"
+      ],
+      "steps": "Verify saved contact note and role; cancel then confirm contact deletion; close lingering sheet; delete disposable scanned company and verify success.",
+      "sha256": "4254fc9f223ea03653a874c0b5b311a562af274bd1df97f744b1c62452119fc1",
+      "startsOnDashboard": true,
+      "seconds": 93,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 44819317,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/02 Companies/Contact Notes and Test Data Deletion.mov"
+    },
+    {
+      "id": "MV-05",
+      "module": "02 Companies",
+      "name": "Create Company and Validation",
+      "flows": [
+        "F12"
+      ],
+      "steps": "Empty-name validation; manual company entry; address and industry; save.",
+      "sha256": "9b12c89d7c6da1dfd6149ac53435bbbb5e28f30c3c4bee3b3363176fcaab1515",
+      "startsOnDashboard": true,
+      "seconds": 66,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 19079195,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/02 Companies/Create Company and Validation.mov"
+    },
+    {
+      "id": "MV-06",
+      "module": "03 Contacts",
+      "name": "Address Book Contacts and Purchase Verification",
+      "flows": [
+        "F13",
+        "F15"
+      ],
+      "steps": "Search Connie Munson; verify purchased phone and enabled email; add contact company to Fresh Coffee route; verify stop.",
+      "sha256": "da056392a73a4ebbde990bbe01a5a7155d2a032cda47a552da0d0660e80d1183",
+      "startsOnDashboard": true,
+      "seconds": 61,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 29109208,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/03 Contacts/Address Book Contacts and Purchase Verification.mov"
+    },
+    {
+      "id": "MV-07",
+      "module": "03 Contacts",
+      "name": "Contact Create Edit and Notes",
+      "flows": [
+        "F13"
+      ],
+      "steps": "Required fields and invalid email validation; create contact; edit position and notes; verify.",
+      "sha256": "3d145d952a4bc7f8d1bc342df1124c61220ae44198249a48e476cfe717fbcc82",
+      "startsOnDashboard": true,
+      "seconds": 86,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 34026104,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/03 Contacts/Contact Create Edit and Notes.mov"
+    },
+    {
+      "id": "MV-08",
+      "module": "04 Lists",
+      "name": "List Create Search and Edit",
+      "flows": [
+        "F11"
+      ],
+      "steps": "Create Fresh Demo List; one-company edit validation; add second company; save and verify.",
+      "sha256": "9695f0a25b3f9f61a021b42c9965b5deef74cc3c4b59176fc5612b6d9f7a4e4f",
+      "startsOnDashboard": true,
+      "seconds": 98,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 50651012,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/04 Lists/List Create Search and Edit.mov"
+    },
+    {
+      "id": "MV-09",
+      "module": "04 Lists",
+      "name": "List Find Contacts Purchase",
+      "flows": [
+        "F11",
+        "F15"
+      ],
+      "steps": "Dashboard > Lists > Test List Brain 0002 > Find Contacts; review/remove/reselect; buy phone and email for Connie Munson using 2 existing credits. Completion verified in the Contacts video.",
+      "sha256": "b8d6e3666abdce1499c6edf9f0010ecba15b79a5e4c9632b8ccfdf7fdda1d8db",
+      "startsOnDashboard": true,
+      "seconds": 114,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 63209969,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/04 Lists/List Find Contacts Purchase.mov"
+    },
+    {
+      "id": "MV-10",
+      "module": "04 Lists",
+      "name": "List Search Filters Sharing and Map",
+      "flows": [
+        "F11",
+        "F17"
+      ],
+      "steps": "Find list; no-result company search; visited filter and reset; invalid sharing email; map and zoom.",
+      "sha256": "923c5bdc9f5ac2486777017480557f4b2cf8accaae407fd9699794ae54d9890d",
+      "startsOnDashboard": true,
+      "seconds": 85,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 59851435,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/04 Lists/List Search Filters Sharing and Map.mov"
+    },
+    {
+      "id": "MV-11",
+      "module": "05 Routes",
+      "name": "Route Creation",
+      "flows": [
+        "F08"
+      ],
+      "steps": "Name validation; select companies; review stops; choose endpoints; publish Fresh Demo Route; verify.",
+      "sha256": "d3e863d29b8ae45e94c54f09daf1d1a7e312539b879d6d0a6b74db1d22a9b103",
+      "startsOnDashboard": true,
+      "seconds": 62,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 36901738,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/05 Routes/Route Creation.mov"
+    },
+    {
+      "id": "MV-12",
+      "module": "05 Routes",
+      "name": "Route Find Contacts Purchase",
+      "flows": [
+        "F08",
+        "F15"
+      ],
+      "steps": "Dashboard > Routes > Fresh Coffee > Find Contacts; company contact preview; select/review/remove/reselect; buy email using 1 existing credit; verify saved contact.",
+      "sha256": "0085768f689d525562604f391f274807376ffd5201c4c9c19c331b2fc885b524",
+      "startsOnDashboard": true,
+      "seconds": 115,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 45047574,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/05 Routes/Route Find Contacts Purchase.mov"
+    },
+    {
+      "id": "MV-13",
+      "module": "05 Routes",
+      "name": "Route Search Filters Sharing and Map",
+      "flows": [
+        "F09",
+        "F17"
+      ],
+      "steps": "Search route and stops; visited filter and reset; invalid sharing email; map zoom; pin details.",
+      "sha256": "dacce726c2c7e5a4eadb7846833d8428ee59ac3bf9ba57a5d46982d10ce0a294",
+      "startsOnDashboard": true,
+      "seconds": 100,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 20383039,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/05 Routes/Route Search Filters Sharing and Map.mov"
+    },
+    {
+      "id": "MV-14",
+      "module": "05 Routes",
+      "name": "Route Visits and Editing",
+      "flows": [
+        "F09",
+        "F10"
+      ],
+      "steps": "Mark and remove visit; next/previous waypoint; edit route; save; endpoint reversal observed.",
+      "sha256": "549e054fc9c5172c455dcee1686ac770b0510e0c972bf93a9be74470a3cc1f30",
+      "startsOnDashboard": true,
+      "seconds": 85,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 41419242,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/05 Routes/Route Visits and Editing.mov"
+    },
+    {
+      "id": "MV-15",
+      "module": "06 Lead Discovery",
+      "name": "AI Find Leads Map and List Import",
+      "flows": [
+        "F06",
+        "F11"
+      ],
+      "steps": "Saved city results; map; start/end/clear area-selection controls; minimum-two validation; select two leads; import into Fresh Demo List; verify company rows.",
+      "sha256": "6edf6d0d94704d299a5cda3e0950ea2256f936f19a6b97cbc4ea557738b57f1a",
+      "startsOnDashboard": true,
+      "seconds": 120,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 65980794,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/06 Lead Discovery/AI Find Leads Map and List Import.mov"
+    },
+    {
+      "id": "MV-16",
+      "module": "06 Lead Discovery",
+      "name": "AI Find Leads Search to Route",
+      "flows": [
+        "F06",
+        "F08"
+      ],
+      "steps": "Clear saved search; ZIP 94043 and Coffee; search; select and import two leads; create Fresh AI route; one imported stop triggers validation; add second stop; publish and verify.",
+      "sha256": "579d3c27506edc6ad6dbce07fac999d0d32e1ac832b3d9545e2f2da623d3ee2a",
+      "startsOnDashboard": true,
+      "seconds": 157,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 78524584,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/06 Lead Discovery/AI Find Leads Search to Route.mov"
+    },
+    {
+      "id": "MV-17",
+      "module": "06 Lead Discovery",
+      "name": "Find Leads Search and Import",
+      "flows": [
+        "F07",
+        "F06"
+      ],
+      "steps": "Dashboard > Address Book > add menu > Find Leads; ZIP 94043 and Coffee; select 41 results; confirm import; verify White Tiger in Address Book.",
+      "sha256": "ecf3024f4d7470f8aeb08a073290c415704b3d899d54b1cc802cf4b5354b6c5a",
+      "startsOnDashboard": true,
+      "seconds": 91,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 110211768,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/06 Lead Discovery/Find Leads Search and Import.mov"
+    },
+    {
+      "id": "MV-18",
+      "module": "07 Scanners",
+      "name": "Business Card Gallery OCR and Save",
+      "flows": [
+        "F18"
+      ],
+      "steps": "Choose existing public sample from Gallery; crop; OCR; review and rename company/contact; clear sample phone; save; verify company/contact.",
+      "sha256": "e9a52e0ab05aef9e9ebe6170430b35b47ae6970e953fbad9b12e3854bfd5cebb",
+      "startsOnDashboard": true,
+      "seconds": 61,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 12401888,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/07 Scanners/Business Card Gallery OCR and Save.mov"
+    },
+    {
+      "id": "MV-19",
+      "module": "07 Scanners",
+      "name": "QR and Camera Scanner Availability",
+      "flows": [
+        "F19",
+        "F18"
+      ],
+      "steps": "Open QR scanner; return; try business-card camera; capture Simulator camera-unavailable message.",
+      "sha256": "93ae62728e839f266ee1b768dfaefdb058910dc9baeb3b5b36ed112f04f30dd1",
+      "startsOnDashboard": true,
+      "seconds": 16,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 11997209,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/07 Scanners/QR and Camera Scanner Availability.mov"
+    },
+    {
+      "id": "MV-20",
+      "module": "08 Settings",
+      "name": "Current Package Modal Open and Close",
+      "flows": [
+        "F03",
+        "F20"
+      ],
+      "steps": "Pro Package Active; expand plan features; open cancellation form; close with X; reopen; Nevermind. No cancellation submitted.",
+      "sha256": "0b03ad38ddb10d20636f9b567a69d7bdbffc00721addead3aa9df3c424fd5386",
+      "startsOnDashboard": true,
+      "seconds": 22,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 4893380,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/08 Settings/Current Package Modal Open and Close.mov"
+    },
+    {
+      "id": "MV-21",
+      "module": "08 Settings",
+      "name": "Settings Tags and App Update",
+      "flows": [
+        "F20",
+        "F32"
+      ],
+      "steps": "Account information; status-tag color picker; update tags success; development app-update preview; Update Later.",
+      "sha256": "54b3d5e69cfad34812ea8a82bec915cc147c8b53b9b929c3123c59e6cd268add",
+      "startsOnDashboard": true,
+      "seconds": 30,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 6088022,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/08 Settings/Settings Tags and App Update.mov"
+    },
+    {
+      "id": "MV-22",
+      "module": "09 Authentication",
+      "name": "Login Logout and Password Validation",
+      "flows": [
+        "F01"
+      ],
+      "steps": "Logout cancel and confirm; empty login; invalid credentials and wrong-password error; password recovery web form; return; successful ann_new login to Dashboard.",
+      "sha256": "123843bc8c50f7effa1b2d16f88f2b7c60fa3e56a7392124df6ae808ffd672d8",
+      "startsOnDashboard": true,
+      "seconds": 77,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 18209242,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/09 Authentication/Login Logout and Password Validation.mov"
+    },
+    {
+      "id": "MV-23",
+      "module": "09 Authentication",
+      "name": "Registration Until Payment Setup",
+      "flows": [
+        "F02",
+        "F03"
+      ],
+      "steps": "Dashboard > Settings > logout > Register; goals; field/B2B role; Google Maps tool; required-field validation; submit test registration; stop at payment setup.",
+      "sha256": "dc6c52457bd8bf2041762ad70c1e7e98435ba48c722576125019914959db686f",
+      "startsOnDashboard": true,
+      "seconds": 90,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 23269626,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/09 Authentication/Registration Until Payment Setup.mov"
+    },
+    {
+      "id": "MV-24",
+      "module": "10 Referrals and App Lifecycle",
+      "name": "Referral Forms and App Lifecycle",
+      "flows": [
+        "F28",
+        "F32"
+      ],
+      "steps": "Referral empty/invalid email and invalid phone validation; close; background/resume; rotate and restore portrait.",
+      "sha256": "d19eea77233eff89f52000b9354559a0eb57489c21394e3dbb60dd0dd5ce8a72",
+      "startsOnDashboard": true,
+      "seconds": 26,
+      "width": 1320,
+      "height": 2868,
+      "bytes": 19570288,
+      "staged": null,
+      "library": "brain/assets/videos/mobile-owner/10 Referrals and App Lifecycle/Referral Forms and App Lifecycle.mov"
+    }
+  ]
+}

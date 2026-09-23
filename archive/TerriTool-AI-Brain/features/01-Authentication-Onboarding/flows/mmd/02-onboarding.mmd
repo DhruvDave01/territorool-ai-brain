@@ -1,0 +1,16 @@
+---
+title: Onboarding
+---
+flowchart TD
+  S1[Step 1: goals] --> Pick1{At least one goal?}
+  Pick1 -->|No| S1
+  Pick1 -->|Yes| Cont[Continue enabled]
+  Cont --> S2[Step 2: role]
+  S2 --> Back[Back to step 1]
+  S2 --> Role{I'm in the field vs I lead a team}
+  Role --> Sell{Businesses B2B vs Homeowners}
+  Sell --> Ready{Role + sell-to picked?}
+  Ready -->|No| S2
+  Ready -->|Yes| Finish[Finish setup]
+  Finish -->|Field| Home[Home]
+  Finish -->|Manager| Mgr[Manager dashboard]

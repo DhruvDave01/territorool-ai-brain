@@ -1,0 +1,42 @@
+/* ===== resources/views/vendor/backpack/crud/inc/filters_navbar.blade.php · <style> block 1 of 1 ===== */
+.backpack-filter label {
+      color: #868686;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .navbar-filters {
+      min-height: 25px;
+      border-radius: 0;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+      border-color: #f4f4f4;
+    }
+
+    .navbar-filters .navbar-collapse {
+    	padding: 0;
+    }
+
+    .navbar-filters .navbar-toggle {
+      padding: 10px 15px;
+      border-radius: 0;
+    }
+
+    .navbar-filters .navbar-brand {
+      height: 25px;
+      padding: 5px 15px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    @media (min-width: 768px) {
+      .navbar-filters .navbar-nav>li>a {
+          padding-top: 5px;
+          padding-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar-filters .navbar-nav {
+        margin: 0;
+      }
+    }

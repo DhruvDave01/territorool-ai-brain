@@ -1,0 +1,32 @@
+---
+id: appendix-b-reading-order
+parent: core
+sources:
+  - TerriTool/App/App.js
+  - App/config/index.js
+  - webterritool/routes/api.php
+  - app/UserMcp/config/territool_app.php
+related:
+  - 01-project-overview.md
+  - 05-constraints-and-drift.md
+  - 07-vocabulary.md
+  - 09-credits-billing.md
+  - brains/README.md
+  - 14-mcp.md
+  - 15-voice-policy.md
+  - brains/mobile-ui.md
+  - brains/ui-ux-guardian.md
+  - screens/navigation-map.md
+  - screens/how-it-works.md
+---
+# Appendix B — Reading order for a new agent
+
+1. Root `../AI_BRAIN.md` sections 1–5 and 7–9, or this vault: [01-project-overview](01-project-overview.md), [05-constraints-and-drift](05-constraints-and-drift.md), [07-vocabulary](07-vocabulary.md), [09-credits-billing](09-credits-billing.md).
+2. Pick a [sub brain](brains/README.md) if the task is one surface (mobile code / mobile UI / web code / web UI / APIs). Any new or changed UI: [UI/UX Guardian](brains/ui-ux-guardian.md) first.
+3. Then either `TerriTool/App/App.js` + `App/config/index.js` **or** `webterritool/routes/api.php` + `app/UserMcp/config/territool_app.php`. Live dumps: [code/MOBILE_CODEBASE_BRAIN.md](code/MOBILE_CODEBASE_BRAIN.md), [code/WEB_CODEBASE_BRAIN.md](code/WEB_CODEBASE_BRAIN.md).
+4. Feature folder or giant controller for the task, plus the matching note under [features/](features/).
+5. If spoken/MCP behavior: [14-mcp.md](14-mcp.md) and [15-voice-policy.md](15-voice-policy.md). Manager assign→route→contacts: [screens/manager-mcp-how-it-works.md](screens/manager-mcp-how-it-works.md).
+6. If the task is **how a screen looks**: [brains/ui-ux-guardian.md](brains/ui-ux-guardian.md) then [brains/mobile-ui.md](brains/mobile-ui.md) then [design/MINI-DESIGN-BRAIN.md](design/MINI-DESIGN-BRAIN.md), or Guardian then [brains/web-design.md](brains/web-design.md) then [design-web/MINI-DESIGN-BRAIN.md](design-web/MINI-DESIGN-BRAIN.md). Product APIs still come from the [API brain](brains/api.md), not the visual pack. Do not mix classic AdminLTE with manager islands. Copy existing chrome; major UX → stop and ask.
+7. If the task is **who navigates where** on mobile: [screens/navigation-map.md](screens/navigation-map.md) then [screens/how-it-works.md](screens/how-it-works.md).
+8. If the task is a **web User / Manager / Admin journey**: [screens/web-how-it-works.md](screens/web-how-it-works.md) then [13-web-urls.md](13-web-urls.md). Do not mix classic Blade, `/manager/*` islands, and `/hq`.
+9. If the task is **manager MCP hunt/save/route/buy**: [screens/manager-mcp-how-it-works.md](screens/manager-mcp-how-it-works.md). Hunt is Places circle (`hunt_engine=manager_portal`), not user V2. Preview `save_ai_leads` then stop; confirm next turn.

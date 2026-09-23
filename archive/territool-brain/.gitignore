@@ -1,0 +1,26 @@
+repos/mobile
+repos/web
+shoebox/**/videos/*
+shoebox/**/frames/*
+# Raw screen recordings (1.1 GB; two files exceed GitHub's 100 MB limit). Source material, backed up
+# separately; LFS decision pending (USER SAID 2026-09-17). Notes cite them by path only.
+brain/assets/videos/
+node_modules
+.DS_Store
+
+# local-only credentials and machine config
+.local/
+tools/node_modules/
+tools/ms-playwright/
+
+# Obsidian: local UI state only, the vault config itself is shared
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+
+# Per-member, never shared: which tools this person uses (written by tools/brain-start.js)
+.local/profile.json
+
+# Generated tool instruction files come from brain/context/agent-brief.md — they ARE committed so a
+# fresh clone works before anyone runs a script. Listed here only as a reminder not to hand-edit them:
+#   AGENTS.md  .cursor/rules/territool-brain.mdc  .github/copilot-instructions.md

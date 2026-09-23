@@ -1,48 +1,35 @@
----
-id: README
-parent: brains
-sources:
-  - TerriTool/
-  - webterritool/
-related:
-  - brains/mobile-code.md
-  - code/mobile-code-details.md
-  - 10-mobile-app.md
-  - brains/mobile-ui.md
-  - design/MINI-DESIGN-BRAIN.md
-  - brains/web-code.md
-  - code/web-code-details.md
-  - 11-web-backend.md
----
-# Sub brains
+# Mini brains
 
-The **main brain** is this vault plus the frontal lobe `../AI_BRAIN.md`. These five hubs do not replace it. They are the first stop when the task is clearly one surface.
+Open one hub, then the review it names. For any new or changed UI, open the Guardian before the UI brain.
 
-**Do not invent** endpoints, FormData keys, credits, or MCP tools. `TerriTool/` and `webterritool/` win.
+| Mini brain | Open when |
+|---|---|
+| [Mobile code](mobile-code.md) | A React Native screen, navigator, Realm, or `API.post` |
+| [Mobile UI](mobile-ui.md) | Header, footer, type, color, a new mobile screen’s chrome |
+| [Web code](web-code.md) | Laravel, Blade, manager islands, MCP PHP |
+| [Web design](web-design.md) | Classic AdminLTE versus manager pixels |
+| [API](api.md) | A path, a FormData key, a credit spend. Full route table: [API endpoints](api-endpoints.md) |
+| [UI/UX Guardian](ui-ux-guardian.md) | Any new or changed UI |
 
-| Sub brain | Use when | Deep notes |
-|-----------|----------|------------|
-| [1. Mobile Code Brain](mobile-code.md) | RN screen, navigator, Realm, `API.post` | [code/mobile-code-details.md](../code/mobile-code-details.md) · [code/MOBILE_CODEBASE_BRAIN.md](../code/MOBILE_CODEBASE_BRAIN.md) · [10-mobile-app.md](../10-mobile-app.md) · [screens/navigation-map.md](../screens/navigation-map.md) |
-| [2. Mobile UI Brain](mobile-ui.md) | Chrome, tokens, footer | [design/MINI-DESIGN-BRAIN.md](../design/MINI-DESIGN-BRAIN.md) |
-| [3. Web Code Brain](web-code.md) | Laravel, `CompanylController`, MCP PHP, islands | [code/web-code-details.md](../code/web-code-details.md) · [code/WEB_CODEBASE_BRAIN.md](../code/WEB_CODEBASE_BRAIN.md) · [11-web-backend.md](../11-web-backend.md) |
-| [4. Web Design Brain](web-design.md) | Classic AdminLTE vs manager pixels | [design-web/MINI-DESIGN-BRAIN.md](../design-web/MINI-DESIGN-BRAIN.md) |
-| [5. Web and Mobile API Brain](api.md) | JWT paths, web URLs, FormData, publish | [12-mobile-api.md](../12-mobile-api.md) · [13-web-urls.md](../13-web-urls.md) · [data/formdata-dictionary.md](../data/formdata-dictionary.md) |
-
-Live code checks (2026-09-17): **46** stack screens; buy-contact **2 / 2 / 1**; `URL_BASE` **staging**; User MCP **1.4.1** (33 tools). Drift log: [05-constraints-and-drift.md](../05-constraints-and-drift.md). Ingest: [2026-09-17.md](../2026-09-17.md).
+Role cards are not a seventh stack. They say who lands where: [User](../roles/user.md), [Manager](../roles/manager.md), [Admin](../roles/admin.md).
 
 ```mermaid
 flowchart LR
-  main["Main brain"]
-  mc[Mobile Code]
-  mui[Mobile UI]
-  wc[Web Code]
-  wd[Web Design]
-  api[API]
+  main["Curated brain"]
+  g["UI/UX Guardian"]
+  mc["Mobile code"]
+  mui["Mobile UI"]
+  wc["Web code"]
+  wd["Web design"]
+  api["API"]
   main --- mc
   main --- mui
   main --- wc
   main --- wd
   main --- api
+  main --- g
+  g --- mui
+  g --- wd
   mc --- mui
   mc --- api
   wc --- wd

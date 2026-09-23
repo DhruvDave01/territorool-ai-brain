@@ -1,0 +1,2630 @@
+/**
+ * AI Find Leads — SaaS dashboard UI
+ */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root {
+  width: 100%;
+  max-width: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Page header ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-icon {
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-title h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-title p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 620px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-credits-pill {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  background: var(--blue-light);
+  border: 1px solid #d4e2fb;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-credits-pill.is-warning {
+  color: #b45309;
+  background: #fffbeb;
+  border-color: #fcd34d;
+}
+
+/* ── Step headers ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-header {
+  padding: 18px 22px 16px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-header-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 6px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-header-top .afl-step-title {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-clear-btn {
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-next-btn {
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-title {
+  margin: 0 0 6px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-label {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: #eef4ff;
+  border: 1px solid #dbeafe;
+  color: var(--blue);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-step-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 680px;
+}
+
+/* ── Search ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card--step {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 20px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card--step .afl-step-header {
+  border-bottom: 1px solid var(--border);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card-body {
+  padding: 16px 22px 18px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card--step .afl-progress-card {
+  margin: 14px 0 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-card--step .afl-search-hint {
+  margin: 10px 0 0;
+  padding: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 6px 6px 6px 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-field:focus-within {
+  border-color: #93b4f5;
+  box-shadow: 0 0 0 4px rgba(18, 74, 198, 0.1);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-icon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  padding: 14px 0;
+  outline: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-input::placeholder {
+  color: #9ca3af;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-input:disabled {
+  opacity: 0.65;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-clear {
+  border: none;
+  background: #f3f4f6;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-clear:hover {
+  background: #e5e7eb;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-btn {
+  border: none;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 13px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 108px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-btn:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-clear-all-btn {
+  background: #fff;
+  color: var(--text);
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-clear-all-btn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* ── Map ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  /* Avoid overflow:hidden + radius on the map ancestor — causes white tiles on pan/zoom */
+  overflow: visible;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 20px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap {
+  position: relative;
+  min-height: 620px;
+  background: #eef1f6;
+  border-radius: 12px;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-canvas .gm-style,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-canvas .gm-style * {
+  box-sizing: content-box;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-canvas .gm-style img {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap.afl-lasso-mode {
+  cursor: crosshair;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-canvas {
+  width: 100%;
+  min-height: 620px;
+  height: 620px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-secondary);
+  font-size: 14px;
+  z-index: 4;
+  padding: 24px;
+  text-align: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-overlay {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-overlay > * {
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-panel {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  min-width: 0;
+  flex-shrink: 0;
+  /* backdrop-filter over Maps causes white tile flashes while panning/zooming */
+  margin-left: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-panel.open {
+  width: 220px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 10px 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-head:hover {
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-body {
+  padding: 0 12px 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-steps li svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--text-muted);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn:hover {
+  background: var(--bg);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn.active {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(18, 74, 198, 0.25);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn--action {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn--action:hover:not(:disabled) {
+  background: #0f3d9e;
+  border-color: #0f3d9e;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn--clear:not(:disabled):hover {
+  border-color: #fca5a5;
+  color: #b91c1c;
+  background: #fef2f2;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -100%);
+  margin-top: -8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 8px 5px 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-text {
+  font-weight: 600;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-count {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-remove {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-remove:hover {
+  color: var(--red);
+  background: #fef2f2;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label--territory.active {
+  border-color: #93b4f5;
+  box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.12);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-open {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label-open:hover .afl-map-label-text {
+  color: var(--blue);
+}
+
+/* Territory list (opens modal) */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-list {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-list-hint {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip:hover {
+  border-color: #93b4f5;
+  background: #fafbfc;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip.active {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.1);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-chip-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-panel {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-panel-head {
+  padding: 16px 20px 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-panel-head h2 {
+  margin: 0 0 4px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-panel-head p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-panel-list {
+  padding: 12px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-row {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-row .afl-territory-chip {
+  flex: 1;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-row-remove {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lasso-row-remove:hover {
+  border-color: #fca5a5;
+  color: #b91c1c;
+  background: #fef2f2;
+}
+
+/* Territory assign modal (mgr-cdm shell + afl-tm content) */
+.afl-tm-dialog {
+  max-width: 640px;
+  width: 100%;
+}
+
+.afl-tm-overlay .mgr-cdm-head.afl-tm-head {
+  align-items: flex-start;
+  padding-top: 18px;
+  padding-bottom: 16px;
+}
+
+.afl-tm-subtitle {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #6e6e8a;
+  line-height: 1.45;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.afl-tm-subtitle-sep {
+  color: #c4c9d4;
+}
+
+.afl-tm-unassigned {
+  color: #6e6e8a;
+}
+
+.afl-tm-assigned {
+  color: #124ac6;
+  font-weight: 600;
+}
+
+.afl-tm-head-icon {
+  color: #fff;
+}
+
+.afl-tm-body {
+  padding: 18px 20px 20px !important;
+}
+
+.afl-tm-assign-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.afl-tm-assign-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.afl-tm-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  padding: 11px 40px 11px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  color: #0f172a;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.afl-tm-select:focus {
+  outline: none;
+  border-color: #93b4f5;
+  box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.12);
+}
+
+.afl-tm-select:disabled {
+  background-color: #f5f6fa;
+  color: #6e6e8a;
+}
+
+.afl-tm-empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: #6e6e8a;
+  font-size: 14px;
+  background: #f5f6fa;
+  border-radius: 10px;
+}
+
+.afl-tm-table-wrap {
+  max-height: min(48vh, 320px);
+  overflow: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.afl-tm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  table-layout: fixed;
+}
+
+.afl-tm-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f8fafc;
+}
+
+.afl-tm-table th {
+  text-align: left;
+  padding: 11px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e8a;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.afl-tm-table th:nth-child(1) {
+  width: 32%;
+}
+
+.afl-tm-table th:nth-child(2) {
+  width: 18%;
+}
+
+.afl-tm-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #f0f1f4;
+  color: #374151;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.afl-tm-table tbody tr:hover td {
+  background: #fafbfc;
+}
+
+.afl-tm-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.afl-tm-td-name {
+  font-weight: 600;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.afl-tm-td-category {
+  color: #6e6e8a;
+}
+
+.afl-tm-td-address {
+  color: #4b5563;
+  font-size: 12px;
+  word-break: break-word;
+}
+
+.afl-tm-foot {
+  justify-content: stretch !important;
+  padding: 14px 20px 18px !important;
+  gap: 10px;
+}
+
+.afl-tm-remove-btn {
+  border: 1px solid #fca5a5;
+  background: #fff;
+  color: #b91c1c;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.afl-tm-remove-btn:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #f87171;
+}
+
+.afl-tm-assign-btn {
+  width: 100%;
+  min-height: 44px;
+  font-size: 15px;
+  margin-left: auto;
+}
+
+.afl-tm-assign-btn:disabled {
+  background: #cbd5e1;
+  color: #64748b;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.afl-tm-field-hint {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #64748b;
+}
+
+.afl-tm-field-hint--error {
+  color: #b91c1c;
+}
+
+.afl-tm-select--needs-attention {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.25);
+}
+
+@media (min-width: 640px) {
+  .afl-tm-foot {
+    justify-content: flex-end !important;
+  }
+
+  .afl-tm-remove-btn {
+    margin-right: auto;
+  }
+
+  .afl-tm-assign-btn {
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-label {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, -100%);
+  margin-top: -8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: auto;
+  max-width: min(280px, 90vw);
+  flex-wrap: wrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-radius-text {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 11px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-handle {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.22);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-handle-glyph {
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.95;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-handle--center {
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid var(--afl-color, var(--blue));
+  color: var(--afl-color, var(--blue));
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-handle--edge {
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: var(--afl-color, var(--blue));
+  border: 2.5px solid #fff;
+  color: #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-hint {
+  margin: 10px 0 0;
+  padding: 0 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs--in-step {
+  margin-top: 14px;
+  border: none;
+  border-radius: 0;
+  border-top: 1px solid var(--border);
+  background: transparent;
+  padding: 14px 0 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs-head h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs-empty {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px 110px 36px;
+  gap: 8px;
+  align-items: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-input-label,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-input-type,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-input-radius {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  background: #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-city-autocomplete {
+  position: relative;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-city-autocomplete-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  max-height: 220px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-city-autocomplete-item {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font-size: 13px;
+  color: #111827;
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-city-autocomplete-item:hover,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-city-autocomplete-item:focus {
+  background: #f3f4f6;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-input-remove {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 16px 18px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results h2 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results-card strong {
+  font-size: 13px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-results-meta {
+  color: var(--text-secondary);
+}
+
+/* Progress card — directly below search bar */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card {
+  margin: 0 0 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-inner {
+  padding: 18px 20px 16px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-icon-wrap {
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #eff6ff;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-card-hint {
+  margin: 10px 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
+  transition: width 0.35s ease;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-detail {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #1e293b;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-working {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #94a3b8;
+  animation: afl-progress-dot 1.2s infinite ease-in-out;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes afl-progress-dot {
+  0%, 80%, 100% { opacity: 0.35; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-progress-loader {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.35), transparent);
+  animation: afl-progress-shimmer 1.4s infinite;
+}
+
+@keyframes afl-progress-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-drag-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: calc(100% - 28px);
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1);
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-hint-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-hint-sep {
+  color: #cbd5e1;
+  font-weight: 400;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-dot {
+  flex-shrink: 0;
+  display: inline-block;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.18);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-dot--center {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-dot--edge {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2.5px solid #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-icon--lasso {
+  color: #dc2626;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-hint-icon--pan {
+  color: var(--blue);
+  background: #eef4ff;
+  border-color: #dbeafe;
+}
+
+/* ── Leads by territory ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-top {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-top h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-sub {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-item {
+  border-bottom: 1px solid var(--border);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-item:last-child {
+  border-bottom: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-head:hover {
+  background: #fafbfc;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-item.open .afl-acc-head {
+  background: #fafbfc;
+  border-bottom: 1px solid var(--border);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-head-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-count-badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--afl-color, var(--blue)) 12%, #fff);
+  color: var(--afl-color, var(--blue));
+  border: 1px solid color-mix(in srgb, var(--afl-color, var(--blue)) 25%, #fff);
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-status-label {
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-status-value {
+  font-weight: 600;
+  color: var(--text);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-chevron {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-body {
+  padding: 16px 20px 18px;
+  background: #fafbfc;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-panel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 220px;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  min-width: 180px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-select:disabled {
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn-outline {
+  background: #fff;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn-outline:hover:not(:disabled) {
+  background: var(--bg);
+  border-color: #c7d7f5;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn-primary {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn-primary:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-selection-bar {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-empty {
+  padding: 16px 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: #fafbfc;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f1f3;
+  color: var(--text);
+  vertical-align: middle;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table tbody tr:hover {
+  background: #fafbfd;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table tbody tr.selected {
+  background: #f0f6ff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table tbody tr.selected:hover {
+  background: #e8f1ff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-th-check {
+  width: 40px;
+  padding-left: 14px !important;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-th-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-td-name {
+  font-weight: 500;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: transparent;
+  color: var(--blue);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 0 4px;
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-view-all:hover {
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-header {
+    flex-direction: column;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-field {
+    flex-wrap: wrap;
+    padding: 10px 10px 10px 16px;
+    gap: 10px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-input {
+    width: 100%;
+    flex: 1 1 100%;
+    order: 1;
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-icon {
+    order: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-clear {
+    order: 2;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-search-btn {
+    order: 3;
+    width: 100%;
+    min-width: 0;
+    margin-top: 2px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap,
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-canvas {
+    min-height: 440px;
+    height: 440px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-overlay {
+    flex-direction: column;
+    align-items: stretch;
+    right: 56px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-panel {
+    margin-left: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-how-panel.open {
+    width: auto;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-tools {
+    flex-wrap: wrap;
+    margin-left: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-tool-btn {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-head {
+    flex-wrap: wrap;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-head-main {
+    flex: 1 1 calc(100% - 30px);
+    order: 1;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-dot {
+    order: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-chevron {
+    order: 2;
+    margin-left: auto;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-status {
+    order: 3;
+    width: 100%;
+    margin-left: 22px;
+    justify-content: flex-start;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-status-value {
+    max-width: none;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-acc-assign-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-label {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-page-title h1 {
+    font-size: 22px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-credits-pill {
+    align-self: flex-start;
+    font-size: 12px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table th:nth-child(3),
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-leads-table td:nth-child(3) {
+    display: none;
+  }
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked {
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-map-canvas,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-lead-popup,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-circle-label--readonly {
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-map-overlay {
+  display: block;
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-map-overlay .afl-map-tools {
+  display: flex;
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-map-overlay .afl-how-panel,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-circle-handle {
+  display: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-wrap--locked .afl-map-drag-hint:not(.afl-map-drag-hint--current-leads) {
+  display: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-circle-label--readonly {
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-body {
+  padding: 0 24px 24px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs--step3 {
+  margin-top: 0;
+  padding: 20px 0 0;
+  border: none;
+  background: transparent;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs--step3 .afl-territory-inputs-head {
+  margin-bottom: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-territory-inputs--step3 .afl-territory-inputs-head p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps-item.is-active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps-item.is-active .afl-assign-steps-num {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-tabs {
+  gap: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-tab {
+  text-align: left;
+  cursor: pointer;
+  padding: 14px 16px;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-tab strong {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-tab.active {
+  border-color: var(--afl-area-color, var(--blue));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--afl-area-color, var(--blue)) 35%, transparent);
+  background: color-mix(in srgb, var(--afl-area-color, var(--blue)) 6%, #fff);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(340px, 1.25fr);
+  gap: 20px;
+  margin-top: 20px;
+  height: 660px;
+  min-height: 660px;
+  align-items: stretch;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head-top h3 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head-hint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-clear-btn {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-check-all {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-check-all input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  min-height: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-item {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-item.checked {
+  background: var(--blue-glow);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-item:last-child {
+  border-bottom: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-label input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-address {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-map-wrap {
+  height: 100%;
+  min-height: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-map-canvas {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section.is-highlighted {
+  border-color: #93c5fd;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fbff 100%);
+  box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.1);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section-title {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section.is-highlighted .afl-assign-section-title {
+  color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section-desc {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-section.is-highlighted .afl-assign-section-desc {
+  color: #1e40af;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  height: 44px;
+  width: 100%;
+  padding: 0 40px 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  color: var(--text);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-select:focus {
+  outline: none;
+  border-color: #93b4f5;
+  box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.12);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-select:disabled {
+  background-color: var(--bg);
+  color: var(--text-secondary);
+  cursor: not-allowed;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-submit-btn {
+  width: 100%;
+  height: 44px;
+  min-width: 0;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-map-overlay {
+  pointer-events: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-map-overlay .afl-map-tools {
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-drag-hint--single-line {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  padding: 7px 12px;
+  gap: 8px;
+  bottom: 12px;
+  max-width: calc(100% - 24px);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-drag-hint--single-line .afl-map-hint-item {
+  white-space: nowrap;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-drag-hint--single-line .afl-map-hint-sep {
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-map-drag-hint--single-line .afl-hint-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+
+@media (max-width: 1024px) {
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-body {
+    padding: 0 16px 16px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    height: auto;
+    min-height: 0;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-sidebar {
+    height: auto;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-panel {
+    height: auto;
+    max-height: none;
+    flex: none;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-scroll {
+    max-height: 380px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-head-row {
+    flex-wrap: wrap;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-map-wrap {
+    height: 360px;
+    min-height: 360px;
+  }
+
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-steps {
+    gap: 8px 12px;
+  }
+}
+
+/* ── Step 4 — Assigned leads (read-only) ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-body {
+  padding: 0 24px 24px;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-group {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  min-width: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-rep-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-rep-count {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--blue-light);
+  color: var(--blue);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #eef1f6;
+  overflow: hidden;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-wrap--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-loading,
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: rgba(238, 241, 246, 0.92);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-legend {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-legend-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2px solid transparent;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-legend-swatch--existing {
+  background: #e6eefb;
+  border-color: #94a3b8;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-legend-swatch--assigned {
+  background: #2563eb;
+  border-color: #ffffff;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  #mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assigned-body {
+    grid-template-columns: 1fr;
+    padding: 0 16px 16px;
+    padding-top: 16px;
+  }
+}
+
+/* ── Area color legend (Step 3 header) ── */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 12px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-area-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Colored dot inline in lead list rows (shown when >1 area) */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-list-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* Lead marker popup — custom overlay on map (not Google InfoWindow) */
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup {
+  position: absolute;
+  z-index: 7;
+  width: 280px;
+  max-width: calc(100vw - 48px);
+  transform: translate(-50%, calc(-100% - 18px));
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px 32px 8px 8px;
+  box-shadow: 0 8px 24px rgba(18, 74, 198, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  pointer-events: auto;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transform: translateX(-50%) rotate(45deg);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup-close:hover {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text);
+  margin: 0 0 6px;
+  padding-right: 0;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup-address {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-lead-popup-address svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--blue);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-card {
+  position: relative;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-complete-area {
+  position: relative;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-card.is-complete .afl-assign-card-content {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 28px 24px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success-text {
+  margin: 0 0 20px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+#mgr-portal-dashboard-wrapper #manager-ai-find-leads-root .afl-assign-success-actions .afl-btn {
+  text-decoration: none;
+}

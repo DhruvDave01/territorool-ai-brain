@@ -1,0 +1,28 @@
+{
+  "F22": {
+    "offline": "F22 is web-only (brain/context/parity-map.md row F22: mobile —); the offline type in territool-test §2 tests mobile rules M5 and S3.9, which have no web counterpart. Declared 2026-09-17."
+  },
+  "F23": {
+    "offline": "F23 is web-only by owner decision (brain/context/parity-map.md row F23: Business Agent web-only, mobile —); the offline type in territool-test §2 tests mobile rules M5 and S3.9, which have no web counterpart. Declared 2026-09-17."
+  },
+  "F24": {
+    "offline": "F24 is web-only by owner decision (brain/context/parity-map.md row F24: BSA management is web-only, mobile —); the offline type in territool-test §2 tests mobile rules M5 and S3.9, which have no web counterpart. Declared 2026-09-17."
+  },
+  "F25": {
+    "offline": "F25 Admin HQ is web-only (brain/context/parity-map.md row F25: mobile —); the offline type tests mobile rules M5 and S3.9, which have no web counterpart. Declared 2026-09-17."
+  },
+  "F26": {
+    "offline": "F26 has no mobile screen (brain/context/parity-map.md row F26: mobile 'API only (no mobile caller)'), so the mobile offline behaviour (M5, S3.9) has nothing to exercise. Declared 2026-09-17."
+  },
+  "F29": {
+    "offline": "F29 is a server-side MCP endpoint with no Territool client (parity-map row F29: mobile —, web —); offline handling belongs to the external AI client, not to Territool (M5 and S3.9 are mobile rules). Declared 2026-09-17.",
+    "visual": "F29 has no Territool screen: it is a JSON-RPC MCP server (parity-map row F29: mobile —, web —), so design-gate §B has nothing to render. Declared 2026-09-17."
+  },
+  "F30": {
+    "offline": "F30 is a server-side MCP endpoint with no Territool client (parity-map row F30: mobile —, web —); offline handling belongs to the external AI client (M5 and S3.9 are mobile rules). Declared 2026-09-17.",
+    "visual": "F30 has no Territool screen: it is a JSON-RPC MCP server (parity-map row F30: mobile —, web —), so design-gate §B has nothing to render. Declared 2026-09-17."
+  },
+  "F31": {
+    "offline": "F31 runs on the web and server only (parity-map row F31: mobile —); the offline type tests mobile rules M5 and S3.9. Declared 2026-09-17."
+  }
+}

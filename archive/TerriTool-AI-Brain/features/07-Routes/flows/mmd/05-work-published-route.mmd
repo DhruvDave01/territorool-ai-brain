@@ -1,0 +1,19 @@
+---
+title: Work a published route
+---
+flowchart TD
+  View[Route detail] --> Stats[Stops distance time contacts]
+  View --> Bulk{Bulk}
+  Bulk --> Del[Delete stops]
+  Bulk --> ToR[Add to another route]
+  Bulk --> ToL[Add to list]
+  View --> Row{Per stop}
+  Row --> Status[Change status]
+  Row --> FC[Find Contacts]
+  Row --> Note[Add note]
+  Row --> List[Add to list]
+  Row --> Route[Add to route]
+  View --> Add[+ Add Company]
+  Add --> Regen[Re-generate]
+  View --> Map[Map View - driving path]
+  View --> Export[PDF / CSV / Send]

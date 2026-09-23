@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review credits — Mobile, Web, Email</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; background: #111827; color: #fff; }
+    .bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
+      background: #1e293b;
+    }
+    .bar span { font-size: 12px; opacity: .7; margin-right: 8px; }
+    .bar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255,255,255,.12);
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+    .bar a.active { background: #124ac6; }
+    iframe { width: 100%; height: calc(100% - 52px); border: 0; background: #fff; }
+  </style>
+</head>
+<body>
+  <nav class="bar">
+    <span>Review credits</span>
+    <a class="active" href="dashboard-review-credits.html" data-view="mobile">Mobile</a>
+    <a href="dashboard-review-credits-web.html" data-view="web">Web</a>
+    <a href="dashboard-review-credits-email.html" data-view="email">Email</a>
+  </nav>
+  <iframe id="frame" title="Review credits UI" src="dashboard-review-credits.html"></iframe>
+  <script>
+    var frame = document.getElementById("frame");
+    document.querySelectorAll(".bar a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelectorAll(".bar a").forEach(function (el) { el.classList.remove("active"); });
+        a.classList.add("active");
+        frame.src = a.getAttribute("href");
+      });
+    });
+  </script>
+</body>
+</html>

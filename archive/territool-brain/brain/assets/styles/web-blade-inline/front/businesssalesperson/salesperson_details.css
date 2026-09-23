@@ -1,0 +1,11 @@
+/* ===== resources/views/front/businesssalesperson/salesperson_details.blade.php · <style> block 1 of 1 ===== */
+.nopadding {
+           padding: 0 !important;
+           margin: 0 !important;
+        }
+        .jqx-grid-cell-sort-bootstrap{
+            background-color: transparent;
+        }
+        .jqx-grid-column-sortdescbutton, .jqx-grid-column-sortascbutton{
+            display: none;
+        }

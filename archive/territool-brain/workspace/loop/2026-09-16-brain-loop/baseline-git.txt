@@ -1,0 +1,12 @@
+# mobile
+f20c5aa893d656347487bf63f74149337e7e6bfa
+M  ios/TerriTool.xcodeproj/project.pbxproj
+# web
+beta_react
+21d6348cc81082ee71c5ce3463aef2bacbe4863f
+ M .env
+ M bootstrap/cache/services.php
+ M public/js/manager-portal.js
+ M public/js/manager-portal.js.map
+?? .codex/
+?? .cursor/

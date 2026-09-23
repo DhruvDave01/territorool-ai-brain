@@ -1,0 +1,15 @@
+{
+ "capturedAt": "2026-09-16T14:02:25.289Z",
+ "base": "https://staging.territool.com",
+ "roles": {
+  "Admin": {
+   "loginPage": "/login",
+   "captchaOnLogin": false,
+   "landed": "/login",
+   "loginOk": false,
+   "loginError": "Please fix the following errors:    \n            \n                We are not able to connect with your credential, Please enter correct credential. | Sorry, you are not authorize to access this page. ×",
+   "pages": []
+  }
+ },
+ "probe": {}
+}

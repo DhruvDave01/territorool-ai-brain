@@ -1,0 +1,466 @@
+<title>Territool Brain Graph</title>
+<style>
+  /* Deliberately dark, single-theme: an Obsidian-style graph view. Every colour is painted explicitly.
+     Fonts: DIN 2014 from the Territool design library (fonts.js), no external fonts. */
+  :root { color-scheme: dark; --bg: #17181c; --stage: #1d1e23; --panel: #24252b; --panel-2: #2d2f36; --line: #34363e; --text: #dfe0e4; --soft: #c3c5cb; --muted: #9b9ea6; --faint: #70737c; --focus: #f3c46a; --link: #8ab4f8; --bold: "DIN 2014 Bold", sans-serif; --light: "DIN 2014 Light", sans-serif; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 14px/1.5 var(--light); font-synthesis: none; padding-inline: 16px; padding-block: 20px 28px; }
+  button { font-weight: 400; }
+  .app { max-width: 1480px; margin: 0 auto; display: grid; gap: 12px; }
+  .top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+  .brand { display: grid; gap: 3px; }
+  .eyebrow { font: 400 11px/1 var(--bold); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font: 400 26px/1.2 var(--bold); letter-spacing: -.01em; }
+  .stats { font: 400 12px var(--light); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .search { position: relative; width: min(380px, 100%); }
+  .search input { width: 100%; background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 9px 12px 9px 34px; font: 400 14px var(--light); }
+  .search input::placeholder { color: var(--faint); }
+  .search input:focus { outline: none; border-color: var(--link); box-shadow: 0 0 0 3px rgba(138, 180, 248, .18); }
+  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .results { position: absolute; z-index: 5; top: calc(100% + 4px); left: 0; right: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px; margin: 0; list-style: none; box-shadow: 0 12px 40px rgba(0, 0, 0, .45); }
+  .results button { width: 100%; display: flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--text); padding: 7px 8px; border-radius: 6px; font: 400 14px var(--bold); text-align: left; cursor: pointer; }
+  .results button:hover, .results button.active { background: var(--panel-2); }
+  .results .sub { margin-left: auto; color: var(--faint); font: 400 12px var(--light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%; }
+  .groups { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 400 13px var(--bold); cursor: pointer; }
+  .chip[aria-pressed="false"] { color: var(--faint); background: transparent; }
+  .chip[aria-pressed="false"] .dot { opacity: .3; }
+  .chip .n { font: 400 12px var(--light); color: var(--muted); }
+  .chip:focus-visible, .btn:focus-visible, .link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; display: inline-block; }
+  .sep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 4px; }
+  .btn { padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 400 13px var(--bold); cursor: pointer; }
+  .btn:hover { background: var(--panel-2); }
+  .work { position: relative; }
+  .stage { position: relative; height: min(80vh, 900px); min-height: 480px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, #23252b 0%, var(--stage) 55%, #18191d 100%); }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  canvas.hover { cursor: pointer; }
+  .hint { position: absolute; left: 12px; bottom: 10px; font: 400 12px var(--light); color: var(--faint); pointer-events: none; }
+  .zoombtns { position: absolute; right: 12px; bottom: 10px; display: flex; gap: 6px; }
+  .panel { position: absolute; top: 12px; right: 12px; width: 340px; max-height: calc(100% - 64px); overflow: auto; background: rgba(36, 37, 43, .95); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; align-content: start; }
+  @media (max-width: 860px) { .panel { position: static; width: auto; max-height: none; margin-top: 12px; } .hint { display: none; } .stage { height: 64vh; min-height: 380px; } }
+  .panel h2 { margin: 0; font: 400 20px/1.25 var(--bold); word-break: break-word; }
+  .kind { display: inline-flex; align-items: center; gap: 7px; font: 400 11px var(--bold); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .title { margin: 0; color: var(--text); font-family: var(--bold); }
+  .def { margin: 0; color: var(--soft); white-space: pre-line; }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+  dt { color: var(--faint); }
+  dd { margin: 0; color: var(--text); word-break: break-word; }
+  .small { font-size: 12px; }
+  .nb h3 { margin: 0 0 6px; font: 400 11px var(--bold); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+  .nbl { display: flex; flex-wrap: wrap; gap: 5px; }
+  .nbl button { background: var(--panel-2); border: 1px solid transparent; color: var(--text); border-radius: 5px; padding: 3px 7px; font: 400 13px var(--light); cursor: pointer; text-align: left; }
+  .nbl button:hover, .nbl button:focus-visible { border-color: var(--link); outline: none; }
+  .more { color: var(--faint); font-size: 12px; padding: 3px 4px; }
+  .link { background: none; border: 0; padding: 0; color: var(--link); font: inherit; cursor: pointer; text-align: left; }
+  .shot { display: block; width: 160px; max-width: 100%; aspect-ratio: 1320 / 2868; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); background: var(--panel-2); }
+  .stepnav { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stepl { margin: 0; padding-left: 20px; display: grid; gap: 3px; color: var(--muted); }
+  .stepl .cnt { color: var(--faint); font-size: 12px; }
+  .intro { display: grid; gap: 8px; }
+  .intro p { margin: 0; color: var(--soft); }
+  .hubs { display: grid; gap: 2px; }
+  .hubs button { display: flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--text); padding: 5px 6px; border-radius: 6px; font: 400 14px var(--bold); cursor: pointer; text-align: left; }
+  .hubs button:hover, .hubs button:focus-visible { background: var(--panel-2); outline: none; }
+  .hubs .deg { margin-left: auto; font: 400 12px var(--light); color: var(--muted); }
+  footer { color: var(--faint); font-size: 12px; }
+  .err { padding: 24px; color: var(--soft); }
+</style>
+
+<div class="app">
+  <div class="top">
+    <div class="brand">
+      <span class="eyebrow">Territool · Claude brain</span>
+      <h1>Territool Brain Graph</h1>
+      <span class="stats" id="stats">loading…</span>
+    </div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9b9ea6" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      <input id="q" type="search" placeholder="Search: Routes, Login, credits, Address book…" autocomplete="off" aria-label="Search the graph">
+      <ul class="results" id="results" hidden></ul>
+    </div>
+  </div>
+  <div class="groups" id="groups" role="group" aria-label="Show or hide node types"></div>
+  <div class="work">
+    <div class="stage" id="stage">
+      <canvas id="cv" role="img" aria-label="Graph of the Territool brain: documents, product features, app journeys, screenshots, rules, quality checks, owner decisions, problems found, app screens and code files"></canvas>
+      <div class="hint">scroll to zoom · drag background to pan · drag a dot · click to inspect</div>
+      <div class="zoombtns"><button class="btn" id="fit" type="button">Fit</button><button class="btn" id="reheat" type="button">Shake</button></div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+  <footer>One of two views of the same index (the other is the owner's Obsidian vault), built from <b>territool-brain/</b> by <b>node tools/brain-sync.js</b> · <span id="gen"></span>. A line means a document mentions it, a table row references it, a screen uses it, a screenshot is the next screen in a journey, or a screen recording covers a product feature.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="fonts.js"></script>
+<script src="graph-data.js"></script>
+<script src="hub-data.js"></script>
+<script>
+(function () {
+  const DATA = window.BRAIN_GRAPH;
+  const stage = document.getElementById('stage');
+  if (!DATA || !window.d3) { stage.innerHTML = '<p class="err">The graph data could not be loaded.</p>'; return; }
+
+  const GL = DATA.groups || {};
+  const GROUPS = [
+    ['doc', 'Documents', '#d4d6db'],
+    ['flow', 'Product features', '#6fdc9a'],
+    ['mflow', 'App journeys', '#ff8fb8'],
+    ['capture', 'Screenshots', '#9fb4c8'],
+    ['video', 'Screen recordings', '#ff9f1c'],
+    ['rule', 'Coding rules', '#6ea8fe'],
+    ['gate', 'Quality checks', '#b39cff'],
+    ['decision', 'Owner decisions', '#f3c46a'],
+    ['gap', 'Problems found', '#ef6a5a'],
+    ['screen', 'App screens', '#4cc9d6'],
+    ['code', 'Code files', '#80848c'],
+  ].map(([k, l, c]) => [k, (GL[k] && GL[k].label) || l, c]);
+  const G = Object.fromEntries(GROUPS.map(([k, l, c]) => [k, { label: l, color: c }]));
+  const FONT = '"DIN 2014 Bold", sans-serif';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = () => matchMedia('(max-width: 860px)').matches;
+  const trunc = (s, n) => (String(s).length > n ? `${String(s).slice(0, n - 1).trimEnd()}…` : String(s));
+
+  const nodes = DATA.nodes.map((n, i) => ({ ...n, i }));
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const links = DATA.links.map(([s, t, w]) => ({ source: nodes[s], target: nodes[t], w }));
+  // Hub map (tools/hub-map.js): the same nodes, each drawn with ONE link to its parent, plus hub dots.
+  const HUBS = window.BRAIN_HUBS && window.BRAIN_HUBS.gen === DATA.generatedAt && window.BRAIN_HUBS.n === DATA.nodes.length ? window.BRAIN_HUBS : null;
+  let hubMode = false;
+  const treeLinks = [];
+  const inTree = (n) => n.hub || (HUBS && HUBS.parent[n.i] !== undefined);
+  if (HUBS) {
+    const home = { id: 'h:home', l: 'Territool brain', g: 'doc', kind: 'hub', hub: 2, d: 'The centre of the hub map. Every other dot hangs from exactly one parent.', i: nodes.length };
+    nodes.push(home);
+    const hubOf = new Map();
+    for (const h of HUBS.hubs) {
+      const n = { id: `h:${h.k}`, l: h.l, g: h.k.startsWith('doc:') ? 'doc' : h.k, kind: 'hub', hub: 1, d: h.d, i: nodes.length };
+      nodes.push(n); hubOf.set(n.id, n);
+      treeLinks.push({ source: n, target: home, w: 0 });
+    }
+    for (const [c, p] of Object.entries(HUBS.parent)) {
+      const t = typeof p === 'string' ? hubOf.get(p) : nodes[p];
+      if (t && nodes[+c]) treeLinks.push({ source: nodes[+c], target: t, w: 0 });
+    }
+  }
+  const nbr = nodes.map(() => new Set());
+  links.forEach((l) => { nbr[l.source.i].add(l.target.i); nbr[l.target.i].add(l.source.i); });
+  const kids = new Map();
+  treeLinks.forEach((l) => kids.set(l.target, (kids.get(l.target) || 0) + 1));
+  treeLinks.forEach((l) => { if (l.source.hub || l.target.hub) { nbr[l.source.i].add(l.target.i); nbr[l.target.i].add(l.source.i); } });
+  const cap = (ref) => byId.get(`cap:${ref}`);
+  const orderOf = (J) => (J && J.steps ? J.steps.flatMap((s) => s.c) : []);
+  nodes.forEach((n) => {
+    n.deg = nbr[n.i].size;
+    n.r = n.g === 'code' || n.g === 'capture'
+      ? Math.min(9, 1.8 + Math.sqrt(n.deg) * 0.6)
+      : n.hub ? (n.hub === 2 ? 22 : 15) : n.kind === 'journey' ? 14 : Math.min(18, (n.g === 'doc' || n.g === 'mflow' ? 3.8 : 2.7) + Math.sqrt(n.deg) * 1.0);
+  });
+  // In the hub map a dot's size is how many dots hang from it, not how many links it has overall.
+  nodes.forEach((n) => { n.r0 = n.r; n.rh = n.hub ? n.r : kids.get(n) ? Math.min(13, 4 + Math.sqrt(kids.get(n)) * 1.1) : 2.4; });
+  // Deterministic scatter in a disc so the first frame already reads as a graph.
+  let seed = 20260915;
+  const rand = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  nodes.forEach((n) => { const a = rand() * Math.PI * 2, rad = 520 * Math.sqrt(rand()); n.x = Math.cos(a) * rad; n.y = Math.sin(a) * rad; });
+
+  const on = Object.fromEntries(GROUPS.map(([k]) => [k, true]));
+  let vNodes = [], vLinks = [], sel = null, hover = null;
+  const stats = document.getElementById('stats');
+  const panel = document.getElementById('panel');
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, dpr = 1, tr = d3.zoomIdentity, pending = false;
+
+  const sim = d3.forceSimulation().stop()
+    .force('link', d3.forceLink()
+      .distance((l) => (hubMode ? (l.target.hub === 2 ? 170 : l.target.hub ? 60 : 30) : (l.source.g === 'code' || l.target.g === 'code') ? 34 : 50))
+      .strength((l) => (hubMode ? 0.8 : 0.9 / Math.min(l.source.deg || 1, l.target.deg || 1))))
+    .force('charge', d3.forceManyBody().strength((n) => (hubMode ? (n.hub ? -520 : kids.get(n) ? -170 : -16) : n.g === 'code' ? -30 : -60)).distanceMax(520).theta(0.9))
+    .force('x', d3.forceX(0).strength(0.05))
+    .force('y', d3.forceY(0).strength(0.05))
+    .force('collide', d3.forceCollide((n) => n.r + 1.5))
+    .alphaDecay(0.03)
+    .on('tick', schedule);
+
+  function applyFilter(heat) {
+    if (hubMode) {
+      const keep = (n) => n.hub || (on[n.g] && inTree(n));
+      vNodes = nodes.filter(keep);
+      vLinks = treeLinks.filter((l) => keep(l.source) && keep(l.target));
+    } else {
+      vNodes = nodes.filter((n) => !n.hub && on[n.g]);
+      vLinks = links.filter((l) => on[l.source.g] && on[l.target.g]);
+    }
+    sim.nodes(vNodes);
+    sim.force('link').links(vLinks);
+    if (sel && !on[sel.g]) sel = null;
+    if (hover && !on[hover.g]) hover = null;
+    stats.textContent = `${vNodes.length.toLocaleString()} nodes · ${vLinks.length.toLocaleString()} links`;
+    if (heat) settle(heat);
+  }
+  function settle(alpha) {
+    if (reduced) { sim.alpha(alpha); for (let k = 0; k < 220; k++) sim.tick(); schedule(); }
+    else sim.alpha(alpha).restart();
+  }
+
+  function resize() {
+    const r = stage.getBoundingClientRect();
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    schedule();
+  }
+  new ResizeObserver(resize).observe(stage);
+
+  const rgba = (hex, a) => { const v = parseInt(hex.slice(1), 16); return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a})`; };
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(draw); } }
+  function draw() {
+    pending = false;
+    const k = tr.k;
+    const focus = hover || sel;
+    const near = focus ? nbr[focus.i] : null;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.translate(tr.x, tr.y);
+    ctx.scale(k, k);
+
+    ctx.lineWidth = 0.6 / k;
+    ctx.strokeStyle = focus ? 'rgba(160,164,172,0.05)' : 'rgba(160,164,172,0.17)';
+    ctx.beginPath();
+    for (const l of vLinks) {
+      if (focus && (l.source === focus || l.target === focus)) continue;
+      ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y);
+    }
+    ctx.stroke();
+    if (focus) {
+      ctx.strokeStyle = rgba(G[focus.g].color, 0.8);
+      ctx.lineWidth = 1.1 / k;
+      ctx.beginPath();
+      for (const l of vLinks) if (l.source === focus || l.target === focus) { ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y); }
+      ctx.stroke();
+    }
+
+    for (const n of vNodes) {
+      ctx.globalAlpha = focus && n !== focus && !near.has(n.i) ? 0.13 : 1;
+      ctx.fillStyle = G[n.g].color;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (sel) { ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.6 / k; ctx.beginPath(); ctx.arc(sel.x, sel.y, sel.r + 3 / k, 0, 6.2832); ctx.stroke(); }
+
+    ctx.font = `400 ${12 / k}px ${FONT}`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.lineJoin = 'round';
+    for (const n of vNodes) {
+      const show = focus
+        ? n === focus || (near.has(n.i) && (k > 0.55 || n.r > 6))
+        : hubMode ? n.hub || (kids.get(n) && (k > 0.7 || n.rh >= 9)) || k > 2.6
+        : n.kind === 'journey' || ((n.g === 'doc' || n.g === 'mflow') && n.r >= 9 && k > 0.4) || (n.g !== 'code' && n.g !== 'capture' && n.r >= 11 && k > 0.9) || (n.g !== 'code' && n.g !== 'capture' && k > 1.9) || k > 3.2;
+      if (!show) continue;
+      const text = trunc(n.l, 34);
+      const y = n.y + n.r + 3 / k;
+      ctx.lineWidth = 3 / k; ctx.strokeStyle = 'rgba(23,24,28,0.9)'; ctx.strokeText(text, n.x, y);
+      ctx.fillStyle = n === focus ? '#ffffff' : 'rgba(223,224,228,0.92)'; ctx.fillText(text, n.x, y);
+    }
+  }
+
+  function nodeAt(px, py) {
+    const [x, y] = tr.invert([px, py]);
+    let best = null, bd = Infinity;
+    for (const n of vNodes) {
+      const dx = n.x - x, dy = n.y - y, d = dx * dx + dy * dy, rr = (n.r + 5 / tr.k) ** 2;
+      if (d < rr && d < bd) { bd = d; best = n; }
+    }
+    return best;
+  }
+
+  const zoom = d3.zoom().scaleExtent([0.05, 10]).on('zoom', (e) => { tr = e.transform; schedule(); });
+  let moved = false;
+  const drag = d3.drag().container(cv)
+    .subject((e) => nodeAt(e.x, e.y))
+    .on('start', (e) => { moved = false; if (!e.active && !reduced) sim.alphaTarget(0.2).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
+    .on('drag', (e) => {
+      moved = true;
+      const [x, y] = tr.invert(d3.pointer(e.sourceEvent, cv));
+      e.subject.fx = x; e.subject.fy = y;
+      if (reduced) { e.subject.x = x; e.subject.y = y; schedule(); }
+    })
+    .on('end', (e) => {
+      if (!e.active && !reduced) sim.alphaTarget(0);
+      e.subject.fx = null; e.subject.fy = null;
+      if (!moved) select(e.subject, false);
+    });
+  d3.select(cv).call(drag).call(zoom).on('dblclick.zoom', null);
+  cv.addEventListener('click', (ev) => { if (!nodeAt(ev.offsetX, ev.offsetY) && sel) select(null); });
+  cv.addEventListener('pointermove', (ev) => {
+    if (ev.buttons) return;
+    const n = nodeAt(ev.offsetX, ev.offsetY);
+    if (n !== hover) { hover = n; cv.classList.toggle('hover', !!n); schedule(); }
+  });
+  cv.addEventListener('pointerleave', () => { if (hover) { hover = null; cv.classList.remove('hover'); schedule(); } });
+
+  const panelW = () => (narrow() ? 0 : 352);
+  function fit(animate) {
+    if (!vNodes.length) return;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const n of vNodes) { x0 = Math.min(x0, n.x - n.r); y0 = Math.min(y0, n.y - n.r); x1 = Math.max(x1, n.x + n.r); y1 = Math.max(y1, n.y + n.r); }
+    const aw = W - panelW(), pad = 28;
+    const k = Math.min(4, 0.96 * Math.min((aw - pad * 2) / Math.max(1, x1 - x0), (H - pad * 2) / Math.max(1, y1 - y0)));
+    const t = d3.zoomIdentity.translate(aw / 2 - k * (x0 + x1) / 2, H / 2 - k * (y0 + y1) / 2).scale(k);
+    const s = d3.select(cv);
+    (animate && !reduced ? s.transition().duration(650) : s).call(zoom.transform, t);
+  }
+  function focusOn(n) {
+    const k = Math.max(tr.k, 1.4);
+    const t = d3.zoomIdentity.translate((W - panelW()) / 2 - k * n.x, H / 2 - k * n.y).scale(k);
+    const s = d3.select(cv);
+    (reduced ? s : s.transition().duration(600)).call(zoom.transform, t);
+  }
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const kindOf = (n) => (n.hub ? 'Hub' : n.kind === 'journey' ? 'App journey' : n.kind === 'part' ? 'Shared part' : G[n.g].label);
+  const thumbSrc = (ref) => { const T = window.BRAIN_THUMBS; if (!T) return ''; return T[ref] || T[(window.BRAIN_THUMB_ALIAS || {})[ref]] || ''; };
+  function select(n, center) {
+    if (n && hubMode && !inTree(n)) setHub(false);
+    if (n && !hubMode && n.hub) setHub(true);
+    if (n && !on[n.g]) { on[n.g] = true; const c = document.getElementById(`grp-${n.g}`); if (c) c.setAttribute('aria-pressed', 'true'); applyFilter(0.3); }
+    sel = n; render(); schedule(); if (n && center) focusOn(n);
+  }
+  function render() {
+    if (!sel) { intro(); return; }
+    const n = sel, g = G[n.g];
+    const nb = [...nbr[n.i]].map((i) => nodes[i]).filter((m) => on[m.g]).sort((a, b) => b.deg - a.deg);
+    const byG = GROUPS.map(([k]) => [k, nb.filter((m) => m.g === k)]).filter(([, a]) => a.length);
+    const home = n.h ? byId.get(n.h) : null;
+    let extra = '';
+    if (n.g === 'capture') {
+      const J = n.j ? byId.get(`id:${n.j}`) : null;
+      const ord = orderOf(J);
+      const i = ord.indexOf(n.ref);
+      const step = J ? J.steps.find((s) => s.c.includes(n.ref)) : null;
+      const prev = i > 0 ? cap(ord[i - 1]) : null;
+      const next = i >= 0 && i < ord.length - 1 ? cap(ord[i + 1]) : null;
+      extra = `<img class="shot" data-ref="${esc(n.ref)}" alt="">`
+        + (J ? `<p class="def">Screen ${i + 1} of ${ord.length} in <button class="link" type="button" data-go="${J.i}">${esc(J.l)}</button>${step ? `, step ${esc(step.k)}: ${esc(step.n)}` : ''}</p>` : '')
+        + (prev || next ? `<div class="stepnav">${prev ? `<button class="btn" type="button" data-go="${prev.i}">← Previous screen</button>` : ''}${next ? `<button class="btn" type="button" data-go="${next.i}">Next screen →</button>` : ''}</div>` : '');
+    }
+    if (n.steps) {
+      extra = `<div class="nb"><h3>Steps</h3><ol class="stepl">${n.steps.filter((s) => s.c.length).map((s) => `<li><button class="link" type="button" data-go="${cap(s.c[0]).i}">${esc(s.n)}</button> <span class="cnt">${s.c.length}</span></li>`).join('')}</ol></div>`;
+    }
+    const rows = [];
+    if (n.ref && n.ref !== n.l) rows.push(['Reference', esc(n.ref)]);
+    if (n.sev) rows.push(['Severity', esc(n.sev)]);
+    if (n.c) rows.push(['Criticality', esc(n.c)]);
+    if (n.pl) rows.push(['Platforms', esc(n.pl)]);
+    if (n.pa) rows.push(['Parity', esc(n.pa)]);
+    if (n.at) rows.push(['Taken', esc(n.at)]);
+    if (n.sec) rows.push(['Length', `${Math.floor(n.sec / 60)}:${String(n.sec % 60).padStart(2, '0')}`]);
+    if (home && home !== n) rows.push(['Written in', `<button class="link" type="button" data-go="${home.i}">${esc(home.l)}</button>`]);
+    if (n.p && n.g !== 'code') rows.push(['File', `<span class="small">${esc(n.p)}</span>`]);
+    if (n.g === 'code' || n.g === 'screen') rows.push(['Codebase', n.a === 'web' ? 'Web app' : 'Mobile app']);
+    rows.push(['Links', String(n.deg)]);
+    const def = n.sum || n.how || n.d;
+    panel.innerHTML = `
+      <span class="kind"><span class="dot" style="background:${g.color}"></span>${esc(kindOf(n))}</span>
+      <h2>${esc(n.l)}</h2>
+      ${n.t && n.t !== n.l && !String(def || '').startsWith(n.t) && n.g !== 'capture' ? `<p class="title">${esc(n.t)}</p>` : ''}
+      ${def ? `<p class="def">${esc(def)}</p>` : ''}
+      ${extra}
+      <dl>${rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>
+      ${byG.map(([k, arr]) => `<div class="nb"><h3><span class="dot" style="background:${G[k].color}"></span>${esc(G[k].label)} · ${arr.length}</h3><div class="nbl">${arr.slice(0, 24).map((m) => `<button type="button" data-go="${m.i}">${esc(trunc(m.l, 40))}</button>`).join('')}${arr.length > 24 ? `<span class="more">+${arr.length - 24} more</span>` : ''}</div></div>`).join('')}
+      <div><button class="btn" type="button" data-clear>Clear selection</button></div>`;
+    panel.querySelectorAll('img[data-ref]').forEach((im) => { const s = thumbSrc(im.dataset.ref); if (s) im.src = s; });
+  }
+  function intro() {
+    const size = (n) => (hubMode ? kids.get(n) || 0 : n.deg);
+    const hubs = nodes.filter((n) => (hubMode ? kids.get(n) : !n.hub) && on[n.g] && n.g !== 'code').sort((a, b) => size(b) - size(a)).slice(0, 10);
+    panel.innerHTML = `
+      <div class="intro">
+        <span class="kind">Overview</span>
+        <h2>How the brain connects</h2>
+        <p>Each dot is one thing Claude knows: a document, product feature, app journey, screenshot, rule, quality check, owner decision, problem found, app screen or code file. Bigger dots have more links. Click one to see what it is and what it touches, or press <b>App journeys</b> to see the mobile app journeys with their screenshots.${HUBS ? ' Press <b>Hub map</b> for the simple picture: every dot hangs from one hub (code files and commit records are left out).' : ''}</p>
+      </div>
+      <div class="nb"><h3>Most connected</h3><div class="hubs">${hubs.map((n) => `<button type="button" data-go="${n.i}"><span class="dot" style="background:${G[n.g].color}"></span>${esc(trunc(n.l, 36))}<span class="deg">${size(n)}</span></button>`).join('')}</div></div>`;
+  }
+  panel.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (b) { select(nodes[+b.dataset.go], true); return; }
+    if (e.target.closest('[data-clear]')) select(null);
+  });
+
+  const groupsEl = document.getElementById('groups');
+  const counts = Object.fromEntries(GROUPS.map(([k]) => [k, nodes.filter((n) => !n.hub && n.g === k).length]));
+  groupsEl.innerHTML = GROUPS.map(([k, l, c]) => `<button class="chip" type="button" id="grp-${k}" data-g="${k}" aria-pressed="true"><span class="dot" style="background:${c}"></span>${esc(l)}<span class="n">${counts[k]}</span></button>`).join('')
+    + '<span class="sep" aria-hidden="true"></span><button class="btn" type="button" id="preset-brain">Brain only</button><button class="btn" type="button" id="preset-mobile">App journeys</button><button class="btn" type="button" id="preset-all">Everything</button>'
+    + (HUBS ? '<span class="sep" aria-hidden="true"></span><button class="btn" type="button" id="preset-hub" aria-pressed="false">Hub map</button>' : '');
+  groupsEl.addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-g]');
+    if (chip) { const k = chip.dataset.g; on[k] = !on[k]; chip.setAttribute('aria-pressed', String(on[k])); applyFilter(0.6); render(); return; }
+    if (e.target.id === 'preset-brain') setAll((k) => k !== 'code' && k !== 'screen' && k !== 'capture' && k !== 'video');
+    if (e.target.id === 'preset-mobile') setAll((k) => ['mflow', 'capture', 'video', 'screen', 'flow', 'gap'].includes(k));
+    if (e.target.id === 'preset-all') setAll(() => true);
+    if (e.target.id === 'preset-hub') { setHub(!hubMode); applyFilter(1); render(); setTimeout(() => fit(true), reduced ? 0 : 1300); }
+  });
+  function setHub(v) {
+    hubMode = v;
+    nodes.forEach((n) => { n.r = v ? n.rh : n.r0; });
+    const b = document.getElementById('preset-hub');
+    if (b) { b.setAttribute('aria-pressed', String(v)); b.textContent = v ? 'Full graph' : 'Hub map'; }
+    if (!v && sel && sel.hub) sel = null;
+    applyFilter(0);
+  }
+  function setAll(fn) {
+    GROUPS.forEach(([k]) => { on[k] = fn(k); document.getElementById(`grp-${k}`).setAttribute('aria-pressed', String(on[k])); });
+    applyFilter(0.7); render();
+    setTimeout(() => fit(true), reduced ? 0 : 1100);
+  }
+
+  const q = document.getElementById('q');
+  const res = document.getElementById('results');
+  let matches = [], act = 0;
+  q.addEventListener('input', () => {
+    const s = q.value.trim().toLowerCase();
+    if (!s) { res.hidden = true; return; }
+    const ref = (n) => String(n.ref || '').toLowerCase();
+    matches = nodes.filter((n) => (hubMode || !n.hub) && on[n.g] && (n.l.toLowerCase().includes(s) || ref(n).includes(s) || (n.t || '').toLowerCase().includes(s)))
+      .sort((a, b) => ((b.l.toLowerCase() === s || ref(b) === s) - (a.l.toLowerCase() === s || ref(a) === s)) || (b.l.toLowerCase().startsWith(s) - a.l.toLowerCase().startsWith(s)) || (b.deg - a.deg))
+      .slice(0, 8);
+    act = 0; paintResults();
+  });
+  function paintResults() {
+    res.hidden = !matches.length;
+    res.innerHTML = matches.map((n, j) => `<li><button type="button" data-go="${n.i}" class="${j === act ? 'active' : ''}"><span class="dot" style="background:${G[n.g].color}"></span>${esc(trunc(n.l, 40))}<span class="sub">${esc(kindOf(n))}</span></button></li>`).join('');
+  }
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') { act = Math.min(matches.length - 1, act + 1); paintResults(); e.preventDefault(); }
+    else if (e.key === 'ArrowUp') { act = Math.max(0, act - 1); paintResults(); e.preventDefault(); }
+    else if (e.key === 'Enter' && matches[act]) pick(matches[act]);
+    else if (e.key === 'Escape') { q.value = ''; res.hidden = true; }
+  });
+  res.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) pick(nodes[+b.dataset.go]); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.search')) res.hidden = true; });
+  function pick(n) { res.hidden = true; q.value = n.l; select(n, true); }
+
+  document.getElementById('fit').addEventListener('click', () => fit(true));
+  document.getElementById('reheat').addEventListener('click', () => settle(0.8));
+  document.getElementById('gen').textContent = `built ${DATA.generatedAt.slice(0, 16).replace('T', ' ')} UTC`;
+
+  resize();
+  applyFilter(0);
+  sim.alpha(1);
+  for (let k = 0; k < (reduced ? 320 : 110); k++) sim.tick();
+  fit(false);
+  render();
+  schedule();
+  if (!reduced) {
+    sim.alpha(0.3).restart();
+    sim.on('end.fit', () => { if (!sel) fit(true); sim.on('end.fit', null); });
+  }
+  if (window.BRAIN_FONTS) window.BRAIN_FONTS.then(schedule, () => {});
+  const ts = document.createElement('script');
+  ts.src = 'thumbs.js';
+  ts.onload = () => { if (sel) render(); };
+  document.body.appendChild(ts);
+})();
+</script>

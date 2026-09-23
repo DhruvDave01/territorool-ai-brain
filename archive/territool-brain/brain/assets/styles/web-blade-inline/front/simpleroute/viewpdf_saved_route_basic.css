@@ -1,0 +1,320 @@
+/* ===== resources/views/front/simpleroute/viewpdf_saved_route_basic.blade.php · <style> block 1 of 1 ===== */
+@page {
+margin-top: 0;
+}
+html, body {
+margin-top: 0;
+padding-top: 0;
+}
+@font-face {
+font-family: 'DIN 2014 Bold';
+src: url("{{ str_replace('\\', '/', public_path('fonts/DinBold.ttf')) }}") format('truetype');
+}
+@font-face {
+font-family: 'DIN 2014 Light';
+src: url("{{ str_replace('\\', '/', public_path('fonts/DinLight.ttf')) }}") format('truetype');
+}
+table, .date-header {
+font-family: "DIN 2014 Light" !important;
+border-collapse: collapse;
+width: 100%;
+}
+h2, .tabel-header th{
+  font-family: "DIN 2014 Bold" !important;
+  font-weight:normal !important;
+}
+.tarritool-pdf {
+  table-layout: fixed;
+  width: 100%;
+}
+.tarritool-pdf td {
+    padding: 18px 8px;
+    color: #525659;
+    font-size: 13px;
+    text-align: center;
+    line-height: 15px;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.tarritool-pdf th {
+  border-right: 3px solid #124ac6;
+  border-top: 0px solid #124ac6;
+  border-left: 0px solid #124ac6;
+  border-bottom: 0px solid #124ac6;
+  text-align: center;
+  padding : 10px 8px;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+.territool-company{
+width: 15%;
+text-overflow: ellipsis;
+}
+.territool-distance,
+.territool-time{
+width: 9%;
+text-overflow: ellipsis;
+}
+.tarritool-pdf th:last-child{border-right: 0px solid #124ac6;}
+.tarritool-pdf th:first-child{border-right: 0px solid #124ac6;}
+.tarritool-pdf tr:nth-child(even) {background-color: #f2f2f2;}
+.terri-tool-container {
+  width: 100%;
+  margin-top: 0;
+  padding-top: 0;
+}
+.tabel-header{
+background-color: #124ac6;
+color: #fff;
+font-size:20px;
+}
+.left-side {
+width: 78%;
+}
+.right-side {
+width: 22%;
+vertical-align: bottom;
+text-align: right;
+}
+.pdf-header-table {
+width: 100%;
+border-collapse: collapse;
+}
+.pdf-header-table td {
+vertical-align: bottom;
+border: none;
+padding: 10px 0 10px;
+}
+.header-title{
+color: #124ac6;
+font-weight: bold;
+width: 480px;  
+text-overflow: ellipsis;
+margin: 0;
+padding: 0;
+}
+
+.header-title h2 {
+margin: 0;
+padding: 0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+line-height: 1;
+}
+
+.date-header{
+  margin-top: -4px;
+  padding: 0;
+  line-height: 1;
+}
+.date-header p {
+margin: 0px 0 9px 0px;
+padding: 0;
+color:#525659;
+font-size: 20px;
+line-height: 1;
+}
+.header-logo{
+margin: 0;
+padding-right: 35px;
+}
+
+.active-green{
+/*background-color: #22b573;
+padding: 1px 13px 0px 5px;*/
+margin-right: 2px;
+width: 14px;
+height: 14px;
+display: inline-block;
+}
+header.cs-header{
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+.territool-add{
+    width: 16%;
+    text-overflow: ellipsis;
+  }
+.terri-status{
+    width: 16%;
+    text-overflow: ellipsis;
+    text-align: left !important;
+    padding-left: 10px !important;
+    padding-right: 6px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.terri-status .status {
+    display: block;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+.territool-cnt {
+    width: 4%;
+    text-overflow: ellipsis;
+}
+.terri-contact{
+    width: 22%;
+    text-overflow: ellipsis;
+    text-align: left !important;
+    padding-left: 12px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+span.active-green {
+    display: inline-block;
+    margin-right: 4px;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    border: 1px solid #999;
+    border-radius: 3px;
+}
+span.active-class {
+    display: inline;
+    text-align: left;
+    vertical-align: middle;
+    word-wrap: break-word;
+}
+.pdf-app-banner-section {
+    width: 100%;
+    margin: 0 0 18px 0;
+}
+.pdf-app-banner {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #124ac6;
+}
+.pdf-app-banner td {
+    vertical-align: middle;
+    border: none;
+}
+.pdf-app-banner-col {
+    width: 50%;
+    padding: 14px 16px;
+}
+.pdf-app-banner-col-full {
+    width: 100%;
+    padding: 14px 16px;
+}
+.pdf-app-banner-col-inner {
+    width: 100%;
+    border-collapse: collapse;
+}
+.pdf-app-banner-col-inner td {
+    vertical-align: middle;
+}
+.pdf-app-banner-qr-cell {
+    width: 82px;
+    padding-right: 12px;
+    text-align: center;
+}
+.pdf-app-banner-qr-wrap {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+.pdf-app-banner-qr-inner {
+    background-color: #ffffff;
+    padding: 7px;
+    text-align: center;
+}
+.pdf-app-banner-qr {
+    width: 68px;
+    height: 68px;
+    display: block;
+    margin: 0;
+}
+.pdf-app-banner-col-divider {
+    width: 1px;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.pdf-app-banner-text {
+    padding: 0;
+    font-family: "DIN 2014 Light" !important;
+}
+.pdf-app-banner-text strong {
+    display: block;
+    font-family: "DIN 2014 Bold" !important;
+    font-weight: normal !important;
+    font-size: 16px;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+}
+.pdf-app-banner-text span {
+    display: block;
+    font-family: "DIN 2014 Light" !important;
+    font-size: 13px;
+    line-height: 1.35;
+    color: #ffffff;
+}
+.route-pdf-map-image {
+    width: 100%;
+    display: block;
+    margin: 0 0 20px 0;
+    border: 1px solid #d9d9d9;
+}
+.route-pdf-map-title {
+    color: #124ac6;
+    font-family: "DIN 2014 Bold", sans-serif;
+    font-weight: normal;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+}
+.route-pdf-stats-wrap {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 16px 0;
+}
+.route-pdf-stats-wrap > tbody > tr > td {
+    width: 33.33%;
+    padding: 0 5px;
+    vertical-align: top;
+    border: none;
+}
+.route-pdf-stats-wrap > tbody > tr > td:first-child {
+    padding-left: 0;
+}
+.route-pdf-stats-wrap > tbody > tr > td:last-child {
+    padding-right: 0;
+}
+.route-pdf-stat-card {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f7fb;
+    border: 1px solid #e2e8f0;
+}
+.route-pdf-stat-card td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border: none;
+}
+.route-pdf-stat-label {
+    display: block;
+    font-family: "DIN 2014 Light", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+    margin: 0 0 6px 0;
+}
+.route-pdf-stat-value {
+    display: block;
+    font-family: "DIN 2014 Bold", sans-serif;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #0f172a;
+    margin: 0;
+}
+.route-pdf-stat-stops td {
+    border-left: 4px solid #124ac6;
+}
+.route-pdf-stat-distance td {
+    border-left: 4px solid #0ea5e9;
+}
+.route-pdf-stat-time td {
+    border-left: 4px solid #00dbdb;
+}

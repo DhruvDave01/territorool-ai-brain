@@ -1,0 +1,83 @@
+/*
+ * Territool approved design tokens: WEB values (D-DS8).
+ * Source of truth: brain/context/design-system.md (approved 2026-09-15). Keep this file identical to it.
+ *
+ * Use:
+ *   - Brain mockups and artifact pages: link this file and tokens/fonts.css. Nothing from outside the project.
+ *   - The first web task that needs tokens copies this file to repos/web/public/css/tt-tokens.css
+ *     (D-DS1 additive; legacy custom.css / manager-portal.css values stay unchanged).
+ * Fonts: DIN only (D-DS3); faces declared in tokens/fonts.css from brain/assets/fonts/web.
+ */
+:root {
+  /* Colour: brand */
+  --tt-color-primary: #124AC6;
+  --tt-color-primary-pressed: #0E3DA6;
+  --tt-color-primary-subtle: #F0F4FF;
+  --tt-color-primary-muted: #E0E7FF;
+  --tt-color-on-primary-selected: #4A90E4;   /* labels >= 17px bold only */
+  --tt-color-accent-teal: #00A99D;           /* fills and icons only, never text */
+  --tt-color-accent-teal-strong: #0F766E;
+
+  /* Colour: status */
+  --tt-color-danger: #E94A5D;                /* destructive confirm fills; labels >= 17px bold */
+  --tt-color-danger-text: #B91C1C;
+  --tt-color-danger-subtle: #FEE2E2;
+  --tt-color-success: #15803D;
+  --tt-color-success-subtle: #DCFCE7;
+  --tt-color-warning: #F59E0B;               /* dark text only */
+  --tt-color-warning-subtle: #FEF3C7;
+
+  /* Colour: text */
+  --tt-color-text: #111827;
+  --tt-color-text-secondary: #6B7280;
+  --tt-color-text-muted: #374151;
+  --tt-color-text-disabled: #9CA3AF;
+  --tt-color-text-on-primary: #FFFFFF;
+
+  /* Colour: surfaces, borders, overlay */
+  --tt-color-bg: #F6F7FB;
+  --tt-color-card: #FFFFFF;
+  --tt-color-surface-muted: #F3F4F6;
+  --tt-color-input: #FAFBFC;
+  --tt-color-border: #E5E7EB;
+  --tt-color-border-input: #E2E4E9;
+  --tt-color-scrim: rgba(17, 24, 39, 0.45);
+  --tt-gradient-header-from: #124AC6;        /* mobile header gradient; direction follows CustomHeader */
+  --tt-gradient-header-to: #2963DB;
+  /* exact app stops (theme.js:12-20): #124AC6 #164FCA #1B54CF #2059D3 #255ED7 #2963DB #124AC6 */
+  --tt-gradient-header-stops: #124AC6, #164FCA, #1B54CF, #2059D3, #255ED7, #2963DB, #124AC6;
+
+  /* Typography (web px): DIN only */
+  --tt-font-bold: "DIN 2014 Bold", sans-serif;
+  --tt-font-regular: "DIN 2014 Light", sans-serif;
+  --tt-type-display: 24px/30px var(--tt-font-bold);
+  --tt-type-title: 20px/26px var(--tt-font-bold);
+  --tt-type-heading: 18px/24px var(--tt-font-bold);
+  --tt-type-subheading: 15px/20px var(--tt-font-bold);
+  --tt-type-body: 14px/20px var(--tt-font-regular);
+  --tt-type-body-strong: 14px/20px var(--tt-font-bold);
+  --tt-type-caption: 13px/18px var(--tt-font-regular);
+  --tt-type-eyebrow: 11px/14px var(--tt-font-bold);  /* + text-transform: uppercase; letter-spacing: 0.5px */
+  --tt-type-button: 14px/18px var(--tt-font-bold);
+  --tt-type-micro: 12px/16px var(--tt-font-regular);
+
+  /* Spacing (4-pt grid) */
+  --tt-space-1: 4px;
+  --tt-space-2: 8px;
+  --tt-space-3: 12px;
+  --tt-space-4: 16px;
+  --tt-space-5: 20px;
+  --tt-space-6: 24px;
+  --tt-space-8: 32px;
+
+  /* Radius, elevation, sizes */
+  --tt-radius-sm: 8px;
+  --tt-radius-md: 12px;
+  --tt-radius-lg: 16px;
+  --tt-radius-pill: 999px;
+  --tt-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --tt-shadow-2: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --tt-shadow-3: 0 12px 40px rgba(0, 0, 0, 0.12);
+  --tt-touch-min: 40px;
+  --tt-control-h: 40px;
+}

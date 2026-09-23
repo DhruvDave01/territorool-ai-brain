@@ -1,0 +1,452 @@
+/* Address Book + Recently Added — aligned with lists/routes list UI */
+#AddressBookPage,
+#RecentlyAddedPage {
+    --tt-blue: #124ac6;
+    --tt-blue-dark: #0e3da6;
+    --tt-blue-light: #e6eefb;
+    --tt-sky: #00bcf0;
+    --tt-sky-dark: #00a3d1;
+    --tt-sky-light: #e0f5fd;
+    --tt-teal: #00a99d;
+    --tt-teal-dark: #008f85;
+    --tt-teal-light: #e0f7f5;
+    --tt-border: #e5e5e5;
+    --tt-text: #1a1a1a;
+    --tt-muted: #64748b;
+    --tt-red: #ef4444;
+    --tt-red-dark: #dc2626;
+}
+
+#AddressBookPage .company-list-box,
+#RecentlyAddedPage .company-list-box {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+#AddressBookPage .company-list-box > .box-body,
+#AddressBookPage .company-list-box > .box-header,
+#RecentlyAddedPage .company-list-box > .box-body,
+#RecentlyAddedPage .company-list-box > .box-header {
+    border: none;
+    padding-left: 0;
+    padding-right: 0;
+    background: transparent;
+}
+
+#AddressBookPage .company-list-header,
+#RecentlyAddedPage .company-list-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    padding-top: 8px;
+}
+
+#AddressBookPage .company-list-header-info,
+#RecentlyAddedPage .company-list-header-info {
+    flex: 1;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+#AddressBookPage .company-list-title,
+#RecentlyAddedPage .company-list-title {
+    margin: 0 0 4px;
+    font-size: 28px;
+    color: #1e293b;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+#AddressBookPage .company-list-subtitle,
+#RecentlyAddedPage .company-list-subtitle {
+    margin: 0;
+    color: var(--tt-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#AddressBookPage .company-list-header-actions,
+#RecentlyAddedPage .company-list-header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+#AddressBookPage .company-list-header-actions.company-buttons,
+#RecentlyAddedPage .company-list-header-actions.company-buttons {
+    float: none;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+#AddressBookPage .route-btn,
+#RecentlyAddedPage .route-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.2;
+    margin: 0;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    text-decoration: none !important;
+}
+
+#AddressBookPage .route-btn .fa,
+#RecentlyAddedPage .route-btn .fa {
+    font-size: 14px;
+}
+
+#AddressBookPage .route-btn-add,
+#RecentlyAddedPage .route-btn-add {
+    background: var(--tt-blue) !important;
+    border-color: var(--tt-blue) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-add:hover,
+#AddressBookPage .route-btn-add:focus,
+#RecentlyAddedPage .route-btn-add:hover,
+#RecentlyAddedPage .route-btn-add:focus {
+    background: var(--tt-blue-dark) !important;
+    border-color: var(--tt-blue-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-leads,
+#RecentlyAddedPage .route-btn-leads {
+    background: var(--tt-sky) !important;
+    border-color: var(--tt-sky) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-leads:hover,
+#AddressBookPage .route-btn-leads:focus,
+#RecentlyAddedPage .route-btn-leads:hover,
+#RecentlyAddedPage .route-btn-leads:focus {
+    background: var(--tt-sky-dark) !important;
+    border-color: var(--tt-sky-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-contacts,
+#RecentlyAddedPage .route-btn-contacts {
+    background: var(--tt-teal) !important;
+    border-color: var(--tt-teal) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-contacts:hover,
+#AddressBookPage .route-btn-contacts:focus,
+#RecentlyAddedPage .route-btn-contacts:hover,
+#RecentlyAddedPage .route-btn-contacts:focus {
+    background: var(--tt-teal-dark) !important;
+    border-color: var(--tt-teal-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-delete,
+#RecentlyAddedPage .route-btn-delete {
+    background: #fff !important;
+    border-color: var(--tt-red) !important;
+    color: var(--tt-red) !important;
+}
+
+#AddressBookPage .route-btn-delete:hover,
+#AddressBookPage .route-btn-delete:focus,
+#RecentlyAddedPage .route-btn-delete:hover,
+#RecentlyAddedPage .route-btn-delete:focus {
+    background: var(--tt-red) !important;
+    border-color: var(--tt-red-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-route,
+#RecentlyAddedPage .route-btn-route {
+    background: var(--tt-blue-light) !important;
+    border-color: var(--tt-blue) !important;
+    color: var(--tt-blue) !important;
+}
+
+#AddressBookPage .route-btn-route:hover,
+#AddressBookPage .route-btn-route:focus,
+#RecentlyAddedPage .route-btn-route:hover,
+#RecentlyAddedPage .route-btn-route:focus {
+    background: var(--tt-blue) !important;
+    border-color: var(--tt-blue-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-list,
+#RecentlyAddedPage .route-btn-list {
+    background: var(--tt-teal-light) !important;
+    border-color: var(--tt-teal) !important;
+    color: var(--tt-teal-dark) !important;
+}
+
+#AddressBookPage .route-btn-list:hover,
+#AddressBookPage .route-btn-list:focus,
+#RecentlyAddedPage .route-btn-list:hover,
+#RecentlyAddedPage .route-btn-list:focus {
+    background: var(--tt-teal) !important;
+    border-color: var(--tt-teal-dark) !important;
+    color: #fff !important;
+}
+
+#AddressBookPage .route-btn-map,
+#RecentlyAddedPage .route-btn-map {
+    background: #fff !important;
+    border-color: var(--tt-blue) !important;
+    color: var(--tt-blue) !important;
+}
+
+#AddressBookPage .route-btn-map:hover,
+#AddressBookPage .route-btn-map:focus,
+#RecentlyAddedPage .route-btn-map:hover,
+#RecentlyAddedPage .route-btn-map:focus {
+    background: var(--tt-blue-light) !important;
+    border-color: var(--tt-blue-dark) !important;
+    color: var(--tt-blue-dark) !important;
+}
+
+#AddressBookPage .route-btn-filter,
+#RecentlyAddedPage .route-btn-filter {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #475569 !important;
+}
+
+#AddressBookPage .route-btn-filter:hover,
+#AddressBookPage .route-btn-filter:focus,
+#RecentlyAddedPage .route-btn-filter:hover,
+#RecentlyAddedPage .route-btn-filter:focus {
+    background: #e2e8f0 !important;
+    border-color: #94a3b8 !important;
+    color: #1e293b !important;
+}
+
+#AddressBookPage .company-list-bulk-wrap,
+#RecentlyAddedPage .company-list-bulk-wrap {
+    margin-bottom: 12px;
+}
+
+#AddressBookPage .company-list-bulk-actions,
+#RecentlyAddedPage .company-list-bulk-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: transparent;
+    border: none;
+    float: none;
+    padding: 0 4px 0 !important;
+}
+
+#AddressBookPage .company-list-bulk-actions .route-btn,
+#RecentlyAddedPage .company-list-bulk-actions .route-btn {
+    float: none !important;
+    margin: 0 !important;
+}
+
+#AddressBookPage .company-list-bulk-label,
+#RecentlyAddedPage .company-list-bulk-label {
+    color: var(--tt-muted);
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+#AddressBookPage .company-list-bulk-actions .pull-right,
+#RecentlyAddedPage .company-list-bulk-actions .pull-right {
+    margin-left: auto !important;
+}
+
+#AddressBookPage .company-list-table-panel,
+#RecentlyAddedPage .company-list-table-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+    padding: 0;
+    overflow: visible;
+    margin-bottom: 8px;
+}
+
+#AddressBookPage .company-list-table-panel #company_list.territool-jqx-company-grid,
+#RecentlyAddedPage .company-list-table-panel #company_list.territool-jqx-company-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid,
+#AddressBookPage .company-list-table-panel .jqx-widget-header-bootstrap,
+#AddressBookPage .company-list-table-panel .jqx-grid-content,
+#AddressBookPage .company-list-table-panel .jqx-grid-table,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid,
+#RecentlyAddedPage .company-list-table-panel .jqx-widget-header-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-table {
+    background: #fff !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-column-header-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-column-header-bootstrap {
+    font-size: 12px !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #6b7280 !important;
+    font-weight: 600 !important;
+    background: #f8fafc !important;
+    border-color: #e5e7eb !important;
+}
+
+/* Center select-all checkbox in the first column header */
+#AddressBookPage .company-list-table-panel .jqx-grid-column-header-bootstrap:has(#header-checkbox),
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-column-header-bootstrap:has(#header-checkbox) {
+    text-align: center !important;
+}
+
+#AddressBookPage .company-list-table-panel #header-checkbox.customCheckbox,
+#RecentlyAddedPage .company-list-table-panel #header-checkbox.customCheckbox {
+    display: block;
+    margin: 7px auto 0 !important;
+    height: 18px;
+    width: 18px;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-bootstrap,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-alt.jqx-grid-cell-bootstrap:not(.jqx-grid-cell-selected-bootstrap),
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-alt.jqx-grid-cell-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+    background: #fff !important;
+    border-color: #f1f5f9 !important;
+    color: #374151;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-hover-bootstrap:not(.jqx-grid-cell-selected-bootstrap),
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-hover-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+    background: #f8fafc !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-alt.jqx-grid-cell-selected-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-alt.jqx-grid-cell-selected-bootstrap {
+    background: #eff6ff !important;
+    border-color: #bfdbfe !important;
+    box-shadow: none !important;
+    color: #374151 !important;
+}
+
+/* Keep selected-row text readable (jqx + custom.css force white text on selected cells) */
+#AddressBookPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap,
+#AddressBookPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div,
+#AddressBookPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div > div,
+#AddressBookPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap span,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div > div,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content .jqx-grid-cell-selected-bootstrap span {
+    color: #374151 !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap a,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap a {
+    color: #2563eb !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .comtitle,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .route-company-name .comtitle,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .comtitle,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .route-company-name .comtitle {
+    color: #111827 !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .singleNoteView,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .singleNoteView {
+    color: #64748b !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap select,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap select {
+    color: #374151 !important;
+    background: #fff !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .btn-find-contacts-route,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap button.btn.btn-primary,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .addPhoneSingle,
+#AddressBookPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .addNoteSingle,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .btn-find-contacts-route,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap button.btn.btn-primary,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .addPhoneSingle,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-cell-selected-bootstrap .addNoteSingle {
+    background: #fff !important;
+    border-color: #bfdbfe !important;
+    color: #2563eb !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-content,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-content {
+    overflow-x: auto !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-pager,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-pager {
+    background: #fff !important;
+    border-top: 1px solid #e5e7eb !important;
+}
+
+#AddressBookPage .company-list-table-panel .jqx-grid-header,
+#RecentlyAddedPage .company-list-table-panel .jqx-grid-header {
+    background: #fff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 768px) {
+    #AddressBookPage .company-list-title,
+    #RecentlyAddedPage .company-list-title {
+        font-size: 22px;
+    }
+
+    #AddressBookPage .company-list-header-actions,
+    #RecentlyAddedPage .company-list-header-actions {
+        width: 100%;
+    }
+
+    #AddressBookPage .company-list-bulk-actions,
+    #RecentlyAddedPage .company-list-bulk-actions {
+        padding: 0 !important;
+    }
+
+    #AddressBookPage .company-list-bulk-actions .pull-right,
+    #RecentlyAddedPage .company-list-bulk-actions .pull-right {
+        margin-left: 0 !important;
+        width: 100%;
+    }
+}

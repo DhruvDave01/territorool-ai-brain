@@ -1,0 +1,1308 @@
+#findleadsModal1 .form-control{
+    height: 25px !important;  
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-top: 0px !important;
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075) !important;
+    border-radius:0px !important;
+    padding:0px !important;
+}
+
+/* Route view — company detail modal refinements */
+#findleadsModal1.cdm-modal.in,
+#viewmapcompanyModal.cdm-modal.in {
+    z-index: 1050;
+}
+
+
+#findleadsModal1.cdm-modal .no-content-box,
+#viewmapcompanyModal.cdm-modal .no-content-box {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 0;
+    margin: 0;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-btn,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-btn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-day,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-day {
+    font-weight: 700;
+    color: #64748b;
+}
+
+#findleadsModal1.cdm-modal .company-activity-header,
+#viewmapcompanyModal.cdm-modal .company-activity-header {
+    margin-bottom: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-activity-add-btn,
+#viewmapcompanyModal.cdm-modal .company-activity-add-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active {
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active::after,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active::after {
+    background: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill--muted,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill--muted {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+#findleadsModal1.cdm-modal .company-activity-table-card,
+#viewmapcompanyModal.cdm-modal .company-activity-table-card {
+    border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    #findleadsModal1.cdm-modal .modal-dialog.cdm-modal-dialog,
+#viewmapcompanyModal.cdm-modal .modal-dialog.cdm-modal-dialog {
+        width: 88%;
+        max-width: 980px;
+    }
+}
+.miles-desc{
+    position: absolute;
+    top: 68px;
+    left: 10px;
+    font-size: 13px;
+}
+.existingName {
+    max-width: 17ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+@media only screen and (min-width: 768px) {
+    #confirmleadsModal .modal-dialog, #creditleadsModal .modal-dialog{
+        width:33% !important;
+        min-width:33% !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #route_list{
+        background: #ffffff;
+        position: relative;
+    }
+    #route_list .company-card {
+        border: 1px solid #e0e0e0;
+        margin: 10px -2px;
+        padding: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    #route_list .company-card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    #route_list .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+    }
+    #route_list .header-content {
+        flex: 1;
+        min-width: 0;
+        padding-right: 10px;
+    }
+    #route_list .expand-icon {
+        align-self: center;
+        transition: transform 0.3s ease;
+        color: #007bff;
+        cursor: pointer;
+    }
+    #route_list .expand-icon.rotated {
+        transform: rotate(180deg);
+    }
+    #route_list .extra-info {
+        padding-top: 5px;
+        border-top: 1px solid #eee;
+        margin-top: 5px;
+        width: 100%;
+        padding-left: 33px;
+    }
+    #route_list .company-card .header-content h5,
+    #route_list .company-card .header-content h5 a {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        font-weight: 600;
+        color: #124ac6;
+    }
+    #route_list .company-card .header-content > p,
+    #route_list .company-card .header-content > p a {
+        margin: 4px 0;
+        font-size: 15px;
+        color: #124ac6;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    #route_list .company-card p i {
+        width: 16px;
+        color: #007bff;
+        margin-right: 5px;
+    }
+    #route_list .company-card h5 i {
+        color: #007bff;
+        margin-right: 5px;
+    }
+    #route_list .company-card p strong {
+        color: #495057;
+    }
+    #route_list .company-card .actions {
+        margin-top: 5px;
+        display: flex;
+        gap: 8px;
+        flex-direction: row-reverse;
+    }
+    #route_list .company-card a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    #route_list .company-card a:hover {
+        text-decoration: underline;
+    }
+    .select-all-btn:hover {
+        box-shadow: 0 4px 8px rgba(0,123,255,0.4);
+        transform: translateY(-1px);
+    }
+    #selectAllContainer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 0px;
+    }
+    #selectAllContainer .select-all-btn {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+    #selectAllContainer #companyCountBadge {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+    }
+    #selectAllContainer #bulkContactBtn {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+    .page-info {
+        margin: 0 15px;
+        font-weight: 500;
+        color: #495057;
+    }
+    .card-vertical-separator {
+        border-left: 2px dashed #ccc;
+        height: 40px;
+        margin: 0px 10px 0px 20px;
+        width: 0;
+        float:left;
+    }
+    .route-segment-info {
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 8px;
+        font-size: 12px;
+        color: #666;
+    }
+    .route-segment-info strong {
+        color: #007bff;
+        margin: 0 5px;
+    }
+}
+.order-id-badge {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    display: inline-block;
+    white-space: nowrap;
+    margin-top: 5px;
+}
+.order-id-badge-mobile {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    margin: 12px 2px;
+}
+#route_map_loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background-image: url('/images/loading-tr.gif');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    opacity: 0.6;
+}
+#route_view_toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+#route_view_toggle .ai-leads-list-view-btn {
+    background-color: #fff !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
+}
+#route_view_toggle .ai-leads-list-view-btn:hover {
+    background-color: #f8f9fa !important;
+    color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+#route_view_toggle #route_map_view_btn.btn-outline-primary {
+    background-color: transparent !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
+}
+#route_view_toggle #route_map_view_btn.btn-outline-primary:hover {
+    background-color: rgba(0, 123, 255, 0.08) !important;
+    color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+@media only screen and (max-width: 767px) {
+    #ViewRoutePage {
+        --tt-blue: #124ac6;
+        --tt-blue-dark: #0e3da6;
+        --tt-blue-light: #e6eefb;
+        --tt-sky: #00bcf0;
+        --tt-sky-dark: #00a3d1;
+        --tt-sky-light: #e0f5fd;
+        --tt-teal: #00a99d;
+        --tt-teal-dark: #008f85;
+        --tt-teal-light: #e0f7f5;
+        --tt-border: #e5e5e5;
+        --tt-text: #1a1a1a;
+        --tt-red: #ef4444;
+        --tt-red-dark: #dc2626;
+    }
+    #ViewRoutePage .route-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        line-height: 1.2;
+        margin: 0;
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        width: 100%;
+    }
+    #ViewRoutePage .route-btn .fa {
+        font-size: 14px;
+    }
+    #ViewRoutePage .route-btn-pdf {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewRoutePage .route-btn-csv {
+        background: var(--tt-sky-light) !important;
+        border-color: var(--tt-sky) !important;
+        color: #0a5165 !important;
+    }
+    #ViewRoutePage .route-btn-csv.route-btn-disabled,
+    #ViewRoutePage .route-btn-csv[disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    #ViewRoutePage .route-btn-filter {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+    }
+    #ViewRoutePage .route-btn-map {
+        background: #fff !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        box-shadow: none !important;
+    }
+    #ViewRoutePage .route-btn-delete {
+        background: var(--tt-red) !important;
+        border-color: var(--tt-red-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-route {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-list {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage #companyButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 0px 10px;
+        margin-bottom: 8px;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    #ViewRoutePage .route-mobile-toolbar-row {
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+    }
+    #ViewRoutePage .route-mobile-toolbar-row #showMore-btn,
+    #ViewRoutePage .route-mobile-toolbar-row #route_view_toggle {
+        flex: 1 1 0;
+        min-width: 0;
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        width: auto !important;
+        margin: 0 !important;
+    }
+    #ViewRoutePage .route-mobile-toolbar-row #route_view_toggle {
+        display: flex;
+    }
+    #ViewRoutePage .route-mobile-toolbar-row #route_view_toggle .btn {
+        flex: 1 1 auto;
+        width: 100%;
+        margin: 0 !important;
+    }
+    #ViewRoutePage #moreOptionsButtons {
+        display: none;
+        width: 100%;
+        min-height: 0 !important;
+    }
+    #ViewRoutePage #moreOptionsButtons #datatable_button_stack {
+        float: none !important;
+        text-align: left !important;
+        width: 100%;
+        padding: 0;
+    }
+    #ViewRoutePage #moreOptionsButtons #datatable_button_stack > div {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+    }
+    #ViewRoutePage #moreOptionsButtons #datatable_button_stack span {
+        display: block;
+        width: 100%;
+    }
+    #ViewRoutePage #moreOptionsButtons .route-btn {
+        width: 100%;
+    }
+    #ViewRoutePage .route-view-bulk-wrap {
+        margin-bottom: 0;
+    }
+    #ViewRoutePage .route-mobile-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 0 !important;
+        background: transparent;
+        border: none;
+    }
+    #ViewRoutePage .route-mobile-actions .route-mobile-bulk-btn {
+        display: none;
+        width: 100%;
+        float: none !important;
+        position: static !important;
+        top: auto !important;
+        margin: 0 !important;
+    }
+    #ViewRoutePage.route-more-open .route-mobile-actions .route-mobile-bulk-btn {
+        display: inline-flex;
+    }
+    #ViewRoutePage #showMore-btn {
+        width: auto !important;
+    }
+    #ViewRoutePage #deletecompany,
+    #ViewRoutePage #addToRoute,
+    #ViewRoutePage #addToList {
+        position: static !important;
+        top: auto !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    #ViewRoutePage .route-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 4px;
+    }
+    #ViewRoutePage .route-title-row .existingName {
+        flex: 1;
+        min-width: 0;
+        max-width: none;
+    }
+    #ViewRoutePage .route-title-filter-btn {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+        padding: 6px 12px;
+    }
+    #ViewRoutePage #filter,
+    #ViewRoutePage .route-footer-filter {
+        display: none !important;
+    }
+    .route-top-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+    .route-top-actions .btn {
+        margin: 0 !important;
+        padding: 6px 12px;
+    }
+    #ViewRoutePage .route-form-send {
+        display: none !important;
+    }
+    #ViewRoutePage #editRouteButton {
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        width: auto !important;
+    }
+    .route-page-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    #ViewRoutePage .route-view-table-panel {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 10px !important;
+        overflow: visible !important;
+    }
+}
+@media only screen and (min-width: 768px) {
+    #ViewRoutePage {
+        --tt-blue: #124ac6;
+        --tt-blue-dark: #0e3da6;
+        --tt-blue-light: #e6eefb;
+        --tt-sky: #00bcf0;
+        --tt-sky-dark: #00a3d1;
+        --tt-sky-light: #e0f5fd;
+        --tt-teal: #00a99d;
+        --tt-teal-dark: #008f85;
+        --tt-teal-light: #e0f7f5;
+        --tt-border: #e5e5e5;
+        --tt-text: #1a1a1a;
+        --tt-red: #ef4444;
+        --tt-red-dark: #dc2626;
+    }
+    #ViewRoutePage .route-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 9px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600 !important;
+        line-height: 1.2;
+        margin: 0;
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewRoutePage .route-btn .fa {
+        font-size: 14px;
+    }
+    #ViewRoutePage .route-btn-back {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+    }
+    #ViewRoutePage .route-btn-back:hover,
+    #ViewRoutePage .route-btn-back:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewRoutePage .route-btn-pdf {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewRoutePage .route-btn-pdf:hover,
+    #ViewRoutePage .route-btn-pdf:focus {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-edit {
+        background: var(--tt-teal-light) !important;
+        border-color: var(--tt-teal) !important;
+        color: var(--tt-teal-dark) !important;
+    }
+    #ViewRoutePage .route-btn-edit:hover,
+    #ViewRoutePage .route-btn-edit:focus {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-csv {
+        background: var(--tt-sky-light) !important;
+        border-color: var(--tt-sky) !important;
+        color: #0a5165 !important;
+    }
+    #ViewRoutePage .route-btn-csv:hover,
+    #ViewRoutePage .route-btn-csv:focus {
+        background: var(--tt-sky) !important;
+        border-color: var(--tt-sky-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-csv.route-btn-disabled,
+    #ViewRoutePage .route-btn-csv[disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    #ViewRoutePage .route-btn-send {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewRoutePage .route-btn-send:hover,
+    #ViewRoutePage .route-btn-send:focus {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewRoutePage .route-btn-send .ladda-label {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+    }
+    #ViewRoutePage .route-btn-add {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-add:hover,
+    #ViewRoutePage .route-btn-add:focus {
+        background: var(--tt-blue-dark) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-leads {
+        background: var(--tt-sky) !important;
+        border-color: var(--tt-sky) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-leads:hover,
+    #ViewRoutePage .route-btn-leads:focus {
+        background: var(--tt-sky-dark) !important;
+        border-color: var(--tt-sky-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-contacts {
+        background: var(--tt-blue-dark) !important;
+        border-color: #0c348f !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-contacts:hover,
+    #ViewRoutePage .route-btn-contacts:focus {
+        background: #0c348f !important;
+        border-color: #0a2d7a !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-map {
+        background: #fff !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        box-shadow: none !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+        font-weight: 500 !important;
+    }
+    #ViewRoutePage .route-btn-map:hover,
+    #ViewRoutePage .route-btn-map:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: var(--tt-blue-dark) !important;
+    }
+    #ViewRoutePage .route-btn-map.btn-outline-primary,
+    #ViewRoutePage .route-btn-map.ai-leads-list-view-btn {
+        font-family: "DIN 2014 bold", sans-serif !important;
+        font-weight: 500 !important;
+    }
+    #ViewRoutePage .route-btn-filter {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+        font-weight: 500 !important;
+    }
+    #ViewRoutePage .route-btn-filter:hover,
+    #ViewRoutePage .route-btn-filter:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewRoutePage .route-btn-filter.ladda-button,
+    #ViewRoutePage .route-btn-filter .ladda-label {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+    }
+    #ViewRoutePage .route-btn-delete {
+        background: var(--tt-red) !important;
+        border-color: var(--tt-red-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-delete:hover,
+    #ViewRoutePage .route-btn-delete:focus {
+        background: var(--tt-red-dark) !important;
+        border-color: #b91c1c !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-route {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-route:hover,
+    #ViewRoutePage .route-btn-route:focus {
+        background: var(--tt-blue-dark) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-list {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-btn-list:hover,
+    #ViewRoutePage .route-btn-list:focus {
+        background: var(--tt-teal-dark) !important;
+        border-color: var(--tt-teal-dark) !important;
+        color: #fff !important;
+    }
+    #ViewRoutePage .route-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    #ViewRoutePage .route-view-box {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+    #ViewRoutePage .route-view-box > .box-body,
+    #ViewRoutePage .route-view-box > .box-header {
+        border: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #ViewRoutePage .route-view-header {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        margin-bottom: 10px;
+    }
+    #ViewRoutePage .route-view-header-main {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        width: 100%;
+        padding-top:20px;
+    }
+    #ViewRoutePage .route-view-header-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+    #ViewRoutePage .route-back-btn {
+        align-self: flex-start;
+        margin-bottom: 0;
+    }
+    #ViewRoutePage .existingName {
+        max-width: none;
+        width: auto;
+        font-size: 28px;
+        color: #1e293b !important;
+        margin: 0 0 4px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    #ViewRoutePage .route-view-title-wrap {
+        width: 100%;
+    }
+    #ViewRoutePage .route-view-header-info .existingName {
+        margin: 0;
+    }
+    #ViewRoutePage .route-view-created {
+        color: #64748b;
+        font-size: 14px;
+        margin: 0;
+        font-weight: bold !important;
+    }
+    #ViewRoutePage .route-view-header-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0 0;
+        width: 100%;
+    }
+    #ViewRoutePage #moreOptionsButtons #datatable_button_stack > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    #ViewRoutePage #moreOptionsButtons #datatable_button_stack span {
+        display: inline-block;
+    }
+    #ViewRoutePage .box-body.pb-0 .form-group {
+        margin-bottom: 0;
+    }
+    #ViewRoutePage .box-body.pb-0 .route-title-row,
+    #ViewRoutePage .box-body.pb-0 .editName,
+    #ViewRoutePage .box-body.pb-0 .saveNameInView,
+    #ViewRoutePage .box-body.pb-0 .miles-desc,
+    #ViewRoutePage .box-body.pb-0 .route-form-send {
+        display: none !important;
+    }
+    #ViewRoutePage .box-body.pb-0 {
+        padding-bottom: 0 !important;
+        min-height: 0;
+    }
+    #ViewRoutePage .route-page-top-bar {
+        display: none;
+    }
+    .route-view-top-row {
+        display: none;
+    }
+    #ViewRoutePage #companyButtons #moreOptionsButtons {
+        display: none !important;
+    }
+    #ViewRoutePage #companyButtons #showMore-btn {
+        display: none !important;
+    }
+    #ViewRoutePage .route-mobile-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        background: transparent;
+        border: none;
+        padding: 0 4px 12px !important;
+    }
+    #ViewRoutePage .route-view-bulk-wrap {
+        margin-bottom: 12px;
+    }
+    #ViewRoutePage .route-view-bulk-wrap .route-mobile-actions {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    #ViewRoutePage .route-view-header .route-view-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        gap: 12px;
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 520px;
+        max-width: none;
+        margin-bottom: 0;
+        padding-top: 15px;
+    }
+    #ViewRoutePage .route-view-header .route-stat-card {
+        min-height: 88px;
+    }
+    #ViewRoutePage .route-stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px 12px  0px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        min-width: 200px;
+    }
+    #ViewRoutePage .route-stat-card::after {
+        content: "";
+        position: absolute;
+        top: -18px;
+        right: -18px;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        opacity: 0.12;
+    }
+    #ViewRoutePage .route-stat-stops::after { background: #124ac6; }
+    #ViewRoutePage .route-stat-distance::after { background: #0ea5e9; }
+    #ViewRoutePage .route-stat-time::after { background: #00dbdb; }
+    #ViewRoutePage .route-stat-contacts::after { background: #22c55e; }
+    #ViewRoutePage .route-stat-label {
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 8px;
+        padding-left:5px;
+    }
+    #ViewRoutePage .route-stat-value {
+        display: block;
+        font-size: 22px;
+        line-height: 1.2;
+        color: #0f172a;
+    }
+    #ViewRoutePage .route-stat-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #fff;
+    }
+    #ViewRoutePage .route-stat-stops .route-stat-icon { background: #124ac6; }
+    #ViewRoutePage .route-stat-distance .route-stat-icon { background: #0ea5e9; }
+    #ViewRoutePage .route-stat-time .route-stat-icon { background: #00dbdb; }
+    #ViewRoutePage .route-stat-contacts .route-stat-icon { background: #22c55e; }
+    #ViewRoutePage .route-view-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    #ViewRoutePage .route-view-search {
+        flex: 1 1 260px;
+        position: relative;
+        min-width: 220px;
+    }
+    #ViewRoutePage .route-view-search .fa-search {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        pointer-events: none;
+    }
+    #ViewRoutePage .route-view-search input {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 12px 10px 38px;
+        height: 40px;
+        background: #f3f4f6;
+        color: #111827;
+        box-shadow: none;
+    }
+    #ViewRoutePage .route-view-search input:focus {
+        background: #f3f4f6;
+        border-color: #d1d5db;
+        outline: none;
+        box-shadow: none;
+    }
+    #ViewRoutePage .route-view-search input::placeholder {
+        color: #9ca3af;
+    }
+    #ViewRoutePage .route-view-toolbar-actions,
+    #ViewRoutePage .route-view-toolbar-secondary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    #ViewRoutePage .route-view-toolbar-actions .route-btn,
+    #ViewRoutePage .route-view-toolbar-secondary .route-btn {
+        margin: 0;
+    }
+    #ViewRoutePage .route-view-table-panel {
+        background: #fff !important;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+        padding: 0 !important;
+        overflow: visible;
+        max-width: 100%;
+        margin-bottom: 4px;
+    }
+    #ViewRoutePage .route-view-table-panel #route_list.territool-jqx-company-grid {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    #ViewRoutePage .route-view-table-panel .jqx-grid-content {
+        overflow-x: auto !important;
+    }
+    #ViewRoutePage .route-view-bulk-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+        padding: 0 4px;
+    }
+    #ViewRoutePage .route-view-actions-row {
+        background: transparent;
+        border: none;
+        padding: 0 4px 12px !important;
+    }
+    #ViewRoutePage {
+       
+    }
+    #ViewRoutePage #route_list.territool-jqx-company-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0;
+    }
+    #ViewRoutePage .route-bulk-label {
+        color: #64748b;
+        font-size: 14px;
+        margin-right: 4px;
+    }
+    #ViewRoutePage .route-view-bulk-row .btn:not(.route-btn),
+    #ViewRoutePage .route-mobile-actions .btn:not(.route-btn) {
+        border-radius: 8px;
+        margin: 0;
+    }
+    #ViewRoutePage .route-view-bulk-row .route-btn,
+    #ViewRoutePage .route-mobile-actions .route-btn {
+        margin: 0;
+    }
+    #ViewRoutePage .route-footer-filter .fa,
+    #ViewRoutePage .route-mobile-actions .ladda-label .fa {
+        margin-right: 5px;
+    }
+    #ViewRoutePage .route-view-bulk-row .pull-left {
+        float: none;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-filter,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-filter-alt {
+        display: none !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid.jqx-grid,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-content,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-table,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-widget-header-bootstrap {
+        background: #fff !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid.jqx-grid {
+        box-shadow: none !important;
+        border-radius: 12px !important;
+        border: none !important;
+        overflow: visible;
+        min-width: 0;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-content {
+        overflow-x: auto !important;
+    }
+    #ViewRoutePage .miles-desc {
+        display: none;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-header {
+        background: #fff !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        box-shadow: none !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-alt.jqx-grid-cell-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+        background: #fff !important;
+        border-color: #f1f5f9 !important;
+        color: #374151;
+        overflow: hidden;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap {
+        font-size: 14px !important;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #6b7280 !important;
+        font-weight: 600 !important;
+        background: #f8fafc !important;
+        border-color: #e5e7eb !important;
+        min-height: 44px;
+        overflow: hidden;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox),
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-bootstrap:has(.jqx-checkbox) {
+        text-align: center !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox) > div {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        margin: 0 auto !important;
+        display: flex;
+        justify-content: center;
+        width: 65% !important;
+        height: 100%;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox) .jqx-checkbox {
+        margin: 0 auto;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-hover-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+        background: #f8fafc !important;
+        border-color: #e2e8f0 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap {
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        box-shadow: none !important;
+        color: #374151 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div > div {
+        color: #374151 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap a {
+        color: #2563eb !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .comtitle,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .route-company-name .comtitle {
+        color: #111827 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .route-row-index {
+        background: #dbeafe !important;
+        color: #1d4ed8 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .singleNoteView {
+        color: #64748b !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap select {
+        color: #374151 !important;
+        background: #fff !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager {
+        background: #fff !important;
+        border-top: 1px solid #e5e7eb !important;
+        padding: 0px 140px 0px 0px !important;
+        min-height: 52px;
+        height: auto !important;
+        overflow: visible !important;
+        box-sizing: border-box;
+        color: #374151 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager > div {
+        overflow: visible !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-input,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        min-width: 30px;
+        min-height: 30px;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-button,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-dropdownlist,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager-label,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-normal-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-hover-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-pressed-bootstrap {
+        border-radius: 6px !important;
+        border-color: #e5e7eb !important;
+        background-color: #fff !important;
+        color: #374151 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-number-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-number {
+        min-width: 28px;
+        min-height: 28px;
+        line-height: 26px;
+        text-align: center;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-button-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-left-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-right-bootstrap,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-left,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-right {
+        width: 16px !important;
+        height: 16px !important;
+        min-width: 16px !important;
+        min-height: 16px !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-hover-bootstrap {
+        background-color: #f9fafb !important;
+        border-color: #d1d5db !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-row-index {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin: 4px;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-company-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        padding: 0 4px;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-company-avatar {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-company-name {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-company-name .comtitle {
+        color: #111827 !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .route-company-name .comtitle:hover {
+        color: #2563eb !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid select {
+        background: #fff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 6px !important;
+        color: #374151 !important;
+        height: 32px;
+        max-width: 100%;
+        padding: 2px 8px;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .btn-find-contacts-route,
+    #ViewRoutePage .territool-jqx-company-grid .addPhoneSingle,
+    #ViewRoutePage .territool-jqx-company-grid .addNoteSingle {
+        background: #fff !important;
+        border: 1px solid #bfdbfe !important;
+        color: #2563eb !important;
+        box-shadow: none !important;
+        border-radius: 6px !important;
+        font-size: 13px !important;
+        padding: 4px 10px !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .btn-find-contacts-route:hover,
+    #ViewRoutePage .territool-jqx-company-grid .btn-find-contacts-route:focus,
+    #ViewRoutePage .territool-jqx-company-grid .addPhoneSingle:hover,
+    #ViewRoutePage .territool-jqx-company-grid .addNoteSingle:hover {
+        background: #eff6ff !important;
+        border-color: #93c5fd !important;
+        color: #1d4ed8 !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .btn-find-contacts-route,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .addPhoneSingle,
+    #ViewRoutePage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .addNoteSingle {
+        background: #fff !important;
+        border-color: #bfdbfe !important;
+        color: #2563eb !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .singleNoteView {
+        color: #64748b !important;
+    }
+    #ViewRoutePage .territool-jqx-company-grid .add_to_list,
+    #ViewRoutePage .territool-jqx-company-grid .add_to_route {
+        background: #fff !important;
+        border: 1px solid #e5e7eb !important;
+        color: #374151 !important;
+        border-radius: 6px !important;
+    }
+}
+
+/* Small desktop: stack stat cards below title + action buttons */
+@media only screen and (min-width: 768px) and (max-width: 1600px) {
+    #ViewRoutePage .route-view-header-main {
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 16px;
+    }
+    #ViewRoutePage .route-view-header-info {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+    #ViewRoutePage .route-view-header .route-view-stats {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #ViewRoutePage .route-view-header .route-view-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

@@ -1,0 +1,13 @@
+/* ===== resources/views/vendor/backpack/crud/inc/revision_timeline.blade.php · <style> block 1 of 1 ===== */
+.timeline-item-wrap.fadein {
+      -webkit-animation: restore-fade-in 3s;
+              animation: restore-fade-in 3s;
+    }
+    @-webkit-keyframes restore-fade-in {
+      from {opacity: 0}
+      to {opacity: 1}
+    }
+      @keyframes restore-fade-in {
+        from {opacity: 0}
+        to {opacity: 1}
+    }

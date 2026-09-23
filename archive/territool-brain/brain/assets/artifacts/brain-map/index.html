@@ -1,0 +1,572 @@
+<title>Territool Brain Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Palette = Territool approved token set (brain/context/design-system.md). DIN isn't on Google Fonts: Barlow Condensed / Barlow stand in. */
+  :root {
+    --page: #F6F7FB; --card: #FFFFFF; --muted-surface: #F3F4F6;
+    --ink: #111827; --ink-2: #374151; --muted: #6B7280; --line: #E5E7EB;
+    --primary: #124AC6; --primary-pressed: #0E3DA6; --primary-subtle: #F0F4FF; --primary-muted: #E0E7FF; --on-primary: #FFFFFF;
+    --teal: #00A99D; --teal-strong: #0F766E; --teal-subtle: #E6F6F4;
+    --danger: #E94A5D; --danger-text: #B91C1C; --danger-subtle: #FEE2E2;
+    --success: #15803D; --success-subtle: #DCFCE7;
+    --warning: #F59E0B; --warning-text: #92400E; --warning-subtle: #FEF3C7;
+    --edge: #CBD5E1; --edge-on: #124AC6;
+    --shadow: 0 1px 3px rgba(17, 24, 39, .06);
+    --shadow-lift: 0 12px 40px rgba(17, 24, 39, .12);
+    --display: "Barlow Condensed", "DIN Condensed", "Arial Narrow", sans-serif;
+    --body: "Barlow", "DIN Alternate", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --page: #0B1120; --card: #111827; --muted-surface: #1A2233;
+      --ink: #F3F4F6; --ink-2: #D1D5DB; --muted: #9CA3AF; --line: #253045;
+      --primary: #7EA2F5; --primary-pressed: #A9C1F8; --primary-subtle: #15213D; --primary-muted: #1C2F5C; --on-primary: #0B1120;
+      --teal: #2DD4BF; --teal-strong: #5EEAD4; --teal-subtle: #0F2A2A;
+      --danger: #F87171; --danger-text: #FCA5A5; --danger-subtle: #3A1618;
+      --success: #4ADE80; --success-subtle: #12301F;
+      --warning: #FBBF24; --warning-text: #FCD34D; --warning-subtle: #33260B;
+      --edge: #33415A; --edge-on: #7EA2F5;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+      --shadow-lift: 0 12px 40px rgba(0, 0, 0, .5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --page: #0B1120; --card: #111827; --muted-surface: #1A2233;
+    --ink: #F3F4F6; --ink-2: #D1D5DB; --muted: #9CA3AF; --line: #253045;
+    --primary: #7EA2F5; --primary-pressed: #A9C1F8; --primary-subtle: #15213D; --primary-muted: #1C2F5C; --on-primary: #0B1120;
+    --teal: #2DD4BF; --teal-strong: #5EEAD4; --teal-subtle: #0F2A2A;
+    --danger: #F87171; --danger-text: #FCA5A5; --danger-subtle: #3A1618;
+    --success: #4ADE80; --success-subtle: #12301F;
+    --warning: #FBBF24; --warning-text: #FCD34D; --warning-subtle: #33260B;
+    --edge: #33415A; --edge-on: #7EA2F5;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    --shadow-lift: 0 12px 40px rgba(0, 0, 0, .5);
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--page); color: var(--ink); font: 400 15px/1.55 var(--body); margin: 0; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 56px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1; }
+  h2 { font-size: 30px; line-height: 1.1; }
+  h3 { font-size: 20px; line-height: 1.2; }
+  p { margin: 0; }
+  .eyebrow { font: 600 12px/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .lede { max-width: 64ch; color: var(--ink-2); font-size: 17px; }
+  code, .mono { font-family: var(--mono); font-size: 12.5px; }
+  .sect-head { display: grid; gap: 8px; margin-bottom: 20px; }
+  .sect-head p { color: var(--muted); max-width: 70ch; }
+
+  /* Header */
+  header { display: grid; gap: 16px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: 13px; color: var(--ink-2); }
+  .tag b { font-weight: 600; color: var(--ink); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+  .dot.warn { background: var(--warning); }
+
+  /* Phase route: phases drawn as stops on a route, the product's own metaphor */
+  .route { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0; padding-top: 8px; }
+  .route::before { content: ""; position: absolute; left: 6%; right: 6%; top: 25px; height: 4px; border-radius: 4px; background: var(--primary); }
+  .stop { position: relative; display: grid; justify-items: center; text-align: center; gap: 8px; padding-inline: 4px; }
+  .stop .pin { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 4px solid var(--primary); display: grid; place-items: center; font: 700 16px/1 var(--display); color: var(--primary); z-index: 1; }
+  .stop.current .pin { border-color: var(--warning); color: var(--warning-text); box-shadow: 0 0 0 6px var(--warning-subtle); }
+  .stop .name { font: 600 14px/1.2 var(--body); color: var(--ink); }
+  .stop .state { font-size: 12px; color: var(--muted); }
+  .stop.current .state { color: var(--warning-text); font-weight: 600; }
+  @media (max-width: 760px) {
+    .route { grid-template-columns: 1fr; gap: 14px; padding-left: 8px; }
+    .route::before { left: 26px; right: auto; top: 10px; bottom: 10px; width: 4px; height: auto; background: var(--primary); }
+    .stop { grid-template-columns: 38px 1fr; justify-items: start; text-align: left; column-gap: 14px; row-gap: 0; }
+    .stop .pin { grid-row: span 2; }
+  }
+
+  /* Graph */
+  .graph-shell { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .graph-scroll { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); }
+  svg.graph { display: block; width: 100%; min-width: 980px; height: auto; }
+  .col-title { font: 600 11px var(--body); letter-spacing: .12em; text-transform: uppercase; fill: var(--muted); }
+  .edge { fill: none; stroke: var(--edge); stroke-width: 1.2; opacity: .55; transition: opacity .15s, stroke .15s; }
+  .node rect { stroke-width: 1.5; transition: filter .15s, opacity .15s; }
+  .node text { pointer-events: none; }
+  .node .l { font: 600 13px var(--body); }
+  .node .s { font: 400 11px var(--body); }
+  .node { cursor: pointer; transition: opacity .15s; }
+  .node:focus { outline: none; }
+  .node:focus-visible rect { stroke: var(--warning); stroke-width: 3; }
+  .k-src rect { fill: var(--muted-surface); stroke: var(--line); } .k-src .l { fill: var(--ink); } .k-src .s { fill: var(--muted); }
+  .k-aud rect { fill: var(--card); stroke: var(--edge); } .k-aud .l { fill: var(--ink); } .k-aud .s { fill: var(--muted); }
+  .k-ctx rect { fill: var(--primary-subtle); stroke: var(--primary-muted); } .k-ctx .l { fill: var(--ink); } .k-ctx .s { fill: var(--muted); }
+  .k-skl rect { fill: var(--primary); stroke: var(--primary); } .k-skl .l { fill: var(--on-primary); } .k-skl .s { fill: var(--on-primary); opacity: .85; }
+  .k-gat rect { fill: var(--teal-subtle); stroke: var(--teal-strong); } .k-gat .l { fill: var(--ink); } .k-gat .s { fill: var(--muted); }
+  .k-out rect { fill: var(--card); stroke: var(--line); stroke-dasharray: 4 3; } .k-out .l { fill: var(--ink); } .k-out .s { fill: var(--muted); }
+  .k-new rect { stroke: var(--warning); }
+  svg.focus .node { opacity: .5; }
+  svg.focus .node.near, svg.focus .node.sel { opacity: 1; }
+  svg.focus .edge { opacity: .12; }
+  svg.focus .edge.on { opacity: 1; stroke: var(--edge-on); stroke-width: 2; }
+  svg .node.sel rect { filter: drop-shadow(0 4px 10px rgba(18, 74, 198, .28)); stroke-width: 2.5; }
+
+  .detail { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 20px; box-shadow: var(--shadow); }
+  .d-main, .d-links { display: grid; gap: 10px; align-content: start; }
+  @media (min-width: 900px) { .detail { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 40px; } }
+  .detail .kind { justify-self: start; }
+  .detail .path { color: var(--muted); word-break: break-all; }
+  .detail ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--ink-2); }
+  .detail .links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .detail .links button { font: 500 12px var(--body); border: 1px solid var(--line); background: var(--muted-surface); color: var(--ink-2); padding: 4px 9px; border-radius: 999px; cursor: pointer; }
+  .detail .links button:hover, .detail .links button:focus-visible { border-color: var(--primary); color: var(--primary); outline: none; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 14px; height: 14px; border-radius: 4px; border: 1.5px solid; }
+
+  /* Loop */
+  .loop { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+  @media (max-width: 900px) { .loop { grid-template-columns: 1fr; } }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .step { padding: 8px 12px; border-radius: 10px; background: var(--primary-subtle); border: 1px solid var(--primary-muted); font-weight: 600; font-size: 14px; }
+  .step small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+  .step.exit { background: var(--success-subtle); border-color: transparent; color: var(--success); }
+  .arrow { color: var(--muted); font-size: 18px; }
+  .back { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line); display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
+  .back b { color: var(--danger-text); }
+  ol.plain, ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--ink-2); }
+
+  /* Flows board */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .filters button { font: 500 13px var(--body); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink-2); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+  .filters button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+  .filters button:focus-visible { outline: 3px solid var(--warning); outline-offset: 2px; }
+  .board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start; }
+  @media (max-width: 980px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .board { grid-template-columns: 1fr; } }
+  .lane { display: grid; gap: 8px; }
+  .lane-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 2px 6px; border-bottom: 3px solid var(--line); }
+  .lane-head h3 { font-size: 18px; }
+  .lane-head .n { font: 600 13px var(--mono); color: var(--muted); }
+  .lane.blocker .lane-head { border-color: var(--danger); }
+  .lane.high .lane-head { border-color: var(--warning); }
+  .lane.medium .lane-head { border-color: var(--primary); }
+  .lane.low .lane-head { border-color: var(--edge); }
+  .flow { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 6px; }
+  .flow[hidden] { display: none !important; }
+  .flow .top { display: flex; gap: 8px; align-items: baseline; }
+  .flow .id { font: 500 12px var(--mono); color: var(--muted); flex: none; }
+  .flow .nm { font-weight: 600; font-size: 14px; line-height: 1.3; }
+  .flow .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .pill { font: 600 11px/1 var(--body); padding: 4px 8px; border-radius: 999px; white-space: nowrap; }
+  .p-identical { background: var(--success-subtle); color: var(--success); }
+  .p-intentional { background: var(--primary-subtle); color: var(--primary); }
+  .p-accidental { background: var(--danger-subtle); color: var(--danger-text); }
+  .p-unverified { background: var(--warning-subtle); color: var(--warning-text); }
+  .p-single { background: var(--muted-surface); color: var(--muted); }
+  .plat { font-size: 12px; color: var(--muted); }
+
+  /* Phase 7 */
+  .checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 860px) { .checks { grid-template-columns: 1fr; } }
+  .check { display: grid; gap: 12px; align-content: start; }
+  .check .hd { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+  .check .num { font: 700 14px var(--mono); color: var(--muted); }
+  .verdict { font: 600 12px/1 var(--body); padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+  .v-good { background: var(--success-subtle); color: var(--success); }
+  .v-mixed { background: var(--warning-subtle); color: var(--warning-text); }
+  .v-bad { background: var(--danger-subtle); color: var(--danger-text); }
+  .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  @media (max-width: 520px) { .split { grid-template-columns: 1fr; } }
+  .split h4 { margin: 0 0 6px; font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; }
+  .split .ok h4 { color: var(--success); }
+  .split .miss h4 { color: var(--danger-text); }
+  .figure { display: flex; gap: 20px; flex-wrap: wrap; }
+  .figure div { display: grid; }
+  .figure b { font: 700 30px/1 var(--display); font-variant-numeric: tabular-nums; }
+  .figure span { font-size: 12px; color: var(--muted); }
+  .figure .warn b { color: var(--warning-text); }
+  .figure .bad b { color: var(--danger-text); }
+
+  .table-scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 12px var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  td:first-child { white-space: nowrap; }
+
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  footer { color: var(--muted); font-size: 13px; display: grid; gap: 6px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Territool · Claude brain</span>
+    <h1>Territool Brain Map</h1>
+    <p class="lede">Everything built for the React Native app, the Laravel web app, the manager portal and the MCP modules: where each rule came from, which skill uses it, which gate checks it, and what Phase 7 proved.</p>
+    <div class="meta">
+      <span class="tag"><span class="dot"></span><b>Staging only</b> · production never touched</span>
+      <span class="tag">Mobile <b>TT_80</b></span>
+      <span class="tag">Web <b>beta_react</b></span>
+      <span class="tag">Updated <b>15 Sep 2026</b></span>
+      <span class="tag"><span class="dot"></span>Phases 0–7 <b>approved</b></span>
+    </div>
+  </header>
+
+  <section aria-labelledby="phases-h">
+    <div class="sect-head">
+      <span class="eyebrow">The build, stop by stop</span>
+      <h2 id="phases-h">Eight phases</h2>
+    </div>
+    <div class="route">
+      <div class="stop"><div class="pin">0</div><div class="name">Inventory</div><div class="state">Approved</div></div>
+      <div class="stop"><div class="pin">1</div><div class="name">Mobile audit</div><div class="state">Approved · M1–M19</div></div>
+      <div class="stop"><div class="pin">2</div><div class="name">Web audit</div><div class="state">Approved · W1–W20</div></div>
+      <div class="stop"><div class="pin">3</div><div class="name">Parity</div><div class="state">Approved · BT-1–12</div></div>
+      <div class="stop"><div class="pin">4</div><div class="name">Design</div><div class="state">Approved · D-DS1–8</div></div>
+      <div class="stop"><div class="pin">5</div><div class="name">Testing</div><div class="state">Approved · D-T1–7</div></div>
+      <div class="stop"><div class="pin">6</div><div class="name">Build brain</div><div class="state">Approved</div></div>
+      <div class="stop"><div class="pin">7</div><div class="name">Validate</div><div class="state">Approved</div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="graph-h">
+    <div class="sect-head">
+      <span class="eyebrow">How it's wired</span>
+      <h2 id="graph-h">From source code to QA verdict</h2>
+      <p>Read left to right: repos and owner decisions feed the audits, the audits become context, the skills use the context, the gates check the skills' work, and the output lands in the workspace. Select any box to trace its connections.</p>
+    </div>
+    <div class="graph-shell">
+      <div>
+        <div class="graph-scroll"><svg class="graph" id="graph" role="group" aria-label="Brain dependency graph"></svg></div>
+        <div class="legend" aria-hidden="true">
+          <span><i class="sw" style="background:var(--muted-surface);border-color:var(--line)"></i>Source</span>
+          <span><i class="sw" style="background:var(--card);border-color:var(--edge)"></i>Audit</span>
+          <span><i class="sw" style="background:var(--primary-subtle);border-color:var(--primary-muted)"></i>Context</span>
+          <span><i class="sw" style="background:var(--primary);border-color:var(--primary)"></i>Skill</span>
+          <span><i class="sw" style="background:var(--teal-subtle);border-color:var(--teal-strong)"></i>Gate / tool</span>
+          <span><i class="sw" style="background:var(--card);border-color:var(--line);border-style:dashed"></i>Output</span>
+          <span><i class="sw" style="background:transparent;border-color:var(--warning)"></i>Added or changed in Phase 7</span>
+        </div>
+      </div>
+      <aside class="detail" id="detail" aria-live="polite"></aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="loop-h">
+    <div class="sect-head">
+      <span class="eyebrow">Every task</span>
+      <h2 id="loop-h">The loop, until 100%</h2>
+    </div>
+    <div class="loop">
+      <div class="panel">
+        <div class="chain">
+          <div class="step">Router<small>platform · parity · impact</small></div><span class="arrow">→</span>
+          <div class="step">Design<small>spec, if UI</small></div><span class="arrow">→</span>
+          <div class="step">Code<small>code gate</small></div><span class="arrow">→</span>
+          <div class="step">Test<small>test gate</small></div><span class="arrow">→</span>
+          <div class="step">QA<small>qa gate</small></div><span class="arrow">→</span>
+          <div class="step exit">PASS<small>report written</small></div>
+        </div>
+        <div class="back">
+          <div><b>FAIL</b> goes back to the specialist that owns the failing item, which fixes only that defect; then QA re-runs the whole gate.</div>
+          <div><span class="mono">CG-*</span> → Code · <span class="mono">DG-A*</span> → Design · <span class="mono">DG-B*</span> → Code · <span class="mono">TG-*</span> → Test · functional defect → Test writes a reproducing case, Code fixes it</div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin-bottom:10px">Stops and asks when</h3>
+        <ul class="plain">
+          <li>The same gate item fails 3 iterations in a row with no progress</li>
+          <li>A product decision is needed</li>
+          <li>The fix would touch old code outside the task</li>
+          <li>It would need production, a payment, a commit, a new dependency or V1</li>
+          <li>A BLOCKER or HIGH check can't run (except the standing waivers: pay step and Admin)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="flows-h">
+    <div class="sect-head">
+      <span class="eyebrow">What gets protected</span>
+      <h2 id="flows-h">32 flows by criticality and parity</h2>
+      <p>Criticality decides test priority (BLOCKER = P0). Parity says whether mobile, web, API and MCP apply the same rule today.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter flows by parity status" id="filters"></div>
+    <div class="board" id="board"></div>
+  </section>
+
+  <section aria-labelledby="p7-h">
+    <div class="sect-head">
+      <span class="eyebrow">Phase 7 · proving it works</span>
+      <h2 id="p7-h">Four checks against real history</h2>
+      <p>Full detail in <code>brain/audits/07-validation.md</code>. Every miss turned into a gate change.</p>
+    </div>
+    <div class="checks">
+      <article class="panel check">
+        <div class="hd"><div><div class="num">Check 1</div><h3>Referral invites, a change across both repos</h3></div><span class="verdict v-mixed">Would block · 5 misses fixed</span></div>
+        <p class="plat">Web <span class="mono">682e68dc</span> + mobile <span class="mono">d15d5a2</span>, 1 Jul 2026</p>
+        <div class="split">
+          <div class="ok"><h4>Caught</h4><ul class="plain">
+            <li>JWT parsed inside the controller (W6, automatic ×2)</li>
+            <li>Literal font size (M8, automatic)</li>
+            <li>New service with no tests (W8)</li>
+            <li>Touches login/registration: BLOCKER regression forced</li>
+            <li>App requires 10-digit phone, API accepts any</li>
+          </ul></div>
+          <div class="miss"><h4>Missed → gate added</h4><ul class="plain">
+            <li>"Invite sent!" but nothing is sent; copy fixed twice next day (CG-A10)</li>
+            <li>Reward can apply from 4 paths, no-op without a credit row (CG-A9)</li>
+            <li>All users loaded to match a phone (CG-W11)</li>
+            <li>Errors shown in success green (DG-B11)</li>
+            <li>Invite link lands on production register (QG-6)</li>
+          </ul></div>
+        </div>
+      </article>
+
+      <article class="panel check">
+        <div class="hd"><div><div class="num">Check 2</div><h3>A bug that reached production</h3></div><span class="verdict v-good">Caught by static gate</span></div>
+        <p class="plat">"bulk contact production error fix" <span class="mono">fe1cfde2</span>, introduced by <span class="mono">2acec7fa</span></p>
+        <p>A FullEnrich batch call was added to frozen <span class="mono">Helper.php</span> without error handling. <b>W7-frozen fails that commit automatically</b>, forcing a service with tests. Staging tests alone wouldn't reproduce a provider failure, so the gate now demands provider-failure cases and a six-point external-call rule.</p>
+        <ul class="plain">
+          <li>Secret detector extended: the provider key was a hardcoded config fallback</li>
+          <li>False positive fixed: PHPDoc shapes no longer flagged as PHP 8</li>
+          <li><b>Still in the code today:</b> the key fallback at 5 sites (reported, not changed)</li>
+        </ul>
+      </article>
+
+      <article class="panel check">
+        <div class="hd"><div><div class="num">Check 3</div><h3>Design audit: manager portal Salespeople</h3></div><span class="verdict v-good">Specific · 16 findings</span></div>
+        <div class="figure">
+          <div class="bad"><b>5</b><span>HIGH</span></div>
+          <div class="warn"><b>7</b><span>MEDIUM</span></div>
+          <div><b>4</b><span>LOW</span></div>
+          <div class="bad"><b>3.08:1</b><span>Remove label contrast</span></div>
+          <div class="warn"><b>29 px</b><span>row action height</span></div>
+        </div>
+        <ul class="plain">
+          <li>No menu at 390 px, and the app banner covers content (Business Agents are web-only)</li>
+          <li>DM Sans and Space Grotesk still loaded against "DIN only"</li>
+          <li>Thin context: no web specs for tables, pagination, avatars, confirm modals; no portal→token mapping</li>
+        </ul>
+      </article>
+
+      <article class="panel check">
+        <div class="hd"><div><div class="num">Check 4</div><h3>Queue worker on staging (BT-10)</h3></div><span class="verdict v-bad">Not processing</span></div>
+        <div class="figure">
+          <div class="bad"><b>6</b><span>routes stuck "Processing"</span></div>
+          <div class="warn"><b>29–280</b><span>days stuck</span></div>
+          <div><b>39</b><span>"Failed" drafts</span></div>
+        </div>
+        <p>Read-only check with the existing staging users. The team's own code comment says database-queued route jobs stay "processing" until a worker picks them up, and six never were. Bulk contact buys, route publish/update, emails and PDFs are queued the same way.</p>
+        <p class="plat">Owner action: check <span class="mono">queue:work</span> / Supervisor on the staging server. Production was never contacted.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="two" aria-label="Decisions and open items">
+    <div class="panel">
+      <h3 style="margin-bottom:12px">Decided today</h3>
+      <ul class="plain">
+        <li>Phase 6 approved, loop safeguards included</li>
+        <li>No Admin login for now: Admin checks waived</li>
+        <li>No payment setup: flows run up to the step before paying</li>
+        <li>Offline mode dropped</li>
+        <li>PHP 7.4.33 is the runtime target</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3 style="margin-bottom:12px">Still needed from the owner</h3>
+      <ul class="plain">
+        <li>Staging queue worker fix, and the same check for production</li>
+        <li>Business rules sheet: plans, credits, referral rewards, renewals</li>
+        <li>Deploy/ops runbook (cron, worker, env differences by name)</li>
+        <li><code>fragile.md</code> review and Q-P9 (is customer MCP sold?)</li>
+        <li>Fresh mobile recordings, or approval to capture on a second simulator</li>
+        <li>Decision on removing the hardcoded provider key</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Source of truth: <code>territool-brain/brain/</code> · entry point <code>CLAUDE.md</code> · skills linked at <code>.claude/skills</code></span>
+    <span>Palette follows the approved Territool token set; DIN stands in as Barlow here.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  const COLS = ['Sources', 'Audits', 'Context', 'Skills', 'Gates & tools', 'Workspace'];
+  const KIND = ['k-src', 'k-aud', 'k-ctx', 'k-skl', 'k-gat', 'k-out'];
+  const KIND_LABEL = ['Source', 'Audit', 'Context', 'Skill', 'Gate / tool', 'Output'];
+  const N = [
+    // col 0
+    { id: 'mobile', c: 0, l: 'repos/mobile', s: 'React Native 0.84 · TT_80', p: '~/Documents/ReactNative_Projects/TerriTool_Mobile', f: ['Sales Agent and Business Sales Agent app', '49 screens in App/App.js; FormData API client; Realm session', 'Maestro 8 flows, Detox login; ESLint baseline 50 errors'] },
+    { id: 'web', c: 0, l: 'repos/web', s: 'Laravel 5.3 · beta_react', p: '/Applications/MAMP/htdocs/webterritool', f: ['Blade user app, API V2, manager portal (React 18), Admin HQ, MCP modules', 'V1 API is dead and left untouched', 'PHP target 7.4.33'] },
+    { id: 'shoebox', c: 0, l: 'shoebox', s: 'flows · screenshots · issues', p: 'territool-brain/shoebox/', f: ['F01–F32 flow definitions', '51 staging web screenshots', 'fragile.md draft awaiting owner review'] },
+    { id: 'owner', c: 0, l: 'Owner decisions', s: 'BT · D-DS · D-T', p: 'approval records in brain/audits/*', f: ['BT-1–BT-12 target behaviours', 'D-DS1–D-DS8 design, D-T1–D-T7 testing', '15 Sep: offline dropped, PHP 7.4.33, stop before paying, no Admin yet'] },
+    // col 1
+    { id: 'a00', c: 1, l: '00 Inventory', s: 'repos · gaps · guardrails', p: 'brain/audits/00-inventory.md', f: ['What exists and what is missing', 'Local run facts; production guardrail'] },
+    { id: 'a01', c: 1, l: '01 Mobile audit', s: 'M1–M19 · D1–D5', p: 'brain/audits/01-mobile.md', f: ['Conventions, reuse inventory, fork families, traps'] },
+    { id: 'a02', c: 1, l: '02 Web audit', s: 'W1–W20 · DW1–DW5', p: 'brain/audits/02-web.md', f: ['API contract, layering, frozen files, PHP 7.4 compatibility'] },
+    { id: 'a03', c: 1, l: '03 Parity', s: 'F01–F32 · BT-1–12', p: 'brain/audits/03-parity.md', f: ['Verified divergences P1–P10', 'Owner-approved criticality and target behaviours'] },
+    { id: 'a04', c: 1, l: '04 Design', s: 'tokens · web visual audit', p: 'brain/audits/04-design.md', f: ['Pixel findings and WCAG contrast', 'Approved unified token set §7'] },
+    { id: 'a05', c: 1, l: '05 Testing', s: 'layers · risk tiers', p: 'brain/audits/05-testing.md', f: ['Execution layers L1–L6', 'Test-case format and staging data policy', 'Risk tiers from dependency graphs'] },
+    { id: 'a07', c: 1, l: '07 Validation', s: 'Phase 7 · this review', p: 'brain/audits/07-validation.md', f: ['Retrospective, fragile bug, design audit, queue worker', 'Every miss became a gate change'], nw: true },
+    // col 2
+    { id: 'stack', c: 2, l: 'stack', s: 'environments · versions', p: 'brain/context/stack.md', f: ['Staging vs production rule', 'Unverified items list (queue result added)'], nw: true },
+    { id: 'shared', c: 2, l: 'conventions-shared', s: 'S0–S7 spine', p: 'brain/context/conventions-shared.md', f: ['S0 non-negotiables', 'S3 business rules (S3.9 offline dropped)', 'S7 definition of done'], nw: true },
+    { id: 'cmob', c: 2, l: 'conventions-mobile', s: 'M rules · traps', p: 'brain/context/conventions-mobile.md', f: ['Canonical example RecentActivityScreen', 'Checks mapped to static-checks IDs'] },
+    { id: 'cweb', c: 2, l: 'conventions-web', s: 'W rules · traps', p: 'brain/context/conventions-web.md', f: ['Canonical examples A–D', 'Checks mapped to static-checks IDs'] },
+    { id: 'ds', c: 2, l: 'design-system', s: 'tokens · components', p: 'brain/context/design-system.md', f: ['Colour, DIN type scale, spacing, radius, elevation', 'Component rules and do-not-copy list'] },
+    { id: 'flows', c: 2, l: 'flows', s: '32 flows · P0–P3', p: 'brain/context/flows.md', f: ['Screens, endpoints and targets per flow'] },
+    { id: 'parity', c: 2, l: 'parity-map', s: 'mobile · web · MCP', p: 'brain/context/parity-map.md', f: ['Identical / intentional / accidental / unverified'] },
+    { id: 'fragile', c: 2, l: 'known-fragile', s: 'tiers T0–T3 · gaps', p: 'brain/context/known-fragile.md', f: ['Impact method from graphs', 'Known gaps incl. KG-Q1 queue, KG-SEC2 key'], nw: true },
+    { id: 'gloss', c: 2, l: 'glossary', s: 'roles · terms', p: 'brain/context/glossary.md', f: ['Admin, Sales Agent, Business Agent, Business Sales Agent', 'Activity vs Note; Stop, not Waypoint'] },
+    // col 3
+    { id: 'router', c: 3, l: 'territool-router', s: 'entry · parity · LOOP', p: 'brain/skills/territool-router/', f: ['Detects platforms, forces parity check', 'Builds impact map and task brief', 'Runs the loop until gates pass'] },
+    { id: 'code', c: 3, l: 'territool-code', s: 'pre-flight · post-flight', p: 'brain/skills/territool-code/', f: ['Search before creating; canonical example', 'New code only; never commits'] },
+    { id: 'design', c: 3, l: 'territool-design', s: 'modes A · B · C', p: 'brain/skills/territool-design/', f: ['Audit, new screen, full flow', 'Specs in token names with every state'], nw: true },
+    { id: 'test', c: 3, l: 'territool-test', s: 'cases · suites · commands', p: 'brain/skills/territool-test/', f: ['Owner format MD + CSV', 'API contract, Playwright, Maestro', 'Stops before the pay step'], nw: true },
+    { id: 'qa', c: 3, l: 'territool-qa', s: 'final verdict', p: 'brain/skills/territool-qa/', f: ['Impact map, regression, token-level design, parity', 'PASS / PASS-WITH-NOTES / FAIL'] },
+    // col 4
+    { id: 'gcode', c: 4, l: 'code-gate', s: 'CG-A · CG-M · CG-W', p: 'brain/gates/code-gate.md', f: ['Phase 7: credit side effects, copy matches behaviour, external calls'], nw: true },
+    { id: 'gdesign', c: 4, l: 'design-gate', s: 'DG-A · DG-B', p: 'brain/gates/design-gate.md', f: ['Phase 7: colour meaning, hit targets, reachable nav, gradients'], nw: true },
+    { id: 'gtest', c: 4, l: 'test-gate', s: 'TG-1–TG-13', p: 'brain/gates/test-gate.md', f: ['Phase 7: provider failure and credit cases'], nw: true },
+    { id: 'gqa', c: 4, l: 'qa-gate', s: 'QG-1–QG-12 · verdict', p: 'brain/gates/qa-gate.md', f: ['Standing waivers: pay step, Admin', 'Phase 7: end-to-end promise'], nw: true },
+    { id: 'static', c: 4, l: 'static-checks.js', s: 'added lines · --commit', p: 'brain/gates/scripts/static-checks.js', f: ['25+ automatic rules, ESLint, php -l', 'Self-test fixtures all pass', 'Phase 7: commit mode, key detector, W17 fix'], nw: true },
+    { id: 'probe', c: 4, l: 'probe tools', s: 'styles · capture · queue', p: 'tools/probe-styles.js · capture-web.js · queue-probe-readonly.js', f: ['Staging-only, read-only guards', 'Computed styles and contrast at 1440/768/390'], nw: true },
+    // col 5
+    { id: 'wtasks', c: 5, l: 'tasks/', s: 'task briefs', p: 'workspace/tasks/', f: ['Request, platforms, parity decision, acceptance criteria'] },
+    { id: 'wdesign', c: 5, l: 'design-proposals/', s: 'audits · specs', p: 'workspace/design-proposals/', f: ['First output: manager Salespeople audit'], nw: true },
+    { id: 'wcases', c: 5, l: 'test-cases/', s: 'MD + CSV per flow', p: 'workspace/test-cases/', f: ['Empty until the first test task'] },
+    { id: 'wsuites', c: 5, l: 'test-suites/', s: 'api · web · mobile', p: 'workspace/test-suites/', f: ['Runners not built yet (weakness W1)'] },
+    { id: 'wqa', c: 5, l: 'qa-reports/', s: 'verdict · evidence', p: 'workspace/qa-reports/', f: ['Iteration log per task'] }
+  ];
+  const E = [
+    ['mobile','a00'],['mobile','a01'],['mobile','a03'],['mobile','a05'],['web','a00'],['web','a02'],['web','a03'],['web','a05'],
+    ['shoebox','a03'],['shoebox','a04'],['shoebox','a05'],['owner','a01'],['owner','a02'],['owner','a03'],['owner','a04'],['owner','a05'],['owner','a07'],
+    ['a00','stack'],['a01','cmob'],['a01','shared'],['a02','cweb'],['a02','shared'],['a02','stack'],['a03','parity'],['a03','flows'],['a03','gloss'],['a03','shared'],
+    ['a04','ds'],['a05','fragile'],['a05','shared'],['a07','fragile'],['a07','stack'],['a07','gcode'],['a07','gdesign'],['a07','gtest'],['a07','gqa'],['a07','static'],['a07','probe'],
+    ['shared','router'],['shared','code'],['shared','design'],['shared','test'],['shared','qa'],['gloss','router'],['parity','router'],['fragile','router'],
+    ['flows','test'],['fragile','test'],['fragile','qa'],['parity','qa'],['ds','design'],['flows','design'],['cmob','code'],['cweb','code'],['stack','code'],
+    ['code','gcode'],['code','static'],['design','gdesign'],['design','probe'],['test','gtest'],['qa','gqa'],['qa','gcode'],['qa','gdesign'],['qa','gtest'],['qa','probe'],['router','gqa'],
+    ['router','wtasks'],['design','wdesign'],['test','wcases'],['test','wsuites'],['qa','wqa']
+  ];
+
+  const NW = 178, NH = 46, VG = 12, CG = 58, PADX = 18, TOP = 44;
+  const byCol = COLS.map((_, i) => N.filter(n => n.c === i));
+  const maxRows = Math.max(...byCol.map(c => c.length));
+  const H = TOP + maxRows * (NH + VG) - VG + 20;
+  const W = PADX * 2 + COLS.length * NW + (COLS.length - 1) * CG;
+  const svg = document.getElementById('graph');
+  const NS = 'http://www.w3.org/2000/svg';
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const el = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  const pos = {};
+  byCol.forEach((col, ci) => {
+    const colH = col.length * (NH + VG) - VG;
+    const y0 = TOP + (maxRows * (NH + VG) - VG - colH) / 2;
+    col.forEach((n, ri) => { pos[n.id] = { x: PADX + ci * (NW + CG), y: y0 + ri * (NH + VG) }; });
+    const t = el('text', { x: PADX + ci * (NW + CG), y: 22, class: 'col-title' });
+    t.textContent = COLS[ci];
+    svg.appendChild(t);
+  });
+  const gEdges = el('g', {}); svg.appendChild(gEdges);
+  const edgeEls = E.map(([a, b]) => {
+    const s = pos[a], t = pos[b];
+    const sx = s.x + NW, sy = s.y + NH / 2, tx = t.x, ty = t.y + NH / 2, dx = Math.max(30, (tx - sx) / 2);
+    const p = el('path', { d: `M${sx},${sy} C${sx + dx},${sy} ${tx - dx},${ty} ${tx},${ty}`, class: 'edge' });
+    gEdges.appendChild(p);
+    return { a, b, p };
+  });
+  const nodeEls = {};
+  N.forEach(n => {
+    const { x, y } = pos[n.id];
+    const g = el('g', { class: `node ${KIND[n.c]}${n.nw ? ' k-new' : ''}`, tabindex: '0', role: 'button', 'aria-label': `${n.l}: ${n.s}` });
+    g.appendChild(el('rect', { x, y, width: NW, height: NH, rx: 10 }));
+    const l = el('text', { x: x + 12, y: y + 19, class: 'l' }); l.textContent = n.l; g.appendChild(l);
+    const s = el('text', { x: x + 12, y: y + 35, class: 's' }); s.textContent = n.s; g.appendChild(s);
+    g.addEventListener('click', () => select(n.id));
+    g.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(n.id); } });
+    svg.appendChild(g);
+    nodeEls[n.id] = g;
+  });
+
+  const detail = document.getElementById('detail');
+  function select(id) {
+    const n = N.find(x => x.id === id);
+    svg.classList.add('focus');
+    Object.values(nodeEls).forEach(g => g.classList.remove('sel', 'near'));
+    const ins = [], outs = [];
+    edgeEls.forEach(e => {
+      const on = e.a === id || e.b === id;
+      e.p.classList.toggle('on', on);
+      if (e.a === id) { outs.push(e.b); nodeEls[e.b].classList.add('near'); }
+      if (e.b === id) { ins.push(e.a); nodeEls[e.a].classList.add('near'); }
+    });
+    nodeEls[id].classList.add('sel');
+    const name = x => N.find(m => m.id === x).l;
+    const btns = arr => arr.length ? arr.map(x => `<button type="button" data-go="${x}">${name(x)}</button>`).join('') : '<span class="plat">none</span>';
+    detail.innerHTML = `
+      <div class="d-main">
+        <span class="pill ${n.c === 3 ? 'p-intentional' : n.c === 4 ? 'p-identical' : 'p-single'} kind">${KIND_LABEL[n.c]}${n.nw ? ' · changed in Phase 7' : ''}</span>
+        <h3>${n.l}</h3>
+        <div class="mono path">${n.p}</div>
+        <ul>${n.f.map(x => `<li>${x}</li>`).join('')}</ul>
+      </div>
+      <div class="d-links">
+        <div class="eyebrow">Feeds from</div><div class="links">${btns(ins)}</div>
+        <div class="eyebrow">Feeds into</div><div class="links">${btns(outs)}</div>
+      </div>`;
+    detail.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => { select(b.dataset.go); nodeEls[b.dataset.go].focus({ preventScroll: true }); }));
+  }
+  select('router');
+
+  // Flows board
+  const F = [
+    ['F01','Login & session','BLOCKER','accidental','mobile · web · portal'],['F02','Registration & onboarding','BLOCKER','accidental','mobile · web'],
+    ['F03','Subscription, paywall, credits top-up','BLOCKER','intentional','RevenueCat · Stripe/PayPal'],['F04','Subscription & credit renewal crons','BLOCKER','single','system'],
+    ['F15','Find & buy contacts','BLOCKER','identical','mobile · web · MCP'],
+    ['F05','Dashboard & activity feed','HIGH','unverified','mobile · web'],['F06','AI Find Leads','HIGH','unverified','mobile · web · portal · MCP'],
+    ['F08','Create route','HIGH','accidental','mobile · web · MCP'],['F09','Route detail & navigation','HIGH','intentional','mobile · web'],
+    ['F10','Mark visited','HIGH','accidental','mobile · MCP'],['F11','Lists','HIGH','accidental','mobile · web · MCP'],
+    ['F12','Companies (Address Book)','HIGH','accidental','mobile · web'],['F13','Contacts','HIGH','accidental','mobile · web · MCP'],
+    ['F14','Activities & log meetings','HIGH','accidental','mobile · web · MCP'],['F23','Manager portal','HIGH','intentional','portal'],
+    ['F24','Business Sales Agent management','HIGH','intentional','web · portal'],
+    ['F07','Places / Yelp leads','MEDIUM','unverified','mobile · web'],['F16','Report company/contact','MEDIUM','identical','mobile · web'],
+    ['F17','Share route/list','MEDIUM','unverified','mobile · web'],['F18','Scan business card','MEDIUM','intentional','mobile'],
+    ['F19','QR route import','MEDIUM','intentional','mobile'],['F20','Settings & status tags','MEDIUM','unverified','mobile · web'],
+    ['F21','CRM sync','MEDIUM','intentional','web · mobile · McpClient'],['F22','Bulk CSV upload','MEDIUM','intentional','web'],
+    ['F25','Admin HQ','MEDIUM','intentional','web'],['F29','Customer MCP connectors','MEDIUM','identical','MCP'],
+    ['F31','MCP client & chat','MEDIUM','single','web'],['F32','Launch, permissions, crash (offline dropped)','MEDIUM','single','mobile'],
+    ['F26','Support tickets','LOW','unverified','web · API'],['F27','Notifications & push','LOW','unverified','mobile · web'],
+    ['F28','Referral invites','LOW','unverified','mobile · server'],['F30','Admin MCP','LOW','single','MCP']
+  ];
+  const PAR = { identical: 'Identical', intentional: 'Intentionally different', accidental: 'Accidentally different', unverified: 'Unverified', single: 'Single platform' };
+  const LANES = [['BLOCKER','blocker','P0'],['HIGH','high','P1'],['MEDIUM','medium','P2'],['LOW','low','P3']];
+  const board = document.getElementById('board');
+  LANES.forEach(([crit, cls, pr]) => {
+    const items = F.filter(f => f[2] === crit);
+    const lane = document.createElement('div');
+    lane.className = `lane ${cls}`;
+    lane.innerHTML = `<div class="lane-head"><h3>${crit.charAt(0) + crit.slice(1).toLowerCase()}</h3><span class="n">${pr} · ${items.length}</span></div>` +
+      items.map(f => `<div class="flow" data-par="${f[3]}"><div class="top"><span class="id">${f[0]}</span><span class="nm">${f[1]}</span></div><div class="row"><span class="pill p-${f[3]}">${PAR[f[3]]}</span><span class="plat">${f[4]}</span></div></div>`).join('');
+    board.appendChild(lane);
+  });
+  const filters = document.getElementById('filters');
+  const opts = [['all', 'All 32']].concat(Object.entries(PAR).map(([k, v]) => [k, `${v} · ${F.filter(f => f[3] === k).length}`]));
+  opts.forEach(([k, label]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.id = `filter-${k}`; b.textContent = label; b.setAttribute('aria-pressed', k === 'all' ? 'true' : 'false');
+    b.addEventListener('click', () => {
+      filters.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', 'true');
+      board.querySelectorAll('.flow').forEach(fl => { fl.hidden = !(k === 'all' || fl.dataset.par === k); });
+    });
+    filters.appendChild(b);
+  });
+})();
+</script>

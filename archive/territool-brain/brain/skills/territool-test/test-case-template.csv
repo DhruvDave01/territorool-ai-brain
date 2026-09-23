@@ -1,0 +1,2 @@
+ID,Flow,Title,Platform,Role,Priority,Type,Preconditions,Test data,Steps,Expected result,Rule / target refs,Known gap,Evidence,Automation,Status,Last run
+TC-F01-001,F01,Sales Agent logs in with valid credentials,ios,Sales Agent,P0,happy,Logged out; staging build,.local role: Sales Agent,"1. Open app 2. Enter email 3. Enter password 4. Tap Login","Dashboard shows ""Welcome""; credits pill visible",M3,,,maestro:workspace/test-suites/mobile/F01-login.yaml,Not run,

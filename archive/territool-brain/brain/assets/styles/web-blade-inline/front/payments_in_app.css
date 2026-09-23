@@ -1,0 +1,189 @@
+/* ===== resources/views/front/payments_in_app.blade.php · <style> block 1 of 1 ===== */
+:root {
+            --tt-primary: #124ac6;
+            --tt-primary-dark: #0e3a9e;
+            --tt-primary-glow: rgba(18, 74, 198, 0.38);
+            --tt-text: #1a2540;
+            --tt-muted: #5c6b85;
+            --tt-surface: #ffffff;
+            --tt-border: rgba(18, 74, 198, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+            color: var(--tt-text);
+            background:
+                radial-gradient(ellipse 80% 60% at 50% -10%, var(--tt-primary-glow), transparent 55%),
+                radial-gradient(ellipse 50% 40% at 100% 100%, rgba(18, 74, 198, 0.14), transparent),
+                linear-gradient(165deg, #eef3fc 0%, #e4ecfa 45%, #f5f8fd 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 520px;
+            animation: fadeUp 0.6s ease-out both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: var(--tt-surface);
+            border-radius: 20px;
+            border: 1px solid var(--tt-border);
+            box-shadow:
+                0 4px 6px rgba(26, 37, 64, 0.05),
+                0 20px 48px rgba(18, 74, 198, 0.14);
+            padding: 40px 32px 36px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 24px;
+            display: block;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--tt-primary-dark);
+            background: rgba(18, 74, 198, 0.1);
+            border: 1px solid var(--tt-border);
+            border-radius: 999px;
+            padding: 6px 14px;
+            margin-bottom: 20px;
+        }
+
+        .badge svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.55;
+            font-weight: 500;
+            color: var(--tt-text);
+            margin-bottom: 32px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--tt-border), transparent);
+            margin-bottom: 28px;
+        }
+
+        .cta-label {
+            font-size: 0.875rem;
+            color: var(--tt-muted);
+            margin-bottom: 16px;
+        }
+
+        .store-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex: 1 1 200px;
+            max-width: 220px;
+            min-width: 0;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #124ac6;
+            border-radius: 12px;
+            padding: 14px 20px;
+            box-shadow: 0 4px 14px var(--tt-primary-glow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .store-btn:hover,
+        .store-btn:focus {
+            color: #fff;
+            text-decoration: none;
+            background: var(--tt-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--tt-primary-glow);
+        }
+
+        .store-btn:active {
+            transform: translateY(0);
+        }
+
+        .store-btn .btn-icon {
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .store-btn .btn-text {
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .store-btn .btn-text small {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            opacity: 0.88;
+            letter-spacing: 0.02em;
+        }
+
+        @media (max-width: 460px) {
+            .card {
+                padding: 32px 22px 28px;
+            }
+
+            .message {
+                font-size: 1.05rem;
+            }
+
+            .store-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .store-btn {
+                max-width: none;
+                flex: 1 1 auto;
+            }
+        }

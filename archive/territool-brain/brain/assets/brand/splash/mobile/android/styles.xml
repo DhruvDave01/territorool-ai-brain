@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Match JS splash / COLOR_PRIMARY so cold start does not flash white -->
+        <item name="android:windowBackground">@color/colorPrimary</item>
+
+        <!-- Edge-to-edge: avoid android:statusBarColor (deprecated on Android 15+).
+             Screens handle insets via SafeAreaView; windowBackground keeps splash brand color. -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <!-- Prevent fullscreen overlap -->
+        <item name="android:windowFullscreen">false</item>
+
+        <!-- Android 12+ edge-to-edge fix -->
+        <item name="android:windowTranslucentStatus">false</item>
+
+    </style>
+
+</resources>

@@ -1,30 +1,19 @@
----
-id: README
-parent: core
-related:
-  - index.md
----
-# TerriTool AI Brain
+# B1
 
-Product knowledge vault plus an [Obsidian-style graph](https://territorool-ai-brain.vercel.app) you can search and chat with.
+One TerriTool brain. Start at [AGENTS.md](AGENTS.md).
 
-Start at [index.md](index.md). Graph: `graph.html` (site `/` redirects there).
+| Folder | What it holds |
+|---|---|
+| [product](product/overview.md) | What TerriTool is, roles, credits, and the [public site](product/public-site.md) |
+| [brains](brains/README.md) | Mobile code, mobile UI, web code, web design, API, UI/UX Guardian |
+| [roles](roles/user.md) | User, Manager, Admin |
+| [flows](flows/mobile.md) | Mobile, web user, web manager, web admin — path plus one still per step |
+| [features](features/README.md) | One page per product module, plus the review-credits UI |
+| [screenshots](screenshots/REVIEW.md) | Stills and the pixel review |
+| [code](code/mobile-review.md) | Live reviews of the mobile and web repos |
+| [gates](gates/design-gate.md) | Design gate and code gate |
+| [methods](methods/README.md) | Six check habits. They never override the brains. |
+| [assets](assets/logos/territool-wordmark-blue.png) | Wordmarks, fonts, icons |
+| [archive](archive/README.md) | The earlier full notes, images, and videos |
 
-## Local
-
-```bash
-cp .env.example .env   # add ANTHROPIC_API_KEY
-python3 graph-server.py
-```
-
-Open http://127.0.0.1:8765/graph.html
-
-## Vercel
-
-Project env: `ANTHROPIC_API_KEY` (sensitive). Optional: `ANTHROPIC_MODEL`.
-
-```bash
-vercel --prod
-```
-
-Never commit `.env` or API keys.
+The working pages are the ones at this root. `archive/` keeps the original three brains so nothing was dropped.

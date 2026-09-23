@@ -1,0 +1,12 @@
+/* ===== resources/views/auth/passwords/email.blade.php · <style> block 1 of 1 ===== */
+@media (max-width: 767px) {
+    .desktop-only {
+        display: none !important;
+    }
+    .sidebar-mini .content-wrapper, .content{
+        margin-top: 0px !important;
+    }
+    .main-header .logo{
+        margin: 20px 0px !important;
+    }
+}

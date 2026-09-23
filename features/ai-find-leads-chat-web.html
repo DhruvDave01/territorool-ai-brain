@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Find Leads — web chat flow</title>
+  <style>
+    @font-face {
+      font-family: "DIN 2014";
+      src: url("../assets/fonts/web/DinBold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "DIN 2014";
+      src: url("../assets/fonts/web/DinLight.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    :root {
+      --blue: #124ac6;
+      --blue-press: #0e3ea8;
+      --page: #eef1f6;
+      --ink: #333;
+      --muted: #667085;
+      --line: #e6eaf0;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+    }
+    .review {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 18px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .review strong { font-size: 14px; }
+    .review span { color: var(--muted); }
+    .review a { color: var(--blue); font-weight: 700; text-decoration: none; }
+    .picks { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; }
+    .picks button {
+      border: 1px solid #cfd6e0;
+      background: #fff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .picks button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .top {
+      height: 60px;
+      background: #fff;
+      border-bottom: 1px solid #eceff3;
+      display: flex;
+      align-items: center;
+      padding: 0 18px 0 14px;
+      gap: 16px;
+    }
+    .brand img { height: 28px; display: block; }
+    .credits {
+      margin-left: auto;
+      background: var(--blue);
+      color: #fff;
+      border-radius: 5px;
+      padding: 8px 12px;
+      font-weight: 700;
+    }
+    .store {
+      background: #111;
+      color: #fff;
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .top a { color: #555; text-decoration: none; }
+    .shell { display: flex; min-height: calc(100vh - 118px); }
+    .side {
+      width: 92px;
+      background: #fff;
+      border-right: 1px solid #eceff3;
+      padding: 14px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .side a {
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #8a93a3;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .side a svg { display: block; margin: 0 auto 4px; }
+    .side a.active { color: var(--blue); }
+    .main { flex: 1; min-width: 0; padding: 18px 22px 32px; }
+    .title-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; }
+    .title-row h1 {
+      margin: 0;
+      font-family: "DIN 2014", "Helvetica Neue", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .bal {
+      background: #eceff3;
+      color: #555;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 12px;
+    }
+    .crumb { margin-left: auto; color: #888; font-size: 13px; }
+    .panel {
+      background: #fff;
+      border: 1px solid #e4e8ee;
+      border-radius: 8px;
+      min-height: 560px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .work { flex: 1; min-height: 520px; display: none; }
+    .work.on { display: flex; }
+    .map-screen { flex: 1; position: relative; background: #e4edf5; touch-action: none; cursor: crosshair; min-height: 520px; }
+    .map-screen svg, .thumb svg, .pinmap svg { width: 100%; height: 100%; display: block; }
+    .ask-bubble {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      max-width: 360px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+    .hint {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,.95);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 16px;
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      border: 3px solid var(--blue);
+      background: rgba(18, 74, 198, 0.16);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .ring b {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .map-actions {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      gap: 8px;
+    }
+    button.btn {
+      border: 0;
+      border-radius: 6px;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      height: 38px;
+      padding: 0 16px;
+      cursor: pointer;
+    }
+    button.btn:disabled { opacity: 0.45; cursor: default; }
+    button.btn.red { background: #cf5b51; }
+    button.btn.line { background: #fff; color: var(--blue); border: 1px solid var(--blue); }
+    .split { flex: 1; display: flex; min-height: 520px; }
+    .split .map-screen { min-height: 0; }
+    .chat-col {
+      width: 360px;
+      border-left: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      background: #fbfcfe;
+    }
+    .thread { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .msg { max-width: 92%; padding: 10px 12px; border-radius: 12px; line-height: 1.4; }
+    .msg.bot { background: #fff; border: 1px solid var(--line); align-self: flex-start; }
+    .msg.user { background: var(--blue); color: #fff; align-self: flex-end; }
+    .msg ul { margin: 6px 0 0; padding-left: 18px; }
+    .composer { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); background: #fff; }
+    .composer input, .solo input {
+      flex: 1;
+      border: 1px solid #d5dce6;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 14px;
+    }
+    .solo {
+      flex: 1;
+      display: flex;
+      gap: 18px;
+      padding: 28px;
+      align-items: stretch;
+    }
+    .thumb {
+      width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #e4edf5;
+      border: 1px solid var(--line);
+    }
+    .solo-chat { flex: 1; display: flex; flex-direction: column; max-width: 640px; }
+    .search {
+      margin: auto;
+      width: min(480px, 90%);
+      text-align: center;
+      padding: 28px 8px;
+    }
+    .search h2 { margin: 0 0 6px; font-size: 22px; }
+    .search p { margin: 0 0 14px; color: var(--muted); }
+    .track { height: 8px; background: #e6ebf2; border-radius: 99px; overflow: hidden; }
+    .track i { display: block; height: 100%; width: 0; background: var(--blue); animation: fill 1.5s linear forwards; }
+    @keyframes fill { to { width: 100%; } }
+    .results { flex: 1; display: flex; min-height: 520px; }
+    .table-wrap { flex: 1; min-width: 0; padding: 14px 16px 18px; }
+    .recap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f4f7fb;
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+    }
+    .recap span { flex: 1; }
+    .recap button, .linkbtn {
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font-weight: 700;
+      cursor: pointer;
+      font: inherit;
+    }
+    .result-head { display: flex; align-items: center; margin: 4px 0 10px; }
+    .result-head b { font-size: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; color: #667085; font-weight: 700; padding: 8px; border-bottom: 1px solid var(--line); }
+    td { padding: 9px 8px; border-bottom: 1px solid #f0f2f5; }
+    tr { cursor: pointer; }
+    tr.on td { background: #f3f7ff; }
+    .note { margin-top: 10px; color: var(--muted); font-size: 12px; }
+    .pinmap { flex: 1; position: relative; min-height: 420px; background: #e4edf5; }
+    .pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      margin: -7px 0 0 -7px;
+      background: var(--blue);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    }
+    .toast {
+      position: fixed;
+      top: 132px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #c2410c;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      display: none;
+      z-index: 5;
+    }
+    .mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 24, 40, 0.35);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+    }
+    .mask.on { display: flex; }
+    .choice { background: #fff; width: 420px; border-radius: 12px; padding: 20px; }
+    .choice h3 { margin: 0 0 4px; }
+    .choice p { margin: 0 0 12px; color: var(--muted); }
+    .choice button { display: block; width: 100%; margin-top: 8px; }
+    @media (max-width: 980px) {
+      .split { flex-direction: column; }
+      .chat-col { width: auto; border-left: 0; border-top: 1px solid var(--line); }
+      .solo { flex-direction: column; }
+      .thumb { width: 100%; height: 220px; }
+      .side { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="review">
+    <strong>Web · classic Find Leads</strong>
+    <span>Drag one circle. The sidebar stays the rep sidebar. Leads stay in the current table.</span>
+    <a href="ai-find-leads-chat-ios.html">Open the iOS screen</a>
+    <div class="picks" id="picks">
+      <button type="button" data-flow="ask" class="on">Chat asks, map answers</button>
+      <button type="button" data-flow="stages">Map, then chat</button>
+      <button type="button" data-flow="split">Map beside the chat</button>
+    </div>
+  </div>
+
+  <header class="top">
+    <a class="brand" href="#"><img src="../assets/logos/territool-wordmark-blue.png" alt="TerriTool"></a>
+    <span class="credits">8393 Credits</span>
+    <span class="store">Google Play</span>
+    <span class="store">App Store</span>
+    <a href="#support">Report Bug</a>
+    <a href="#logout">Logout</a>
+  </header>
+  <div class="shell">
+    <aside class="side">
+      <a href="#home">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><path d="M4 11 L12 4 L20 11 V20 H4 Z"/></svg>
+        Home
+      </a>
+      <a href="#book">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/></svg>
+        Address Book
+      </a>
+      <a class="active" href="#find">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#124ac6" stroke-width="1.7"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
+        AI Find Leads
+      </a>
+      <a href="#routes">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/></svg>
+        Routes
+      </a>
+      <a href="#lists">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><path d="M8 7h11M8 12h11M8 17h11"/><circle cx="4.5" cy="7" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="17" r="1"/></svg>
+        Lists
+      </a>
+      <a href="#settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
+        Settings
+      </a>
+    </aside>
+    <main class="main">
+      <div class="title-row">
+        <h1>AI Find Leads</h1>
+        <span class="bal">Current Balance: 8393</span>
+        <div class="crumb">AI Find Leads › Create Leads</div>
+      </div>
+      <div class="panel">
+        <section class="work on" id="view-area">
+          <div class="map-screen" id="map" data-map="main"></div>
+        </section>
+        <section class="work" id="view-split">
+          <div class="split">
+            <div class="map-screen" id="map-split" data-map="split"></div>
+            <aside class="chat-col">
+              <div class="thread" id="split-thread"></div>
+              <form class="composer" id="split-form">
+                <input id="split-input" type="text" placeholder="Plumbing companies, exclude national chains" aria-label="Ideal businesses" disabled>
+                <button class="btn" id="split-send" type="submit" disabled>Send</button>
+              </form>
+            </aside>
+          </div>
+        </section>
+        <section class="work" id="view-chat">
+          <div class="solo">
+            <div class="thumb" id="thumb"></div>
+            <div class="solo-chat">
+              <div class="thread" id="chat-thread"></div>
+              <form class="composer" id="chat-form">
+                <input id="chat-input" type="text" placeholder="Plumbing companies, exclude national chains" aria-label="Ideal businesses">
+                <button class="btn" type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="work" id="view-search">
+          <div class="search">
+            <h2>Searching this area</h2>
+            <p id="search-copy">This usually takes about 60 seconds.</p>
+            <div class="track"><i></i></div>
+          </div>
+        </section>
+        <section class="work" id="view-results">
+          <div class="results">
+            <div class="table-wrap" id="table-wrap"></div>
+            <aside class="chat-col" id="result-chat" style="display:none">
+              <div class="thread" id="result-thread"></div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="mask" id="mask">
+    <div class="choice">
+      <h3>Leads confirmed</h3>
+      <p id="choice-copy">Your selected leads are ready.</p>
+      <button class="btn" type="button" data-next="route">Add to a route</button>
+      <button class="btn line" type="button" data-next="list">Add to a list</button>
+      <button class="btn line" type="button" data-next="close">Keep browsing leads</button>
+    </div>
+  </div>
+
+  <template id="map-svg">
+    <svg viewBox="0 0 800 640" preserveAspectRatio="xMidYMid slice">
+      <rect width="800" height="640" fill="#e4edf5"/>
+      <path d="M0 0 H280 C250 80 320 140 240 230 C160 320 300 380 210 470 C140 540 250 590 180 640 H0 Z" fill="#c5d9ee"/>
+      <ellipse cx="560" cy="120" rx="90" ry="46" fill="#d5e7cc"/>
+      <ellipse cx="470" cy="360" rx="120" ry="42" fill="#d5e7cc"/>
+      <g stroke="#ffffff" stroke-width="8" fill="none">
+        <path d="M300 0 V640"/><path d="M460 0 V640"/><path d="M620 0 V640"/>
+        <path d="M200 140 H800"/><path d="M180 280 H800"/><path d="M170 430 H800"/><path d="M190 560 H800"/>
+      </g>
+      <g stroke="#f7f9fb" stroke-width="2.5" fill="none">
+        <path d="M360 0 V640"/><path d="M540 0 V640"/>
+        <path d="M190 70 H800"/><path d="M180 210 H800"/><path d="M170 350 H800"/><path d="M180 500 H800"/>
+      </g>
+      <g fill="#5d6d7e" font-size="18" font-family="Helvetica, Arial, sans-serif">
+        <text x="70" y="250">Bay</text>
+        <text x="360" y="180">Downtown Oakland</text>
+        <text x="360" y="330">Temescal</text>
+        <text x="360" y="500">Fruitvale</text>
+      </g>
+    </svg>
+  </template>
+
+  <script>
+    const LEADS = [
+      ["Pipe Spy", "1108 26th St, Oakland, CA 94607", "www.pipespy.com", "4"],
+      ["Big Smile Plumbing", "3115 Beaumont Ave, Oakland, CA 94602", "www.bigsmileplumbing.com", "2"],
+      ["Ehret Co Plumbing", "887 71st Ave, Oakland, CA 94621", "ehretco.com", "3"],
+      ["Harry Clark Plumbing", "3026 Broadway, Oakland, CA 94611", "www.hcplumbing.com", "3"],
+      ["Oakland Rooter", "1614 Fruitvale Ave, Oakland, CA 94601", "oaklandrooter.com", "2"],
+      ["Allen & Sons Plumbing", "7645 MacArthur Blvd, Oakland, CA 94605", "", "2"]
+    ];
+    const PINS = [[42, 30], [58, 24], [48, 46], [66, 42], [40, 62], [55, 58]];
+    const svgHtml = document.getElementById("map-svg").innerHTML;
+
+    const state = {
+      flow: new URLSearchParams(location.search).get("flow") || "ask",
+      phase: "area",
+      circles: { main: null, split: null },
+      activeMap: "main",
+      place: "Oakland",
+      miles: "",
+      query: "",
+      selected: new Set(),
+      showMap: false,
+      searchTimer: 0
+    };
+
+    function mountMap(el) {
+      el.innerHTML = svgHtml + '<div class="hint">Drag to circle the area you sell in</div><div class="ring" style="display:none"><b>Search area</b></div><div class="ask-bubble" hidden></div><div class="map-actions"><button class="btn red" type="button" data-act="clear">Clear</button><button class="btn" type="button" data-act="use" disabled>Use this area</button></div>';
+      const key = el.dataset.map;
+      let drag = null;
+      const ring = el.querySelector(".ring");
+      const hint = el.querySelector(".hint");
+      const useBtn = el.querySelector("[data-act=use]");
+      function paint() {
+        const c = state.circles[key];
+        if (!c) {
+          ring.style.display = "none";
+          hint.style.display = "block";
+          useBtn.disabled = true;
+          return;
+        }
+        hint.style.display = "none";
+        ring.style.display = "block";
+        ring.style.left = (c.x - c.r) + "px";
+        ring.style.top = (c.y - c.r) + "px";
+        ring.style.width = ring.style.height = (c.r * 2) + "px";
+        const miles = Math.max(1, Math.min(31, (c.r / 90) * 3));
+        state.miles = miles.toFixed(1);
+        if (el.clientHeight > 20) {
+          const t = c.y / el.clientHeight;
+          state.place = t < 0.34 ? "Downtown Oakland" : t < 0.62 ? "Temescal" : "Fruitvale";
+        }
+        ring.querySelector("b").textContent = "Search area · " + state.miles + " mi";
+        useBtn.disabled = c.r < 36;
+      }
+      el.addEventListener("pointerdown", (e) => {
+        if (state.phase !== "area") return;
+        if (e.target.closest("button")) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        let c = state.circles[key];
+        let mode = "draw";
+        if (c) {
+          const d = Math.hypot(x - c.x, y - c.y);
+          if (Math.abs(d - c.r) < 18) mode = "resize";
+          else if (d < c.r - 4) mode = "move";
+        }
+        if (mode === "draw") {
+          c = { x, y, r: 12 };
+          state.circles[key] = c;
+        }
+        drag = { mode, x, y, ox: c.x, oy: c.y };
+        try { el.setPointerCapture(e.pointerId); } catch (err) { /* untrusted events */ }
+        paint();
+      });
+      el.addEventListener("pointermove", (e) => {
+        if (!drag) return;
+        const rect = el.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const c = state.circles[key];
+        if (drag.mode === "move") {
+          c.x = Math.max(c.r, Math.min(rect.width - c.r, drag.ox + (x - drag.x)));
+          c.y = Math.max(c.r, Math.min(rect.height - c.r, drag.oy + (y - drag.y)));
+        } else if (drag.mode === "resize") {
+          c.r = Math.max(24, Math.min(220, Math.hypot(x - c.x, y - c.y)));
+        } else {
+          c.x = drag.x;
+          c.y = drag.y;
+          c.r = Math.max(12, Math.min(220, Math.hypot(x - drag.x, y - drag.y)));
+        }
+        paint();
+      });
+      el.addEventListener("pointerup", () => { drag = null; });
+      el.querySelector("[data-act=clear]").onclick = () => {
+        state.circles[key] = null;
+        paint();
+      };
+      useBtn.onclick = () => {
+        const c = state.circles[key];
+        if (!c || c.r < 36) return;
+        state.activeMap = key;
+        state.phase = "chat";
+        if (key === "main") state.circles.split = Object.assign({}, c);
+        else state.circles.main = Object.assign({}, c);
+        show();
+      };
+      el._paint = paint;
+      paint();
+    }
+
+    function bubble(el, text) {
+      const node = el.querySelector(".ask-bubble");
+      if (!node) return;
+      const show = state.flow === "ask" && state.phase === "area";
+      node.hidden = !show;
+      node.textContent = text;
+    }
+
+    function threadHtml(includeReply) {
+      let html = '<div class="msg bot">Circle the area you sell in. One area for this search.</div>';
+      if (state.phase !== "area") {
+        html += '<div class="msg user">One area · ' + state.place + " · " + state.miles + " mi</div>";
+        html += '<div class="msg bot">What businesses should we find?</div>';
+      }
+      if (includeReply && state.query) {
+        html += '<div class="msg user">' + escapeHtml(state.query) + "</div>";
+        html += '<div class="msg bot">Ideal prospects<ul><li>Local plumbing companies in ' + state.place + '.</li><li>Small to medium-sized plumbing businesses.</li><li>Excludes large national chains.</li></ul></div>';
+      }
+      return html;
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"]/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+    }
+
+    function renderTable() {
+      const rows = LEADS.map((lead, i) => {
+        return "<tr data-i='" + i + "' class='" + (state.selected.has(i) ? "on" : "") + "'><td><input type='checkbox' " + (state.selected.has(i) ? "checked" : "") + "></td><td>" + lead[0] + "</td><td>" + lead[1] + "</td><td>" + lead[2] + "</td><td>" + lead[3] + "</td></tr>";
+      }).join("");
+      const body = state.showMap
+        ? "<div class='pinmap' id='pinmap'>" + svgHtml + PINS.map((p) => "<div class='pin' style='left:" + p[0] + "%;top:" + p[1] + "%'></div>").join("") + "</div>"
+        : "<table><thead><tr><th></th><th>Name</th><th>Address</th><th>Website URL</th><th>Contacts</th></tr></thead><tbody>" + rows + "</tbody></table>";
+      document.getElementById("table-wrap").innerHTML =
+        "<div class='recap'><span>" + state.place + " · " + state.miles + " mi · " + escapeHtml(state.query) + "</span><button type='button' id='change-area'>Change area</button></div>" +
+        "<div class='result-head'><b>" + LEADS.length + " leads found</b><span style='flex:1'></span><button class='btn line' id='map-toggle' type='button'>" + (state.showMap ? "List" : "Map view") + "</button><button class='btn' id='next' type='button' style='margin-left:8px'>Next step</button></div>" +
+        body;
+      document.getElementById("table-wrap").querySelectorAll("tr").forEach((row) => {
+        row.onclick = () => {
+          const i = Number(row.dataset.i);
+          if (state.selected.has(i)) state.selected.delete(i);
+          else state.selected.add(i);
+          renderTable();
+        };
+      });
+      document.getElementById("change-area").onclick = () => {
+        state.phase = "area";
+        state.showMap = false;
+        show();
+      };
+      document.getElementById("map-toggle").onclick = () => {
+        state.showMap = !state.showMap;
+        renderTable();
+      };
+      document.getElementById("next").onclick = () => {
+        if (state.selected.size < 2) {
+          showToast("Select at least 2 leads");
+          return;
+        }
+        document.getElementById("choice-copy").textContent = state.selected.size + " leads ready. This continues the current save path.";
+        document.getElementById("mask").classList.add("on");
+      };
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => { toast.style.display = "none"; }, 1600);
+    }
+
+    function syncSplitComposer() {
+      const ready = state.phase === "chat";
+      document.getElementById("split-input").disabled = !ready;
+      document.getElementById("split-send").disabled = !ready;
+      document.getElementById("split-thread").innerHTML = threadHtml(false);
+    }
+
+    function show() {
+      const flow = state.flow;
+      const phase = state.phase;
+      document.querySelectorAll("#picks button").forEach((btn) => btn.classList.toggle("on", btn.dataset.flow === flow));
+      const area = document.getElementById("view-area");
+      const split = document.getElementById("view-split");
+      const chat = document.getElementById("view-chat");
+      const search = document.getElementById("view-search");
+      const results = document.getElementById("view-results");
+      area.classList.toggle("on", flow !== "split" && phase === "area");
+      split.classList.toggle("on", flow === "split" && (phase === "area" || phase === "chat"));
+      chat.classList.toggle("on", flow !== "split" && phase === "chat");
+      search.classList.toggle("on", phase === "search");
+      results.classList.toggle("on", phase === "results");
+      document.getElementById("thumb").style.display = flow === "stages" ? "block" : "none";
+      document.getElementById("result-chat").style.display = flow === "split" ? "flex" : "none";
+      bubble(document.getElementById("map"), "Circle the area you sell in. One area for this search.");
+      document.querySelectorAll(".map-screen").forEach((el) => {
+        const actions = el.querySelector(".map-actions");
+        if (actions) actions.style.display = phase === "area" ? "flex" : "none";
+        if (el._paint) el._paint();
+      });
+      if (flow === "split") syncSplitComposer();
+      if (phase === "chat" && flow !== "split") {
+        document.getElementById("chat-thread").innerHTML = threadHtml(Boolean(state.query));
+        if (flow === "stages") {
+          document.getElementById("thumb").innerHTML = svgHtml;
+        }
+      }
+      if (phase === "results") {
+        renderTable();
+        if (flow === "split") {
+          document.getElementById("result-thread").innerHTML = threadHtml(true) + '<div class="msg bot">The leads are in the table. This thread is only the recap.</div>';
+        }
+      }
+    }
+
+    function goSearch() {
+      state.phase = "search";
+      document.getElementById("search-copy").textContent = "Searching " + state.place + ". Partial results will show on the leads table, the same way they do today.";
+      show();
+      const bar = document.querySelector("#view-search .track i");
+      if (bar) {
+        bar.style.animation = "none";
+        void bar.offsetWidth;
+        bar.style.animation = "";
+      }
+      clearTimeout(state.searchTimer);
+      state.searchTimer = setTimeout(() => {
+        state.phase = "results";
+        state.showMap = false;
+        show();
+      }, 1600);
+    }
+
+    function submitQuery(value) {
+      const query = value.trim();
+      if (!query) return;
+      state.query = query;
+      if (state.flow !== "split") {
+        document.getElementById("chat-thread").innerHTML = threadHtml(true);
+      }
+      setTimeout(goSearch, 600);
+    }
+
+    document.getElementById("chat-form").onsubmit = (e) => {
+      e.preventDefault();
+      submitQuery(document.getElementById("chat-input").value);
+    };
+    document.getElementById("split-form").onsubmit = (e) => {
+      e.preventDefault();
+      submitQuery(document.getElementById("split-input").value);
+    };
+    document.getElementById("mask").onclick = (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.getElementById("mask").classList.remove("on");
+      if (btn.dataset.next === "close") return;
+      showToast(btn.dataset.next === "route" ? "Continues to the current route flow." : "Continues to the current list picker.");
+    };
+    document.getElementById("picks").onclick = (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.flow = btn.dataset.flow;
+      state.phase = "area";
+      state.query = "";
+      state.selected.clear();
+      state.showMap = false;
+      document.getElementById("chat-input").value = "";
+      document.getElementById("split-input").value = "";
+      const url = new URL(location.href);
+      url.searchParams.set("flow", state.flow);
+      history.replaceState(null, "", url);
+      show();
+    };
+
+    mountMap(document.getElementById("map"));
+    mountMap(document.getElementById("map-split"));
+    show();
+  </script>
+</body>
+</html>

@@ -1,0 +1,3107 @@
+{
+ "generatedFrom": {
+  "routes": "repos/web/routes/api.php",
+  "v2StartsAtLine": 75
+ },
+ "count": 145,
+ "routes": [
+  {
+   "method": "POST",
+   "uri": "authenticate",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "authenticate",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:40",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "logout",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "logout",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:201",
+   "mobile": {
+    "constants": [
+     "URL_USER_LOGIN_LOGOUT"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F01"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "login",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "login",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:59",
+   "mobile": {
+    "constants": [
+     "URL_USER_LOGIN"
+    ],
+    "files": [
+     "App/components/login/index.js",
+     "App/utils/SentryHelper.js",
+     "App/utils/sentryTags.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F01"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "signup",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "signup",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:603",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "mobileregistration",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "mobileRegister",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:259",
+   "mobile": {
+    "constants": [
+     "URL_USER_REGISTER"
+    ],
+    "files": [
+     "App/components/register/index_register_split.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F02"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "renewtoken",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "renewToken",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:688",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "recovery",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "recovery",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:633",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "reset",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "reset",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:655",
+   "mobile": {
+    "constants": [],
+    "files": [
+     "App/components/login/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "citysearch",
+   "controller": "Api/V2/Controllers/CityController",
+   "action": "search",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/CityController.php:35",
+   "mobile": {
+    "constants": [
+     "URL_SEARCH_CITY"
+    ],
+    "files": [
+     "App/components/company/businessCard/index.js",
+     "App/components/company/create/index.js",
+     "App/components/company/edit.js",
+     "App/components/company/list.js",
+     "App/components/contacts/create.js",
+     "App/components/contacts/update.js",
+     "App/components/filterModule/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/basic/index.js",
+     "App/components/list/create.js",
+     "App/components/list/edit.js",
+     "App/components/list/filter.js",
+     "App/components/register/postSignupPaywallFlow.js",
+     "App/components/route/basic/index.js",
+     "App/components/route/create.js",
+     "App/components/route/edit.js",
+     "App/components/route/filter.js",
+     "App/components/route/lassoMap.js",
+     "App/utils/addCompanyFromBusinessCard.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "citysearch",
+   "controller": "Api/V2/Controllers/CityController",
+   "action": "search",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/CityController.php:35",
+   "mobile": {
+    "constants": [
+     "URL_SEARCH_CITY"
+    ],
+    "files": [
+     "App/components/company/businessCard/index.js",
+     "App/components/company/create/index.js",
+     "App/components/company/edit.js",
+     "App/components/company/list.js",
+     "App/components/contacts/create.js",
+     "App/components/contacts/update.js",
+     "App/components/filterModule/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/basic/index.js",
+     "App/components/list/create.js",
+     "App/components/list/edit.js",
+     "App/components/list/filter.js",
+     "App/components/register/postSignupPaywallFlow.js",
+     "App/components/route/basic/index.js",
+     "App/components/route/create.js",
+     "App/components/route/edit.js",
+     "App/components/route/filter.js",
+     "App/components/route/lassoMap.js",
+     "App/utils/addCompanyFromBusinessCard.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "downloadpdf",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "download",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/CompanyController.php:209",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "zapierCompanyCreate",
+   "controller": "Http/Controllers/SfdcController",
+   "action": "zapierCompanyCreate",
+   "auth": "public",
+   "at": "app/Http/Controllers/SfdcController.php:811",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "GET",
+   "uri": "zapierContactCreate",
+   "controller": "Http/Controllers/SfdcController",
+   "action": "zapierContactCreate",
+   "auth": "public",
+   "at": "app/Http/Controllers/SfdcController.php:994",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "GET",
+   "uri": "getcategories",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserCategories",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/RouteController.php:4096",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_CATEGORY_DETAILS"
+    ],
+    "files": [
+     "App/components/company/create/index.js",
+     "App/components/company/edit.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "getusercontactstage",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserContactStage",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/RouteController.php:4111",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_LIFE_STAGE_DETAILS"
+    ],
+    "files": [
+     "App/components/contacts/create.js",
+     "App/components/contacts/update.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "getrestrictuser",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getRestrictUser",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/RouteController.php:4126",
+   "mobile": {
+    "constants": [
+     "USER_RESTRICT"
+    ],
+    "files": [
+     "App/components/login/index.js",
+     "App/utils/API.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "apollo-webhook",
+   "controller": "Api/V2/Controllers/WebhookController",
+   "action": "handle",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/WebhookController.php:26",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F15"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "leads_user",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "leadsUser",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:235",
+   "mobile": {
+    "constants": [
+     "URL_USER_REGISTER_STORE"
+    ],
+    "files": [
+     "App/components/register/index_register_split.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F02"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getUsers",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "getAllUser",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:251",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "revenue-subscription-update",
+   "controller": "Api/V2/Controllers/WebhookController",
+   "action": "revenueSubscriptionUpdate",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/WebhookController.php:79",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F03"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "validate-phone",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "validatePhone",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:721",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "fullenrich-webhook/{company_id}",
+   "controller": "Api/V2/Controllers/WebhookController",
+   "action": "fullEnrichWebhook",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/WebhookController.php:385",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F15"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "fullenrich-webhook/bulk/{jobId}",
+   "controller": "Api/V2/Controllers/WebhookController",
+   "action": "fullEnrichBulkWebhook",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/WebhookController.php:397",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F15"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "fullenrich-webhook/bulk/{jobId}/contact",
+   "controller": "Api/V2/Controllers/WebhookController",
+   "action": "fullEnrichBulkContactWebhook",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/WebhookController.php:475",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F15"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "revenuecate-success",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "revenuecateSuccess",
+   "auth": "public",
+   "at": "app/Api/V2/Controllers/AuthController.php:502",
+   "mobile": {
+    "constants": [
+     "URL_REVENUECAT_SUCCESS"
+    ],
+    "files": [
+     "App/components/register/SubscriptionGate.js",
+     "App/components/register/index_register_split.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F03"
+   ],
+   "kind": "webhook"
+  },
+  {
+   "method": "POST",
+   "uri": "notifications",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "notifications",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3435",
+   "mobile": {
+    "constants": [],
+    "files": [
+     "App/components/dashboard/NotificationsScreen.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "GET",
+   "uri": "notificationlist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "notificationListing",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3560",
+   "mobile": {
+    "constants": [
+     "URL_USER_ALERT_LIST"
+    ],
+    "files": [
+     "App/components/dashboard/NotificationsScreen.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F27"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "notificationmarkread",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "notificationMarkRead",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3600",
+   "mobile": {
+    "constants": [
+     "URL_ALERT_MARKED_READ"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "notificationremove",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "notificationRemove",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3625",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "delete"
+  },
+  {
+   "method": "GET",
+   "uri": "newreleasenotify",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "newReleaseNotify",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3640",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "getversiondetails",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getVersionDetails",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3824",
+   "mobile": {
+    "constants": [
+     "URL_GET_VERSION_DETAILS"
+    ],
+    "files": [
+     "App/components/customfooter/index.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addcompany",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "add",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:233",
+   "mobile": {
+    "constants": [
+     "URL_ADD_COMPANY"
+    ],
+    "files": [
+     "App/components/company/businessCard/index.js",
+     "App/components/company/create/index.js",
+     "App/utils/addCompanyFromBusinessCard.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F12",
+    "F18"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "routecompanyremove",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "routeCompanyRemove",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2585",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "companymarkedvisited",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyMarkedVisited",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1272",
+   "mobile": {
+    "constants": [
+     "URL_COMPANY_MARKED_VISITED"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/list/basic/index.js",
+     "App/components/route/basic/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F10"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "companylist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1517",
+   "mobile": {
+    "constants": [
+     "URL_USER_COMPANY_LIST"
+    ],
+    "files": [
+     "App/components/company/create/index.js",
+     "App/components/company/list.js",
+     "App/components/dashboard/index.js",
+     "App/components/filterModule/index.js",
+     "App/components/list/create.js",
+     "App/components/list/edit.js",
+     "App/components/list/filter.js",
+     "App/components/route/create.js",
+     "App/components/route/edit.js",
+     "App/components/route/filter.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F12"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "companylistmap",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyListMap",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1842",
+   "mobile": {
+    "constants": [
+     "URL_USER_COMPANY_LIST_MAP"
+    ],
+    "files": [
+     "App/components/route/lassoMap.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "companydetail",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyDetail",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2140",
+   "mobile": {
+    "constants": [
+     "URL_COMPANY_DETAILS"
+    ],
+    "files": [
+     "App/components/company/view.js",
+     "App/components/route/bizContact/index.js",
+     "App/utils/navigateToViewCompanyById.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "companynamelist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyNameList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2255",
+   "mobile": {
+    "constants": [
+     "URL_COMPANY_NAME_LIST"
+    ],
+    "files": [
+     "App/components/contacts/create.js",
+     "App/components/contacts/update.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecompanystatus",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "updateCompanyStatus",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2287",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_COMPANY_STATUS"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecompanynotes",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "updateCompanyNotes",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2317",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_COMPANY_NOTES"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecompany",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "updateCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:518",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_COMPANY"
+    ],
+    "files": [
+     "App/components/company/edit.js",
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F12"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "reportcompany",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "reportCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3230",
+   "mobile": {
+    "constants": [
+     "URL_REPORT_COMPANY"
+    ],
+    "files": [
+     "App/components/company/view.js",
+     "App/components/route/basic/company-view.js",
+     "App/utils/reportCompany.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F16"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "removeCompanies",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "removeCompanies",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3245",
+   "mobile": {
+    "constants": [
+     "URL_REMOVE_COMPANIES"
+    ],
+    "files": [
+     "App/components/company/list.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F12"
+   ],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "getnotes",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getCompanyNotes",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:826",
+   "mobile": {
+    "constants": [
+     "URL_GET_COMPANY_NOTE"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addnote",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "addCompanyNote",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:837",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_NOTE"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F14"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getcompanyactivities",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getCompanyActivities",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:911",
+   "mobile": {
+    "constants": [
+     "URL_GET_COMPANY_ACTIVITIES"
+    ],
+    "files": [
+     "App/components/contacts/view.js",
+     "App/components/customcompany/index.js",
+     "App/components/dashboard/CalendarActivityScreen.js",
+     "App/components/dashboard/RecentActivityScreen.js",
+     "App/components/dashboard/index.js",
+     "App/components/dashboard/recentActivityData.js",
+     "App/utils/companyActivityPayload.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F05",
+    "F14"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addcompanyactivity",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "addCompanyActivity",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:983",
+   "mobile": {
+    "constants": [
+     "URL_ADD_COMPANY_ACTIVITY"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F14"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecompanyactivity",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "updateCompanyActivity",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1032",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_COMPANY_ACTIVITY"
+    ],
+    "files": [
+     "App/components/contacts/view.js",
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F14"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatenote",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "updateCompanyNote",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:880",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_NOTES"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "deletenote",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "deleteCompanyNote",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:902",
+   "mobile": {
+    "constants": [
+     "URL_DELETE_NOTES"
+    ],
+    "files": [
+     "App/components/contacts/view.js",
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "getlogmeeting",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getCompanyLogMeeting",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1076",
+   "mobile": {
+    "constants": [
+     "URL_GET_LOG_MEET"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [
+    "F14"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addlogmeeting",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "addCompanyLogMeeting",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1099",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_LOG_MEET"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getlist",
+   "controller": "Api/V2/Controllers/ListController",
+   "action": "getLists",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ListController.php:51",
+   "mobile": {
+    "constants": [
+     "URL_USER_LIST"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F11"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "createList",
+   "controller": "Api/V2/Controllers/ListController",
+   "action": "createList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ListController.php:84",
+   "mobile": {
+    "constants": [
+     "URL_CREATE_LIST"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/create.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F11"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "updateList",
+   "controller": "Api/V2/Controllers/ListController",
+   "action": "updateList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ListController.php:144",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_LIST"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/edit.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F11"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "deleteList",
+   "controller": "Api/V2/Controllers/ListController",
+   "action": "deleteList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ListController.php:208",
+   "mobile": {
+    "constants": [
+     "URL_DELETE_LIST"
+    ],
+    "files": [
+     "App/components/list/basic/index.js",
+     "App/components/list/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F11"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "generateroute",
+   "controller": "Api/V2/Controllers/ListController",
+   "action": "generateroute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ListController.php:240",
+   "mobile": {
+    "constants": [
+     "URL_CREATE_LIST_ROUTE"
+    ],
+    "files": [
+     "App/components/list/create/select-start-end-points.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F11"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "contactlist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "contactList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2388",
+   "mobile": {
+    "constants": [
+     "URL_USER_CONTACT_LIST"
+    ],
+    "files": [
+     "App/components/company/list.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F13"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "companycontactlist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyContactList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2635",
+   "mobile": {
+    "constants": [
+     "URL_USER_COMPANY_CONTACT_LIST"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/utils/bulkContactProgress.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addcontact",
+   "controller": "Api/V2/Controllers/ContactSellController",
+   "action": "addContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ContactSellController.php:54",
+   "mobile": {
+    "constants": [
+     "URL_USER_ADD_CONTACT"
+    ],
+    "files": [
+     "App/components/company/create/index.js",
+     "App/components/contacts/create.js",
+     "App/components/route/bizContact/index.js",
+     "App/components/route/congContact/index.js",
+     "App/utils/addContactFromBusinessCard.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F13",
+    "F18"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecontact",
+   "controller": "Api/V2/Controllers/ContactSellController",
+   "action": "updateContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ContactSellController.php:320",
+   "mobile": {
+    "constants": [
+     "URL_USER_UPDATE_CONTACT"
+    ],
+    "files": [
+     "App/components/contacts/update.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F13"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updatecontactnotes",
+   "controller": "Api/V2/Controllers/ContactSellController",
+   "action": "updateContactNotes",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ContactSellController.php:564",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_CONTACT_NOTES"
+    ],
+    "files": [
+     "App/components/contacts/view.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "deletecontact",
+   "controller": "Api/V2/Controllers/ContactSellController",
+   "action": "deleteContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ContactSellController.php:768",
+   "mobile": {
+    "constants": [
+     "URL_DELETE_CONTACT"
+    ],
+    "files": [
+     "App/components/contacts/view.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F13"
+   ],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "reportcontact",
+   "controller": "Api/V2/Controllers/ContactSellController",
+   "action": "reportContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/ContactSellController.php:788",
+   "mobile": {
+    "constants": [
+     "URL_REPORT_CONTACT"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F16"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getContactDetail",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getContactDetail",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2617",
+   "mobile": {
+    "constants": [
+     "URL_CONTACT_DETAILS"
+    ],
+    "files": [
+     "App/components/route/congContact/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "routelist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "routeList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:63",
+   "mobile": {
+    "constants": [
+     "URL_USER_ROUTE_LIST"
+    ],
+    "files": [
+     "App/components/contacts/view.js",
+     "App/components/customcompany/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "routeRegenerate/{id}",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "routeRegenerate",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:201",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write (GET)"
+  },
+  {
+   "method": "POST",
+   "uri": "simplerouteview",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "simpleRouteView",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:227",
+   "mobile": {
+    "constants": [
+     "URL_GET_BASIC_ROUTE"
+    ],
+    "files": [
+     "App/components/activeroutemap/index.js",
+     "App/components/customcompany/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/basic/index.js",
+     "App/components/list/edit.js",
+     "App/components/list/index.js",
+     "App/components/route/basic/company-view.js",
+     "App/components/route/basic/index.js",
+     "App/components/route/contact/index.js",
+     "App/components/route/create/publish-route.js",
+     "App/components/route/edit.js",
+     "App/components/route/edit/edit-publish-route.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F09"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "advancerouteview",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "advanceRouteView",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1020",
+   "mobile": {
+    "constants": [
+     "URL_GET_ADVANCED_ROUTE"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [
+    "F09"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "createroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "createRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2737",
+   "mobile": {
+    "constants": [
+     "URL_CREATE_BASIC_ROUTE"
+    ],
+    "files": [
+     "App/components/route/create/publish-route.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F08"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updateroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "updateRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3195",
+   "mobile": {
+    "constants": [
+     "URL_USER_ROUTE_UPDATE"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/route/edit/edit-publish-route.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F08"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "reroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "reRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2993",
+   "mobile": {
+    "constants": [
+     "URL_REROUTE"
+    ],
+    "files": [
+     "App/components/list/index.js",
+     "App/components/register/index_register_split.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "publishroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "publishRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3398",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F08"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "routeonboardingconversion",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "storeRouteOnboardingConversion",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4419",
+   "mobile": {
+    "constants": [
+     "URL_ROUTE_ONBOARDING_CONVERSION"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/route/basic/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updaterouteactive",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "updateRouteActive",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3370",
+   "mobile": {
+    "constants": [
+     "URL_UPDATE_ROUTE_ACTIVE"
+    ],
+    "files": [
+     "App/components/route/create/publish-route.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getuseractiveroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserActiveRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:592",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_ACTIVE_ROUTE"
+    ],
+    "files": [
+     "App/components/activeroutemap/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F09"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getuseractiveroute",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserActiveRoute",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:592",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_ACTIVE_ROUTE"
+    ],
+    "files": [
+     "App/components/activeroutemap/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F09"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getuseractiveroutev1",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserActiveRouteCompress",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:757",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_ACTIVE_ROUTE_V1"
+    ],
+    "files": [
+     "App/components/activeroutemap/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F09"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getactiveroutecompany",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getActiveRouteCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:922",
+   "mobile": {
+    "constants": [
+     "URL_GET_ACTIVE_ROUTE_COMPANY"
+    ],
+    "files": [
+     "App/components/activeroutemap/waypointdetail.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "getuserstatusdetails",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserStatusDetails",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:563",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_STATUS_DETAILS"
+    ],
+    "files": [
+     "App/components/activeroutemap/index.js",
+     "App/components/activeroutemap/waypointdetail.js",
+     "App/components/company/create/index.js",
+     "App/components/company/edit.js",
+     "App/components/company/list.js",
+     "App/components/contacts/create.js",
+     "App/components/contacts/update.js",
+     "App/components/customcompany/index.js",
+     "App/components/filterModule/index.js",
+     "App/components/list/basic/index.js",
+     "App/components/list/create.js",
+     "App/components/list/edit.js",
+     "App/components/list/filter.js",
+     "App/components/route/basic/index.js",
+     "App/components/route/bizContact/index.js",
+     "App/components/route/congContact/index.js",
+     "App/components/route/create.js",
+     "App/components/route/edit.js",
+     "App/components/route/filter.js",
+     "App/components/route/lassoMap.js",
+     "App/utils/addCompanyFromBusinessCard.js",
+     "App/utils/addContactFromBusinessCard.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "routeremove",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "routeRemove",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3506",
+   "mobile": {
+    "constants": [
+     "URL_ROUTE_REMOVE"
+    ],
+    "files": [
+     "App/components/route/basic/index.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "checkroutename",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "checkRouteName",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3884",
+   "mobile": {
+    "constants": [
+     "URL_CHECK_ROUTE_NAME"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/create.js",
+     "App/components/route/create.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F08"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "bookmarkroutecompany",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "bookmarkRouteCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1216",
+   "mobile": {
+    "constants": [
+     "COMPANY_BOOKMARK"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getuserstatus",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserStatus",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3909",
+   "mobile": {
+    "constants": [
+     "GET_USER_STATUS_LIST"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F20"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "updateuserstatus",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "updateUserStatus",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3934",
+   "mobile": {
+    "constants": [
+     "UPDATE_USER_STATUS"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F20"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "addcompanyvisittime",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "addcompanyVisit",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3962",
+   "mobile": {
+    "constants": [
+     "URL_ADD_COMPANY_VISIT_TIME"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [
+    "F10"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "companyvisitremove",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "removeCompanyVisit",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4032",
+   "mobile": {
+    "constants": [
+     "URL_DELETE_COMPANY_VISIT"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F10"
+   ],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "selectallcompany",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companySelectAll",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:1374",
+   "mobile": {
+    "constants": [
+     "URL_SELECT_ALL_COMPANY_LIST"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/create.js",
+     "App/components/list/filter.js",
+     "App/components/route/create.js",
+     "App/components/route/filter.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getlastvisitedentry",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getLastVisitedEntry",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4014",
+   "mobile": {
+    "constants": [
+     "URL_GET_LAST_VISITED_ENTRY"
+    ],
+    "files": [
+     "App/components/contacts/view.js",
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getticket",
+   "controller": "Api/V2/Controllers/SupportController",
+   "action": "getTicket",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/SupportController.php:132",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F26"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getticketdetail",
+   "controller": "Api/V2/Controllers/SupportController",
+   "action": "getTicketDetail",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/SupportController.php:165",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "addticket",
+   "controller": "Api/V2/Controllers/SupportController",
+   "action": "addTicket",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/SupportController.php:35",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "updateticket",
+   "controller": "Api/V2/Controllers/SupportController",
+   "action": "updateTicket",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/SupportController.php:91",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "unreadticketcount",
+   "controller": "Api/V2/Controllers/SupportController",
+   "action": "unreadTicketCount",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/SupportController.php:232",
+   "mobile": {
+    "constants": [
+     "URL_UNREAD_TICKET_COUNT"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "unassigncontactlist",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "unassignContactlist",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:2505",
+   "mobile": {
+    "constants": [
+     "URL_UNASSIGN_CONTACT_LIST"
+    ],
+    "files": [
+     "App/components/company/create/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "companynavigateme",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "companyNavigateMe",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4069",
+   "mobile": {
+    "constants": [
+     "COMPANY_NAVIGATE_ME"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "hubspot-contacts-sync",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "syncContactsAPI",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:141",
+   "mobile": {
+    "constants": [
+     "URI_CONTACT_SYNC"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F21"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "hubspot-companies-sync",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "syncCompaniesAPI",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:462",
+   "mobile": {
+    "constants": [
+     "URI_COMPANIES_SYNC"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F21"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "GET",
+   "uri": "hubspot-last-sync",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "getLastSyncDetailsBySyncType",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:1821",
+   "mobile": {
+    "constants": [
+     "URL_LAST_SYNC"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F21"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "hubspot-both-sync",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "syncBothAPI",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:1978",
+   "mobile": {
+    "constants": [
+     "URI_BOTH_SYNC"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F21"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "GET",
+   "uri": "hubspot-sync-error-list",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "companySessionErrorList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:2070",
+   "mobile": {
+    "constants": [
+     "URL_HUBSPOT_ERROR_COMP"
+    ],
+    "files": [
+     "App/components/error/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F21"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "hubspotSessionCompanyDelete",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "sessionCompanyDelete",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:2106",
+   "mobile": {
+    "constants": [
+     "URL_HUBSPOT_ERROR_COMP_DEL"
+    ],
+    "files": [
+     "App/components/error/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "delete"
+  },
+  {
+   "method": "POST",
+   "uri": "hubspotSessionCompanyErrorFix",
+   "controller": "Http/Controllers/HubSpotController",
+   "action": "sessionCompanyErrorFix",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Http/Controllers/HubSpotController.php:2135",
+   "mobile": {
+    "constants": [
+     "URL_HUBSPOT_ERROR_COMP_FIX"
+    ],
+    "files": [
+     "App/components/error/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "bulk-companies-create",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "bulkCompaniesCreate",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1178",
+   "mobile": {
+    "constants": [
+     "URL_BULK_COMPANIES_CREATE"
+    ],
+    "files": [
+     "App/components/findLeads/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getusercredit",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getUserCredit",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:3711",
+   "mobile": {
+    "constants": [
+     "GET_CREDIT_INFO"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/customheader/index.js",
+     "App/components/dashboard/editstatus.js",
+     "App/components/dashboard/index.js",
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/list/create.js",
+     "App/components/list/edit.js",
+     "App/components/route/contact/review.js",
+     "App/components/route/create.js",
+     "App/components/route/edit.js",
+     "App/utils/subscriptionGate.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F05",
+    "F15"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "getuserdata",
+   "controller": "Api/V2/Controllers/UserDataController",
+   "action": "show",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/UserDataController.php:20",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "getuserdata",
+   "controller": "Api/V2/Controllers/UserDataController",
+   "action": "show",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/UserDataController.php:20",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "uploaderror/autofill-address",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "autofillAddress",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1540",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "uploaderror/autofill-company",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "autofillCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1552",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "uploaderror/merge-contacts-with-company",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "mergeContactsWithCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1536",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "uploaderror/append-companies",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "appendCompanies",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1544",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write (GET)"
+  },
+  {
+   "method": "GET",
+   "uri": "uploaderror/delete-duplicate",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "deleteDuplicate",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1548",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write (GET)"
+  },
+  {
+   "method": "POST",
+   "uri": "getCongnismContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getCongnismContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1648",
+   "mobile": {
+    "constants": [
+     "URL_CONGNISUM_CONTACT"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "redeemCongnismContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "redeemCongnismContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1820",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_CONGNISUM_CONTACT"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "redeemFullEnrichContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "redeemFullEnrichContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1709",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_FULL_ENRICH_CONTACT"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "getApolloContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getApolloContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1583",
+   "mobile": {
+    "constants": [
+     "URL_APOLLO_CONTACT"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/register/postSignupPaywallFlow.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp"
+   ],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "redeemApolloContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "redeemApolloContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1927",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_APOLLO_CONTACT"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "fetchAllContacts",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "fetchAllContacts",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3157",
+   "mobile": {
+    "constants": [
+     "URL_FETCH_FIRST_CONTACT"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/route/congContact/index.js",
+     "App/utils/bulkContactFetch.js",
+     "App/utils/fetchFirstContactApi.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F15"
+   ],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "fetchOpencorporatesCompany",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "fetchOpencorporatesCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3166",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "fetchClaudeContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "fetchClaudeContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3175",
+   "mobile": {
+    "constants": [
+     "URL_FETCH_OPENCORPORATES_COMPANY",
+     "URL_FETCH_CLAUDE_CONTACT"
+    ],
+    "files": [
+     "App/components/customcompany/index.js",
+     "App/components/route/bizContact/index.js",
+     "App/components/route/congContact/index.js",
+     "App/utils/bulkContactFetch.js",
+     "App/utils/fetchClaudeContactDevMock.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "buyContacts",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "buyContacts",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3216",
+   "mobile": {
+    "constants": [
+     "URL_SAVE_COMPANY_CONTACT"
+    ],
+    "files": [
+     "App/components/route/bizContact/index.js",
+     "App/components/route/congContact/index.js",
+     "App/utils/bulkContactSelect.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F15"
+   ],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "GET",
+   "uri": "cancelSubscription",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "cancelSubscribe",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4207",
+   "mobile": {
+    "constants": [
+     "CANCEL_SUBSCRIPTION"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F03"
+   ],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "cancelSubscription",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "cancelSubscribe",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4207",
+   "mobile": {
+    "constants": [
+     "CANCEL_SUBSCRIPTION"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F03"
+   ],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "request-package-upgrade",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "requestPackageUpgrade",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4241",
+   "mobile": {
+    "constants": [
+     "CHANGE_SUBSCRIPTION"
+    ],
+    "files": [
+     "App/components/dashboard/editstatus.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F03"
+   ],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "getBizpediaContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getBizpediaContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2036",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "getOpencorporatesCompany",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getOpencorporatesCompany",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2474",
+   "mobile": {
+    "constants": [
+     "URL_OPENCORPORATES_COMPANY"
+    ],
+    "files": [
+     "App/components/customcompany/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "getOpencorporatesContact",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getOpencorporatesContact",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2667",
+   "mobile": {
+    "constants": [
+     "URL_OPENCORPORATES_CONTACT"
+    ],
+    "files": [
+     "App/components/route/bizContact/bizCompanies.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "updateName",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "updateName",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:1555",
+   "mobile": {
+    "constants": [
+     "URL_EDIT_NAME"
+    ],
+    "files": [
+     "App/components/list/index.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getroutedata",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "offlineRouteData",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4288",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "GET",
+   "uri": "getIndutriesType",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getIndutriesType",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2853",
+   "mobile": {
+    "constants": [
+     "GET_INDUSTRY_TYPES"
+    ],
+    "files": [
+     "App/components/company/businessCard/index.js",
+     "App/components/company/create/index.js",
+     "App/components/dashboard/index.js",
+     "App/components/filterModule/index.js",
+     "App/components/findLeads/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "shareRouteList",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "shareRouteList",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4318",
+   "mobile": {
+    "constants": [
+     "SHARE_ROUTE_LIST"
+    ],
+    "files": [
+     "App/components/list/basic/index.js",
+     "App/components/list/index.js",
+     "App/components/route/basic/index.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F17"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "getShareRouteListEmails",
+   "controller": "Api/V2/Controllers/RouteController",
+   "action": "getShareRouteListEmails",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/RouteController.php:4408",
+   "mobile": {
+    "constants": [
+     "GET_SHARED_EMAIL_LIST"
+    ],
+    "files": [
+     "App/components/list/index.js",
+     "App/components/route/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "getAILeads",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getAILeads",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2862",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_COMPANIES"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F06"
+   ],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "getTop50AILeads",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getTop50AILeads",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2981",
+   "mobile": {
+    "constants": [
+     "URL_GET_TOP50_AI_COMPANIES"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "saveAILeads",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "saveAILeads",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3021",
+   "mobile": {
+    "constants": [
+     "URL_AI_BULK_COMPANIES_CREATE"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F06"
+   ],
+   "kind": "paid/billing"
+  },
+  {
+   "method": "POST",
+   "uri": "AILeadsContactFinder",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "AILeadsContactFinder",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3096",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_COMPANIES_CONTACT_LIST"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/findLeads/index.js",
+     "App/components/register/postSignupPaywallFlow.js",
+     "App/components/route/contact/index.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getYelpLeads",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getYelpLeads",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3127",
+   "mobile": {
+    "constants": [],
+    "files": [],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F07"
+   ],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "getAILeadsV2",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getAILeadsV2",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2903",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_COMPANIES_V2"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/register/postSignupPaywallFlow.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F06"
+   ],
+   "kind": "read (provider call; may cost)"
+  },
+  {
+   "method": "POST",
+   "uri": "resumeAILeadSearch",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "resumeAILeadSearch",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:2933",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_COMPANIES_LIST_V2"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js",
+     "App/components/register/postSignupPaywallFlow.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [
+    "UserMcp",
+    "FindMcp"
+   ],
+   "flows": [
+    "F06"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "GET",
+   "uri": "getAiLeadData",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "getAiLeadData",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3150",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_LEAD_DATA"
+    ],
+    "files": [
+     "App/components/findLeads/aiFindLeads.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "aiLeadGoogleSearch",
+   "controller": "Api/V2/Controllers/CompanyController",
+   "action": "AILeadGoogleSearch",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/CompanyController.php:3064",
+   "mobile": {
+    "constants": [
+     "URL_GET_AI_COMPANIES_LIST"
+    ],
+    "files": [],
+    "definedOnly": true
+   },
+   "mcp": [],
+   "flows": [],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "updateUserPreferences",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "updateUserPreferences",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/AuthController.php:744",
+   "mobile": {
+    "constants": [
+     "URI_UPDATE_USER_PREFERENCES"
+    ],
+    "files": [
+     "App/components/register/postSignupPaywallFlow.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F02"
+   ],
+   "kind": "write"
+  },
+  {
+   "method": "POST",
+   "uri": "getUserActivity",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "getUserActivity",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/AuthController.php:845",
+   "mobile": {
+    "constants": [
+     "URL_GET_USER_ACTIVITY"
+    ],
+    "files": [
+     "App/components/dashboard/RecentActivityScreen.js",
+     "App/components/dashboard/index.js",
+     "App/components/dashboard/recentActivityData.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F05"
+   ],
+   "kind": "read"
+  },
+  {
+   "method": "POST",
+   "uri": "invite-user",
+   "controller": "Api/V2/Controllers/InviteController",
+   "action": "inviteUser",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/InviteController.php:25",
+   "mobile": {
+    "constants": [
+     "URL_INVITE_USER"
+    ],
+    "files": [
+     "App/components/dashboard/ReferralInviteModal.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F24",
+    "F28"
+   ],
+   "kind": "external side effect"
+  },
+  {
+   "method": "POST",
+   "uri": "scan-qr-code",
+   "controller": "Api/V2/Controllers/AuthController",
+   "action": "scanQRCode",
+   "auth": "JWT (jwt.refresh)",
+   "at": "app/Api/V2/Controllers/AuthController.php:876",
+   "mobile": {
+    "constants": [
+     "URL_SCAN_QR_CODE"
+    ],
+    "files": [
+     "App/utils/navigateToRouteDetail.js"
+    ],
+    "definedOnly": false
+   },
+   "mcp": [],
+   "flows": [
+    "F19"
+   ],
+   "kind": "write"
+  }
+ ]
+}

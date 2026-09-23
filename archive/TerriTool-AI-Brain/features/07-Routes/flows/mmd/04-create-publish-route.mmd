@@ -1,0 +1,23 @@
+---
+title: Create and publish a route
+---
+flowchart TD
+  Entry{Entry} -->|From saved leads| Pre[Companies pre-selected]
+  Entry -->|From list Convert/Generate| Pre
+  Entry -->|+ Create Route| Empty[Pick companies]
+  Pre --> Step1[Step 1: name + select]
+  Empty --> Step1
+  Step1 --> Opt{Action}
+  Opt -->|Save as Draft| Draft[Routes Draft tab]
+  Opt -->|Map / Lasso / Filter| Map1[Adjust selection]
+  Map1 --> Step1
+  Opt -->|Find Leads| LeadIn[AI search into this route]
+  LeadIn --> Step1
+  Opt -->|Next Step| Step2[Step 2: start + end]
+  Step2 --> Opt2{Action}
+  Opt2 -->|Save as Draft| Draft
+  Opt2 -->|Generate Route| Gen[Optimize tour]
+  Gen --> Success[Route Generated Successfully]
+  Success --> View[View my Route]
+  View --> Pub[Published tab]
+  Pub --> Field[Download PDF / CSV / Send / Map / Mobile]

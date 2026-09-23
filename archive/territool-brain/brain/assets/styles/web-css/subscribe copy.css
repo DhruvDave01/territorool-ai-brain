@@ -1,0 +1,322 @@
+@media screen and (max-width: 800px) {
+  #salesforceDiv, #hubspotDiv, #karmaDiv {
+    display: none;
+  }
+}	
+body{margin-top:20px;}
+/******************************************************************************
+  Pricing
+*******************************************************************************/
+.pricing {
+  background-color: #fff;
+  /*margin: 0 auto 40px;*/
+  /*max-width: 280px;*/
+  position: relative;
+  text-align: left;
+}
+.pricing * {
+  position: relative;
+}
+.pricing:before {
+  background: #f7f7f7;
+  background: rgba(30,30,30,.06);
+  bottom: 0;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.pricing .title {
+  line-height: 32px;
+  padding: 10px 20px 10px;
+}
+.pricing .title a {
+  color: #1e1e1e;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 32px;
+  text-decoration: none;
+}
+.pricing .price-box {
+  font-size: 12px;
+  line-height: 1;
+  overflow: hidden;
+  padding: 0 20px 20px;
+}
+.pricing .price-box .icon {
+  background: #fff;
+  color: #505050;
+  height: 60px;
+  text-align: center;
+  width: 60px;
+  z-index: 1;
+}
+.pricing .price-box .icon i,
+.pricing .price-box .icon .livicon {
+  background: none;
+  font-size: 30px;
+  height: auto;
+  line-height: 52px;
+  margin: 0;
+  width: auto;
+}
+.pricing .price-box .icon .livicon {
+  height: 60px !important;
+}
+.pricing .price-box .icon .livicon svg {
+  top: 0 !important;
+  vertical-align: middle;
+}
+.pricing .price-box .price {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 13px 0 0;
+}
+.pricing .price-box .price span {
+  font-size: 12px;
+}
+.pricing .options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pricing .options li {
+  border-top: 1px solid rgba(30,30,30,.1);
+  color: #999;
+  color: rgba(30,30,30,.4);
+  line-height: 22px;
+  padding: 7px 10px 7px 45px;
+  position: relative;
+}
+.pricing .options li span {
+  color: #1e1e1e;
+  display: none;
+  left: 25px;
+  line-height: 1;
+  position: absolute;
+  top: 10px;
+}
+.pricing .options li.active {
+  color: #1e1e1e;
+}
+.pricing .options li.active span {
+  display: block;
+}
+.pricing .bottom-box {
+  border-top: 1px solid rgba(30,30,30,.1);
+  background: rgba(30,30,30,.05);
+  overflow: hidden;
+  padding: 19px 19px 20px;
+}
+.pricing .bottom-box .more {
+  color: #7f7f7f;
+  color: rgba(30,30,30,.7);
+  display: block;
+  float: left;
+  font-size: 12px;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-transition: opacity .2s linear;
+  transition: opacity .2s linear;
+}
+.pricing .bottom-box .more:hover {
+  opacity: .65;
+  filter: alpha(opacity=65);
+  -webkit-transition: opacity .2s linear;
+  transition: opacity .2s linear;
+}
+.pricing .bottom-box .more span {
+  font-size: 17px;
+  line-height: 12px;
+  margin: 0 0 0 3px;
+  vertical-align: top;
+}
+.pricing .bottom-box .rating-box {
+  text-align: center;
+}
+.pricing .bottom-box .btn {
+  font-weight: bold;
+  margin: 19px 0 0;
+  width: 100%;
+}
+.pricing.prising-info:before {
+  background: rgba(1,165,219,.06);
+}
+.pricing.prising-info .title a {
+  color: #01a5db;
+}
+.pricing.prising-info .price-box .icon {
+  color: #35beeb;
+  border-color: #35beeb;
+}
+.pricing.prising-info .options li,
+.pricing.prising-info .bottom-box {
+  border-color: rgba(1,165,219,.1);
+  color: rgba(1,165,219,.4);
+}
+.pricing.prising-info .bottom-box {
+  border-top: 1px solid rgba(1,165,219,.1);
+  background: rgba(1,165,219,.05);
+} 
+.pricing.prising-info .options li span,
+.pricing.prising-info .bottom-box .more,
+.pricing.prising-info .options li.active {
+  color: #01a5db;
+}
+.pricing.pricing-info:before {
+    background: rgba(1,165,219,.06);
+}
+.pricing.pricing-info .options li span, .pricing.pricing-info .bottom-box .more, .pricing.pricing-info .options li.active {
+    color: #01a5db;
+}
+.pricing.pricing-info .options li, .pricing.pricing-info .bottom-box {
+    border-color: rgba(1,165,219,.1);
+    color: rgba(1,165,219,.4);
+}
+.pricing.pricing-info .title a {
+    color: #01a5db;
+}
+.grid-container-element {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  justify-content: center;
+}
+.grid-child-element {
+  margin-bottom: 10px;
+}
+
+.top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 23px;
+}
+
+
+#countdown0, #countdown1 {
+  top:10px;
+  color: #000;
+  text-align: center;
+  font-size: 12px;
+  background-color:#ffffff;
+  font-weight:bold;
+  /* margin-top: 5%; */
+  border:1px solid #01a5db;
+}
+
+.days,
+.hours,
+.minutes,
+.seconds {
+  display: inline-block;
+  padding: 10px;
+
+  border-radius: 10px;
+}
+p {
+    margin: 10px 0 10px !important;
+}
+
+.c-number {
+  font-family: "Montserrat", sans-serif;
+  color: #000;
+  font-size: 16px;
+}
+.blink {
+  animation: blinker 1s linear infinite;
+  color: #ff3e41;
+  font-size: 20px;
+}
+.discountDiv{
+    border-bottom:1px solid rgba(30,30,30,.1);
+    margin-left:6px;
+    width: 99% !important;
+}
+.save{
+  top: 10px;
+  font-size: 17px;
+  color: green;
+  font-weight: bold;
+}
+.valid{
+  text-align:left;
+  padding:10px 0px 0 10px ;
+  font-size: 15px;
+}
+.discount{
+  top: 11px;
+  font-size: 11px;
+  color: #726f6f;
+}
+
+/* SWITCH STYLES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.switch-wrapper {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  border: 1px solid lightgrey;
+  margin-bottom: 40px;
+  border-radius: 30px;
+  background: #ffffff;
+}
+
+.switch-wrapper [type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+
+.switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"],
+.switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"] {
+  color: #ffffff;
+}
+
+.switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"]:hover,
+.switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"]:hover {
+  background: transparent;
+}
+
+.switch-wrapper
+  [type="radio"]:checked#monthly
+  + label[for="yearly"]
+  ~ .highlighter {
+  transform: none;
+}
+
+.switch-wrapper
+  [type="radio"]:checked#yearly
+  + label[for="monthly"]
+  ~ .highlighter {
+  transform: translateX(100%);
+}
+
+.switch-wrapper label {
+  font-size: 16px;
+  z-index: 1;
+  min-width: 100px;
+  line-height: 32px;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: color 0.25s ease-in-out;
+  text-align: center;
+  margin-bottom:0px;
+}
+
+.switch-wrapper label:hover {
+  background: #f5f5f5;
+}
+
+.switch-wrapper .highlighter {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  border-radius: 30px;
+  background: #2a9d8f;
+  transition: transform 0.25s ease-in-out;
+}

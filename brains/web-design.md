@@ -1,69 +1,44 @@
----
-id: web-design
-parent: brains
-sources:
-  - webterritool/
-  - resources/views/front/layout.blade.php
-  - resources/views/front/manager/_portal_layout.blade.php
-related:
-  - brains/web-code.md
-  - brains/README.md
-  - design-web/MINI-DESIGN-BRAIN.md
-  - design-web/Tokens.md
-  - design-web/Page-Inventory.md
-  - design-web/Navigation.md
-  - design-web/Usage-Rules.md
-  - design-web/Deferred-Scope.md
----
-# 4. Web Design Brain
+# Web design
 
-Hub for **as-shipped** web pixels. Two stacks — do not mix. Sibling: [Web Code Brain](web-code.md). Parent: [sub brains](README.md).
+Two products in one repo, plus HQ. Do not mix them. Open [the Guardian](ui-ux-guardian.md), then the still for the stack you are on in [the screenshot review](../screenshots/REVIEW.md). Code: [web code](web-code.md).
 
-**Repo:** `webterritool/` Blade + `public/css/` + `resources/manager-portal/`. Short stills: `design-web/03-Assets/stills/`. HQ `/hq/*` pixels **deferred**.
+| Surface | Stack | Source of truth | Still |
+|---|---|---|---|
+| Classic `/dashboard`, `/company`, `/routes`, `/lists`, `/findleads` | Blade, jQuery 2.2.0, Bootstrap 3.3.5, AdminLTE | `resources/views/front/layout.blade.php`, `public/css/custom.css` | [company list](../screenshots/web-stills/04-classic-company-list.png) |
+| Manager `/manager/*` | React 18 islands mounted in Blade | `resources/manager-portal/`, `public/css/manager-portal.css` | [manager dashboard](../screenshots/web-owner/Manager/Manager-Dashboard-TerriTool-09-15-2026_01_20_PM.png) |
+| HQ `/hq/*` | Backpack on AdminLTE | `resources/views/vendor/backpack/` | [Admin folder](../screenshots/web-owner/Admin/) |
 
-## Read first
+Manager pages still extend the front layout through `front.manager._portal_layout`. `body.manager-portal` hides the AdminLTE header and sidebar. Do not replace that parent with Bootstrap 5. `package.json` lists Bootstrap 5; manager JSX does not import it.
 
-1. This file.
-2. [design-web/MINI-DESIGN-BRAIN.md](../design-web/MINI-DESIGN-BRAIN.md).
-3. [Tokens.md](../design-web/Tokens.md) · [Page-Inventory.md](../design-web/Page-Inventory.md) · [Navigation.md](../design-web/Navigation.md) · [Usage-Rules.md](../design-web/Usage-Rules.md).
+## Tokens — do not average
 
-## Must follow
+| | Classic | Manager |
+|---|---|---|
+| Primary | `#124ac6` in `custom.css` | `--blue: #124ac6` |
+| Teal | `#16aa9d` in `custom.css`. List pages also use `--tt-teal: #00a99d` in `company-list.css`, `route-list.css`, `list-list.css`. | `--teal` / `--green` are `#00a99d` |
+| Radius | AdminLTE boxes | `--radius: 14px`, `--radius-sm: 10px` |
+| Type | Source Sans Pro + DIN 2014 (`/fonts/DinBold.ttf`, `/fonts/DinLight.ttf`) | DM Sans / Space Grotesk |
 
-| Rule | Do this |
-|------|---------|
-| Classic `/dashboard`, `/company`, `/routes`, `/lists`, `/findleads` | `@extends('front.layout')`. AdminLTE + jQuery **2.2.0** + Bootstrap **3.3.5**. |
-| Manager `/manager/*` | React islands. CSS vars on `#mgr-portal-dashboard-wrapper` (`public/css/manager-portal.css`). `body.manager-portal` hides AdminLTE header/sidebar. |
-| Shared primary | `#124ac6` on both (`custom.css` and `--blue`). |
-| Classic leftover teal | `#16aa9d` in `custom.css` (cluster titles, `.btn-floating`, nav chips). |
-| Classic **list-page** vars | `--tt-teal: #00a99d` in `public/css/company-list.css`, `route-list.css`, `list-list.css` — third teal, still classic Blade. Do not convert those pages to islands. |
-| Manager `--teal` / `--green` | `#00a99d` (same hex twice). Do not average with `#16aa9d`. |
-| Manager radius | `--radius: 14px`, `--radius-sm: 10px`. Classic boxes stay AdminLTE. |
-| Type | Classic: Source Sans Pro + **DIN 2014** (`/fonts/DinBold.ttf`, `/fonts/DinLight.ttf`). Manager: **DM Sans** / **Space Grotesk**. Do not put manager fonts on a new classic page. |
-| Sidebar | Duplicate icon + text `<a>` pairs in `resources/views/front/inc/sidebar.blade.php`. Do not clean up. |
-| Vite Bootstrap 5 | In `package.json`; manager JSX **does not import it**. |
-| Manager map circles | `AIFindLeads.jsx` uses `['#2563eb', '#10b981', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4']` — **not** `--blue`. |
-| Register / paywall / HQ | Login/trial/SA dashboard captured. Register web steps 2–3 + HQ still deferred: [Deferred-Scope.md](../design-web/Deferred-Scope.md). |
+Do not put manager fonts on a new classic page. Do not convert a Blade list page into a React island to “clean up” the teal.
 
-## New page recipe
+## New page
 
-**Classic:** sections `after_styles`, `header`, `content`, `after_scripts`. CSRF `X-CSRF-TOKEN`. PNotify. `#cover-spin`. jqxGrid vs DataTables — match the sibling page.
+Classic: Blade sections `after_styles`, `header`, `content`, `after_scripts`. CSRF header `X-CSRF-TOKEN`. Loading overlay `#cover-spin`. Copy the sibling page’s grid (jqxGrid or DataTables).
 
-**Manager:** mount `#manager-*-root` listed in [Web Code Brain](web-code.md). Toasts: `#manager-toast-root`. Do not add a new AdminLTE page for Business Agent.
+Manager: mount a `#manager-*-root` the way `main.jsx` already mounts dashboard, find-leads, salespeople, activity, support, and settings. Toasts go to `#manager-toast-root`.
 
-## Token files
+Sidebar: `resources/views/front/inc/sidebar.blade.php` has duplicate icon and text links. Leave the duplicates.
 
-| Stack | File |
-|------|------|
-| Classic | `public/css/custom.css` |
-| Classic lists | `public/css/company-list.css`, `route-list.css`, `list-list.css` |
-| Manager | `public/css/manager-portal.css` |
-| Layout | `resources/views/front/layout.blade.php` |
-| Manager shell | `resources/views/front/manager/_portal_layout.blade.php` |
+## Unlock credits
 
-Skin config `backpack.base.skin` = `skin-purple` but live header is **white** with blue logo.
+Classic page at `/reviews/credits`. It extends `front.layout`. It is not a card on `/dashboard` and not a manager island. Stills: [desktop](../screenshots/web/sales-agent/review-credits-desktop.png), [phone](../screenshots/web/sales-agent/review-credits-phone.png). The credits pill on those stills reads 60. That is the signed-in balance, not the reward.
 
-## Trained if you can
+Page title “Unlock 50 free credits”. Crumb “Unlock Credits”. Panel title “Share your TerriTool experience”. Lead: “Leave an honest review. We add credits after we verify it — usually within 1–2 business days.” G2 row: “Leave a review on our G2.com profile”, **30 credits**, filled button “Leave a G2 review”. Product Hunt row: “Leave a review on Product Hunt”, **20 credits**, “Leave a Product Hunt review”. Buttons are `#124ac6`, radius 8. Note: “Reviews are verified before credits are added to your account. We never ask for a positive rating — just an honest review.” Help link goes to `support/create`.
 
-- Extend classic vs manager without mixing fonts or teals.
-- Keep `--tt-teal` list CSS on Blade list pages.
-- Leave sidebar duplicate links and HQ un-redesigned.
+Phone width stacks each offer and makes the button full width. The store bar “Download the App to use TerriTool in the Field” is the existing layout footer.
+
+After a click the button turns `#9aa7c2` and reads “Submitted”. The credit number is removed. Copy becomes “Thanks — we received your submission.” Pending is a pill “Pending verification”. Verified reads “Verified - 30 credits added” or “Verified - 20 credits added”. Both verified: title “Thanks for the feedback”, banner “You unlocked 50 credits. They are already in your balance.”, and a “Back to dashboard” button. Both submitted hides the honesty note and shows that dashboard link.
+
+Map circle colors in `AIFindLeads.jsx` are a fixed six-color list. They are not `--blue`.
+
+Fonts on disk for new art: [assets/fonts](../assets/fonts). Logos: [assets/logos](../assets/logos/README.md). Classic header uses the blue wordmark file. Do not redraw the cube.

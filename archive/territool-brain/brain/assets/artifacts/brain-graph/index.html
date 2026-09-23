@@ -1,0 +1,369 @@
+<title>Territool Brain Graph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  /* Deliberately dark, single-theme: an Obsidian-style graph view. Every colour is painted explicitly. */
+  :root { color-scheme: dark; --bg: #17181c; --stage: #1d1e23; --panel: #24252b; --panel-2: #2d2f36; --line: #34363e; --text: #dfe0e4; --soft: #c3c5cb; --muted: #9b9ea6; --faint: #70737c; --focus: #f3c46a; --link: #8ab4f8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 400 14px/1.5 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; padding-inline: 16px; padding-block: 20px 28px; }
+  .app { max-width: 1480px; margin: 0 auto; display: grid; gap: 12px; }
+  .top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+  .brand { display: grid; gap: 3px; }
+  .eyebrow { font: 500 11px/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font: 600 24px/1.2 "IBM Plex Sans", system-ui, sans-serif; letter-spacing: -.01em; }
+  .stats { font: 400 12px "IBM Plex Mono", ui-monospace, monospace; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .search { position: relative; width: min(380px, 100%); }
+  .search input { width: 100%; background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 9px 12px 9px 34px; font: inherit; }
+  .search input::placeholder { color: var(--faint); }
+  .search input:focus { outline: none; border-color: var(--link); box-shadow: 0 0 0 3px rgba(138, 180, 248, .18); }
+  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+  .results { position: absolute; z-index: 5; top: calc(100% + 4px); left: 0; right: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 4px; margin: 0; list-style: none; box-shadow: 0 12px 40px rgba(0, 0, 0, .45); }
+  .results button { width: 100%; display: flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--text); padding: 7px 8px; border-radius: 6px; font: inherit; text-align: left; cursor: pointer; }
+  .results button:hover, .results button.active { background: var(--panel-2); }
+  .results .sub { margin-left: auto; color: var(--faint); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55%; }
+  .groups { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .chip { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 500 12.5px "IBM Plex Sans", system-ui, sans-serif; cursor: pointer; }
+  .chip[aria-pressed="false"] { color: var(--faint); background: transparent; }
+  .chip[aria-pressed="false"] .dot { opacity: .3; }
+  .chip .n { font: 400 11.5px "IBM Plex Mono", ui-monospace, monospace; color: var(--muted); }
+  .chip:focus-visible, .btn:focus-visible, .link:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; display: inline-block; }
+  .sep { width: 1px; align-self: stretch; background: var(--line); margin: 2px 4px; }
+  .btn { padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--text); font: 500 12.5px "IBM Plex Sans", system-ui, sans-serif; cursor: pointer; }
+  .btn:hover { background: var(--panel-2); }
+  .work { position: relative; }
+  .stage { position: relative; height: min(80vh, 900px); min-height: 480px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, #23252b 0%, var(--stage) 55%, #18191d 100%); }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  canvas.hover { cursor: pointer; }
+  .hint { position: absolute; left: 12px; bottom: 10px; font: 400 11.5px "IBM Plex Mono", ui-monospace, monospace; color: var(--faint); pointer-events: none; }
+  .zoombtns { position: absolute; right: 12px; bottom: 10px; display: flex; gap: 6px; }
+  .panel { position: absolute; top: 12px; right: 12px; width: 340px; max-height: calc(100% - 64px); overflow: auto; background: rgba(36, 37, 43, .95); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 12px; align-content: start; }
+  @media (max-width: 860px) { .panel { position: static; width: auto; max-height: none; margin-top: 12px; } .hint { display: none; } .stage { height: 64vh; min-height: 380px; } }
+  .panel h2 { margin: 0; font: 600 19px/1.25 "IBM Plex Sans", system-ui, sans-serif; word-break: break-word; }
+  .kind { display: inline-flex; align-items: center; gap: 7px; font: 500 11px "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .title { margin: 0; color: var(--text); font-weight: 500; }
+  .def { margin: 0; color: var(--soft); }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; }
+  dt { color: var(--faint); }
+  dd { margin: 0; color: var(--text); word-break: break-word; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; }
+  .nb h3 { margin: 0 0 6px; font: 500 11px "IBM Plex Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+  .nbl { display: flex; flex-wrap: wrap; gap: 5px; }
+  .nbl button { background: var(--panel-2); border: 1px solid transparent; color: var(--text); border-radius: 5px; padding: 3px 7px; font: 400 12px "IBM Plex Sans", system-ui, sans-serif; cursor: pointer; }
+  .nbl button:hover, .nbl button:focus-visible { border-color: var(--link); outline: none; }
+  .more { color: var(--faint); font-size: 12px; padding: 3px 4px; }
+  .link { background: none; border: 0; padding: 0; color: var(--link); font: inherit; cursor: pointer; text-align: left; }
+  .intro { display: grid; gap: 8px; }
+  .intro p { margin: 0; color: var(--soft); }
+  .hubs { display: grid; gap: 2px; }
+  .hubs button { display: flex; align-items: center; gap: 8px; background: none; border: 0; color: var(--text); padding: 5px 6px; border-radius: 6px; font: inherit; cursor: pointer; text-align: left; }
+  .hubs button:hover, .hubs button:focus-visible { background: var(--panel-2); outline: none; }
+  .hubs .deg { margin-left: auto; font: 400 12px "IBM Plex Mono", ui-monospace, monospace; color: var(--muted); }
+  footer { color: var(--faint); font-size: 12px; }
+  .err { padding: 24px; color: var(--soft); }
+</style>
+
+<div class="app">
+  <div class="top">
+    <div class="brand">
+      <span class="eyebrow">Territool · Claude brain</span>
+      <h1>Territool Brain Graph</h1>
+      <span class="stats" id="stats">loading…</span>
+    </div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9b9ea6" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      <input id="q" type="search" placeholder="Search: F15, CG-W12, known-fragile, Login…" autocomplete="off" aria-label="Search the graph">
+      <ul class="results" id="results" hidden></ul>
+    </div>
+  </div>
+  <div class="groups" id="groups" role="group" aria-label="Show or hide node types"></div>
+  <div class="work">
+    <div class="stage" id="stage">
+      <canvas id="cv" role="img" aria-label="Force-directed graph of the Territool brain: notes, rules, flows, decisions, gate checks, known gaps, screens and code modules"></canvas>
+      <div class="hint">scroll to zoom · drag background to pan · drag a node · click to inspect</div>
+      <div class="zoombtns"><button class="btn" id="fit" type="button">Fit</button><button class="btn" id="reheat" type="button">Shake</button></div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+  <footer>Generated from <span class="mono">territool-brain/</span> by <span class="mono">node tools/brain-graph.js</span> · <span id="gen"></span>. A line means a note mentions it, a table row references it, a screen imports it, or a web class serves one of the flow's endpoints.</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="graph-data.js"></script>
+<script>
+(function () {
+  const DATA = window.BRAIN_GRAPH;
+  const stage = document.getElementById('stage');
+  if (!DATA || !window.d3) { stage.innerHTML = '<p class="err">The graph data could not be loaded.</p>'; return; }
+
+  const GROUPS = [
+    ['doc', 'Brain notes', '#d4d6db'],
+    ['flow', 'Flows', '#6fdc9a'],
+    ['rule', 'Rules', '#6ea8fe'],
+    ['gate', 'Gate checks', '#b39cff'],
+    ['decision', 'Owner decisions', '#f3c46a'],
+    ['gap', 'Known gaps', '#ef6a5a'],
+    ['screen', 'Mobile screens', '#4cc9d6'],
+    ['code', 'Code modules', '#80848c'],
+  ];
+  const G = Object.fromEntries(GROUPS.map(([k, l, c]) => [k, { label: l, color: c }]));
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = () => matchMedia('(max-width: 860px)').matches;
+
+  const nodes = DATA.nodes.map((n, i) => ({ ...n, i }));
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const links = DATA.links.map(([s, t, w]) => ({ source: nodes[s], target: nodes[t], w }));
+  const nbr = nodes.map(() => new Set());
+  links.forEach((l) => { nbr[l.source.i].add(l.target.i); nbr[l.target.i].add(l.source.i); });
+  nodes.forEach((n) => {
+    n.deg = nbr[n.i].size;
+    n.r = n.g === 'code' ? Math.min(9, 1.8 + Math.sqrt(n.deg) * 0.6) : Math.min(18, (n.g === 'doc' ? 3.8 : 2.7) + Math.sqrt(n.deg) * 1.0);
+  });
+  // Deterministic scatter in a disc so the first frame already reads as a graph.
+  let seed = 20260915;
+  const rand = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  nodes.forEach((n) => { const a = rand() * Math.PI * 2, rad = 520 * Math.sqrt(rand()); n.x = Math.cos(a) * rad; n.y = Math.sin(a) * rad; });
+
+  const on = Object.fromEntries(GROUPS.map(([k]) => [k, true]));
+  let vNodes = [], vLinks = [], sel = null, hover = null;
+  const stats = document.getElementById('stats');
+  const panel = document.getElementById('panel');
+  const cv = document.getElementById('cv');
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, dpr = 1, tr = d3.zoomIdentity, pending = false;
+
+  const sim = d3.forceSimulation().stop()
+    .force('link', d3.forceLink().distance((l) => (l.source.g === 'code' || l.target.g === 'code') ? 34 : 50).strength((l) => 0.9 / Math.min(l.source.deg || 1, l.target.deg || 1)))
+    .force('charge', d3.forceManyBody().strength((n) => n.g === 'code' ? -30 : -60).distanceMax(520).theta(0.9))
+    .force('x', d3.forceX(0).strength(0.05))
+    .force('y', d3.forceY(0).strength(0.05))
+    .force('collide', d3.forceCollide((n) => n.r + 1.5))
+    .alphaDecay(0.03)
+    .on('tick', schedule);
+
+  function applyFilter(heat) {
+    vNodes = nodes.filter((n) => on[n.g]);
+    vLinks = links.filter((l) => on[l.source.g] && on[l.target.g]);
+    sim.nodes(vNodes);
+    sim.force('link').links(vLinks);
+    if (sel && !on[sel.g]) sel = null;
+    if (hover && !on[hover.g]) hover = null;
+    stats.textContent = `${vNodes.length.toLocaleString()} nodes · ${vLinks.length.toLocaleString()} links`;
+    if (heat) settle(heat);
+  }
+  function settle(alpha) {
+    if (reduced) { sim.alpha(alpha); for (let k = 0; k < 220; k++) sim.tick(); schedule(); }
+    else sim.alpha(alpha).restart();
+  }
+
+  function resize() {
+    const r = stage.getBoundingClientRect();
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = r.width; H = r.height;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    schedule();
+  }
+  new ResizeObserver(resize).observe(stage);
+
+  const rgba = (hex, a) => { const v = parseInt(hex.slice(1), 16); return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a})`; };
+  function schedule() { if (!pending) { pending = true; requestAnimationFrame(draw); } }
+  function draw() {
+    pending = false;
+    const k = tr.k;
+    const focus = hover || sel;
+    const near = focus ? nbr[focus.i] : null;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    ctx.translate(tr.x, tr.y);
+    ctx.scale(k, k);
+
+    ctx.lineWidth = 0.6 / k;
+    ctx.strokeStyle = focus ? 'rgba(160,164,172,0.05)' : 'rgba(160,164,172,0.17)';
+    ctx.beginPath();
+    for (const l of vLinks) {
+      if (focus && (l.source === focus || l.target === focus)) continue;
+      ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y);
+    }
+    ctx.stroke();
+    if (focus) {
+      ctx.strokeStyle = rgba(G[focus.g].color, 0.8);
+      ctx.lineWidth = 1.1 / k;
+      ctx.beginPath();
+      for (const l of vLinks) if (l.source === focus || l.target === focus) { ctx.moveTo(l.source.x, l.source.y); ctx.lineTo(l.target.x, l.target.y); }
+      ctx.stroke();
+    }
+
+    for (const n of vNodes) {
+      ctx.globalAlpha = focus && n !== focus && !near.has(n.i) ? 0.13 : 1;
+      ctx.fillStyle = G[n.g].color;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (sel) { ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 1.6 / k; ctx.beginPath(); ctx.arc(sel.x, sel.y, sel.r + 3 / k, 0, 6.2832); ctx.stroke(); }
+
+    ctx.font = `500 ${12 / k}px "IBM Plex Sans", system-ui, sans-serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.lineJoin = 'round';
+    for (const n of vNodes) {
+      const show = focus
+        ? n === focus || (near.has(n.i) && (k > 0.55 || n.r > 6))
+        : (n.g === 'doc' && n.r >= 9 && k > 0.4) || (n.g !== 'code' && n.r >= 11 && k > 0.9) || (n.g !== 'code' && k > 1.9) || k > 3.2;
+      if (!show) continue;
+      const y = n.y + n.r + 3 / k;
+      ctx.lineWidth = 3 / k; ctx.strokeStyle = 'rgba(23,24,28,0.9)'; ctx.strokeText(n.l, n.x, y);
+      ctx.fillStyle = n === focus ? '#ffffff' : 'rgba(223,224,228,0.92)'; ctx.fillText(n.l, n.x, y);
+    }
+  }
+
+  function nodeAt(px, py) {
+    const [x, y] = tr.invert([px, py]);
+    let best = null, bd = Infinity;
+    for (const n of vNodes) {
+      const dx = n.x - x, dy = n.y - y, d = dx * dx + dy * dy, rr = (n.r + 5 / tr.k) ** 2;
+      if (d < rr && d < bd) { bd = d; best = n; }
+    }
+    return best;
+  }
+
+  const zoom = d3.zoom().scaleExtent([0.05, 10]).on('zoom', (e) => { tr = e.transform; schedule(); });
+  let moved = false;
+  const drag = d3.drag().container(cv)
+    .subject((e) => nodeAt(e.x, e.y))
+    .on('start', (e) => { moved = false; if (!e.active && !reduced) sim.alphaTarget(0.2).restart(); e.subject.fx = e.subject.x; e.subject.fy = e.subject.y; })
+    .on('drag', (e) => {
+      moved = true;
+      const [x, y] = tr.invert(d3.pointer(e.sourceEvent, cv));
+      e.subject.fx = x; e.subject.fy = y;
+      if (reduced) { e.subject.x = x; e.subject.y = y; schedule(); }
+    })
+    .on('end', (e) => {
+      if (!e.active && !reduced) sim.alphaTarget(0);
+      e.subject.fx = null; e.subject.fy = null;
+      if (!moved) select(e.subject, false);
+    });
+  d3.select(cv).call(drag).call(zoom).on('dblclick.zoom', null);
+  cv.addEventListener('click', (ev) => { if (!nodeAt(ev.offsetX, ev.offsetY) && sel) select(null); });
+  cv.addEventListener('pointermove', (ev) => {
+    if (ev.buttons) return;
+    const n = nodeAt(ev.offsetX, ev.offsetY);
+    if (n !== hover) { hover = n; cv.classList.toggle('hover', !!n); schedule(); }
+  });
+  cv.addEventListener('pointerleave', () => { if (hover) { hover = null; cv.classList.remove('hover'); schedule(); } });
+
+  const panelW = () => (narrow() ? 0 : 352);
+  function fit(animate) {
+    if (!vNodes.length) return;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const n of vNodes) { x0 = Math.min(x0, n.x - n.r); y0 = Math.min(y0, n.y - n.r); x1 = Math.max(x1, n.x + n.r); y1 = Math.max(y1, n.y + n.r); }
+    const aw = W - panelW(), pad = 28;
+    const k = Math.min(4, 0.96 * Math.min((aw - pad * 2) / Math.max(1, x1 - x0), (H - pad * 2) / Math.max(1, y1 - y0)));
+    const t = d3.zoomIdentity.translate(aw / 2 - k * (x0 + x1) / 2, H / 2 - k * (y0 + y1) / 2).scale(k);
+    const s = d3.select(cv);
+    (animate && !reduced ? s.transition().duration(650) : s).call(zoom.transform, t);
+  }
+  function focusOn(n) {
+    const k = Math.max(tr.k, 1.4);
+    const t = d3.zoomIdentity.translate((W - panelW()) / 2 - k * n.x, H / 2 - k * n.y).scale(k);
+    const s = d3.select(cv);
+    (reduced ? s : s.transition().duration(600)).call(zoom.transform, t);
+  }
+
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function select(n, center) { sel = n; render(); schedule(); if (n && center) focusOn(n); }
+  function render() {
+    if (!sel) { intro(); return; }
+    const n = sel, g = G[n.g];
+    const nb = [...nbr[n.i]].map((i) => nodes[i]).filter((m) => on[m.g]).sort((a, b) => b.deg - a.deg);
+    const byG = GROUPS.map(([k]) => [k, nb.filter((m) => m.g === k)]).filter(([, a]) => a.length);
+    const home = n.h ? byId.get(n.h) : null;
+    const rows = [];
+    if (n.c) rows.push(['Criticality', esc(n.c)]);
+    if (n.pl) rows.push(['Platforms', esc(n.pl)]);
+    if (n.pa) rows.push(['Parity', esc(n.pa)]);
+    if (home && home !== n) rows.push(['Defined in', `<button class="link" type="button" data-go="${home.i}">${esc(home.l)}</button>`]);
+    if (n.p) rows.push(['Path', `<span class="mono">${esc(n.p)}</span>`]);
+    if (n.g === 'code' || n.g === 'screen') rows.push(['Codebase', n.a === 'web' ? 'Web app' : 'Mobile app']);
+    rows.push(['Links', String(n.deg)]);
+    panel.innerHTML = `
+      <span class="kind"><span class="dot" style="background:${g.color}"></span>${esc(g.label)}</span>
+      <h2>${esc(n.l)}</h2>
+      ${n.t && n.t !== n.l ? `<p class="title">${esc(n.t)}</p>` : ''}
+      ${n.d ? `<p class="def">${esc(n.d)}</p>` : ''}
+      <dl>${rows.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl>
+      ${byG.map(([k, arr]) => `<div class="nb"><h3><span class="dot" style="background:${G[k].color}"></span>${esc(G[k].label)} · ${arr.length}</h3><div class="nbl">${arr.slice(0, 24).map((m) => `<button type="button" data-go="${m.i}">${esc(m.l)}</button>`).join('')}${arr.length > 24 ? `<span class="more">+${arr.length - 24} more</span>` : ''}</div></div>`).join('')}
+      <div><button class="btn" type="button" data-clear>Clear selection</button></div>`;
+  }
+  function intro() {
+    const hubs = nodes.filter((n) => on[n.g] && n.g !== 'code').sort((a, b) => b.deg - a.deg).slice(0, 10);
+    panel.innerHTML = `
+      <div class="intro">
+        <span class="kind">Overview</span>
+        <h2>How the brain connects</h2>
+        <p>Each dot is a note, rule, flow, owner decision, gate check, known gap, mobile screen or code module. Bigger dots carry more links. Select one to see what it touches.</p>
+      </div>
+      <div class="nb"><h3>Most connected</h3><div class="hubs">${hubs.map((n) => `<button type="button" data-go="${n.i}"><span class="dot" style="background:${G[n.g].color}"></span>${esc(n.l)}<span class="deg">${n.deg}</span></button>`).join('')}</div></div>`;
+  }
+  panel.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-go]');
+    if (b) { select(nodes[+b.dataset.go], true); return; }
+    if (e.target.closest('[data-clear]')) select(null);
+  });
+
+  const groupsEl = document.getElementById('groups');
+  const counts = Object.fromEntries(GROUPS.map(([k]) => [k, nodes.filter((n) => n.g === k).length]));
+  groupsEl.innerHTML = GROUPS.map(([k, l, c]) => `<button class="chip" type="button" id="grp-${k}" data-g="${k}" aria-pressed="true"><span class="dot" style="background:${c}"></span>${l}<span class="n">${counts[k]}</span></button>`).join('')
+    + '<span class="sep" aria-hidden="true"></span><button class="btn" type="button" id="preset-brain">Brain only</button><button class="btn" type="button" id="preset-all">Everything</button>';
+  groupsEl.addEventListener('click', (e) => {
+    const chip = e.target.closest('[data-g]');
+    if (chip) { const k = chip.dataset.g; on[k] = !on[k]; chip.setAttribute('aria-pressed', String(on[k])); applyFilter(0.6); render(); return; }
+    if (e.target.id === 'preset-brain') setAll((k) => k !== 'code' && k !== 'screen');
+    if (e.target.id === 'preset-all') setAll(() => true);
+  });
+  function setAll(fn) {
+    GROUPS.forEach(([k]) => { on[k] = fn(k); document.getElementById(`grp-${k}`).setAttribute('aria-pressed', String(on[k])); });
+    applyFilter(0.7); render();
+    setTimeout(() => fit(true), reduced ? 0 : 1100);
+  }
+
+  const q = document.getElementById('q');
+  const res = document.getElementById('results');
+  let matches = [], act = 0;
+  q.addEventListener('input', () => {
+    const s = q.value.trim().toLowerCase();
+    if (!s) { res.hidden = true; return; }
+    matches = nodes.filter((n) => on[n.g] && (n.l.toLowerCase().includes(s) || (n.t || '').toLowerCase().includes(s)))
+      .sort((a, b) => ((b.l.toLowerCase() === s) - (a.l.toLowerCase() === s)) || (b.l.toLowerCase().startsWith(s) - a.l.toLowerCase().startsWith(s)) || (b.deg - a.deg))
+      .slice(0, 8);
+    act = 0; paintResults();
+  });
+  function paintResults() {
+    res.hidden = !matches.length;
+    res.innerHTML = matches.map((n, j) => `<li><button type="button" data-go="${n.i}" class="${j === act ? 'active' : ''}"><span class="dot" style="background:${G[n.g].color}"></span>${esc(n.l)}<span class="sub">${esc(n.t || G[n.g].label)}</span></button></li>`).join('');
+  }
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') { act = Math.min(matches.length - 1, act + 1); paintResults(); e.preventDefault(); }
+    else if (e.key === 'ArrowUp') { act = Math.max(0, act - 1); paintResults(); e.preventDefault(); }
+    else if (e.key === 'Enter' && matches[act]) pick(matches[act]);
+    else if (e.key === 'Escape') { q.value = ''; res.hidden = true; }
+  });
+  res.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) pick(nodes[+b.dataset.go]); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.search')) res.hidden = true; });
+  function pick(n) { res.hidden = true; q.value = n.l; select(n, true); }
+
+  document.getElementById('fit').addEventListener('click', () => fit(true));
+  document.getElementById('reheat').addEventListener('click', () => settle(0.8));
+  document.getElementById('gen').textContent = `built ${DATA.generatedAt.slice(0, 16).replace('T', ' ')} UTC`;
+
+  resize();
+  applyFilter(0);
+  sim.alpha(1);
+  for (let k = 0; k < (reduced ? 320 : 110); k++) sim.tick();
+  fit(false);
+  render();
+  schedule();
+  if (!reduced) {
+    sim.alpha(0.3).restart();
+    sim.on('end.fit', () => { if (!sel) fit(true); sim.on('end.fit', null); });
+  }
+})();
+</script>

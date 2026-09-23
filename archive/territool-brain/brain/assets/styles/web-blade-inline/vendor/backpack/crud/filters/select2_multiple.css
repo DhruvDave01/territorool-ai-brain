@@ -1,0 +1,14 @@
+/* ===== resources/views/vendor/backpack/crud/filters/select2_multiple.blade.php · <style> block 1 of 1 ===== */
+.form-inline .select2-container {
+	    display: inline-block;
+	  }
+	  .select2-drop-active {
+	  	border:none;
+	  }
+	  .select2-container .select2-choices .select2-search-field input, .select2-container .select2-choice, .select2-container .select2-choices {
+	  	border: none;
+	  }
+	  .select2-container-active .select2-choice {
+	  	border: none;
+	  	box-shadow: none;
+	  }

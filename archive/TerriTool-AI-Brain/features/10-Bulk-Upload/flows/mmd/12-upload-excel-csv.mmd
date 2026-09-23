@@ -1,0 +1,15 @@
+---
+title: Upload Excel / CSV
+---
+flowchart TD
+  Dash[Home: Upload Excel/CSV] --> Kind{Companies or contacts}
+  Kind --> S1[Step 1 upload file]
+  S1 --> S2[Step 2 map columns / preview]
+  S2 --> S3[Step 3 validate]
+  S3 --> Err{Errors?}
+  Err -->|Yes| Fix[Autofill address / merge / drop duplicates]
+  Fix --> S3
+  Err -->|No| S4[Step 4 commit]
+  S4 --> SF{Push to Salesforce?}
+  SF -->|Yes| Sfdc[step4sfdc]
+  SF -->|No| Done[Companies/contacts in Address Book]

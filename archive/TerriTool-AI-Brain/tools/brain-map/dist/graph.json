@@ -1,0 +1,7055 @@
+{
+"nodes": [
+{
+"id": "AGENTS.md",
+"title": "Agent instructions \u2014 TerriTool Engineering Brain",
+"group": "root",
+"kind": "index",
+"bytes": 3471,
+"words": 459,
+"status": "index",
+"excerpt": "You are an engineering agent working on TerriTool. Cursor will eventually be removed. Operate as if Claude + MCPs + Codex are the long-term toolchain.",
+"h2": [
+"Required sequence",
+"Evidence ranking (when sources conflict)",
+"Hard product rules",
+"Stack check before any UI edit",
+"What not to do",
+"Loop selection"
+]
+},
+{
+"id": "LAST_VERIFIED.md",
+"title": "Last verified",
+"group": "root",
+"kind": "index",
+"bytes": 12313,
+"words": 1632,
+"status": "index",
+"excerpt": "Copied into TerriTool AI Brain/ so agents do not need an external pack. Update this ledger in this folder when you re-verify.",
+"h2": [
+"Convention",
+"Ledger",
+"Known stale-risk areas",
+"Changes to this pack"
+]
+},
+{
+"id": "README.md",
+"title": "TerriTool AI Engineering Brain",
+"group": "root",
+"kind": "index",
+"bytes": 9031,
+"words": 898,
+"status": "index",
+"excerpt": "Agent entry point. Read this first. Do not invent architecture.",
+"h2": [
+"Start Here",
+"Architecture",
+"Product",
+"Use Cases",
+"UI Flows",
+"Code",
+"Skills",
+"Loops",
+"MCPs",
+"Learnings",
+"Decisions",
+"Operating models"
+]
+},
+{
+"id": "cursor-exit.md",
+"title": "Cursor exit checklist",
+"group": "root",
+"kind": "index",
+"bytes": 3681,
+"words": 552,
+"status": "index",
+"excerpt": "Goal: operate TerriTool engineering with Claude + Codex + MCPs, without Cursor.",
+"h2": [
+"Inventory",
+"Recommended migration order",
+"What Cursor still uniquely provides today"
+]
+},
+{
+"id": "decisions/README.md",
+"title": "Decisions",
+"group": "decisions",
+"kind": "engineering",
+"bytes": 1858,
+"words": 253,
+"status": "code",
+"excerpt": "Record durable engineering choices here. Product behavior lives in features/*/MODULE.md.",
+"h2": [
+"ADR-006 \u2014 Canonical folder is `TerriTool AI Brain/`",
+"ADR-001 \u2014 This folder is self-contained",
+"ADR-002 \u2014 Keep existing UC IDs",
+"ADR-003 \u2014 Laravel version: lockfile wins until proven otherwise",
+"ADR-004 \u2014 Do not install Playwright Test in this phase",
+"ADR-005 \u2014 MCP is a client of v2, not a second app"
+]
+},
+{
+"id": "discovery-report.md",
+"title": "Discovery report",
+"group": "root",
+"kind": "index",
+"bytes": 16235,
+"words": 2212,
+"status": "index",
+"excerpt": "Created: 2026-09-16 Method: Inspected the live repository (composer.lock, routes, controllers, MCP modules, tests, Cursor config, and copied product/engineering markdown now in this folder). Not a live runtime probe of staging or a running local server",
+"h2": [
+"Repository",
+"Architecture",
+"Product",
+"UI",
+"Testing",
+"MCP",
+"AI tooling",
+"Environment / configuration conventions",
+"Important scripts",
+"Documentation in this Brain",
+"Unknowns (need human clarification)",
+"What this Brain contains"
+]
+},
+{
+"id": "evidence/README.md",
+"title": "Evidence",
+"group": "evidence",
+"kind": "evidence",
+"bytes": 1628,
+"words": 179,
+"status": "evidence",
+"excerpt": "Staging and device captures used to verify UI. Filenames often use a narrow no-break space (U+202F) before AM/PM.",
+"h2": [
+"Assigned (open these first)",
+"Unassigned",
+"Videos"
+]
+},
+{
+"id": "evidence/catalog-unassigned.md",
+"title": "Unassigned evidence catalog",
+"group": "evidence",
+"kind": "evidence",
+"bytes": 9321,
+"words": 879,
+"status": "evidence",
+"excerpt": "Captures that are not yet tied to a feature. Feature-assigned screenshots moved to features/<module>/evidence/ on 2026-09-16 (see each module's evidence.md). Filenames use a narrow no-break space (U+202F) before AM/PM.",
+"h2": [
+"Web / Salespeople \u2014 not in the original catalog",
+"Mobile (iOS / simulator)",
+"Video",
+"Credit balance observed in the walkthrough",
+"Note on file 8"
+]
+},
+{
+"id": "features/01-Authentication-Onboarding/MODULE.md",
+"title": "01 \u2014 Authentication, Registration, Onboarding",
+"group": "01-Authentication-Onboarding",
+"kind": "module",
+"bytes": 3696,
+"words": 472,
+"status": "evidence",
+"excerpt": "Create an account, sign in, reset a password, activate an invite, collect selling preferences, and start a product tour. After login, the user is sent to the home that matches their role.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Where they go after login",
+"Rules for new work",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/01-Authentication-Onboarding/evidence.md",
+"title": "Authentication Onboarding \u2014 evidence",
+"group": "01-Authentication-Onboarding",
+"kind": "evidence",
+"bytes": 1108,
+"words": 140,
+"status": "evidence",
+"excerpt": "Part of 01-Authentication-Onboarding. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the ",
+"h2": []
+},
+{
+"id": "features/01-Authentication-Onboarding/flows.md",
+"title": "Authentication Onboarding \u2014 flows",
+"group": "01-Authentication-Onboarding",
+"kind": "flows",
+"bytes": 1530,
+"words": 182,
+"status": "carried",
+"excerpt": "Part of 01-Authentication-Onboarding. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Authentication",
+"Onboarding"
+]
+},
+{
+"id": "features/01-Authentication-Onboarding/use-cases.md",
+"title": "Authentication Onboarding \u2014 use cases",
+"group": "01-Authentication-Onboarding",
+"kind": "use-cases",
+"bytes": 2401,
+"words": 368,
+"status": "evidence",
+"excerpt": "Part of 01-Authentication-Onboarding. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to [evidence.md](evidence.m",
+"h2": [
+"1. Authentication",
+"2. Onboarding"
+]
+},
+{
+"id": "features/02-Dashboard/MODULE.md",
+"title": "02 \u2014 Dashboard",
+"group": "02-Dashboard",
+"kind": "module",
+"bytes": 2507,
+"words": 284,
+"status": "evidence",
+"excerpt": "Home after login for reps. Shows what they did recently, what is coming up, and credit/upgrade status. Business Agents are sent to the Manager Portal instead of this screen.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/02-Dashboard/evidence.md",
+"title": "Dashboard \u2014 evidence",
+"group": "02-Dashboard",
+"kind": "evidence",
+"bytes": 566,
+"words": 66,
+"status": "evidence",
+"excerpt": "Part of 02-Dashboard. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough vide",
+"h2": []
+},
+{
+"id": "features/02-Dashboard/use-cases.md",
+"title": "Dashboard \u2014 use cases",
+"group": "02-Dashboard",
+"kind": "use-cases",
+"bytes": 1029,
+"words": 135,
+"status": "evidence",
+"excerpt": "Part of 02-Dashboard. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that fi",
+"h2": [
+"3. Home dashboard"
+]
+},
+{
+"id": "features/03-Company-AddressBook/MODULE.md",
+"title": "03 \u2014 Company (Address Book)",
+"group": "03-Company-AddressBook",
+"kind": "module",
+"bytes": 4184,
+"words": 547,
+"status": "evidence",
+"excerpt": "The Address Book is the core object. Every lead from Find Leads, CSV, CRM, manual add, or AI tools becomes a company. Contacts, notes, visits, lists, and routes hang off companies. The same company record is what every client reads and writes.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/03-Company-AddressBook/evidence.md",
+"title": "Company AddressBook \u2014 evidence",
+"group": "03-Company-AddressBook",
+"kind": "evidence",
+"bytes": 1398,
+"words": 180,
+"status": "evidence",
+"excerpt": "Part of 03-Company-AddressBook. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkth",
+"h2": []
+},
+{
+"id": "features/03-Company-AddressBook/flows.md",
+"title": "Company AddressBook \u2014 flows",
+"group": "03-Company-AddressBook",
+"kind": "flows",
+"bytes": 1580,
+"words": 207,
+"status": "carried",
+"excerpt": "Part of 03-Company-AddressBook. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Company profile",
+"Address Book filter"
+]
+},
+{
+"id": "features/03-Company-AddressBook/known-issues.md",
+"title": "Company AddressBook \u2014 known issues and error messages",
+"group": "03-Company-AddressBook",
+"kind": "ops",
+"bytes": 1540,
+"words": 223,
+"status": "code",
+"excerpt": "Part of 03-Company-AddressBook. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the back",
+"h2": [
+"Companies and contacts"
+]
+},
+{
+"id": "features/03-Company-AddressBook/use-cases.md",
+"title": "Company AddressBook \u2014 use cases",
+"group": "03-Company-AddressBook",
+"kind": "use-cases",
+"bytes": 2500,
+"words": 326,
+"status": "evidence",
+"excerpt": "Part of 03-Company-AddressBook. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md whe",
+"h2": [
+"7. Address Book & companies",
+"9. Activities / notes"
+]
+},
+{
+"id": "features/04-Contacts/MODULE.md",
+"title": "04 \u2014 Contacts",
+"group": "04-Contacts",
+"kind": "module",
+"bytes": 2414,
+"words": 278,
+"status": "evidence",
+"excerpt": "People at companies. They can be added by hand, CSV, CRM sync, or redeemed from enrichment. Same contact record everywhere.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/04-Contacts/evidence.md",
+"title": "Contacts \u2014 evidence",
+"group": "04-Contacts",
+"kind": "evidence",
+"bytes": 704,
+"words": 85,
+"status": "evidence",
+"excerpt": "Part of 04-Contacts. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough video",
+"h2": []
+},
+{
+"id": "features/04-Contacts/use-cases.md",
+"title": "Contacts \u2014 use cases",
+"group": "04-Contacts",
+"kind": "use-cases",
+"bytes": 964,
+"words": 98,
+"status": "evidence",
+"excerpt": "Part of 04-Contacts. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that fil",
+"h2": []
+},
+{
+"id": "features/05-Find-Leads/MODULE.md",
+"title": "05 \u2014 Find Leads (AI + Yelp)",
+"group": "05-Find-Leads",
+"kind": "module",
+"bytes": 3673,
+"words": 470,
+"status": "evidence",
+"excerpt": "Discover new businesses in a territory that are not already in the user\u2019s Address Book. Search is free. Saving costs 1 credit per company. Managers have a separate \u201csearch then assign to a rep\u201d path (module 16).",
+"h2": [
+"Purpose",
+"Who",
+"AI Find Leads",
+"Yelp Find Leads",
+"Find leads on a route map",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/05-Find-Leads/evidence.md",
+"title": "Find Leads \u2014 evidence",
+"group": "05-Find-Leads",
+"kind": "evidence",
+"bytes": 1349,
+"words": 176,
+"status": "evidence",
+"excerpt": "Part of 05-Find-Leads. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough vid",
+"h2": []
+},
+{
+"id": "features/05-Find-Leads/flows.md",
+"title": "Find Leads \u2014 flows",
+"group": "05-Find-Leads",
+"kind": "flows",
+"bytes": 1446,
+"words": 192,
+"status": "carried",
+"excerpt": "Part of 05-Find-Leads. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"AI Find Leads"
+]
+},
+{
+"id": "features/05-Find-Leads/known-issues.md",
+"title": "Find Leads \u2014 known issues and error messages",
+"group": "05-Find-Leads",
+"kind": "ops",
+"bytes": 1448,
+"words": 220,
+"status": "code",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the backend retur",
+"h2": [
+"Find Leads / AI search"
+]
+},
+{
+"id": "features/05-Find-Leads/limits.md",
+"title": "Find Leads \u2014 limits",
+"group": "05-Find-Leads",
+"kind": "ops",
+"bytes": 2017,
+"words": 297,
+"status": "code",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-note",
+"h2": [
+"AI Find Leads (Google Places + Gemini pipeline)"
+]
+},
+{
+"id": "features/05-Find-Leads/use-cases.md",
+"title": "Find Leads \u2014 use cases",
+"group": "05-Find-Leads",
+"kind": "use-cases",
+"bytes": 2587,
+"words": 379,
+"status": "evidence",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that f",
+"h2": [
+"4. AI Find Leads"
+]
+},
+{
+"id": "features/06-Recently-Added/MODULE.md",
+"title": "06 \u2014 Recently Added",
+"group": "06-Recently-Added",
+"kind": "module",
+"bytes": 1365,
+"words": 144,
+"status": "evidence",
+"excerpt": "Work the newest companies and contacts without scanning the full Address Book.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/06-Recently-Added/evidence.md",
+"title": "Recently Added \u2014 evidence",
+"group": "06-Recently-Added",
+"kind": "evidence",
+"bytes": 726,
+"words": 87,
+"status": "evidence",
+"excerpt": "Part of 06-Recently-Added. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough",
+"h2": []
+},
+{
+"id": "features/06-Recently-Added/use-cases.md",
+"title": "Recently Added \u2014 use cases",
+"group": "06-Recently-Added",
+"kind": "use-cases",
+"bytes": 642,
+"words": 61,
+"status": "evidence",
+"excerpt": "Part of 06-Recently-Added. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where th",
+"h2": []
+},
+{
+"id": "features/07-Routes/MODULE.md",
+"title": "07 \u2014 Routes",
+"group": "07-Routes",
+"kind": "module",
+"bytes": 4554,
+"words": 578,
+"status": "evidence",
+"excerpt": "An optimized driving sequence of companies (stops). Create, process, publish, run in the field, share, export, and regenerate when stops change.",
+"h2": [
+"Purpose",
+"Who",
+"Route list",
+"Create a route",
+"Route statuses",
+"Using a published route",
+"Active route",
+"Add companies from elsewhere",
+"Notifications",
+"CSV route upload (older path)",
+"Lasso / map find leads",
+"Rules"
+]
+},
+{
+"id": "features/07-Routes/evidence.md",
+"title": "Routes \u2014 evidence",
+"group": "07-Routes",
+"kind": "evidence",
+"bytes": 2191,
+"words": 291,
+"status": "evidence",
+"excerpt": "Part of 07-Routes. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough video: ",
+"h2": []
+},
+{
+"id": "features/07-Routes/flows.md",
+"title": "Routes \u2014 flows",
+"group": "07-Routes",
+"kind": "flows",
+"bytes": 1709,
+"words": 233,
+"status": "carried",
+"excerpt": "Part of 07-Routes. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Create and publish a route",
+"Work a published route"
+]
+},
+{
+"id": "features/07-Routes/known-issues.md",
+"title": "Routes \u2014 known issues and error messages",
+"group": "07-Routes",
+"kind": "ops",
+"bytes": 1090,
+"words": 150,
+"status": "code",
+"excerpt": "Part of 07-Routes. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the backend returns. ",
+"h2": [
+"Route generation"
+]
+},
+{
+"id": "features/07-Routes/limits.md",
+"title": "Routes \u2014 limits",
+"group": "07-Routes",
+"kind": "ops",
+"bytes": 639,
+"words": 71,
+"status": "code",
+"excerpt": "Part of 07-Routes. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-notes.md",
+"h2": [
+"Route builder"
+]
+},
+{
+"id": "features/07-Routes/use-cases.md",
+"title": "Routes \u2014 use cases",
+"group": "07-Routes",
+"kind": "use-cases",
+"bytes": 3088,
+"words": 459,
+"status": "evidence",
+"excerpt": "Part of 07-Routes. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file ",
+"h2": [
+"5. Routes"
+]
+},
+{
+"id": "features/08-Lists/MODULE.md",
+"title": "08 \u2014 Lists",
+"group": "08-Lists",
+"kind": "module",
+"bytes": 1840,
+"words": 220,
+"status": "evidence",
+"excerpt": "A List is a named group of companies. It is not a driving order. Use it for territories, campaigns, or \u201ctoday\u2019s accounts\u201d, then optionally generate a route from it.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/08-Lists/evidence.md",
+"title": "Lists \u2014 evidence",
+"group": "08-Lists",
+"kind": "evidence",
+"bytes": 1227,
+"words": 161,
+"status": "evidence",
+"excerpt": "Part of 08-Lists. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrough video: [",
+"h2": []
+},
+{
+"id": "features/08-Lists/flows.md",
+"title": "Lists \u2014 flows",
+"group": "08-Lists",
+"kind": "flows",
+"bytes": 825,
+"words": 107,
+"status": "carried",
+"excerpt": "Part of 08-Lists. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Lists"
+]
+},
+{
+"id": "features/08-Lists/use-cases.md",
+"title": "Lists \u2014 use cases",
+"group": "08-Lists",
+"kind": "use-cases",
+"bytes": 1612,
+"words": 237,
+"status": "evidence",
+"excerpt": "Part of 08-Lists. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file e",
+"h2": [
+"6. Lists"
+]
+},
+{
+"id": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"title": "09 \u2014 Contact Enrichment and Credits",
+"group": "09-Contact-Enrichment-Credits",
+"kind": "module",
+"bytes": 4068,
+"words": 506,
+"status": "evidence",
+"excerpt": "Look up people at a company and buy/fetch them with credits. Buy contacts is not free. The same credit wallet is used to save AI leads.",
+"h2": [
+"Purpose",
+"Who",
+"Credit economics (identical on every client)",
+"Where Find Contacts starts",
+"Providers (live)",
+"Single company",
+"Bulk Contacts",
+"Wallet",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/09-Contact-Enrichment-Credits/flows.md",
+"title": "Contact Enrichment Credits \u2014 flows",
+"group": "09-Contact-Enrichment-Credits",
+"kind": "flows",
+"bytes": 1019,
+"words": 122,
+"status": "carried",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Credit spend vs free use cases"
+]
+},
+{
+"id": "features/09-Contact-Enrichment-Credits/known-issues.md",
+"title": "Contact Enrichment Credits \u2014 known issues and error messages",
+"group": "09-Contact-Enrichment-Credits",
+"kind": "ops",
+"bytes": 1432,
+"words": 204,
+"status": "code",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string t",
+"h2": [
+"Credits and spending"
+]
+},
+{
+"id": "features/09-Contact-Enrichment-Credits/limits.md",
+"title": "Contact Enrichment Credits \u2014 limits",
+"group": "09-Contact-Enrichment-Credits",
+"kind": "ops",
+"bytes": 1544,
+"words": 194,
+"status": "code",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/",
+"h2": [
+"Contacts"
+]
+},
+{
+"id": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"title": "Contact Enrichment Credits \u2014 use cases",
+"group": "09-Contact-Enrichment-Credits",
+"kind": "use-cases",
+"bytes": 1125,
+"words": 131,
+"status": "evidence",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued ",
+"h2": [
+"8. Contacts"
+]
+},
+{
+"id": "features/10-Bulk-Upload/MODULE.md",
+"title": "10 \u2014 Bulk Upload (Companies and Contacts)",
+"group": "10-Bulk-Upload",
+"kind": "module",
+"bytes": 2380,
+"words": 294,
+"status": "evidence",
+"excerpt": "Import many companies or contacts from CSV/Excel, map columns, preview, commit, then repair rows that failed (geocode, duplicates, missing fields). Work sits in a session until success or discard.",
+"h2": [
+"Purpose",
+"Who",
+"Company import",
+"Repair failed company rows",
+"Contact import",
+"Related behavior",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/10-Bulk-Upload/flows.md",
+"title": "Bulk Upload \u2014 flows",
+"group": "10-Bulk-Upload",
+"kind": "flows",
+"bytes": 755,
+"words": 100,
+"status": "carried",
+"excerpt": "Part of 10-Bulk-Upload. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Upload Excel / CSV"
+]
+},
+{
+"id": "features/10-Bulk-Upload/use-cases.md",
+"title": "Bulk Upload \u2014 use cases",
+"group": "10-Bulk-Upload",
+"kind": "use-cases",
+"bytes": 835,
+"words": 90,
+"status": "evidence",
+"excerpt": "Part of 10-Bulk-Upload. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this module",
+"h2": [
+"13. Upload Excel / CSV"
+]
+},
+{
+"id": "features/11-Maps/MODULE.md",
+"title": "11 \u2014 Maps and Geocoding",
+"group": "11-Maps",
+"kind": "module",
+"bytes": 1934,
+"words": 220,
+"status": "evidence",
+"excerpt": "Show companies, lists, and routes on a map; turn addresses into coordinates and cities; navigate to a stop.",
+"h2": [
+"Purpose",
+"Who",
+"What can be mapped",
+"Geocoding",
+"Navigation",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/12-Subscription-Payments/MODULE.md",
+"title": "12 \u2014 Subscriptions and Payments",
+"group": "12-Subscription-Payments",
+"kind": "module",
+"bytes": 3083,
+"words": 385,
+"status": "evidence",
+"excerpt": "Sell plans and extra credits, keep status in sync, invoices, trial, upgrade, cancel. The wallet and plan are the same no matter how the user paid.",
+"h2": [
+"Purpose",
+"Who",
+"What the user can do",
+"Providers",
+"Packages",
+"Cancel",
+"Request upgrade",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/12-Subscription-Payments/evidence.md",
+"title": "Subscription Payments \u2014 evidence",
+"group": "12-Subscription-Payments",
+"kind": "evidence",
+"bytes": 590,
+"words": 67,
+"status": "evidence",
+"excerpt": "Part of 12-Subscription-Payments. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walk",
+"h2": []
+},
+{
+"id": "features/12-Subscription-Payments/flows.md",
+"title": "Subscription Payments \u2014 flows",
+"group": "12-Subscription-Payments",
+"kind": "flows",
+"bytes": 868,
+"words": 100,
+"status": "carried",
+"excerpt": "Part of 12-Subscription-Payments. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Billing"
+]
+},
+{
+"id": "features/12-Subscription-Payments/use-cases.md",
+"title": "Subscription Payments \u2014 use cases",
+"group": "12-Subscription-Payments",
+"kind": "use-cases",
+"bytes": 1041,
+"words": 122,
+"status": "evidence",
+"excerpt": "Part of 12-Subscription-Payments. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md w",
+"h2": [
+"11. Subscription & credits"
+]
+},
+{
+"id": "features/13-CRM-Integrations/MODULE.md",
+"title": "13 \u2014 CRM Integrations",
+"group": "13-CRM-Integrations",
+"kind": "module",
+"bytes": 2082,
+"words": 232,
+"status": "evidence",
+"excerpt": "Keep TerriTool companies/contacts (and HubSpot notes/meetings) in sync with an external CRM. Pipedrive is not implemented; do not assume it works.",
+"h2": [
+"Purpose",
+"Who",
+"Salesforce",
+"HubSpot",
+"KarmaCRM",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/13-CRM-Integrations/evidence.md",
+"title": "CRM Integrations \u2014 evidence",
+"group": "13-CRM-Integrations",
+"kind": "evidence",
+"bytes": 923,
+"words": 118,
+"status": "evidence",
+"excerpt": "Part of 13-CRM-Integrations. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walkthrou",
+"h2": []
+},
+{
+"id": "features/13-CRM-Integrations/flows.md",
+"title": "CRM Integrations \u2014 flows",
+"group": "13-CRM-Integrations",
+"kind": "flows",
+"bytes": 910,
+"words": 124,
+"status": "carried",
+"excerpt": "Part of 13-CRM-Integrations. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Settings / MCP / CRM"
+]
+},
+{
+"id": "features/13-CRM-Integrations/use-cases.md",
+"title": "CRM Integrations \u2014 use cases",
+"group": "13-CRM-Integrations",
+"kind": "use-cases",
+"bytes": 1143,
+"words": 144,
+"status": "evidence",
+"excerpt": "Part of 13-CRM-Integrations. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where ",
+"h2": [
+"10. Settings, CRM, MCP"
+]
+},
+{
+"id": "features/14-Settings-Profile/MODULE.md",
+"title": "14 \u2014 Settings and Profile",
+"group": "14-Settings-Profile",
+"kind": "module",
+"bytes": 2801,
+"words": 311,
+"status": "evidence",
+"excerpt": "The signed-in user\u2019s profile, labels (statuses, categories, stages), subscription controls, CRM, preferences, and optional AI-tool connections.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/14-Settings-Profile/use-cases.md",
+"title": "Settings Profile \u2014 use cases",
+"group": "14-Settings-Profile",
+"kind": "use-cases",
+"bytes": 806,
+"words": 80,
+"status": "evidence",
+"excerpt": "Part of 14-Settings-Profile. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this m",
+"h2": []
+},
+{
+"id": "features/15-Support-Notifications/MODULE.md",
+"title": "15 \u2014 Support and Notifications",
+"group": "15-Support-Notifications",
+"kind": "module",
+"bytes": 1613,
+"words": 182,
+"status": "evidence",
+"excerpt": "Help tickets (including Report Bug), an inbox for route and system messages, email, and push.",
+"h2": [
+"Purpose",
+"Who",
+"Tickets",
+"Notifications",
+"Email",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/15-Support-Notifications/evidence.md",
+"title": "Support Notifications \u2014 evidence",
+"group": "15-Support-Notifications",
+"kind": "evidence",
+"bytes": 591,
+"words": 67,
+"status": "evidence",
+"excerpt": "Part of 15-Support-Notifications. Staging captures (15 Sep 2026, https://staging.territool.com), rows split from the former 06-Evidence/screenshot-catalog.md. Use-case IDs refer to use-cases.md. Unassigned captures and the walk",
+"h2": []
+},
+{
+"id": "features/15-Support-Notifications/flows.md",
+"title": "Support Notifications \u2014 flows",
+"group": "15-Support-Notifications",
+"kind": "flows",
+"bytes": 557,
+"words": 65,
+"status": "carried",
+"excerpt": "Part of 15-Support-Notifications. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Support"
+]
+},
+{
+"id": "features/15-Support-Notifications/use-cases.md",
+"title": "Support Notifications \u2014 use cases",
+"group": "15-Support-Notifications",
+"kind": "use-cases",
+"bytes": 608,
+"words": 67,
+"status": "evidence",
+"excerpt": "Part of 15-Support-Notifications. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md w",
+"h2": [
+"12. Support"
+]
+},
+{
+"id": "features/16-Manager-Portal/MODULE.md",
+"title": "16 \u2014 Manager Portal (Business Agent)",
+"group": "16-Manager-Portal",
+"kind": "module",
+"bytes": 5494,
+"words": 654,
+"status": "code",
+"excerpt": "Cockpit for Business Agents: licenses, team, KPIs, assign AI leads to reps, activity, support, settings. Older team screens still exist for invites (module 21). New manager work belongs here.",
+"h2": [
+"Purpose",
+"Who",
+"Navigation",
+"Dashboard",
+"Salespeople",
+"Manager AI Find Leads",
+"Activity, support, settings",
+"Rules",
+"Verified routes",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/16-Manager-Portal/evidence.md",
+"title": "Manager Portal \u2014 evidence",
+"group": "16-Manager-Portal",
+"kind": "evidence",
+"bytes": 2188,
+"words": 152,
+"status": "evidence",
+"excerpt": "Part of 16-Manager-Portal. Browser captures of the manager portal on staging, 15 Sep 2026 (Screenshots/Web/Manager before the 2026-09-16 reorganization). Screen names are taken from the filenames; they have not been matched to use-case IDs yet \u2014",
+"h2": []
+},
+{
+"id": "features/16-Manager-Portal/flows.md",
+"title": "Manager Portal \u2014 flows",
+"group": "16-Manager-Portal",
+"kind": "flows",
+"bytes": 731,
+"words": 90,
+"status": "carried",
+"excerpt": "Part of 16-Manager-Portal. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Manager portal"
+]
+},
+{
+"id": "features/16-Manager-Portal/use-cases.md",
+"title": "Manager Portal \u2014 use cases",
+"group": "16-Manager-Portal",
+"kind": "use-cases",
+"bytes": 913,
+"words": 103,
+"status": "evidence",
+"excerpt": "Part of 16-Manager-Portal. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where th",
+"h2": [
+"14. Manager portal"
+]
+},
+{
+"id": "features/17-Admin-HQ/MODULE.md",
+"title": "17 \u2014 Admin HQ",
+"group": "17-Admin-HQ",
+"kind": "module",
+"bytes": 8745,
+"words": 929,
+"status": "code",
+"excerpt": "Internal TerriTool staff tools. Admin role only. Other roles never see HQ.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Rules",
+"Verified routes",
+"Rules (spend integrity)",
+"Evidence gap",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/17-Admin-HQ/evidence.md",
+"title": "Admin HQ \u2014 evidence",
+"group": "17-Admin-HQ",
+"kind": "evidence",
+"bytes": 2774,
+"words": 223,
+"status": "evidence",
+"excerpt": "Part of 17-Admin-HQ. Browser captures of the HQ / admin screens on staging, 15 Sep 2026 (Screenshots/Web/Admin before the 2026-09-16 reorganization). Filenames carry no screen name, so these are not yet catalogued against the UC-ADM-* use ",
+"h2": []
+},
+{
+"id": "features/17-Admin-HQ/use-cases.md",
+"title": "Admin HQ \u2014 use cases",
+"group": "17-Admin-HQ",
+"kind": "use-cases",
+"bytes": 3350,
+"words": 399,
+"status": "evidence",
+"excerpt": "Part of 17-Admin-HQ. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that fil",
+"h2": [
+"16. Admin (back office)"
+]
+},
+{
+"id": "features/18-Clients/MODULE.md",
+"title": "18 \u2014 One product, every client",
+"group": "18-Clients",
+"kind": "module",
+"bytes": 4076,
+"words": 490,
+"status": "carried",
+"excerpt": "TerriTool is one product. Browser, iOS, Android, voice, and AI tools all read and write the same companies, contacts, routes, lists, credits, and CRM connections. Do not design a feature as \u201cweb only\u201d or \u201capp only.\u201d If a client cannot show a screen yet",
+"h2": [
+"Purpose",
+"What is the same everywhere",
+"Field-day extras (still the same data)",
+"Clients",
+"Provider callbacks (not a user screen)",
+"Rules for new work",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"title": "19 \u2014 Background jobs and provider callbacks",
+"group": "19-Cron-Jobs-Webhooks",
+"kind": "module",
+"bytes": 2567,
+"words": 308,
+"status": "carried",
+"excerpt": "Work that is not a user clicking a button: keep plans/credits true, finish route optimization, finish contact enrich, send mail/push, sync CRM, log to sheets.",
+"h2": [
+"Purpose",
+"Scheduled work",
+"Queue jobs",
+"Inbound provider callbacks",
+"Rules",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/20-MCP/MODULE.md",
+"title": "20 \u2014 MCP and voice (Claude / Cursor / ChatGPT / voice)",
+"group": "20-MCP",
+"kind": "module",
+"bytes": 5032,
+"words": 642,
+"status": "code",
+"excerpt": "The AI-agent surface of TerriTool. An agent (Claude, Cursor, ChatGPT, the voice client, or an in-app custom MCP connection) calls the same actions as the browser and the phone \u2014 same companies, credits, routes, lists, publish rules \u2014 through MCP tools. Age",
+"h2": [
+"Purpose",
+"Who",
+"The three servers",
+"Credit and confirm rules (same as every other client)",
+"Files in this feature",
+"Rules for new work",
+"Related"
+]
+},
+{
+"id": "features/20-MCP/api-surfaces.md",
+"title": "TerriTool surfaces and API contract",
+"group": "20-MCP",
+"kind": "contract",
+"bytes": 9025,
+"words": 1367,
+"status": "code",
+"excerpt": "Load this with the Bible. It is not an OpenAPI spec. Agents must use MCP tools (or the matching voice catalog action). Do not call PHP, SQL, curl, or /api/v2 directly.",
+"h2": [
+"1. Surfaces (how a client talks to TerriTool)",
+"2. Customer MCP action \u2192 v2 name",
+"3. Collisions (never mix these)",
+"4. Agent-facing errors (speak these, don\u2019t invent a workaround)",
+"5. Do not call (poison / not a user action)",
+"6. Inbound webhooks (system, not agent tools)",
+"7. Field-day extras (same data, extra v2 names)",
+"8. Copy that must not override the Bible",
+"Related"
+]
+},
+{
+"id": "features/20-MCP/conversations.md",
+"title": "Example MCP / voice conversations",
+"group": "20-MCP",
+"kind": "contract",
+"bytes": 9200,
+"words": 1414,
+"status": "code",
+"excerpt": "Multi-turn transcripts showing how the rules in api-surfaces.md, example-utterances.md, and glossary.md play out turn by turn. Every tool name, credit cost, and error string below is take",
+"h2": [
+"1. Happy path: find, save, route (the core loop)",
+"2. Insufficient credits \u2014 Sales Agent",
+"3. Insufficient credits \u2014 Business Sales Agent",
+"4. Collision: new lead vs. already-saved account",
+"5. Buying contacts, small batch (under the confirm threshold)",
+"6. Buying contacts, large batch (over the confirm threshold)",
+"7. Website missing for Find Contacts",
+"8. Route with too few companies",
+"9. \"What's next\" with no active route",
+"10. Resuming an interrupted search vs. starting over",
+"11. Out-of-scope request: Admin/HQ via customer MCP",
+"12. MCP Chat connector not connected (in-app custom MCP, not this agent)"
+]
+},
+{
+"id": "features/20-MCP/example-utterances.md",
+"title": "Example utterances \u2192 catalog actions",
+"group": "20-MCP",
+"kind": "contract",
+"bytes": 3106,
+"words": 543,
+"status": "code",
+"excerpt": "Voice and chat should map to one catalog id, then stop. Confirm writes and paid actions. Full surface/auth/error rules: api-surfaces.md.",
+"h2": [
+"Find vs saved vs save",
+"Contacts",
+"Status, notes, activities",
+"Routes and lists",
+"Session words (not actions)",
+"Paid confirm (required)",
+"Unsupported on voice (do not fake an API)"
+]
+},
+{
+"id": "features/20-MCP/flows.md",
+"title": "MCP \u2014 flows",
+"group": "20-MCP",
+"kind": "flows",
+"bytes": 1830,
+"words": 201,
+"status": "carried",
+"excerpt": "Part of 20-MCP. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"MCP agent lead-to-route",
+"MCP agent use cases"
+]
+},
+{
+"id": "features/20-MCP/limits.md",
+"title": "MCP \u2014 limits",
+"group": "20-MCP",
+"kind": "ops",
+"bytes": 945,
+"words": 120,
+"status": "code",
+"excerpt": "Part of 20-MCP. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-notes.md](.",
+"h2": [
+"MCP / catalog"
+]
+},
+{
+"id": "features/20-MCP/use-cases.md",
+"title": "MCP \u2014 use cases",
+"group": "20-MCP",
+"kind": "use-cases",
+"bytes": 1719,
+"words": 246,
+"status": "evidence",
+"excerpt": "Part of 20-MCP. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this module yet; ev",
+"h2": [
+"15. Sales-rep MCP (Claude / ChatGPT)"
+]
+},
+{
+"id": "features/21-Business-Team/MODULE.md",
+"title": "21 \u2014 Business Team (older screens)",
+"group": "21-Business-Team",
+"kind": "module",
+"bytes": 2732,
+"words": 312,
+"status": "code",
+"excerpt": "Original Business Agent team management, still live for invite activation, credit allocation, and some redirects. New manager UX is module 16. Do not delete this path.",
+"h2": [
+"Purpose",
+"Who",
+"Functionality",
+"Admin counterpart",
+"Rules",
+"Verified routes",
+"Code",
+"Related"
+]
+},
+{
+"id": "features/README.md",
+"title": "TerriTool feature modules",
+"group": "features",
+"kind": "module",
+"bytes": 6776,
+"words": 744,
+"status": "carried",
+"excerpt": "Field sales territory platform documentation for future development, organized one folder per feature. Functionality is one product: the same companies, credits, routes, and rules apply wherever the user is signed in (browser, iOS, Android, voice, or AI to",
+"h2": [
+"Module index",
+"Roles",
+"Credit costs (same everywhere)",
+"Tech (for implementers)"
+]
+},
+{
+"id": "knowledge/README.md",
+"title": "Knowledge (execution-oriented)",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1216,
+"words": 113,
+"status": "code",
+"excerpt": "These files exist so an agent can answer \u201chow is TerriTool built?\u201d without scanning the whole repo. Deep maps live in architecture/ and code/ beside these indexes.",
+"h2": []
+},
+{
+"id": "knowledge/api.md",
+"title": "API surfaces",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2036,
+"words": 318,
+"status": "code",
+"excerpt": "Four ways to hit the same product. Prefer the surface the user is on; do not invent a fifth.",
+"h2": [
+"v2 names agents actually need",
+"MCP vs v2"
+]
+},
+{
+"id": "knowledge/architecture.md",
+"title": "Architecture",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1283,
+"words": 157,
+"status": "code",
+"excerpt": "One Laravel process. Three clients of the same product rules.",
+"h2": [
+"Boundaries that matter for engineering",
+"What is not in this repo"
+]
+},
+{
+"id": "knowledge/architecture/authentication.md",
+"title": "Authentication",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1584,
+"words": 207,
+"status": "code",
+"excerpt": "Evidence: config/auth.php, app/Http/Kernel.php, app/User.php, app/UserMcp/config/territool_app.php.",
+"h2": [
+"Web",
+"Mobile / v2",
+"Passport",
+"MCP OAuth",
+"API token guard",
+"Product gates (not just auth)"
+]
+},
+{
+"id": "knowledge/architecture/backend.md",
+"title": "Backend",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2538,
+"words": 321,
+"status": "code",
+"excerpt": "Treat installed lockfile as fact for this checkout. Write PHP 7.2-safe, Laravel 5.3-compatible code unless a human confirms production is Laravel 7.",
+"h2": [
+"Runtime conflict",
+"Layout",
+"Request flow (web)",
+"Request flow (MCP)",
+"Controllers (feature owners)"
+]
+},
+{
+"id": "knowledge/architecture/database.md",
+"title": "Database",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1862,
+"words": 257,
+"status": "code",
+"excerpt": "Live schema (2026-09-15): data-model-reference.md",
+"h2": [
+"Connections",
+"Core tables (engineering)",
+"Out of scope",
+"Eloquent relationships",
+"Migrations"
+]
+},
+{
+"id": "knowledge/architecture/deployment.md",
+"title": "Deployment",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1365,
+"words": 176,
+"status": "code",
+"excerpt": "Fact: this repository has no Docker, Forge, Envoyer, GitHub Actions, or deploy scripts.",
+"h2": [
+"What exists locally",
+"Staging / production URLs",
+"CI",
+"Mobile"
+]
+},
+{
+"id": "knowledge/architecture/design-tokens-stopgap.md",
+"title": "Design tokens \u2014 stopgap (extracted, not designed)",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 4268,
+"words": 689,
+"status": "code",
+"excerpt": "This is not a real design system. There is no Figma file, brand guideline, or token source in this repo \u2014 public/css/custom.css (5,693 lines, not ~3,700 as some docs say \u2014 recount on 2026-09-15) has zero CSS custom properties. Everything below was ex",
+"h2": [
+"The most important finding: there isn't one blue, there are three",
+"Grays: two different scales in use",
+"Other real, frequently-used values",
+"How to use this until a real design system exists"
+]
+},
+{
+"id": "knowledge/architecture/frontend.md",
+"title": "Frontend",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1734,
+"words": 231,
+"status": "code",
+"excerpt": "Must-read: stack-migration-map.md",
+"h2": [
+"Legacy stack (default)",
+"Manager Portal stack",
+"Other JS",
+"Agent rule"
+]
+},
+{
+"id": "knowledge/architecture/integrations.md",
+"title": "Integrations",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1871,
+"words": 257,
+"status": "code",
+"excerpt": "Configured or called from this repo. Keys live in env/config \u2014 never commit secrets into the Brain.",
+"h2": []
+},
+{
+"id": "knowledge/architecture/stack-migration-map.md",
+"title": "Frontend stack migration map",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 5543,
+"words": 741,
+"status": "code",
+"excerpt": "TerriTool is running two different frontend stacks at once, split by feature area, not by a gradual per-component migration. Verified 2026-09-15 by reading vite.config.js, resources/manager-portal/, and every resources/views/front/manager/*.blade.php",
+"h2": [
+"The two stacks",
+"Verified mount pattern (every Manager Portal screen)",
+"Rules for any agent touching either stack",
+"Why this exists (context, not to act on yet)"
+]
+},
+{
+"id": "knowledge/architecture/system-overview.md",
+"title": "System overview",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2086,
+"words": 248,
+"status": "code",
+"excerpt": "Evidence: ../discovery-report.md. Do not assume extra services.",
+"h2": [
+"Shape",
+"Rule: reuse v2 / Helper",
+"Boundaries",
+"Generated map"
+]
+},
+{
+"id": "knowledge/code/CODEMAP.md",
+"title": "22 \u2014 Development reference",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 3435,
+"words": 499,
+"status": "code",
+"excerpt": "For a URL \u2192 Controller@method \u2192 Blade view lookup across all 725 registered routes, see ROUTEMAP.md (generated from php artisan route:list; regenerate, don't hand-edit). This file is the feature-owner summary.",
+"h2": [
+"Conventions",
+"Controllers (feature owners)",
+"Helpers / services",
+"Hot UI files",
+"Integrations",
+"Regression checklist (one product)",
+"Other in-repo prompts"
+]
+},
+{
+"id": "knowledge/code/README.md",
+"title": "Code maps",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2076,
+"words": 244,
+"status": "code",
+"excerpt": "How the code is actually built, and how to find it \u2014 not what the product does (that is features/). Reverse-engineered from the real code on 2026-09-15; no linter/CI enforces any of it, so treat this as \"match what's here,\" not \"the rules",
+"h2": []
+},
+{
+"id": "knowledge/code/ROUTEMAP.md",
+"title": "Route map",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 82042,
+"words": 11537,
+"status": "code",
+"excerpt": "Generated 2026-09-16 by tools/routemap.py from php artisan route:list on the local checkout; each Controller@method body was scanned for view('\u2026'), JSON, redirect and download responses. Regenerate rather than hand-edit \u2014 python3 tools/routemap.py",
+"h2": [
+"Totals",
+"App (sales rep)",
+"Manager Portal",
+"Admin HQ",
+"API (token clients)",
+"MCP servers",
+"Auth",
+"Cron / Webhooks",
+"Backpack admin (vendor)",
+"Vendor / dev tooling",
+"Known limits of this map"
+]
+},
+{
+"id": "knowledge/code/bug-repro-runbook.md",
+"title": "Bug repro / verification runbook",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 5021,
+"words": 697,
+"status": "code",
+"excerpt": "TerriTool already has real prior sessions of browser-driven repro via Playwright MCP \u2014 .playwright-mcp/console-*.log in the repo root holds actual captured console output from past runs (e.g. a ReferenceError: AuthUser is not defined on /login, times",
+"h2": [
+"The loop",
+"Local environment (verified, with a known gap)",
+"Staging (when local repro isn't enough or the bug is environment-specific)",
+"What counts as \"verified,\" not just \"changed\"",
+"Open item"
+]
+},
+{
+"id": "knowledge/code/coding-conventions.md",
+"title": "Coding conventions",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 6474,
+"words": 899,
+"status": "code",
+"excerpt": "Reverse-engineered from the actual code on 2026-09-15 \u2014 not an aspirational style guide. There is no ESLint/Stylelint/PHPStan/.editorconfig in this repo (verified: none of those config files exist), so nothing here is enforced by tooling. Where the real ",
+"h2": [
+"PHP / Laravel",
+"Frontend \u2014 two separate stacks, don't mix them",
+"CSS",
+"Naming and IDs an agent will see everywhere",
+"What's still unverified"
+]
+},
+{
+"id": "knowledge/code/data-model-reference.md",
+"title": "Data model reference",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 10519,
+"words": 1298,
+"status": "code",
+"excerpt": "Superseded on 2026-09-15: MAMP's MySQL came up mid-session, so this is now built from a live SHOW TABLES / SHOW COLUMNS read of the actual territool database, not from models or the stale dump. 83 real tables exist. Row counts below are real, taken a",
+"h2": [
+"Read this first: the SQL dump in this repo is still stale \u2014 do not use it",
+"Important: this database is not exclusively TerriTool's data",
+"Verified live tables, TerriTool-relevant ones only",
+"Key column schemas (live, verified \u2014 not guessed)",
+"Relationships: mostly manual, not Eloquent",
+"Conceptual shape (now backed by live row counts)",
+"What's still not verified"
+]
+},
+{
+"id": "knowledge/code/important-files.md",
+"title": "Important files",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 3695,
+"words": 488,
+"status": "code",
+"excerpt": "Not every file. These are the files an agent actually needs for product changes.",
+"h2": [
+"Gravity wells",
+"MCP tool classes",
+"Auth / billing / CRM (open when that feature is in scope)",
+"Known gotcha files"
+]
+},
+{
+"id": "knowledge/code/patterns.md",
+"title": "Patterns (as used, not as wished)",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1569,
+"words": 235,
+"status": "code",
+"excerpt": "Details: code/coding-conventions.md.",
+"h2": [
+"PHP",
+"Frontend",
+"MCP",
+"What \u201cgood\u201d looks like in this repo",
+"Inconsistencies to tolerate"
+]
+},
+{
+"id": "knowledge/code/repository-map.md",
+"title": "Repository map",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2007,
+"words": 307,
+"status": "code",
+"excerpt": "Ignore vendor/, node_modules/, public/jqwidgets/, public/packages/, storage/logs, .playwright-mcp/ dumps unless debugging a specific session.",
+"h2": []
+},
+{
+"id": "knowledge/code/services.md",
+"title": "Services",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1932,
+"words": 243,
+"status": "code",
+"excerpt": "Laravel app/Services plus MCP tool services. Controllers still hold a lot of logic \u2014 do not assume a service exists.",
+"h2": [
+"MCP (not under `app/Services`)",
+"Helper"
+]
+},
+{
+"id": "knowledge/code/testing.md",
+"title": "Testing",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 2241,
+"words": 309,
+"status": "code",
+"excerpt": "Run from repo root:",
+"h2": [
+"What exists",
+"Tests in the repo",
+"What does not exist",
+"MCP QA (not PHPUnit)",
+"Agent rules"
+]
+},
+{
+"id": "knowledge/code/tooling-proposal.md",
+"title": "Tooling proposal \u2014 DRAFT, NOT INSTALLED",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 5447,
+"words": 686,
+"status": "code",
+"excerpt": "None of this is active. No .eslintrc, .stylelintrc, phpstan.neon, .editorconfig, or .github/workflows/* exist in the repo (verified 2026-09-15) \u2014 that's still true after writing this file. These are starting-point drafts calibrated to the *real* code",
+"h2": [
+"Why calibrated-loose, not strict",
+"`.editorconfig` (proposed)",
+"PHPStan (proposed, `phpstan.neon`, level 2 \u2014 deliberately low)",
+"ESLint (proposed, `.eslintrc.json` \u2014 legacy jQuery-aware)",
+"Stylelint (proposed, `.stylelintrc.json` \u2014 loose)",
+"CI proposal (`.github/workflows/lint.yml` \u2014 draft, not committed)",
+"Adoption plan, if you decide to proceed"
+]
+},
+{
+"id": "knowledge/codebase.md",
+"title": "Codebase",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1572,
+"words": 193,
+"status": "code",
+"excerpt": "Monolith named laravel/laravel at the repo root.",
+"h2": []
+},
+{
+"id": "knowledge/conventions.md",
+"title": "Conventions (agent-facing)",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 948,
+"words": 141,
+"status": "code",
+"excerpt": "Match the file you are in. There is no ESLint / PHPStan / EditorConfig.",
+"h2": []
+},
+{
+"id": "knowledge/database.md",
+"title": "Database",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1333,
+"words": 183,
+"status": "code",
+"excerpt": "Live schema (~83 tables, 2026-09-15): ../code/data-model-reference.md.",
+"h2": []
+},
+{
+"id": "knowledge/dependencies.md",
+"title": "Dependencies",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 1526,
+"words": 212,
+"status": "code",
+"excerpt": "Facts from composer.lock / composer.json / package.json as of the 2026-09-16 discovery pass. Do not add packages unless asked.",
+"h2": [
+"Runtime (PHP)",
+"Frontend (npm)",
+"Integrations (keys in env)"
+]
+},
+{
+"id": "knowledge/services.md",
+"title": "Services",
+"group": "knowledge",
+"kind": "engineering",
+"bytes": 765,
+"words": 103,
+"status": "code",
+"excerpt": "Most product logic is not in app/Services. Controllers + Helper own writes.",
+"h2": []
+},
+{
+"id": "learnings/README.md",
+"title": "Learning loop",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 1057,
+"words": 156,
+"status": "code",
+"excerpt": "Documentation supports execution. After a task, record what the next agent needs.",
+"h2": [
+"Successful vs failed",
+"Template (one row)",
+"Honesty"
+]
+},
+{
+"id": "learnings/failed-approaches.md",
+"title": "Failed approaches",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 1537,
+"words": 262,
+"status": "code",
+"excerpt": "Things agents keep trying that are wrong for TerriTool.",
+"h2": []
+},
+{
+"id": "learnings/gotchas.md",
+"title": "Gotchas",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 2592,
+"words": 402,
+"status": "code",
+"excerpt": "Durable traps. Add a row when you lose time to one.",
+"h2": []
+},
+{
+"id": "learnings/known-issues/03-Company-AddressBook.md",
+"title": "Company AddressBook \u2014 known issues and error messages",
+"group": "learnings",
+"kind": "ops",
+"bytes": 1540,
+"words": 223,
+"status": "derived",
+"excerpt": "Part of 03-Company-AddressBook. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the back",
+"h2": [
+"Companies and contacts"
+]
+},
+{
+"id": "learnings/known-issues/05-Find-Leads.md",
+"title": "Find Leads \u2014 known issues and error messages",
+"group": "learnings",
+"kind": "ops",
+"bytes": 1448,
+"words": 220,
+"status": "derived",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the backend retur",
+"h2": [
+"Find Leads / AI search"
+]
+},
+{
+"id": "learnings/known-issues/07-Routes.md",
+"title": "Routes \u2014 known issues and error messages",
+"group": "learnings",
+"kind": "ops",
+"bytes": 1090,
+"words": 150,
+"status": "derived",
+"excerpt": "Part of 07-Routes. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string the backend returns. ",
+"h2": [
+"Route generation"
+]
+},
+{
+"id": "learnings/known-issues/09-Contact-Enrichment-Credits.md",
+"title": "Contact Enrichment Credits \u2014 known issues and error messages",
+"group": "learnings",
+"kind": "ops",
+"bytes": 1432,
+"words": 204,
+"status": "derived",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 07-Operational-Reference/known-issues-and-error-messages.md (literal strings from the controllers, verified 2026-09-15; split 2026-09-16). Use these when you need the exact string t",
+"h2": [
+"Credits and spending"
+]
+},
+{
+"id": "learnings/limits/05-Find-Leads.md",
+"title": "Find Leads \u2014 limits",
+"group": "learnings",
+"kind": "ops",
+"bytes": 2017,
+"words": 297,
+"status": "derived",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-note",
+"h2": [
+"AI Find Leads (Google Places + Gemini pipeline)"
+]
+},
+{
+"id": "learnings/limits/07-Routes.md",
+"title": "Routes \u2014 limits",
+"group": "learnings",
+"kind": "ops",
+"bytes": 639,
+"words": 71,
+"status": "derived",
+"excerpt": "Part of 07-Routes. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-notes.md",
+"h2": [
+"Route builder"
+]
+},
+{
+"id": "learnings/limits/09-Contact-Enrichment-Credits.md",
+"title": "Contact Enrichment Credits \u2014 limits",
+"group": "learnings",
+"kind": "ops",
+"bytes": 1544,
+"words": 194,
+"status": "derived",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/",
+"h2": [
+"Contacts"
+]
+},
+{
+"id": "learnings/limits/20-MCP.md",
+"title": "MCP \u2014 limits",
+"group": "learnings",
+"kind": "ops",
+"bytes": 945,
+"words": 120,
+"status": "derived",
+"excerpt": "Part of 20-MCP. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-notes.md](.",
+"h2": [
+"MCP / catalog"
+]
+},
+{
+"id": "learnings/operational-notes.md",
+"title": "Operational notes (cross-feature)",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 5362,
+"words": 737,
+"status": "code",
+"excerpt": "What was left of the former 07-Operational-Reference/ after its per-feature sections moved beside their modules on 2026-09-16. Verified against code / the live database on 2026-09-15.",
+"h2": [
+"Where the feature-specific sections went",
+"Source note for the error-message tables",
+"System / config errors",
+"Not yet measured (flag for a real load/perf pass)",
+"Support tickets: real data pulled, but it's not usable as a customer-voice corpus",
+"Also flagged while querying this database"
+]
+},
+{
+"id": "learnings/recurring-bugs.md",
+"title": "Recurring bugs",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 1525,
+"words": 241,
+"status": "code",
+"excerpt": "From bible known-issues.md, Playwright dumps, and code comments. Not a full ticket log.",
+"h2": []
+},
+{
+"id": "learnings/successful-patterns.md",
+"title": "Successful patterns",
+"group": "learnings",
+"kind": "learnings",
+"bytes": 886,
+"words": 130,
+"status": "code",
+"excerpt": "Approaches that worked on this repo. Add a row when a loop actually succeeded.",
+"h2": []
+},
+{
+"id": "loops/README.md",
+"title": "Loops",
+"group": "loops",
+"kind": "workflow",
+"bytes": 971,
+"words": 115,
+"status": "code",
+"excerpt": "Loops are repeatable engineering processes. Skills are the steps inside them. Protocol: execution-protocol.md.",
+"h2": []
+},
+{
+"id": "loops/bug-loop.md",
+"title": "Bug loop",
+"group": "loops",
+"kind": "workflow",
+"bytes": 900,
+"words": 127,
+"status": "code",
+"excerpt": "Bug report \u2192 Expected behavior \u2192 Reproduce \u2192 Gather evidence \u2192 Trace code \u2192 Root cause \u2192 Fix \u2192 Regression test \u2192 Playwright verification \u2192 Review \u2192 PR \u2192 CI \u2192 Document learning",
+"h2": []
+},
+{
+"id": "loops/execution-protocol.md",
+"title": "Engineering execution protocol",
+"group": "loops",
+"kind": "workflow",
+"bytes": 1907,
+"words": 270,
+"status": "code",
+"excerpt": "For every non-trivial task:",
+"h2": [
+"Step 1 \u2014 Understand",
+"Step 2 \u2014 Explore",
+"Step 3 \u2014 Plan",
+"Step 4 \u2014 Execute",
+"Step 5 \u2014 Test",
+"Step 6 \u2014 Verify",
+"Step 7 \u2014 Review",
+"Step 8 \u2014 Finish"
+]
+},
+{
+"id": "loops/feature-loop.md",
+"title": "Feature loop",
+"group": "loops",
+"kind": "workflow",
+"bytes": 1215,
+"words": 155,
+"status": "code",
+"excerpt": "Requirement \u2192 Understand product \u2192 Identify use case \u2192 Identify UI flow \u2192 Trace code \u2192 Plan \u2192 Implement \u2192 Unit/integration tests \u2192 Playwright/UI verification \u2192 Review \u2192 PR \u2192 CI \u2192 Product verification \u2192 Update Engineering Brain",
+"h2": []
+},
+{
+"id": "loops/pr-loop.md",
+"title": "PR loop (Codex)",
+"group": "loops",
+"kind": "workflow",
+"bytes": 2095,
+"words": 338,
+"status": "code",
+"excerpt": "Codex is the engineering delivery / review layer. Claude implements and verifies. Codex reviews, packages the PR, and watches CI when CI exists.",
+"h2": [
+"Codex responsibilities",
+"Claude must hand Codex",
+"Review checklist (Codex)",
+"Git hygiene"
+]
+},
+{
+"id": "loops/refactoring-loop.md",
+"title": "Refactoring loop",
+"group": "loops",
+"kind": "workflow",
+"bytes": 817,
+"words": 109,
+"status": "code",
+"excerpt": "Constraints: ../product/constraints.md, ../knowledge/conventions.md.",
+"h2": [
+"Rules for this codebase"
+]
+},
+{
+"id": "loops/release-loop.md",
+"title": "Release loop",
+"group": "loops",
+"kind": "workflow",
+"bytes": 1019,
+"words": 150,
+"status": "code",
+"excerpt": "Documented because the prompt asked for it. The repo has no installable release pipeline. Treat this as a checklist for humans until deploy/CI is added.",
+"h2": []
+},
+{
+"id": "loops/ui-loop.md",
+"title": "UI loop",
+"group": "loops",
+"kind": "workflow",
+"bytes": 1253,
+"words": 162,
+"status": "code",
+"excerpt": "Prefer source code + actual browser over source code only.",
+"h2": [
+"Capture for each important flow",
+"Environment failures (not product bugs)"
+]
+},
+{
+"id": "mcp/MODULE.md",
+"title": "20 \u2014 MCP and voice (Claude / Cursor / ChatGPT / voice)",
+"group": "mcp",
+"kind": "contract",
+"bytes": 5114,
+"words": 645,
+"status": "derived",
+"excerpt": "The AI-agent surface of TerriTool. An agent (Claude, Cursor, ChatGPT, the voice client, or an in-app custom MCP connection) calls the same actions as the browser and the phone \u2014 same companies, credits, routes, lists, publish rules \u2014 through MCP tools. Age",
+"h2": [
+"Purpose",
+"Who",
+"The three servers",
+"Credit and confirm rules (same as every other client)",
+"Files in this feature",
+"Rules for new work",
+"Related"
+]
+},
+{
+"id": "mcp/api-surfaces.md",
+"title": "TerriTool surfaces and API contract",
+"group": "mcp",
+"kind": "contract",
+"bytes": 9019,
+"words": 1367,
+"status": "derived",
+"excerpt": "Load this with the Bible. It is not an OpenAPI spec. Agents must use MCP tools (or the matching voice catalog action). Do not call PHP, SQL, curl, or /api/v2 directly.",
+"h2": [
+"1. Surfaces (how a client talks to TerriTool)",
+"2. Customer MCP action \u2192 v2 name",
+"3. Collisions (never mix these)",
+"4. Agent-facing errors (speak these, don\u2019t invent a workaround)",
+"5. Do not call (poison / not a user action)",
+"6. Inbound webhooks (system, not agent tools)",
+"7. Field-day extras (same data, extra v2 names)",
+"8. Copy that must not override the Bible",
+"Related"
+]
+},
+{
+"id": "mcp/conversations.md",
+"title": "Example MCP / voice conversations",
+"group": "mcp",
+"kind": "contract",
+"bytes": 9200,
+"words": 1414,
+"status": "derived",
+"excerpt": "Multi-turn transcripts showing how the rules in api-surfaces.md, example-utterances.md, and glossary.md play out turn by turn. Every tool name, credit cost, and error string below is take",
+"h2": [
+"1. Happy path: find, save, route (the core loop)",
+"2. Insufficient credits \u2014 Sales Agent",
+"3. Insufficient credits \u2014 Business Sales Agent",
+"4. Collision: new lead vs. already-saved account",
+"5. Buying contacts, small batch (under the confirm threshold)",
+"6. Buying contacts, large batch (over the confirm threshold)",
+"7. Website missing for Find Contacts",
+"8. Route with too few companies",
+"9. \"What's next\" with no active route",
+"10. Resuming an interrupted search vs. starting over",
+"11. Out-of-scope request: Admin/HQ via customer MCP",
+"12. MCP Chat connector not connected (in-app custom MCP, not this agent)"
+]
+},
+{
+"id": "mcp/example-utterances.md",
+"title": "Example utterances \u2192 catalog actions",
+"group": "mcp",
+"kind": "contract",
+"bytes": 3106,
+"words": 543,
+"status": "derived",
+"excerpt": "Voice and chat should map to one catalog id, then stop. Confirm writes and paid actions. Full surface/auth/error rules: api-surfaces.md.",
+"h2": [
+"Find vs saved vs save",
+"Contacts",
+"Status, notes, activities",
+"Routes and lists",
+"Session words (not actions)",
+"Paid confirm (required)",
+"Unsupported on voice (do not fake an API)"
+]
+},
+{
+"id": "mcp/limits.md",
+"title": "MCP \u2014 limits",
+"group": "mcp",
+"kind": "contract",
+"bytes": 945,
+"words": 120,
+"status": "derived",
+"excerpt": "Part of 20-MCP. Verbatim from the former 07-Operational-Reference/limits-and-performance.md (verified against code 2026-09-15; split 2026-09-16). Real numbers from code, not estimates. Other features' limits: [engineering/operational-notes.md](.",
+"h2": [
+"MCP / catalog"
+]
+},
+{
+"id": "mcp/use-cases.md",
+"title": "MCP \u2014 use cases",
+"group": "mcp",
+"kind": "contract",
+"bytes": 1710,
+"words": 246,
+"status": "derived",
+"excerpt": "Part of 20-MCP. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this module yet; evide",
+"h2": [
+"15. Sales-rep MCP (Claude / ChatGPT)"
+]
+},
+{
+"id": "operating/claude.md",
+"title": "Claude operating model",
+"group": "operating",
+"kind": "workflow",
+"bytes": 1964,
+"words": 261,
+"status": "code",
+"excerpt": "Claude is the primary:",
+"h2": [
+"Evidence ranking",
+"MCP usage",
+"Hand off to Codex",
+"Knowledge maintenance"
+]
+},
+{
+"id": "operating/codex.md",
+"title": "Codex operating model",
+"group": "operating",
+"kind": "workflow",
+"bytes": 947,
+"words": 151,
+"status": "code",
+"excerpt": "Codex is the PR / review / delivery agent, not the product-explorer.",
+"h2": [
+"Role",
+"Inputs Codex should demand",
+"Outputs"
+]
+},
+{
+"id": "product/00-Product-README.md",
+"title": "00 \u2014 Product",
+"group": "product",
+"kind": "product",
+"bytes": 1305,
+"words": 166,
+"status": "carried",
+"excerpt": "What TerriTool is, vocabulary, roles, and the product-level (cross-feature) journeys. Read before any feature module.",
+"h2": []
+},
+{
+"id": "product/FLOWS.md",
+"title": "Product-level flows",
+"group": "product",
+"kind": "flows",
+"bytes": 4801,
+"words": 589,
+"status": "carried",
+"excerpt": "End-to-end map, role split and the use-case overview diagrams. Feature-level flows live beside each module in features/<module>/flows.md; the index is in features/README.md and ../ui-flows/README.md.",
+"h2": [
+"End-to-end product map",
+"Role split after onboarding",
+"TerriTool actors",
+"Field-rep use case catalog",
+"Field-rep happy path use cases (captured 15 Sep 2026)",
+"Rules these diagrams encode"
+]
+},
+{
+"id": "product/TerriTool_OverView.md",
+"title": "TerriTool \u2014 Developer Onboarding Guide",
+"group": "product",
+"kind": "product",
+"bytes": 12369,
+"words": 1799,
+"status": "carried",
+"excerpt": "TerriTool is a field sales territory management platform built for sales reps, business clients, and their teams. It helps sales professionals manage territories, discover leads, plan routes, and track companies and contacts \u2014 all from a web dashboard or c",
+"h2": [
+"1. What TerriTool Is",
+"2. What TerriTool Does",
+"3. How the Web App Works",
+"4. Overall Code Structure"
+]
+},
+{
+"id": "product/business-rules.md",
+"title": "Business rules",
+"group": "product",
+"kind": "product",
+"bytes": 2502,
+"words": 400,
+"status": "carried",
+"excerpt": "Rules that must not silently change. Feature details live in features/*/MODULE.md.",
+"h2": [
+"One product",
+"Credits",
+"Wallets",
+"Access",
+"Routes vs lists",
+"Writes that are not interchangeable",
+"Manager vs rep"
+]
+},
+{
+"id": "product/concepts.md",
+"title": "Core concepts",
+"group": "product",
+"kind": "product",
+"bytes": 3233,
+"words": 521,
+"status": "carried",
+"excerpt": "Copied from the product glossary and overview. Implementation pointers stay inside this Brain.",
+"h2": [
+"What the objects are",
+"Route lifecycle (product)",
+"Find Leads vs add company",
+"Find vs add vs buy contacts",
+"Labels",
+"Four different writes (do not mix)"
+]
+},
+{
+"id": "product/constraints.md",
+"title": "Constraints",
+"group": "product",
+"kind": "product",
+"bytes": 1532,
+"words": 248,
+"status": "carried",
+"excerpt": "Hard limits on what an engineering change may do.",
+"h2": [
+"Stack",
+"Frontend",
+"Data",
+"Product",
+"Secrets / PII",
+"Tooling honesty"
+]
+},
+{
+"id": "product/glossary.md",
+"title": "TerriTool glossary",
+"group": "product",
+"kind": "product",
+"bytes": 4424,
+"words": 742,
+"status": "carried",
+"excerpt": "Use these words the way the product uses them. Do not invent synonyms that change the action.",
+"h2": [
+"People and roles",
+"Core objects",
+"Company labels",
+"Route lifecycle",
+"Find Leads",
+"Find vs add vs buy contacts",
+"Credits and billing",
+"CRM vs MCP",
+"Other"
+]
+},
+{
+"id": "product/overview.md",
+"title": "00 \u2014 TerriTool Overview",
+"group": "product",
+"kind": "product",
+"bytes": 2991,
+"words": 470,
+"status": "carried",
+"excerpt": "End-to-end journeys across modules: FLOWS.md. UI flow index: ../ui-flows/README.md. Use cases: use-cases-overview.md. Feature modules: features/README.md.",
+"h2": [
+"What TerriTool is",
+"Roles and home after login",
+"Navigation a rep sees (subscription active)",
+"Core objects (shared)",
+"Subscription and credits (shared rules)",
+"Compatibility"
+]
+},
+{
+"id": "product/personas.md",
+"title": "TerriTool roles",
+"group": "product",
+"kind": "product",
+"bytes": 2465,
+"words": 458,
+"status": "carried",
+"excerpt": "One product, four roles. After login they land on different homes; credits and CRM still follow these rules.",
+"h2": [
+"Landing",
+"What each role can do",
+"Credit ownership",
+"Customer MCP / voice",
+"Do not mix"
+]
+},
+{
+"id": "product/roles.md",
+"title": "TerriTool roles",
+"group": "product",
+"kind": "product",
+"bytes": 2465,
+"words": 458,
+"status": "carried",
+"excerpt": "One product, four roles. After login they land on different homes; credits and CRM still follow these rules.",
+"h2": [
+"Landing",
+"What each role can do",
+"Credit ownership",
+"Customer MCP / voice",
+"Do not mix"
+]
+},
+{
+"id": "product/terminology.md",
+"title": "Terminology",
+"group": "product",
+"kind": "product",
+"bytes": 466,
+"words": 70,
+"status": "carried",
+"excerpt": "Canonical product language: glossary.md.",
+"h2": []
+},
+{
+"id": "product/use-cases-overview.md",
+"title": "TerriTool use cases",
+"group": "product",
+"kind": "product",
+"bytes": 4362,
+"words": 412,
+"status": "carried",
+"excerpt": "Actors, preconditions, main flow, alternate paths, and exceptions for every product flow. Evidence lives beside each feature (features/<module>/evidence/) plus routes/web.php. The per-feature use cases are linked in the table below.",
+"h2": [
+"Actors",
+"Global chrome (every authenticated page)",
+"Use cases by feature",
+"Cross-flow decision (happy path captured in this Brain)"
+]
+},
+{
+"id": "skills/README.md",
+"title": "Skills",
+"group": "skills",
+"kind": "workflow",
+"bytes": 844,
+"words": 100,
+"status": "code",
+"excerpt": "Base skills are single capabilities. Loops compose them (../loops/README.md). Cursor loads .cursor/skills/territool-* automatically; these markdown files are the detailed procedures.",
+"h2": []
+},
+{
+"id": "skills/debug.md",
+"title": "Skill: Debug",
+"group": "skills",
+"kind": "workflow",
+"bytes": 838,
+"words": 116,
+"status": "code",
+"excerpt": "Workflow:",
+"h2": [
+"TerriTool specifics"
+]
+},
+{
+"id": "skills/implement.md",
+"title": "Skill: Implement",
+"group": "skills",
+"kind": "workflow",
+"bytes": 950,
+"words": 159,
+"status": "code",
+"excerpt": "Workflow:",
+"h2": [
+"Plan must list",
+"Implementation rules",
+"After code"
+]
+},
+{
+"id": "skills/investigate.md",
+"title": "Skill: Investigate",
+"group": "skills",
+"kind": "workflow",
+"bytes": 941,
+"words": 120,
+"status": "code",
+"excerpt": "Given a problem, do not start by modifying code.",
+"h2": [
+"Steps"
+]
+},
+{
+"id": "skills/test.md",
+"title": "Skill: Test",
+"group": "skills",
+"kind": "workflow",
+"bytes": 1066,
+"words": 166,
+"status": "code",
+"excerpt": "Relevant today mainly for app/Services/Manager/*. Full suite includes ExampleTest, which needs MySQL (login layout queries user_packages).",
+"h2": [
+"Automated (exists)",
+"Automated (does not exist)",
+"What to add (when you write tests)",
+"Mapping"
+]
+},
+{
+"id": "skills/trace-feature.md",
+"title": "Skill: Trace feature",
+"group": "skills",
+"kind": "workflow",
+"bytes": 1422,
+"words": 207,
+"status": "code",
+"excerpt": "Trace requested behavior:",
+"h2": [
+"Output",
+"Procedure",
+"TerriTool shortcuts"
+]
+},
+{
+"id": "skills/understand-repo.md",
+"title": "Skill: Understand repository",
+"group": "skills",
+"kind": "workflow",
+"bytes": 1251,
+"words": 167,
+"status": "code",
+"excerpt": "1. Read ../README.md and ../knowledge/architecture.md if this is a new session. Discovery dump: ../discovery-report.md. 2. Investigate before modifying. 3. Cite actual files. U",
+"h2": [
+"Input",
+"Output",
+"Rules",
+"Procedure"
+]
+},
+{
+"id": "skills/verify-ui.md",
+"title": "Skill: Verify UI",
+"group": "skills",
+"kind": "workflow",
+"bytes": 3717,
+"words": 545,
+"status": "code",
+"excerpt": "Static reading is not enough for UI or credit-visible behavior. Executable understanding means running the app.",
+"h2": [
+"Distinguish two Playwrights",
+"Workflow",
+"How an agent executes major workflows",
+"Environment failures (not product bugs)",
+"Local vs staging",
+"Recommended integration (not done in this phase)",
+"Sentry"
+]
+},
+{
+"id": "tools/README.md",
+"title": "Tool layer",
+"group": "tools",
+"kind": "engineering",
+"bytes": 1507,
+"words": 219,
+"status": "code",
+"excerpt": "The Brain is useless if agents do not run tools. Prefer the real environment.",
+"h2": [
+"Playwright MCP",
+"Git / GitHub",
+"Terminal",
+"Product MCPs (not in `.cursor/mcp.json`)",
+"Cursor exit"
+]
+},
+{
+"id": "ui-flows/01-Authentication-Onboarding.md",
+"title": "Authentication Onboarding \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1527,
+"words": 182,
+"status": "derived",
+"excerpt": "Part of 01-Authentication-Onboarding. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Authentication",
+"Onboarding"
+]
+},
+{
+"id": "ui-flows/03-Company-AddressBook.md",
+"title": "Company AddressBook \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1577,
+"words": 207,
+"status": "derived",
+"excerpt": "Part of 03-Company-AddressBook. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Company profile",
+"Address Book filter"
+]
+},
+{
+"id": "ui-flows/05-Find-Leads.md",
+"title": "Find Leads \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1443,
+"words": 192,
+"status": "derived",
+"excerpt": "Part of 05-Find-Leads. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"AI Find Leads"
+]
+},
+{
+"id": "ui-flows/07-Routes.md",
+"title": "Routes \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1706,
+"words": 233,
+"status": "derived",
+"excerpt": "Part of 07-Routes. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Create and publish a route",
+"Work a published route"
+]
+},
+{
+"id": "ui-flows/08-Lists.md",
+"title": "Lists \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 822,
+"words": 107,
+"status": "derived",
+"excerpt": "Part of 08-Lists. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Lists"
+]
+},
+{
+"id": "ui-flows/09-Contact-Enrichment-Credits.md",
+"title": "Contact Enrichment Credits \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1016,
+"words": 122,
+"status": "derived",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Credit spend vs free use cases"
+]
+},
+{
+"id": "ui-flows/10-Bulk-Upload.md",
+"title": "Bulk Upload \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 752,
+"words": 100,
+"status": "derived",
+"excerpt": "Part of 10-Bulk-Upload. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Upload Excel / CSV"
+]
+},
+{
+"id": "ui-flows/12-Subscription-Payments.md",
+"title": "Subscription Payments \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 865,
+"words": 100,
+"status": "derived",
+"excerpt": "Part of 12-Subscription-Payments. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Billing"
+]
+},
+{
+"id": "ui-flows/13-CRM-Integrations.md",
+"title": "CRM Integrations \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 907,
+"words": 124,
+"status": "derived",
+"excerpt": "Part of 13-CRM-Integrations. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Settings / MCP / CRM"
+]
+},
+{
+"id": "ui-flows/15-Support-Notifications.md",
+"title": "Support Notifications \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 554,
+"words": 65,
+"status": "derived",
+"excerpt": "Part of 15-Support-Notifications. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Support"
+]
+},
+{
+"id": "ui-flows/16-Manager-Portal.md",
+"title": "Manager Portal \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 728,
+"words": 90,
+"status": "derived",
+"excerpt": "Part of 16-Manager-Portal. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"Manager portal"
+]
+},
+{
+"id": "ui-flows/20-MCP.md",
+"title": "MCP \u2014 flows",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 1827,
+"words": 201,
+"status": "derived",
+"excerpt": "Part of 20-MCP. Source mermaid in flows/mmd/, rendered PNG in flows/png/ (re-render with mermaid is inlined in this file). Product-level map: FLOWS.md.",
+"h2": [
+"MCP agent lead-to-route",
+"MCP agent use cases"
+]
+},
+{
+"id": "ui-flows/README.md",
+"title": "UI flow inventory",
+"group": "ui-flows",
+"kind": "flows",
+"bytes": 5360,
+"words": 767,
+"status": "derived",
+"excerpt": "Diagrams: product/FLOWS.md and features/*/flows.md (also copied under this folder). This page is the executable map: starting point, states, APIs, how an agent verifies.",
+"h2": [
+"End-to-end (actual, from FLOWS.md)",
+"FLOW-AUTH",
+"FLOW-ONB {#flow-onb}",
+"FLOW-HOME",
+"FLOW-FIND-LEADS {#flow-find-leads}",
+"FLOW-AB (Address Book)",
+"FLOW-CONTACTS",
+"FLOW-LIST",
+"FLOW-ROUTE {#flow-route}",
+"FLOW-FIELD (visit day)",
+"FLOW-UPLOAD",
+"FLOW-BILLING"
+]
+},
+{
+"id": "use-cases/01-Authentication-Onboarding.md",
+"title": "Authentication Onboarding \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 2398,
+"words": 368,
+"status": "derived",
+"excerpt": "Part of 01-Authentication-Onboarding. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md ",
+"h2": [
+"1. Authentication",
+"2. Onboarding"
+]
+},
+{
+"id": "use-cases/02-Dashboard.md",
+"title": "Dashboard \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1026,
+"words": 135,
+"status": "derived",
+"excerpt": "Part of 02-Dashboard. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file ",
+"h2": [
+"3. Home dashboard"
+]
+},
+{
+"id": "use-cases/03-Company-AddressBook.md",
+"title": "Company AddressBook \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 2497,
+"words": 326,
+"status": "derived",
+"excerpt": "Part of 03-Company-AddressBook. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where ",
+"h2": [
+"7. Address Book & companies",
+"9. Activities / notes"
+]
+},
+{
+"id": "use-cases/04-Contacts.md",
+"title": "Contacts \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 961,
+"words": 98,
+"status": "derived",
+"excerpt": "Part of 04-Contacts. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file e",
+"h2": []
+},
+{
+"id": "use-cases/05-Find-Leads.md",
+"title": "Find Leads \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 2584,
+"words": 379,
+"status": "derived",
+"excerpt": "Part of 05-Find-Leads. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file",
+"h2": [
+"4. AI Find Leads"
+]
+},
+{
+"id": "use-cases/06-Recently-Added.md",
+"title": "Recently Added \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 639,
+"words": 61,
+"status": "derived",
+"excerpt": "Part of 06-Recently-Added. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that ",
+"h2": []
+},
+{
+"id": "use-cases/07-Routes.md",
+"title": "Routes \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 3085,
+"words": 459,
+"status": "derived",
+"excerpt": "Part of 07-Routes. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file exi",
+"h2": [
+"5. Routes"
+]
+},
+{
+"id": "use-cases/08-Lists.md",
+"title": "Lists \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1609,
+"words": 237,
+"status": "derived",
+"excerpt": "Part of 08-Lists. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file exis",
+"h2": [
+"6. Lists"
+]
+},
+{
+"id": "use-cases/09-Contact-Enrichment-Credits.md",
+"title": "Contact Enrichment Credits \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1116,
+"words": 131,
+"status": "derived",
+"excerpt": "Part of 09-Contact-Enrichment-Credits. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for",
+"h2": [
+"8. Contacts"
+]
+},
+{
+"id": "use-cases/10-Bulk-Upload.md",
+"title": "Bulk Upload \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 826,
+"words": 90,
+"status": "derived",
+"excerpt": "Part of 10-Bulk-Upload. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this module ye",
+"h2": [
+"13. Upload Excel / CSV"
+]
+},
+{
+"id": "use-cases/12-Subscription-Payments.md",
+"title": "Subscription Payments \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1038,
+"words": 122,
+"status": "derived",
+"excerpt": "Part of 12-Subscription-Payments. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md wher",
+"h2": [
+"11. Subscription & credits"
+]
+},
+{
+"id": "use-cases/13-CRM-Integrations.md",
+"title": "CRM Integrations \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1140,
+"words": 144,
+"status": "derived",
+"excerpt": "Part of 13-CRM-Integrations. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where tha",
+"h2": [
+"10. Settings, CRM, MCP"
+]
+},
+{
+"id": "use-cases/14-Settings-Profile.md",
+"title": "Settings Profile \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 797,
+"words": 80,
+"status": "derived",
+"excerpt": "Part of 14-Settings-Profile. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this modu",
+"h2": []
+},
+{
+"id": "use-cases/15-Support-Notifications.md",
+"title": "Support Notifications \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 605,
+"words": 67,
+"status": "derived",
+"excerpt": "Part of 15-Support-Notifications. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md wher",
+"h2": [
+"12. Support"
+]
+},
+{
+"id": "use-cases/16-Manager-Portal.md",
+"title": "Manager Portal \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 910,
+"words": 103,
+"status": "derived",
+"excerpt": "Part of 16-Manager-Portal. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that ",
+"h2": [
+"14. Manager portal"
+]
+},
+{
+"id": "use-cases/17-Admin-HQ.md",
+"title": "Admin HQ \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 3347,
+"words": 399,
+"status": "derived",
+"excerpt": "Part of 17-Admin-HQ. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. Evidence times refer to evidence.md where that file e",
+"h2": [
+"16. Admin (back office)"
+]
+},
+{
+"id": "use-cases/20-MCP.md",
+"title": "MCP \u2014 use cases",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1710,
+"words": 246,
+"status": "derived",
+"excerpt": "Part of 20-MCP. Verbatim from the former 03-Use-Cases/use-cases.md (split 2026-09-16). Actors and global chrome: use-cases-overview.md. No feature-specific screenshots are catalogued for this module yet; evide",
+"h2": [
+"15. Sales-rep MCP (Claude / ChatGPT)"
+]
+},
+{
+"id": "use-cases/README.md",
+"title": "Use case inventory",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 5718,
+"words": 855,
+"status": "derived",
+"excerpt": "Canonical IDs and prose: product/use-cases-overview.md and each features/*/use-cases.md.",
+"h2": [
+"How to use",
+"Index",
+"Template (for new UCs)"
+]
+},
+{
+"id": "use-cases/TEMPLATE.md",
+"title": "Use case template",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1290,
+"words": 202,
+"status": "derived",
+"excerpt": "Existing IDs are canonical (UC-LEAD-01, \u2026). Do not invent UC-001. New paths get the next ID in that family.",
+"h2": []
+},
+{
+"id": "use-cases/UC-CT-buy.md",
+"title": "UC-CT \u2014 Buy contacts (engineering trace)",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1952,
+"words": 276,
+"status": "derived",
+"excerpt": "Product IDs: UC-CT-01, UC-CT-02. Prose: use-cases/09-Contact-Enrichment-Credits.md. UI flow: FLOW-CONTACTS.",
+"h2": [
+"User Goal",
+"Preconditions",
+"Happy Path",
+"Alternative Paths",
+"Failure Modes",
+"Expected Result",
+"UI",
+"API",
+"Code",
+"Tests",
+"Verification"
+]
+},
+{
+"id": "use-cases/UC-LEAD-save.md",
+"title": "UC-LEAD \u2014 Save AI leads (engineering trace)",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 3429,
+"words": 469,
+"status": "derived",
+"excerpt": "Product IDs: UC-LEAD-* (save path). Full prose: use-cases/05-Find-Leads.md. UI flow: FLOW-FIND-LEADS.",
+"h2": [
+"User Goal",
+"Preconditions",
+"Happy Path",
+"Alternative Paths",
+"Failure Modes",
+"Expected Result",
+"UI",
+"API",
+"Code",
+"Tests",
+"Verification"
+]
+},
+{
+"id": "use-cases/UC-MCP-route.md",
+"title": "UC-MCP \u2014 Create a published route from tools (engineering trace)",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 1819,
+"words": 247,
+"status": "derived",
+"excerpt": "Product: use-cases/20-MCP.md + api-surfaces.md. UI flow: FLOW-MCP.",
+"h2": [
+"User Goal",
+"Preconditions",
+"Happy Path",
+"Alternative Paths",
+"Failure Modes",
+"Expected Result",
+"UI",
+"API",
+"Code",
+"Tests",
+"Verification"
+]
+},
+{
+"id": "use-cases/UC-MGR-dashboard.md",
+"title": "UC-MGR \u2014 Manager dashboard (engineering trace)",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 2008,
+"words": 235,
+"status": "derived",
+"excerpt": "Product IDs: UC-MGR-*. Prose: use-cases/16-Manager-Portal.md. UI flow: FLOW-MANAGER.",
+"h2": [
+"User Goal",
+"Preconditions",
+"Happy Path",
+"Alternative Paths",
+"Failure Modes",
+"Expected Result",
+"UI",
+"API",
+"Code",
+"Tests",
+"Verification"
+]
+},
+{
+"id": "use-cases/UC-RTE-create.md",
+"title": "UC-RTE \u2014 Create and publish a route (engineering trace)",
+"group": "use-cases",
+"kind": "use-cases",
+"bytes": 2016,
+"words": 263,
+"status": "derived",
+"excerpt": "Product IDs: UC-RTE-*. Prose: use-cases/07-Routes.md. UI flow: FLOW-ROUTE.",
+"h2": [
+"User Goal",
+"Preconditions",
+"Happy Path (web)",
+"Alternative Paths",
+"Failure Modes",
+"Expected Result",
+"UI",
+"API",
+"Code",
+"Tests",
+"Verification"
+]
+},
+{
+"id": "validation/README.md",
+"title": "Validation \u2014 three real engineering tasks",
+"group": "validation",
+"kind": "engineering",
+"bytes": 6852,
+"words": 902,
+"status": "code",
+"excerpt": "Ran 2026-09-16 against this Brain + the live repo. Local app servers were down. Playwright MCP browser profile was locked (Browser is already in use). Staging login was reachable.",
+"h2": [
+"Task A \u2014 Small feature",
+"Task B \u2014 Real bug",
+"Task C \u2014 UI workflow",
+"Score",
+"Task D \u2014 Wire execution (2026-09-16, later)"
+]
+}
+],
+"edges": [
+{
+"source": "AGENTS.md",
+"target": "README.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/execution-protocol.md"
+},
+{
+"source": "AGENTS.md",
+"target": "use-cases/README.md"
+},
+{
+"source": "AGENTS.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "AGENTS.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "AGENTS.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "AGENTS.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "AGENTS.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "AGENTS.md",
+"target": "learnings/README.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/feature-loop.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/bug-loop.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/refactoring-loop.md"
+},
+{
+"source": "AGENTS.md",
+"target": "loops/release-loop.md"
+},
+{
+"source": "README.md",
+"target": "AGENTS.md"
+},
+{
+"source": "README.md",
+"target": "loops/execution-protocol.md"
+},
+{
+"source": "README.md",
+"target": "discovery-report.md"
+},
+{
+"source": "README.md",
+"target": "evidence/README.md"
+},
+{
+"source": "README.md",
+"target": "product/overview.md"
+},
+{
+"source": "README.md",
+"target": "product/glossary.md"
+},
+{
+"source": "README.md",
+"target": "product/roles.md"
+},
+{
+"source": "README.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "README.md",
+"target": "features/README.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/system-overview.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/codebase.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "README.md",
+"target": "use-cases/README.md"
+},
+{
+"source": "README.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "README.md",
+"target": "loops/README.md"
+},
+{
+"source": "README.md",
+"target": "product/business-rules.md"
+},
+{
+"source": "README.md",
+"target": "learnings/gotchas.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/README.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/frontend.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/stack-migration-map.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/backend.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/database.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/authentication.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/integrations.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/architecture/deployment.md"
+},
+{
+"source": "README.md",
+"target": "product/constraints.md"
+},
+{
+"source": "README.md",
+"target": "product/concepts.md"
+},
+{
+"source": "README.md",
+"target": "product/terminology.md"
+},
+{
+"source": "README.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "README.md",
+"target": "product/TerriTool_OverView.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/repository-map.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/important-files.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/services.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/patterns.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/testing.md"
+},
+{
+"source": "README.md",
+"target": "knowledge/code/bug-repro-runbook.md"
+},
+{
+"source": "README.md",
+"target": "skills/understand-repo.md"
+},
+{
+"source": "README.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "README.md",
+"target": "skills/investigate.md"
+},
+{
+"source": "README.md",
+"target": "skills/debug.md"
+},
+{
+"source": "README.md",
+"target": "skills/implement.md"
+},
+{
+"source": "README.md",
+"target": "skills/test.md"
+},
+{
+"source": "README.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "README.md",
+"target": "loops/feature-loop.md"
+},
+{
+"source": "README.md",
+"target": "loops/bug-loop.md"
+},
+{
+"source": "README.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "README.md",
+"target": "loops/refactoring-loop.md"
+},
+{
+"source": "README.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "README.md",
+"target": "loops/release-loop.md"
+},
+{
+"source": "README.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "README.md",
+"target": "tools/README.md"
+},
+{
+"source": "README.md",
+"target": "cursor-exit.md"
+},
+{
+"source": "README.md",
+"target": "learnings/README.md"
+},
+{
+"source": "README.md",
+"target": "learnings/successful-patterns.md"
+},
+{
+"source": "README.md",
+"target": "learnings/recurring-bugs.md"
+},
+{
+"source": "README.md",
+"target": "learnings/failed-approaches.md"
+},
+{
+"source": "README.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "README.md",
+"target": "decisions/README.md"
+},
+{
+"source": "README.md",
+"target": "operating/claude.md"
+},
+{
+"source": "README.md",
+"target": "operating/codex.md"
+},
+{
+"source": "README.md",
+"target": "validation/README.md"
+},
+{
+"source": "cursor-exit.md",
+"target": "AGENTS.md"
+},
+{
+"source": "cursor-exit.md",
+"target": "knowledge/architecture/integrations.md"
+},
+{
+"source": "cursor-exit.md",
+"target": "operating/codex.md"
+},
+{
+"source": "cursor-exit.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "discovery-report.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "discovery-report.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "evidence/README.md",
+"target": "evidence/catalog-unassigned.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/21-Business-Team/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/01-Authentication-Onboarding/use-cases.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/01-Authentication-Onboarding/flows.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "features/01-Authentication-Onboarding/evidence.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/evidence.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/evidence.md",
+"target": "features/01-Authentication-Onboarding/use-cases.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/flows.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/use-cases.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/01-Authentication-Onboarding/use-cases.md",
+"target": "features/01-Authentication-Onboarding/evidence.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/02-Dashboard/use-cases.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/02-Dashboard/evidence.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/02-Dashboard/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/02-Dashboard/evidence.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/evidence.md",
+"target": "features/02-Dashboard/use-cases.md"
+},
+{
+"source": "features/02-Dashboard/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/02-Dashboard/use-cases.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/02-Dashboard/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/02-Dashboard/use-cases.md",
+"target": "features/02-Dashboard/evidence.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/03-Company-AddressBook/flows.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/03-Company-AddressBook/evidence.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/03-Company-AddressBook/known-issues.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/03-Company-AddressBook/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/03-Company-AddressBook/evidence.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/evidence.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/03-Company-AddressBook/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/03-Company-AddressBook/flows.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/03-Company-AddressBook/known-issues.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/known-issues.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "features/03-Company-AddressBook/evidence.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/03-Company-AddressBook/use-cases.md",
+"target": "features/09-Contact-Enrichment-Credits/use-cases.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/04-Contacts/evidence.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/04-Contacts/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/04-Contacts/evidence.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/04-Contacts/evidence.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/04-Contacts/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "features/04-Contacts/evidence.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "features/09-Contact-Enrichment-Credits/use-cases.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/04-Contacts/use-cases.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/05-Find-Leads/use-cases.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/05-Find-Leads/flows.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/05-Find-Leads/evidence.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/05-Find-Leads/limits.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/05-Find-Leads/known-issues.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/05-Find-Leads/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/05-Find-Leads/evidence.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/evidence.md",
+"target": "features/05-Find-Leads/use-cases.md"
+},
+{
+"source": "features/05-Find-Leads/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/05-Find-Leads/flows.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/05-Find-Leads/known-issues.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/known-issues.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/05-Find-Leads/limits.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/limits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/05-Find-Leads/use-cases.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/05-Find-Leads/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/05-Find-Leads/use-cases.md",
+"target": "features/05-Find-Leads/evidence.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/06-Recently-Added/evidence.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/06-Recently-Added/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/06-Recently-Added/evidence.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/evidence.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "features/06-Recently-Added/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/06-Recently-Added/use-cases.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/06-Recently-Added/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/06-Recently-Added/use-cases.md",
+"target": "features/06-Recently-Added/evidence.md"
+},
+{
+"source": "features/06-Recently-Added/use-cases.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/06-Recently-Added/use-cases.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/07-Routes/use-cases.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/07-Routes/flows.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/07-Routes/evidence.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/07-Routes/limits.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/07-Routes/known-issues.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/07-Routes/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/07-Routes/evidence.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/07-Routes/evidence.md",
+"target": "features/07-Routes/use-cases.md"
+},
+{
+"source": "features/07-Routes/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/07-Routes/flows.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/07-Routes/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/07-Routes/known-issues.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/07-Routes/known-issues.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/07-Routes/known-issues.md",
+"target": "features/07-Routes/limits.md"
+},
+{
+"source": "features/07-Routes/known-issues.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/07-Routes/limits.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/07-Routes/limits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/07-Routes/limits.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/07-Routes/limits.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/07-Routes/use-cases.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/07-Routes/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/07-Routes/use-cases.md",
+"target": "features/07-Routes/evidence.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/08-Lists/use-cases.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/08-Lists/flows.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/08-Lists/evidence.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/08-Lists/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/08-Lists/evidence.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/08-Lists/evidence.md",
+"target": "features/08-Lists/use-cases.md"
+},
+{
+"source": "features/08-Lists/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/08-Lists/flows.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/08-Lists/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/08-Lists/use-cases.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/08-Lists/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/08-Lists/use-cases.md",
+"target": "features/08-Lists/evidence.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/use-cases.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/flows.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/limits.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/known-issues.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/flows.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/known-issues.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/known-issues.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/known-issues.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/limits.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/limits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/09-Contact-Enrichment-Credits/use-cases.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/10-Bulk-Upload/use-cases.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "features/10-Bulk-Upload/flows.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/10-Bulk-Upload/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/10-Bulk-Upload/flows.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/10-Bulk-Upload/use-cases.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/10-Bulk-Upload/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/10-Bulk-Upload/use-cases.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/11-Maps/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/21-Business-Team/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/12-Subscription-Payments/use-cases.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/12-Subscription-Payments/flows.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "features/12-Subscription-Payments/evidence.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/12-Subscription-Payments/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/12-Subscription-Payments/evidence.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/evidence.md",
+"target": "features/12-Subscription-Payments/use-cases.md"
+},
+{
+"source": "features/12-Subscription-Payments/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/12-Subscription-Payments/flows.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/12-Subscription-Payments/use-cases.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/12-Subscription-Payments/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/12-Subscription-Payments/use-cases.md",
+"target": "features/12-Subscription-Payments/evidence.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/13-CRM-Integrations/use-cases.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/13-CRM-Integrations/flows.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "features/13-CRM-Integrations/evidence.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/13-CRM-Integrations/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/13-CRM-Integrations/evidence.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/evidence.md",
+"target": "features/13-CRM-Integrations/use-cases.md"
+},
+{
+"source": "features/13-CRM-Integrations/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/13-CRM-Integrations/flows.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/13-CRM-Integrations/use-cases.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/13-CRM-Integrations/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/13-CRM-Integrations/use-cases.md",
+"target": "features/13-CRM-Integrations/evidence.md"
+},
+{
+"source": "features/13-CRM-Integrations/use-cases.md",
+"target": "features/14-Settings-Profile/use-cases.md"
+},
+{
+"source": "features/13-CRM-Integrations/use-cases.md",
+"target": "features/20-MCP/use-cases.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "features/14-Settings-Profile/use-cases.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/14-Settings-Profile/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/14-Settings-Profile/use-cases.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/14-Settings-Profile/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/14-Settings-Profile/use-cases.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/14-Settings-Profile/use-cases.md",
+"target": "features/13-CRM-Integrations/use-cases.md"
+},
+{
+"source": "features/14-Settings-Profile/use-cases.md",
+"target": "features/12-Subscription-Payments/use-cases.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/15-Support-Notifications/use-cases.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/15-Support-Notifications/flows.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "features/15-Support-Notifications/evidence.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/15-Support-Notifications/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/15-Support-Notifications/evidence.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/evidence.md",
+"target": "features/15-Support-Notifications/use-cases.md"
+},
+{
+"source": "features/15-Support-Notifications/evidence.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/15-Support-Notifications/flows.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/15-Support-Notifications/use-cases.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/15-Support-Notifications/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/15-Support-Notifications/use-cases.md",
+"target": "features/15-Support-Notifications/evidence.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/21-Business-Team/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/16-Manager-Portal/use-cases.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/16-Manager-Portal/flows.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "features/16-Manager-Portal/evidence.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/16-Manager-Portal/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/16-Manager-Portal/evidence.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/evidence.md",
+"target": "features/16-Manager-Portal/use-cases.md"
+},
+{
+"source": "features/16-Manager-Portal/flows.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/16-Manager-Portal/use-cases.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/16-Manager-Portal/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/16-Manager-Portal/use-cases.md",
+"target": "features/16-Manager-Portal/evidence.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/17-Admin-HQ/evidence.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/17-Admin-HQ/use-cases.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/21-Business-Team/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/17-Admin-HQ/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/17-Admin-HQ/evidence.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/evidence.md",
+"target": "features/17-Admin-HQ/use-cases.md"
+},
+{
+"source": "features/17-Admin-HQ/use-cases.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/17-Admin-HQ/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/17-Admin-HQ/use-cases.md",
+"target": "features/17-Admin-HQ/evidence.md"
+},
+{
+"source": "features/17-Admin-HQ/use-cases.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/17-Admin-HQ/use-cases.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/20-MCP/example-utterances.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/18-Clients/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/19-Cron-Jobs-Webhooks/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/example-utterances.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/conversations.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/use-cases.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/flows.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/20-MCP/limits.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/20-MCP/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/use-cases.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/flows.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/limits.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/conversations.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/20-MCP/api-surfaces.md",
+"target": "features/20-MCP/example-utterances.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "features/20-MCP/example-utterances.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "product/glossary.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "features/20-MCP/limits.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "features/05-Find-Leads/known-issues.md"
+},
+{
+"source": "features/20-MCP/conversations.md",
+"target": "README.md"
+},
+{
+"source": "features/20-MCP/example-utterances.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/20-MCP/flows.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/20-MCP/flows.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "features/20-MCP/limits.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/20-MCP/limits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "features/20-MCP/limits.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/20-MCP/use-cases.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/20-MCP/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "features/20-MCP/use-cases.md",
+"target": "evidence/README.md"
+},
+{
+"source": "features/20-MCP/use-cases.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/21-Business-Team/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/README.md",
+"target": "product/overview.md"
+},
+{
+"source": "features/README.md",
+"target": "LAST_VERIFIED.md"
+},
+{
+"source": "features/README.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/01-Authentication-Onboarding/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/01-Authentication-Onboarding/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/01-Authentication-Onboarding/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/02-Dashboard/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/02-Dashboard/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/03-Company-AddressBook/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/03-Company-AddressBook/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/03-Company-AddressBook/known-issues.md"
+},
+{
+"source": "features/README.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/04-Contacts/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/limits.md"
+},
+{
+"source": "features/README.md",
+"target": "features/05-Find-Leads/known-issues.md"
+},
+{
+"source": "features/README.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/06-Recently-Added/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/limits.md"
+},
+{
+"source": "features/README.md",
+"target": "features/07-Routes/known-issues.md"
+},
+{
+"source": "features/README.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/08-Lists/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/08-Lists/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/08-Lists/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/09-Contact-Enrichment-Credits/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/09-Contact-Enrichment-Credits/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/09-Contact-Enrichment-Credits/limits.md"
+},
+{
+"source": "features/README.md",
+"target": "features/09-Contact-Enrichment-Credits/known-issues.md"
+},
+{
+"source": "features/README.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/10-Bulk-Upload/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/10-Bulk-Upload/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/11-Maps/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/12-Subscription-Payments/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/12-Subscription-Payments/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/12-Subscription-Payments/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/13-CRM-Integrations/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/13-CRM-Integrations/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/13-CRM-Integrations/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/14-Settings-Profile/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/15-Support-Notifications/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/15-Support-Notifications/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/15-Support-Notifications/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/16-Manager-Portal/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/16-Manager-Portal/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/16-Manager-Portal/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/17-Admin-HQ/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/17-Admin-HQ/evidence.md"
+},
+{
+"source": "features/README.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/19-Cron-Jobs-Webhooks/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/use-cases.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/flows.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/limits.md"
+},
+{
+"source": "features/README.md",
+"target": "features/21-Business-Team/MODULE.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/api-surfaces.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/example-utterances.md"
+},
+{
+"source": "features/README.md",
+"target": "features/20-MCP/conversations.md"
+},
+{
+"source": "features/README.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "features/README.md",
+"target": "product/roles.md"
+},
+{
+"source": "features/README.md",
+"target": "knowledge/architecture/stack-migration-map.md"
+},
+{
+"source": "features/README.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/architecture.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/architecture/system-overview.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/codebase.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/code/repository-map.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/dependencies.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/architecture/integrations.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/conventions.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/services.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/code/services.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/database.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/architecture/database.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/api.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/README.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "knowledge/api.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "knowledge/api.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/architecture.md",
+"target": "knowledge/architecture/system-overview.md"
+},
+{
+"source": "knowledge/architecture.md",
+"target": "knowledge/architecture/backend.md"
+},
+{
+"source": "knowledge/architecture.md",
+"target": "knowledge/architecture/frontend.md"
+},
+{
+"source": "knowledge/architecture.md",
+"target": "knowledge/architecture/authentication.md"
+},
+{
+"source": "knowledge/architecture.md",
+"target": "discovery-report.md"
+},
+{
+"source": "knowledge/architecture/database.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "knowledge/architecture/deployment.md",
+"target": "loops/release-loop.md"
+},
+{
+"source": "knowledge/architecture/design-tokens-stopgap.md",
+"target": "knowledge/architecture/stack-migration-map.md"
+},
+{
+"source": "knowledge/architecture/frontend.md",
+"target": "knowledge/architecture/stack-migration-map.md"
+},
+{
+"source": "knowledge/architecture/system-overview.md",
+"target": "discovery-report.md"
+},
+{
+"source": "knowledge/code/CODEMAP.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/code/CODEMAP.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/README.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/architecture/stack-migration-map.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/bug-repro-runbook.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/architecture/design-tokens-stopgap.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/tooling-proposal.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/important-files.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/repository-map.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/services.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/patterns.md"
+},
+{
+"source": "knowledge/code/README.md",
+"target": "knowledge/code/testing.md"
+},
+{
+"source": "knowledge/code/ROUTEMAP.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "product/TerriTool_OverView.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "evidence/README.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "evidence/catalog-unassigned.md"
+},
+{
+"source": "knowledge/code/bug-repro-runbook.md",
+"target": "README.md"
+},
+{
+"source": "knowledge/code/coding-conventions.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "knowledge/code/coding-conventions.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "knowledge/code/coding-conventions.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "knowledge/code/coding-conventions.md",
+"target": "product/glossary.md"
+},
+{
+"source": "knowledge/code/coding-conventions.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "knowledge/code/data-model-reference.md",
+"target": "product/glossary.md"
+},
+{
+"source": "knowledge/code/data-model-reference.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "knowledge/code/data-model-reference.md",
+"target": "product/TerriTool_OverView.md"
+},
+{
+"source": "knowledge/code/testing.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "knowledge/code/tooling-proposal.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "knowledge/code/tooling-proposal.md",
+"target": "knowledge/code/bug-repro-runbook.md"
+},
+{
+"source": "knowledge/codebase.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "knowledge/codebase.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "knowledge/codebase.md",
+"target": "knowledge/code/repository-map.md"
+},
+{
+"source": "knowledge/codebase.md",
+"target": "knowledge/code/important-files.md"
+},
+{
+"source": "knowledge/conventions.md",
+"target": "knowledge/code/coding-conventions.md"
+},
+{
+"source": "knowledge/database.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "knowledge/database.md",
+"target": "knowledge/architecture/database.md"
+},
+{
+"source": "knowledge/dependencies.md",
+"target": "knowledge/architecture/integrations.md"
+},
+{
+"source": "knowledge/services.md",
+"target": "knowledge/code/services.md"
+},
+{
+"source": "learnings/README.md",
+"target": "learnings/successful-patterns.md"
+},
+{
+"source": "learnings/README.md",
+"target": "learnings/failed-approaches.md"
+},
+{
+"source": "learnings/README.md",
+"target": "learnings/gotchas.md"
+},
+{
+"source": "learnings/README.md",
+"target": "learnings/recurring-bugs.md"
+},
+{
+"source": "learnings/known-issues/03-Company-AddressBook.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/known-issues/05-Find-Leads.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/known-issues/07-Routes.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/known-issues/09-Contact-Enrichment-Credits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/limits/05-Find-Leads.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/limits/07-Routes.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/limits/07-Routes.md",
+"target": "product/glossary.md"
+},
+{
+"source": "learnings/limits/09-Contact-Enrichment-Credits.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/limits/20-MCP.md",
+"target": "learnings/operational-notes.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/05-Find-Leads/limits.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/09-Contact-Enrichment-Credits/limits.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/07-Routes/limits.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/20-MCP/limits.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/09-Contact-Enrichment-Credits/known-issues.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/05-Find-Leads/known-issues.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/03-Company-AddressBook/known-issues.md"
+},
+{
+"source": "learnings/operational-notes.md",
+"target": "features/07-Routes/known-issues.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/execution-protocol.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/feature-loop.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/bug-loop.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/refactoring-loop.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "loops/README.md",
+"target": "loops/release-loop.md"
+},
+{
+"source": "loops/bug-loop.md",
+"target": "skills/debug.md"
+},
+{
+"source": "loops/bug-loop.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "loops/bug-loop.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "loops/bug-loop.md",
+"target": "learnings/recurring-bugs.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "knowledge/codebase.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "learnings/README.md"
+},
+{
+"source": "loops/execution-protocol.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "product/overview.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "use-cases/README.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "skills/implement.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "skills/test.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "loops/feature-loop.md",
+"target": "loops/execution-protocol.md"
+},
+{
+"source": "loops/refactoring-loop.md",
+"target": "product/constraints.md"
+},
+{
+"source": "loops/refactoring-loop.md",
+"target": "knowledge/conventions.md"
+},
+{
+"source": "loops/refactoring-loop.md",
+"target": "loops/feature-loop.md"
+},
+{
+"source": "loops/release-loop.md",
+"target": "learnings/gotchas.md"
+},
+{
+"source": "loops/ui-loop.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "loops/ui-loop.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "knowledge/code/ROUTEMAP.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "mcp/example-utterances.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "mcp/conversations.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "mcp/use-cases.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "mcp/limits.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/18-Clients/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "knowledge/code/CODEMAP.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "knowledge/code/README.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "product/glossary.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "product/roles.md"
+},
+{
+"source": "mcp/MODULE.md",
+"target": "product/overview.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "README.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "mcp/MODULE.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "mcp/use-cases.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "mcp/limits.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "mcp/conversations.md"
+},
+{
+"source": "mcp/api-surfaces.md",
+"target": "mcp/example-utterances.md"
+},
+{
+"source": "mcp/conversations.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "mcp/conversations.md",
+"target": "mcp/example-utterances.md"
+},
+{
+"source": "mcp/conversations.md",
+"target": "mcp/limits.md"
+},
+{
+"source": "mcp/example-utterances.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "mcp/limits.md",
+"target": "mcp/MODULE.md"
+},
+{
+"source": "mcp/limits.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "mcp/use-cases.md",
+"target": "mcp/MODULE.md"
+},
+{
+"source": "mcp/use-cases.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "mcp/use-cases.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "operating/claude.md",
+"target": "AGENTS.md"
+},
+{
+"source": "operating/claude.md",
+"target": "loops/execution-protocol.md"
+},
+{
+"source": "operating/claude.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "operating/claude.md",
+"target": "loops/refactoring-loop.md"
+},
+{
+"source": "operating/claude.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "operating/claude.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "operating/codex.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/TerriTool_OverView.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/overview.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/business-rules.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/constraints.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/glossary.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/terminology.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/roles.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "product/00-Product-README.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "product/FLOWS.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "product/business-rules.md",
+"target": "product/personas.md"
+},
+{
+"source": "product/business-rules.md",
+"target": "product/roles.md"
+},
+{
+"source": "product/concepts.md",
+"target": "knowledge/code/data-model-reference.md"
+},
+{
+"source": "product/concepts.md",
+"target": "product/glossary.md"
+},
+{
+"source": "product/concepts.md",
+"target": "product/roles.md"
+},
+{
+"source": "product/glossary.md",
+"target": "mcp/api-surfaces.md"
+},
+{
+"source": "product/overview.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "product/overview.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "product/overview.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "product/terminology.md",
+"target": "product/glossary.md"
+},
+{
+"source": "product/terminology.md",
+"target": "product/concepts.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/01-Authentication-Onboarding/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/01-Authentication-Onboarding/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/02-Dashboard/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/02-Dashboard/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/03-Company-AddressBook/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/03-Company-AddressBook/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/04-Contacts/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/04-Contacts/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/05-Find-Leads/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/05-Find-Leads/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/06-Recently-Added/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/06-Recently-Added/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/07-Routes/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/07-Routes/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/08-Lists/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/08-Lists/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/09-Contact-Enrichment-Credits/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/09-Contact-Enrichment-Credits/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/10-Bulk-Upload/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/10-Bulk-Upload/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/12-Subscription-Payments/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/12-Subscription-Payments/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/13-CRM-Integrations/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/13-CRM-Integrations/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/14-Settings-Profile/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/14-Settings-Profile/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/15-Support-Notifications/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/15-Support-Notifications/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/16-Manager-Portal/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/16-Manager-Portal/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/17-Admin-HQ/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/17-Admin-HQ/use-cases.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/20-MCP/MODULE.md"
+},
+{
+"source": "product/use-cases-overview.md",
+"target": "features/20-MCP/use-cases.md"
+},
+{
+"source": "skills/README.md",
+"target": "loops/README.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/understand-repo.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/investigate.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/debug.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/implement.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/test.md"
+},
+{
+"source": "skills/README.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "skills/README.md",
+"target": "learnings/README.md"
+},
+{
+"source": "skills/debug.md",
+"target": "skills/test.md"
+},
+{
+"source": "skills/debug.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "skills/debug.md",
+"target": "learnings/gotchas.md"
+},
+{
+"source": "skills/implement.md",
+"target": "loops/pr-loop.md"
+},
+{
+"source": "skills/investigate.md",
+"target": "use-cases/README.md"
+},
+{
+"source": "skills/investigate.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "skills/investigate.md",
+"target": "skills/trace-feature.md"
+},
+{
+"source": "skills/investigate.md",
+"target": "skills/debug.md"
+},
+{
+"source": "skills/test.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "skills/understand-repo.md",
+"target": "README.md"
+},
+{
+"source": "skills/understand-repo.md",
+"target": "knowledge/architecture.md"
+},
+{
+"source": "skills/understand-repo.md",
+"target": "discovery-report.md"
+},
+{
+"source": "skills/understand-repo.md",
+"target": "knowledge/architecture/frontend.md"
+},
+{
+"source": "skills/verify-ui.md",
+"target": "cursor-exit.md"
+},
+{
+"source": "skills/verify-ui.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "tools/README.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "tools/README.md",
+"target": "loops/ui-loop.md"
+},
+{
+"source": "tools/README.md",
+"target": "cursor-exit.md"
+},
+{
+"source": "ui-flows/01-Authentication-Onboarding.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/03-Company-AddressBook.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/05-Find-Leads.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/07-Routes.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/08-Lists.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/09-Contact-Enrichment-Credits.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/10-Bulk-Upload.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/12-Subscription-Payments.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/13-CRM-Integrations.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/15-Support-Notifications.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/16-Manager-Portal.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/20-MCP.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/README.md",
+"target": "product/FLOWS.md"
+},
+{
+"source": "ui-flows/README.md",
+"target": "learnings/recurring-bugs.md"
+},
+{
+"source": "ui-flows/README.md",
+"target": "evidence/README.md"
+},
+{
+"source": "use-cases/01-Authentication-Onboarding.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/02-Dashboard.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/03-Company-AddressBook.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/04-Contacts.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/05-Find-Leads.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/06-Recently-Added.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/07-Routes.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/08-Lists.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/09-Contact-Enrichment-Credits.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/10-Bulk-Upload.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/12-Subscription-Payments.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/13-CRM-Integrations.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/14-Settings-Profile.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/15-Support-Notifications.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/16-Manager-Portal.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/17-Admin-HQ.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/20-MCP.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "product/use-cases-overview.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "skills/verify-ui.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/UC-LEAD-save.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/UC-RTE-create.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/UC-CT-buy.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/UC-MGR-dashboard.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/UC-MCP-route.md"
+},
+{
+"source": "use-cases/README.md",
+"target": "use-cases/TEMPLATE.md"
+},
+{
+"source": "use-cases/TEMPLATE.md",
+"target": "use-cases/UC-LEAD-save.md"
+},
+{
+"source": "use-cases/TEMPLATE.md",
+"target": "use-cases/UC-RTE-create.md"
+},
+{
+"source": "use-cases/TEMPLATE.md",
+"target": "use-cases/UC-CT-buy.md"
+},
+{
+"source": "use-cases/UC-LEAD-save.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "validation/README.md",
+"target": "use-cases/UC-LEAD-save.md"
+},
+{
+"source": "validation/README.md",
+"target": "ui-flows/README.md"
+},
+{
+"source": "validation/README.md",
+"target": "skills/verify-ui.md"
+}
+],
+"flows": [
+{
+"file": "ui-flows/source/product/00-end-to-end-product-map.mmd",
+"group": "ui-flows",
+"title": "End-to-end product map",
+"src": "flowchart TD\n  Guest[Guest] --> Auth{Has account?}\n  Auth -->|No| Trial[Create account / 7-day trial]\n  Auth -->|Yes| Login[Login]\n  Trial --> Onb[Onboarding]\n  Login --> OnbCheck{Onboarding done?}\n  OnbCheck -->|No| Onb\n  OnbCheck -->|Yes| Role\n  Onb --> Role{Role}\n  Role -->|Field rep| Home[Home dashboard]\n  Role -->|Manager| Mgr[Manager portal]\n  Home --> Leads[AI Find Leads]\n  Home --> AB[Address Book]\n  Home --> Routes[Routes]\n  Home --> Lists[Lists]\n  Home --> Upload[Upload Excel/CSV]\n  Home --> Settings[Settings / CRM / MCP]\n  Home --> Bill[Upgrade / Credits]\n  Home --> Support[Support ticket]\n  Leads -->|1 credit per save| Companies[Saved companies]\n  Companies --> Routes\n  Companies --> Lists\n  Lists -->|Convert / Generate| Routes\n  Routes -->|Publish| Field[Mobile app in the field]"
+},
+{
+"file": "ui-flows/source/product/15-role-split.mmd",
+"group": "ui-flows",
+"title": "Role split after onboarding",
+"src": "flowchart LR\n  Onb[Which one's you?] --> Field[I'm in the field]\n  Onb --> Lead[I lead a team]\n  Field --> FApp[Home / Find Leads / Routes / Lists]\n  Lead --> MApp[Manager dashboard / team / assign leads]\n  Onb --> B2B[Businesses B2B]\n  Onb --> Res[Homeowners Residential]\n  B2B --> FApp\n  Res --> FApp"
+},
+{
+"file": "ui-flows/source/product/uc-actors.mmd",
+"group": "ui-flows",
+"title": "TerriTool actors",
+"src": "flowchart LR\n  Guest[Guest<br/>login / trial / forgot password]\n  Field[Field Rep<br/>Home, Find Leads, Routes, Lists]\n  Mgr[Manager<br/>team dashboard, assign leads]\n  Admin[Admin<br/>promocodes, subscriptions]\n  Mcp[MCP Agent<br/>Claude / ChatGPT tools]\n  Guest -->|creates account| Field\n  Guest -->|I lead a team| Mgr\n  Field -->|MCP connector| Mcp\n  Mgr -->|invites| Field\n  Admin -->|credits / trial| Field"
+},
+{
+"file": "ui-flows/source/product/uc-field-rep-catalog.mmd",
+"group": "ui-flows",
+"title": "Field-rep use case catalog",
+"src": "flowchart TB\n  subgraph Auth[\"Auth\"]\n    A1[UC-AUTH-01 Sign in]\n    A2[UC-AUTH-02 Trial]\n    A3[UC-AUTH-03 Forgot password]\n  end\n  subgraph Onb[\"Onboarding\"]\n    O1[UC-ONB-01 Goals]\n    O2[UC-ONB-02 Role]\n    O3[UC-ONB-03 B2B vs homeowners]\n  end\n  subgraph Leads[\"AI Find Leads\"]\n    L1[UC-LEAD-01 Search Multiple]\n    L5[UC-LEAD-05 Save 1 cr each]\n    L6[UC-LEAD-06 New/existing route]\n    L8[UC-LEAD-08 New/existing list]\n  end\n  subgraph Routes[\"Routes\"]\n    R2[UC-RTE-02 Select companies]\n    R5[UC-RTE-05 Save draft]\n    R6[UC-RTE-06 Generate]\n    R7[UC-RTE-07 Work published]\n  end\n  subgraph Lists[\"Lists\"]\n    S1[UC-LST-01 Create]\n    S6[UC-LST-06 Send / CSV / map]\n    S8[UC-LST-08 Convert to route]\n  end\n  subgraph Co[\"Companies and contacts\"]\n    C1[UC-CO-01 Address Book]\n    C4[UC-CO-04 Profile]\n    T1[UC-CT-01/02 Fetch contacts<br/>FE 2cr / Claude 1cr]\n    T3[UC-CT-03 Create contact]\n    N1[UC-ACT-01 Add activity]\n  end\n  Auth --> Onb --> Leads\n  Leads --> Routes\n  Leads --> Lists\n  Lists --> Routes\n  Leads --> Co"
+},
+{
+"file": "ui-flows/source/product/uc-happy-path.mmd",
+"group": "ui-flows",
+"title": "Field-rep happy path use cases (captured 15 Sep 2026)",
+"src": "flowchart TD\n  A[UC-AUTH-02 Create 7-day trial<br/>60 credits, no card] --> B[UC-ONB-01 Goals]\n  B --> C[UC-ONB-02 I'm in the field]\n  C --> D[UC-ONB-03 Sell to Businesses B2B]\n  D --> E[UC-LEAD-01 Search Multiple<br/>Los Angeles + restaurants]\n  E --> F[UC-LEAD-05 Save leads<br/>1 credit each]\n  F --> G[UC-LEAD-06 Create route R123]\n  G --> H[UC-RTE-06 Generate start/end]\n  H --> I[UC-RTE-07 View published route]\n  F --> J[UC-LEAD-08 Create list L123]\n  J --> K[UC-LST-07 View list / convert to route]\n  F --> L[UC-CO-04 Company profile]\n  L --> M[UC-CT-03 Create contact]\n  L --> N[UC-ACT-01 Add activity]\n  L --> O[UC-SET-03 Add MCP connector]\n  O --> P[UC-BIL-01 Subscription history]\n  P --> Q[UC-SUP-01 Support ticket]"
+},
+{
+"file": "features/01-Authentication-Onboarding/flows/mmd/01-authentication.mmd",
+"group": "01-Authentication-Onboarding",
+"title": "Authentication",
+"src": "flowchart TD\n  Start[Open TerriTool] --> Choice{Action}\n  Choice -->|Login| Creds[Email + password]\n  Creds --> Remember{Remember Me?}\n  Remember --> Authn{Valid?}\n  Authn -->|No| Err[Show error]\n  Err --> Creds\n  Authn -->|Yes| Active{Activated?}\n  Active -->|No| Activate[Activation link]\n  Active -->|Yes| App[Onboarding or Home]\n  Choice -->|Forgot password| Reset[Email reset]\n  Reset --> Creds\n  Choice -->|Create Account| Trial[Name phone email password captcha]\n  Trial --> Dup{Email unique + captcha OK?}\n  Dup -->|No| Trial\n  Dup -->|Yes| Grant[60 credits, 7-day trial]\n  Grant --> Onb[Onboarding]\n  Choice -->|QR / stores| Mobile[iOS or Android app]"
+},
+{
+"file": "features/01-Authentication-Onboarding/flows/mmd/02-onboarding.mmd",
+"group": "01-Authentication-Onboarding",
+"title": "Onboarding",
+"src": "flowchart TD\n  S1[Step 1: goals] --> Pick1{At least one goal?}\n  Pick1 -->|No| S1\n  Pick1 -->|Yes| Cont[Continue enabled]\n  Cont --> S2[Step 2: role]\n  S2 --> Back[Back to step 1]\n  S2 --> Role{I'm in the field vs I lead a team}\n  Role --> Sell{Businesses B2B vs Homeowners}\n  Sell --> Ready{Role + sell-to picked?}\n  Ready -->|No| S2\n  Ready -->|Yes| Finish[Finish setup]\n  Finish -->|Field| Home[Home]\n  Finish -->|Manager| Mgr[Manager dashboard]"
+},
+{
+"file": "features/03-Company-AddressBook/flows/mmd/07-company-profile.mmd",
+"group": "03-Company-AddressBook",
+"title": "Company profile",
+"src": "flowchart TD\n  Open[Open company] --> See[Phone website hours status]\n  See --> Act{Action}\n  Act --> Route[Add to Route]\n  Act --> List[Add to List]\n  Act --> Edit[Edit fields / status]\n  Act --> Report[Report issue]\n  Report --> Reason{Wrong address / phone / site / closed / duplicate / other}\n  Reason --> Submit[Submit report]\n  Act --> FC[Find Contacts]\n  FC --> Prov{FullEnrich or Claude}\n  Prov -->|FullEnrich| FE[Buy: 2 credits each]\n  Prov -->|Claude| CL[Buy: 1 credit each]\n  FE --> Debit[Confirm then debit]\n  CL --> Debit\n  Debit -->|No credits| Pay[Buy credits]\n  Act --> Manual[Create Contact]\n  Act --> Activity[+ Add Activity]\n  Activity --> Tabs[Today / Upcoming / Past]"
+},
+{
+"file": "features/03-Company-AddressBook/flows/mmd/08-address-book-filter.mmd",
+"group": "03-Company-AddressBook",
+"title": "Address Book filter",
+"src": "flowchart TD\n  AB[Address Book or Recently Added] --> Filter[Filter By]\n  Filter --> Emp[Employee]\n  Filter --> Rev[Annual Revenue]\n  Filter --> Ind[Industry]\n  Filter --> Sort[A-Z or Z-A]\n  Filter --> Hours[Open / Close / N/A]\n  Filter --> Status[Gold Active High Priority Idle Potential Reject Unclassified]\n  Emp --> Apply[Confirm]\n  Rev --> Apply\n  Ind --> Apply\n  Sort --> Apply\n  Hours --> Apply\n  Status --> Apply\n  Apply --> Grid[Filtered grid]"
+},
+{
+"file": "features/05-Find-Leads/flows/mmd/03-ai-find-leads.mmd",
+"group": "05-Find-Leads",
+"title": "AI Find Leads",
+"src": "flowchart TD\n  Open[Open AI Find Leads] --> Mode{Search Multiple or Search One}\n  Mode -->|Multiple| Loc[State + city]\n  Loc --> Type[Business type text]\n  Type --> AI[AI Ideal Prospects]\n  AI --> Search[Search - free]\n  Mode -->|One| Named[Named business lookup]\n  Named --> Search\n  Search --> Results{Leads found?}\n  Results -->|No| Empty[Empty / refine]\n  Empty --> Loc\n  Results -->|Yes| Table[Table or Map View]\n  Table --> Select[Check leads]\n  Select --> Next[Next Step]\n  Next --> Credits{Enough credits? 1 per lead}\n  Credits -->|No| Pay[Upgrade or credits add-on]\n  Credits -->|Yes| Save[Progress modal - keep tab open]\n  Save --> Debit[Debit N credits]\n  Debit --> Modal[Leads Added Successfully]\n  Modal --> A1[Create or add Route]\n  Modal --> A2[Create or add List]\n  Modal --> A3[Return to Dashboard]\n  Modal --> A4[Find More Leads]\n  A1 --> RNew{New or existing route}\n  RNew -->|New name| RBuild[Route builder step 1]\n  RNew -->|Existing| RAppend[Append + optional re-optimize]\n  A2 --> LNew{New or existing list}\n  LNew -->|New name| LBuild[List builder]\n  LNew -->|Existing| LAppend[Append companies]\n  A4 --> Open"
+},
+{
+"file": "features/07-Routes/flows/mmd/04-create-publish-route.mmd",
+"group": "07-Routes",
+"title": "Create and publish a route",
+"src": "flowchart TD\n  Entry{Entry} -->|From saved leads| Pre[Companies pre-selected]\n  Entry -->|From list Convert/Generate| Pre\n  Entry -->|+ Create Route| Empty[Pick companies]\n  Pre --> Step1[Step 1: name + select]\n  Empty --> Step1\n  Step1 --> Opt{Action}\n  Opt -->|Save as Draft| Draft[Routes Draft tab]\n  Opt -->|Map / Lasso / Filter| Map1[Adjust selection]\n  Map1 --> Step1\n  Opt -->|Find Leads| LeadIn[AI search into this route]\n  LeadIn --> Step1\n  Opt -->|Next Step| Step2[Step 2: start + end]\n  Step2 --> Opt2{Action}\n  Opt2 -->|Save as Draft| Draft\n  Opt2 -->|Generate Route| Gen[Optimize tour]\n  Gen --> Success[Route Generated Successfully]\n  Success --> View[View my Route]\n  View --> Pub[Published tab]\n  Pub --> Field[Download PDF / CSV / Send / Map / Mobile]"
+},
+{
+"file": "features/07-Routes/flows/mmd/05-work-published-route.mmd",
+"group": "07-Routes",
+"title": "Work a published route",
+"src": "flowchart TD\n  View[Route detail] --> Stats[Stops distance time contacts]\n  View --> Bulk{Bulk}\n  Bulk --> Del[Delete stops]\n  Bulk --> ToR[Add to another route]\n  Bulk --> ToL[Add to list]\n  View --> Row{Per stop}\n  Row --> Status[Change status]\n  Row --> FC[Find Contacts]\n  Row --> Note[Add note]\n  Row --> List[Add to list]\n  Row --> Route[Add to route]\n  View --> Add[+ Add Company]\n  Add --> Regen[Re-generate]\n  View --> Map[Map View - driving path]\n  View --> Export[PDF / CSV / Send]"
+},
+{
+"file": "features/08-Lists/flows/mmd/06-lists.mmd",
+"group": "08-Lists",
+"title": "Lists",
+"src": "flowchart TD\n  In{Entry} -->|Saved leads modal| Named[Name new or pick existing]\n  In -->|Lists + Create| Named\n  Named --> Build[Select companies]\n  Build --> Map[Map / lasso / filter]\n  Map --> Build\n  Build --> Submit[Submit]\n  Submit --> Index[Lists index]\n  Index --> View[View detail]\n  Index --> Send[Send List]\n  Index --> CSV[Export CSV]\n  Index --> OnMap[View On Map]\n  Index --> Gen[Generate Route]\n  Index --> Edit[Edit]\n  Index --> Del[Delete]\n  View --> Convert[Convert to Route]\n  Convert --> RStep1[Route builder]\n  Gen --> RStep1"
+},
+{
+"file": "features/09-Contact-Enrichment-Credits/flows/mmd/uc-credit-spend.mmd",
+"group": "09-Contact-Enrichment-Credits",
+"title": "Credit spend vs free use cases",
+"src": "flowchart TB\n  subgraph Free[\"Free\"]\n    S[UC-LEAD-01/02 Search leads]\n    V[UC-CO-04 View company]\n    R[UC-RTE-06 Generate route]\n    L[UC-LST-01 Create list]\n    N[UC-ACT-01 Add note/activity]\n  end\n  subgraph Paid[\"Costs credits\"]\n    Save[UC-LEAD-05 Save AI leads<br/>1 credit per lead]\n    BuyFE[UC-CT-02 FullEnrich fetch<br/>2 credits per contact]\n    BuyCL[UC-CT-02 Claude fetch<br/>1 credit per contact]\n    Up[UC-BIL-02 Upgrade plan]\n    Ad[UC-BIL-03 Credits add-on]\n  end\n  S --> Save\n  Save --> R\n  Save --> L\n  V --> BuyFE\n  V --> BuyCL\n  Save -->|not enough| Ad\n  BuyFE -->|not enough| Ad\n  BuyCL -->|not enough| Ad\n  Ad --> Up"
+},
+{
+"file": "features/10-Bulk-Upload/flows/mmd/12-upload-excel-csv.mmd",
+"group": "10-Bulk-Upload",
+"title": "Upload Excel / CSV",
+"src": "flowchart TD\n  Dash[Home: Upload Excel/CSV] --> Kind{Companies or contacts}\n  Kind --> S1[Step 1 upload file]\n  S1 --> S2[Step 2 map columns / preview]\n  S2 --> S3[Step 3 validate]\n  S3 --> Err{Errors?}\n  Err -->|Yes| Fix[Autofill address / merge / drop duplicates]\n  Fix --> S3\n  Err -->|No| S4[Step 4 commit]\n  S4 --> SF{Push to Salesforce?}\n  SF -->|Yes| Sfdc[step4sfdc]\n  SF -->|No| Done[Companies/contacts in Address Book]"
+},
+{
+"file": "features/12-Subscription-Payments/flows/mmd/10-billing.mmd",
+"group": "12-Subscription-Payments",
+"title": "Billing",
+"src": "flowchart TD\n  Need{Need more access?} -->|Plan| Upgrade[Upgrade]\n  Need -->|Credits only| Addon[Credits add-on]\n  Need -->|Inspect| Hist[Subscription history]\n  Upgrade --> Pay[Stripe / RevenueCat]\n  Addon --> Pay\n  Pay --> OK{Success?}\n  OK -->|Yes| Active[Active subscription + credits]\n  OK -->|No| Fail[Stay on current plan]\n  Hist --> Cancel[Cancel with reason]\n  Cancel --> End[Access until period end]\n  Trial[7-day Free Package] --> Expire{End date passed?}\n  Expire -->|Yes| BlockSave[Block save leads / buy contacts]\n  BlockSave --> Upgrade"
+},
+{
+"file": "features/13-CRM-Integrations/flows/mmd/09-settings-mcp-crm.mmd",
+"group": "13-CRM-Integrations",
+"title": "Settings / MCP / CRM",
+"src": "flowchart TD\n  Set[Settings] --> Profile[Edit profile + status colors]\n  Set --> CRM{Connect CRM}\n  CRM --> SF[Salesforce OAuth sync]\n  CRM --> HS[HubSpot API key + mapping]\n  CRM --> Karma[Karma CRM API key]\n  Set --> MCPConn[Add custom MCP: name + HTTPS URL]\n  MCPConn --> List[Connected MCPs]\n  Set --> Chat[MCP Chat]\n  Chat --> Conn{Connected?}\n  Conn -->|No| Block[not connected]\n  Conn -->|Yes| Verb{Fetch / Send / Update}\n  Verb --> Ask[Ask before run]\n  Set --> Sync[MCP Sync form]\n  Sync --> Start[Start with record type]\n  Set --> Sub[View Invoice / Upgrade]"
+},
+{
+"file": "features/15-Support-Notifications/flows/mmd/11-support.mmd",
+"group": "15-Support-Notifications",
+"title": "Support",
+"src": "flowchart TD\n  Bug[Report Bug] --> Form[Title + description + optional image]\n  Form --> Valid{Title and description filled?}\n  Valid -->|No| Form\n  Valid -->|Yes| Add[Add ticket]\n  Add --> Inbox[Support list]\n  Inbox --> View[View / reply]"
+},
+{
+"file": "features/16-Manager-Portal/flows/mmd/13-manager-portal.mmd",
+"group": "16-Manager-Portal",
+"title": "Manager portal",
+"src": "flowchart TD\n  Onb[Onboarding: I lead a team] --> Dash[Manager dashboard]\n  Dash --> Team[Salespeople CRUD]\n  Team --> Invite[Create / resend invitation]\n  Team --> Detail[Rep details / routes / companies]\n  Dash --> AFL[Manager AI Find Leads]\n  AFL --> Assign[Assign or clear assigned leads]\n  Dash --> Act[Team activity]\n  Dash --> Rep[Reports / territory]\n  Dash --> Sup[Support]\n  Dash --> Set[Settings]"
+},
+{
+"file": "features/20-MCP/flows/mmd/14-mcp-agent-lead-to-route.mmd",
+"group": "20-MCP",
+"title": "MCP agent lead-to-route",
+"src": "flowchart TD\n  Ask[User asks for leads] --> Cred[get_credits]\n  Cred --> Search[find_ai_leads]\n  Search --> More{Still running?}\n  More -->|Yes| Resume[resume_ai_lead_search]\n  Resume --> Search\n  More -->|No| Preview[Preview hits - do not add_company]\n  Preview --> Confirm{User agrees to spend?}\n  Confirm -->|No| Stop[Stop]\n  Confirm -->|Yes| Save[save_ai_leads confirm_all + token]\n  Save --> Co[search_companies / view_company]\n  Co --> Next{User wants route or list?}\n  Next -->|List| AskL[Ask list name]\n  AskL --> List[create_list]\n  Next -->|Route| AskR[Ask start, end, route name]\n  AskR --> Route[create_route - publishes]\n  Route --> Url[Return route_url]\n  List --> FromList[create_route_from_list]"
+},
+{
+"file": "features/20-MCP/flows/mmd/uc-mcp-agent.mmd",
+"group": "20-MCP",
+"title": "MCP agent use cases",
+"src": "flowchart TD\n  Ask[User request] --> Credits[get_credits]\n  Credits --> Find[find_ai_leads / resume]\n  Find --> Preview[Preview hits<br/>never add_company]\n  Preview --> Confirm{User confirms spend?}\n  Confirm -->|No| Stop[Stop]\n  Confirm -->|Yes| Save[save_ai_leads<br/>confirm_all + token]\n  Save --> View[search_companies / view_company]\n  View --> Want{Route or list?}\n  Want -->|List| List[create_list]\n  Want -->|Route| AskR[Ask start, end, name]\n  AskR --> Route[create_route publishes]\n  List --> FromList[create_route_from_list]\n  Route --> Url[Return route_url]\n  View --> Status[set_company_status]\n  View --> People[find_contacts / add_contact]\n  View --> Note[add_note / add_activity]"
+}
+]
+}

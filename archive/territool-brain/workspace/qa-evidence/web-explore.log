@@ -1,0 +1,75 @@
+Sales Agent: login OK → /dashboard
+  Sales Agent 01 200 /dashboard → /dashboard
+  Sales Agent 02 200 /company → /company
+  Sales Agent 03 200 /recent-company → /recent-company
+  Sales Agent 04 200 /routes → /routes
+  Sales Agent 05 200 /lists → /lists
+  Sales Agent 06 200 /contact → /contact
+  Sales Agent 07 200 /salesperson/edit → /salesperson/edit
+  Sales Agent 08 200 /subscription → /subscription
+  Sales Agent 09 200 /support → /support
+  Sales Agent 10 200 /notification → /notification
+  Sales Agent 11 200 /findleads → /findleads
+  Sales Agent 12 404 /ai-lead-finder → /ai-lead-finder
+  Sales Agent 13 200 /route/step1 → /route/step1
+  Sales Agent 14 200 /list/step1 → /list/step1
+  Sales Agent 15 200 /company/create → /company/create
+  Sales Agent 16 200 /contact/create → /contact/create
+  Sales Agent 17 200 / → /dashboard
+  Sales Agent 18 200 /support/create → /support/create
+  Sales Agent 19 200 /recent-contact → /recent-contact
+  Sales Agent 20 200 /company/viewmapallcompany → /company/viewmapallcompany
+  Sales Agent 21 200 /recent-company/viewmaprecentcompany → /recent-company/viewmaprecentcompany
+  Sales Agent 22 200 /route/view/3910 → /route/view/3910
+  Sales Agent 23 200 /route/step1/3910 → /route/step1/3910
+  Sales Agent 24 200 /route/viewmap/3910 → /route/viewmap/3910
+  Sales Agent 25 200 /list/598/view → /list/598/view
+  Sales Agent 26 200 /list/viewmap/598 → /list/viewmap/598
+  Sales Agent 27 200 /list/598/edit → /list/598/edit
+  Sales Agent 28 null /subscription/invoice/118 → /list/598/edit
+  Sales Agent 29 null /subscription/addon/invoice/75 → /list/598/edit
+  Sales Agent 30 200 /login → /dashboard
+Business Sales Agent: login OK → /dashboard
+  Business Sales Agent 01 200 /dashboard → /dashboard
+  Business Sales Agent 02 200 /company → /company
+  Business Sales Agent 03 200 /routes → /routes
+  Business Sales Agent 04 200 /lists → /lists
+  Business Sales Agent 05 200 /contact → /contact
+  Business Sales Agent 06 200 /salesperson/edit → /salesperson/edit
+  Business Sales Agent 07 200 /subscription → /subscription
+  Business Sales Agent 08 200 /support → /support
+  Business Sales Agent 09 200 /findleads → /findleads
+  Business Sales Agent 10 200 / → /dashboard
+  Business Sales Agent 11 200 /support/create → /support/create
+  Business Sales Agent 12 200 /recent-company → /recent-company
+  Business Sales Agent 13 200 /recent-contact → /recent-contact
+  Business Sales Agent 14 200 /route/step1 → /route/step1
+  Business Sales Agent 15 200 /list/step1 → /list/step1
+  Business Sales Agent 16 200 /company/viewmapallcompany → /company/viewmapallcompany
+  Business Sales Agent 17 200 /route/view/3902 → /route/view/3902
+  Business Sales Agent 18 200 /route/step1/3902 → /route/step1/3902
+  Business Sales Agent 19 200 /route/viewmap/3902 → /route/viewmap/3902
+  Business Sales Agent 20 200 /list/596/view → /list/596/view
+  Business Sales Agent 21 200 /list/viewmap/596 → /list/viewmap/596
+  Business Sales Agent 22 200 /list/596/edit → /list/596/edit
+Business Agent: login OK → /manager/dashboard
+  Business Agent 01 200 /manager/dashboard → /manager/dashboard
+  Business Agent 02 200 /manager/ai-find-leads → /manager/ai-find-leads
+  Business Agent 03 200 /manager/salespeople → /manager/salespeople
+  Business Agent 04 200 /manager/salespeople/create → /manager/salespeople/create
+  Business Agent 05 200 /manager/activity → /manager/activity
+  Business Agent 06 200 /manager/reports → /manager/reports
+  Business Agent 07 200 /manager/support → /manager/support
+  Business Agent 08 200 /manager/support/create → /manager/support/create
+  Business Agent 09 200 /manager/settings → /manager/settings
+  Business Agent 10 200 /businesssalesperson → /manager/salespeople
+  Business Agent 11 200 /businessagent/subscription → /businessagent/subscription
+  Business Agent 12 200 /dashboard → /manager/dashboard
+  Business Agent 13 200 /manager/salespeople/1671/details → /manager/salespeople/1671/details
+  Business Agent 14 200 /subscription → /subscription
+  Business Agent 15 200 / → /manager/dashboard
+  Business Agent 16 200 /support/create → /manager/support/create
+  Business Agent 17 null /subscription/invoice/2566 → /manager/support/create
+Admin: login FAILED → /hq/login (captcha present)
+web-explore: 69 pages → brain/audits/data/web-explore.json
+exit 0

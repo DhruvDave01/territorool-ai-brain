@@ -1,0 +1,28 @@
+/* ===== resources/views/front/cancelledRevenueCatTrialUsers.blade.php · <style> block 1 of 1 ===== */
+.rc-loader-wrap {
+        padding: 30px 15px;
+        text-align: center;
+        color: #6c757d;
+    }
+    .rc-spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e5e7eb;
+        border-top-color: #3c8dbc;
+        border-radius: 50%;
+        animation: rc-spin 0.9s linear infinite;
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    @keyframes rc-spin { to { transform: rotate(360deg); } }
+    .rc-loader-text { vertical-align: middle; font-size: 14px; }
+    .rc-status-bar { padding: 6px 12px; }
+    #rcTrialCancelledTable { width: 100% !important; table-layout: fixed; }
+    #rcTrialCancelledTable th,
+    #rcTrialCancelledTable td {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+    .dataTables_wrapper { overflow-x: visible; }

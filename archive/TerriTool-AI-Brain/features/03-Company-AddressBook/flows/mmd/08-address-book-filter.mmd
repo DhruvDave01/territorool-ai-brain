@@ -1,0 +1,18 @@
+---
+title: Address Book filter
+---
+flowchart TD
+  AB[Address Book or Recently Added] --> Filter[Filter By]
+  Filter --> Emp[Employee]
+  Filter --> Rev[Annual Revenue]
+  Filter --> Ind[Industry]
+  Filter --> Sort[A-Z or Z-A]
+  Filter --> Hours[Open / Close / N/A]
+  Filter --> Status[Gold Active High Priority Idle Potential Reject Unclassified]
+  Emp --> Apply[Confirm]
+  Rev --> Apply
+  Ind --> Apply
+  Sort --> Apply
+  Hours --> Apply
+  Status --> Apply
+  Apply --> Grid[Filtered grid]

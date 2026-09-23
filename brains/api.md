@@ -1,117 +1,59 @@
----
-id: api
-parent: brains
-sources:
-  - TerriTool/App/config/index.js
-  - webterritool/routes/api.php
-  - routes/api.php
-  - webterritool/routes/web.php
-  - findLeads/aiFindLeads.js
-  - App/utils/contactBuyCredits.js
-related:
-  - brains/README.md
-  - brains/mobile-code.md
-  - brains/web-code.md
-  - 12-mobile-api.md
-  - 13-web-urls.md
-  - data/formdata-dictionary.md
-  - screens/how-it-works.md
-  - 09-credits-billing.md
----
-# 5. Web and Mobile API Brain
+# API
 
-Hub for **what clients call**. Parent: [sub brains](README.md). Siblings: [Mobile Code](mobile-code.md) · [Web Code](web-code.md).
+What clients call. Do not invent a path or a FormData key. Every v2 route with its handler, auth group, and mobile constant is in [API endpoints](api-endpoints.md). If it is not there, open the file named here before writing it.
 
-**Do not invent** path constants, FormData keys, or credit costs. If a key is missing, open the cited screen/controller.
+Mobile: [mobile code](mobile-code.md). Web: [web code](web-code.md).
 
-## Read first
+## Sources
 
-1. This file.
-2. [12-mobile-api.md](../12-mobile-api.md) · [13-web-urls.md](../13-web-urls.md).
-3. [data/formdata-dictionary.md](../data/formdata-dictionary.md).
-4. [screens/how-it-works.md](../screens/how-it-works.md).
-5. Credits: [09-credits-billing.md](../09-credits-billing.md). MCP names: [14-mcp.md](../14-mcp.md).
-
-## Sources of truth
-
-| Surface | Source |
-|---------|--------|
-| Mobile constants | `TerriTool/App/config/index.js` appended to `URL_BASE` |
-| Live mobile `URL_BASE` | **2026-09-17 staging** `https://staging.territool.com/index.php/api/` (`STAGING — temporary for screenshot login`). Prod `https://app.territool.com/index.php/api/` is commented. |
-| All v2 URIs | `webterritool/routes/api.php` — `$api->version('v2')`. Config prefix `env('API_PREFIX', null)`. MCP client talks `/api/v2`. |
-| JWT group | middleware **`jwt.refresh`** in `routes/api.php` |
+| Surface | File |
+|---|---|
+| Mobile base and path constants | `TerriTool/App/config/index.js` appended to `URL_BASE` |
+| Live base | `https://staging.territool.com/index.php/api/` |
+| v2 URIs | `webterritool/routes/api.php` — `$api->version('v2')` |
+| JWT | middleware `jwt.refresh` on the authenticated group |
 | Web pages | `webterritool/routes/web.php` |
-| FormData | Live `formdata.append` / `buildAiFormData` in `findLeads/aiFindLeads.js` |
-| Auth | `Authorization: Bearer {JWT}` except public list below |
-
-`APP_VERSION` `'2.0'`. Mobile `API.post(url, formdata, props, signal, options)` — JWT is a **header**.
+| Mobile post | `API.post(url, formdata, props, signal, options)` — JWT is a header, body is FormData |
 
 ## Public (no `jwt.refresh`)
 
-`authenticate`, `logout`, `login`, `signup`, `mobileregistration`, `renewtoken`, `recovery`, `reset`, `citysearch` (GET+POST), `downloadpdf`, `zapierCompanyCreate`, `zapierContactCreate`, `getcategories`, `getusercontactstage`, `getrestrictuser`, `apollo-webhook`, `leads_user`, `getUsers`, `revenue-subscription-update`, `validate-phone`, `fullenrich-webhook/*`, `revenuecate-success`.
+`authenticate`, `logout`, `login`, `signup`, `mobileregistration`, `renewtoken`, `recovery`, `reset`, `citysearch`, `downloadpdf`, `zapierCompanyCreate`, `zapierContactCreate`, `getcategories`, `getusercontactstage`, `getrestrictuser`, `apollo-webhook`, `leads_user`, `getUsers`, `revenue-subscription-update`, `validate-phone`, `fullenrich-webhook/*`, `revenuecate-success`.
 
-Everything else the app uses (`addcompany`, `createroute`, `simplerouteview`, `getusercredit`, …) is inside the JWT group. Full constant table: [12-mobile-api.md](../12-mobile-api.md).
+Everything else the app uses (`addcompany`, `createroute`, `simplerouteview`, `getusercredit`, …) is inside the JWT group.
 
-## Must follow
+## Costs and calls
 
-| Rule | Do this |
-|------|---------|
-| Mobile post | Multipart **FormData**. |
-| `buildAiFormData` | Skip null/undefined; booleans → `"true"` / `"false"` (`findLeads/aiFindLeads.js`). |
-| Route create | `createroute` then poll `simplerouteview` until `route_status === "published"`. Also `publishroute` exists on Dingo. Published tab, not Draft. |
-| Credit spend | `getusercredit` / MCP `get_credits` → quote → wait. No partial spend. |
-| AI search | `getAILeadsV2` / `resumeAILeadSearch` / `getAiLeadData` **free**. |
-| AI save | `saveAILeads` **1 credit/company**. MCP `save_ai_leads`: preview, stop, then `confirm_all` + `confirm_token`. Never `add_company` for AI hits. |
-| Buy contacts | Live `App/utils/contactBuyCredits.js`: Cognism/FE/Apollo path **2** (`NAME_POSITION_ONLY` and `WITH_EMAIL_OR_PHONE` are both 2). Claude/biz **1** (`CONTACT_BUY_CREDITS_BIZ_CLAUDE`). Older notes that say name-only = 1 are stale — [drift](../05-constraints-and-drift.md). |
-| Manual person | `addcontact` / MCP `add_contact` **free**. Not a note. Not `buyContacts`. |
-| Status | `updatecompanystatus` / `set_company_status`. |
-| MCP | Tools only; never php/curl. Same Dingo endpoints via `CustomerApiClient`. |
+| Action | Call | Cost |
+|---|---|---|
+| AI search | `getAILeadsV2`, `resumeAILeadSearch`, `getAiLeadData` | 0 |
+| Save AI companies | `saveAILeads` | 1 per company |
+| Buy contact | `buyContacts` | 2, or 1 on the Claude/biz path (`contactBuyCredits.js`) |
+| Add a person by hand | `addcontact` | 0 |
+| Credits | `getusercredit` | 0 |
+| Create route | `createroute`, then poll `simplerouteview` until `route_status === "published"` | — |
+| Mark visited | `companymarkedvisited` | — |
+| Note | `addnote` | — |
 
-## MCP HTTP
+`buildAiFormData` skips null and undefined. Booleans become the strings `"true"` and `"false"`.
+
+Do not save an AI hit with `addcompany`. Do not treat `buyContacts` as free.
+
+## MCP
 
 | Server | Path | Who |
-|--------|--------|-----|
-| User / manager | `/ai/mcp` | SA, BSA, Business Agent |
-| Admin | `/ai/mcp-admin` | HQ |
-| Find | `/find-mcp/mcp` | SA + BSA only (**not** BA) |
+|---|---|---|
+| User | `/ai/mcp` | Sales Agent, Business Sales Agent, Business Agent |
+| Admin | `/ai/mcp-admin` | Admin |
+| Find | `/find-mcp/mcp` | Sales Agent and Business Sales Agent only |
 
-User tool names (complete): see [Web Code Brain](web-code.md) and [WEB_CODEBASE_BRAIN.md](../code/WEB_CODEBASE_BRAIN.md). Manager extras: `list_team`, `get_team_territories`, `recommend_lead_distribution`, `get_team_dashboard`, `get_team_activity` (User MCP **1.4.1**, 33 tools).
+Agents call tools. They do not call PHP, SQL, or curl against `/api/v2` from a chat turn. The PHP client that the tools use is `UserMcp/Services/CustomerApiClient.php`.
 
-## Two AI engines (do not mix)
+Manager Find Leads is a different engine from the mobile V2 search: Places circles, `hunt_engine=manager_portal`, routes under `/manager/api/find-leads`. Do not point a Sales Agent screen at that engine.
 
-| Who | Engine | Typical URIs |
-|-----|--------|----------------|
-| SA / BSA (mobile V2, user MCP) | User AI Find Leads V2 | `getAILeadsV2`, `resumeAILeadSearch`, `saveAILeads` |
-| Manager | Places / manager finder | `/manager/api/find-leads*`, `AIFindLeads.jsx` |
+## Web prefixes
 
-## High-traffic JWT URIs (mobile constants)
+Classic: `/dashboard`, `/reviews/credits`, `/company`, `/contact`, `/list`, `/route`, `/findleads`, `/subscription`. `/reviews/credits` is session auth. GET renders the page. POST `{ type: g2|ph }` records the attempt on `user_invitees` and does not grant credits. The mobile `invite-user` call is the app equivalent.
 
-| Constant | Path |
-|---------|------|
-| `URL_USER_LOGIN` | `login` |
-| `GET_CREDIT_INFO` | `getusercredit` |
-| `URL_ADD_COMPANY` | `addcompany` |
-| `URL_CREATE_BASIC_ROUTE` | `createroute` |
-| `URL_GET_BASIC_ROUTE` | `simplerouteview` |
-| `URL_COMPANY_MARKED_VISITED` | `companymarkedvisited` |
-| `URL_SAVE_COMPANY_CONTACT` | `buyContacts` |
-| `URL_FETCH_FIRST_CONTACT` | `fetchAllContacts` |
-| `URL_GET_AI_COMPANIES_V2` | `getAILeadsV2` |
-| `URL_AI_BULK_COMPANIES_CREATE` | `saveAILeads` |
-| `URL_USER_ADD_CONTACT` | `addcontact` |
-| `URL_SAVE_NOTE` | `addnote` |
+Manager: `/manager/dashboard`, `/manager/ai-find-leads`, `/manager/salespeople`, `/manager/api/*`.
 
-Dingo also has routes mobile config may not name (`getYelpLeads`, `publishroute`, tickets, …).
-
-## Web URL prefixes
-
-Classic: `/dashboard`, `/company*`, `/contact*`, `/list*`, `/route*`, `/findleads`, `/subscription*`.  
-Manager: `/manager/dashboard`, `/manager/ai-find-leads`, `/manager/salespeople*`, `/manager/api/*`.  
-HQ: `/hq/*`. Catalog: [13-web-urls.md](../13-web-urls.md).
-
-## Trained if you can
-
-- Pick public vs JWT for a new URI.
-- Save AI leads with preview + credit quote, not `addcompany`.
-- Charge **2** for paid contact buy and **1** for Claude/biz per `contactBuyCredits.js`.
-- Poll `simplerouteview` until published.
+HQ: `/hq/*`.

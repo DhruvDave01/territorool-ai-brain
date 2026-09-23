@@ -1,0 +1,1104 @@
+/* ===== resources/views/front/route/findleads.blade.php · <style> block 1 of 2 ===== */
+#leadsMap{
+    position: relative;
+}
+.loader{
+    position: absolute;
+    top:0px;
+    right:0px;
+    width:100%;
+    height:100%;
+    background-color:#000000;
+    background-image:url("{{ URL::to('/')}}/images/loading-tr.gif");
+    background-size: 100px;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:10000000;
+    opacity: 0.6;
+    filter: alpha(opacity=40);
+}
+.thank-you-pop{
+	width:100%;
+	text-align:center;
+}
+.thank-you-pop img{
+	width:76px;
+	height:auto;
+	margin:0 auto;
+	display:block;
+	margin-bottom:25px;
+}
+
+.thank-you-pop h1{
+	font-size: 42px;
+    margin-bottom: 25px;
+	color:#5C5C5C;
+}
+.thank-you-pop p{
+	font-size: 20px;
+    margin-bottom: 27px;
+ 	color:#5C5C5C;
+}
+.thank-you-pop a{
+	display: inline-block;
+    margin: 0 auto;
+    padding: 9px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+    background-color: #8BC34A;
+    border-radius: 17px;
+}
+.thank-you-pop a i{
+	margin-right:5px;
+	color:#fff;
+}
+.odd{
+    background-color:#ebe8e8;
+}
+.my-custom-scrollbar {
+    position: relative;
+    max-height: 475px;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+}
+.modal-dialog{
+    /* width:800px !important; */
+}
+.jqx-grid-cell-selected-bootstrap a{
+    color:white !important;
+}
+#confirmleadsModal .modal-dialog, #creditleadsModal .modal-dialog{
+    width:33% !important;
+    min-width:33% !important;
+}
+.optinLabel{
+    width:39%;
+    height:25px;
+}
+.confirmDialogDesc
+{
+    min-height: 60px;
+    padding: 14px 0px;
+    margin:5px
+}
+.now-used{
+    margin-bottom:0px;
+}
+.content-header-flex {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+.content-header-flex h1 {
+    font-size: 2em;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+#findleadscredits{
+    margin-bottom:0px;
+}
+#findleadsModal .modal-dialog{
+   min-width:32% !important;
+   width:500px !important
+}
+#findleadsModal  .modal-content{
+    padding: 10px 20px !important;
+}
+@media (max-width: 767px) {
+    .form-control, .form-group {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+    #search, #search_find_leads_button, #selectallLeads, #zipcode1, #city_drop{
+        margin-left: 0px !important;
+    }
+    #leadsMap{
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+        margin-top:10px;
+    }
+    #city_drop{
+        margin-bottom:0px !important;
+    }
+    #confirmleadsModal .modal-dialog, #creditleadsModal .modal-dialog, #findleadsModal .modal-dialog{
+        width:94% !important;
+        min-width:94% !important;
+    }
+     #findleadsModal  .modal-content{
+        padding: 10px 15px !important;
+     }
+     #addCreateRouteModal .form-control, #addCreateListModal .form-control{
+        width: 50% !important;
+     }
+     #findleadsModal1 .form-control{
+        width:90% !important;
+     }
+     .loader {
+        background-position: top !important;
+     }
+}
+@media (min-width: 768px){
+    .company-add-footer{
+        padding: 3% 20% 0% 20%;
+    }
+}
+/* Match the Route List tab design; scoped to this page only. */
+#findleadspage .find-leads-tabs-toolbar {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    padding: 8px 10px 0;
+    margin-bottom: 0;
+}
+#findleadspage .find-leads-tabs {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+#findleadspage .find-leads-tabs::before,
+#findleadspage .find-leads-tabs::after {
+    display: none;
+}
+#findleadspage .find-leads-tabs > li {
+    float: none;
+    margin: 0;
+}
+#findleadspage .find-leads-tabs > li > a {
+    position: relative;
+    bottom: -1px;
+    margin: 0;
+    padding: 11px 20px;
+    border: 1px solid transparent !important;
+    border-bottom: none !important;
+    border-radius: 10px 10px 0 0 !important;
+    background: transparent !important;
+    color: #64748b;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+#findleadspage .find-leads-tabs > li > a::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 16px;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+    background: transparent;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+#findleadspage .find-leads-tabs > li > a:hover {
+    color: #124ac6;
+    background: rgba(18, 74, 198, 0.06) !important;
+    transform: translateY(-1px);
+}
+#findleadspage .find-leads-tabs > li > a:hover::after {
+    background: rgba(18, 74, 198, 0.35);
+}
+#findleadspage .find-leads-tabs > li.active > a,
+#findleadspage .find-leads-tabs > li.active > a:hover,
+#findleadspage .find-leads-tabs > li.active > a:focus {
+    color: #124ac6 !important;
+    background: #ffffff !important;
+    border-color: #e5e7eb !important;
+    border-bottom-color: transparent !important;
+    box-shadow: 0 -2px 10px rgba(18, 74, 198, 0.08);
+    transform: none;
+}
+#findleadspage .find-leads-tabs > li.active > a::after {
+    background: linear-gradient(90deg, #124ac6 0%, #00bcf0 100%);
+    box-shadow: 0 0 10px rgba(18, 74, 198, 0.35);
+}
+#findleadspage #ai_find_leads_form_row {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    padding: 18px 15px !important;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+#findleadspage #ai_find_leads_form_row > h4 {
+    padding-left: 0;
+    padding-right: 0;
+}
+@media (max-width: 767px) {
+    #findleadspage .find-leads-tabs-toolbar {
+        margin: 0 4px;
+        padding: 8px 8px 0;
+    }
+    #findleadspage .find-leads-tabs {
+        width: 100%;
+        gap: 4px;
+    }
+    #findleadspage .find-leads-tabs > li {
+        flex: 1;
+    }
+    #findleadspage .find-leads-tabs > li > a {
+        display: block;
+        padding: 12px 8px;
+        text-align: center;
+    }
+    #findleadspage #ai_find_leads_form_row {
+        margin: 0 4px 8px;
+        padding: 15px 10px !important;
+    }
+}
+#find_ai_leads{
+    width: 100%;
+    height: 46px;
+    margin: 5px 0 0;
+    padding: 0 18px;
+    border: none !important;
+    border-radius: 10px;
+    color: #ffffff !important;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 46px;
+    background: linear-gradient(135deg, #124ac6 0%, #1a6de8 45%, #00bcf0 100%) !important;
+    box-shadow: 0 10px 22px -10px rgba(18, 74, 198, 0.85), 0 2px 0 rgba(255, 255, 255, 0.18) inset;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+#find_ai_leads .fa {
+    margin-right: 8px;
+    font-size: 14px;
+}
+#find_ai_leads:hover,
+#find_ai_leads:focus {
+    color: #ffffff !important;
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -10px rgba(18, 74, 198, 0.95), 0 2px 0 rgba(255, 255, 255, 0.2) inset;
+}
+#find_ai_leads:active {
+    transform: translateY(0);
+    filter: brightness(0.98);
+}
+#find_ai_leads:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    filter: none;
+    transform: none;
+    box-shadow: none;
+}
+/* AI contact preview modal */
+#AIcontactModal .modal-dialog {
+    width: 720px;
+    max-width: calc(100% - 30px);
+    margin: 40px auto;
+}
+#AIcontactModal .modal-content {
+    overflow: hidden;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+}
+#AIcontactModal .ai-contact-modal-header {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 22px 24px 20px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(135deg, #f8fafc 0%, #eef6ff 100%);
+}
+#AIcontactModal .ai-contact-modal-icon {
+    display: flex;
+    flex: 0 0 44px;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 18px;
+    background: linear-gradient(135deg, #124ac6 0%, #00bcf0 100%);
+    box-shadow: 0 10px 20px -10px rgba(18, 74, 198, 0.8);
+}
+#AIcontactModal .ai-contact-modal-heading {
+    min-width: 0;
+}
+#AIcontactModal .ai-contact-modal-title {
+    margin: 9px 0 0;
+    color: #0f172a;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+#AIcontactModal .ai-contact-modal-body {
+    padding: 22px 24px 24px;
+}
+#AIcontactModal .ai-contact-table-wrap {
+    overflow: auto;
+    max-height: 390px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+}
+#AIcontactModal #AIcontactTable {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+#AIcontactModal #AIcontactTable caption {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #0f172a;
+    font-size: 16px;
+    text-align: left;
+    background: #fff;
+}
+#AIcontactModal #AIcontactTable th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-align: left;
+    text-transform: uppercase;
+    background: #f8fafc;
+}
+#AIcontactModal #AIcontactTable td {
+    padding: 13px 14px !important;
+    border-bottom: 1px solid #eef2f7;
+    color: #334155;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    background: #fff;
+}
+#AIcontactModal #AIcontactTable tr:last-child td {
+    border-bottom: 0;
+}
+#AIcontactModal #AIcontactTable tr:hover td {
+    background: #f8fbff;
+}
+#AIcontactModal .ai-contact-modal-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding: 11px 13px;
+    border-radius: 9px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+    background: #f8fafc;
+}
+#AIcontactModal .ai-contact-load-more-wrap {
+    padding-top: 14px;
+    text-align: center;
+}
+#AIcontactModal #btnloadmorecontact {
+    padding: 9px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    color: #124ac6 !important;
+    font-weight: 600;
+    background: #fff;
+}
+#AIcontactModal #btnloadmorecontact:hover,
+#AIcontactModal #btnloadmorecontact:focus {
+    border-color: #124ac6;
+    background: #f5f9ff;
+}
+@media (max-width: 767px) {
+    #AIcontactModal .modal-dialog {
+        width: auto;
+        max-width: none;
+        margin: 15px 10px;
+    }
+    #AIcontactModal .ai-contact-modal-header {
+        padding: 18px 16px 16px 16px;
+    }
+    #AIcontactModal .ai-contact-modal-body {
+        padding: 16px;
+    }
+    #AIcontactModal .ai-contact-table-wrap {
+        max-height: 55vh;
+        overflow-x: hidden;
+    }
+    #AIcontactModal #AIcontactTable {
+        width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+    #AIcontactModal #AIcontactTable caption {
+        padding: 10px;
+        font-size: 15px;
+    }
+    #AIcontactModal #AIcontactTable th,
+    #AIcontactModal #AIcontactTable td {
+        padding: 9px 6px !important;
+        font-size: 11px;
+        letter-spacing: 0;
+    }
+    #AIcontactModal #AIcontactTable .ai-contact-number-cell {
+        width: 9%;
+        text-align: center;
+    }
+    #AIcontactModal #AIcontactTable .ai-contact-name-cell {
+        width: 30%;
+    }
+    #AIcontactModal #AIcontactTable .ai-contact-position-cell {
+        width: auto;
+    }
+    #AIcontactModal #AIcontactTable .ai-contact-action-cell {
+        width: 20%;
+        text-align: center;
+    }
+    #AIcontactModal #AIcontactTable .ai-contact-action-cell .btn {
+        max-width: 100%;
+        padding: 3px 5px !important;
+        font-size: 11px !important;
+    }
+}
+#ai_leads_buttons{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding:0px 20px;
+}
+.ai-find-leads-form-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    width: 100%;
+}
+#ai_find_leads_inputs_wrap {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.ai-find-leads-fields-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.ai-find-leads-location-col,
+.ai-find-leads-desc-col {
+    width: 25%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+#ai_leads_buttons.ai-find-leads-btn-col {
+    width: 16.666%;
+    box-sizing: border-box;
+}
+#ai_ideal_prospects_col {
+    width: 33.333%;
+    margin-left: 8.333%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+#ai_find_leads_form_row:not(.ideal-prospects-visible) #ai_ideal_prospects_col {
+    display: none;
+}
+#ai_ideal_prospects_col #aiLeadInfo {
+    width: 100%;
+}
+#ai_find_leads_form_row.ideal-prospects-visible .ai-find-leads-form-inner {
+    align-items: stretch;
+}
+#ai_find_leads_form_row.ideal-prospects-visible #ai_find_leads_inputs_wrap {
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+#ai_find_leads_form_row.ideal-prospects-visible #ai_ideal_prospects_col {
+    display: block;
+    flex: 0 0 40%;
+    max-width: 40%;
+    width: auto;
+    margin-left: 0;
+    padding-top: 0;
+}
+#ai_find_leads_form_row.ideal-prospects-visible .ai-find-leads-location-col,
+#ai_find_leads_form_row.ideal-prospects-visible .ai-find-leads-desc-col {
+    width: 50%;
+}
+#ai_find_leads_form_row.ideal-prospects-visible #ai_leads_buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 16px;
+    padding: 0 15px;
+}
+#ai_find_leads_form_row.ideal-prospects-visible #find_ai_leads {
+    width: auto;
+    min-width: 220px;
+    max-width: 320px;
+}
+#ai_find_leads_form_row.ideal-prospects-visible #aiLeadInfo {
+    margin-left: 0;
+    max-width: 100%;
+    padding: 16px 18px;
+}
+.btn-white{
+    background-color: #ffffff !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
+}
+#sell_description::placeholder {
+    font-style: italic;
+    color: #999;
+}
+.ai-find-leads-try {
+    margin-top: 10px;
+}
+.ai-find-leads-try-label {
+    display: block;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+.ai-find-leads-try-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.ai-find-leads-try-chip {
+    display: inline-block;
+    padding: 4px 7px;
+    border-radius: 999px;
+    border: 1px solid #7aa3e0;
+    background: #eef3fa;
+    color: #2f6fbf;
+    font-size: 12px;
+    line-height: 1.3;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.ai-find-leads-try-chip:hover,
+.ai-find-leads-try-chip:focus {
+    background: #e0eaf8;
+    border-color: #4d85d1;
+    color: #1f5aa8;
+    outline: none;
+    text-decoration: none;
+}
+.ai-lead-mobile-address {
+    padding: 0 0 0 0px;
+    border: 0;
+    background: transparent;
+    color: #337ab7;
+    text-align: left;
+}
+.ai-lead-website {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    margin-top: 0px;
+    color: #64748b;
+    font-size: 13px;
+}
+.ai-lead-website .fa {
+    flex: 0 0 auto;
+    color: #124ac6;
+}
+.ai-lead-website-link {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 100%;
+    font-weight: 500;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.ai-lead-website-link:hover,
+.ai-lead-website-link:focus {
+    color: #0b389d;
+    text-decoration: underline;
+}
+.ai-lead-website-empty {
+    color: #94a3b8;
+}
+#company_list .ai-lead-website {
+    height: 100%;
+    margin: 0;
+    padding: 0 8px;
+}
+@media (min-width: 768px) {
+    #company_list .ai-lead-website > .fa {
+        display: none;
+    }
+}
+#company_cards .company-card > div {
+    min-width: 0;
+    width: 100%;
+}
+/* AI Leads List/Map view toggle - mobile + desktop when leads exist */
+#ai_leads_view_toggle {
+    display: none;
+}
+#ai_leads_view_toggle.visible {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+/* Search from List: count on first row; list/map + lasso on one row below */
+.ai-leads-toolbar-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.ai-leads-toolbar-actions-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+.ai-leads-top-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.ai-leads-toolbar-right {
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+#ai_leads_map_container .company-card {
+    min-width: 225px;
+    max-width: 420px;
+    margin: 0;
+    border: 0px;
+}
+/* Keep lead count visible in flex layout */
+#aiLeadCount, #aiLeadCount1 {
+    flex-shrink: 0;
+    margin: 0;
+    margin-right: 8px;
+}
+/* AI leads bottom bar (count + button) - full width below table on desktop */
+#ai_leads_bottom_bar {
+    clear: both;
+    width: 100%;
+    margin-top: 15px;
+    justify-content:space-between; 
+    align-items:center; 
+    flex-wrap: wrap; 
+}
+@media (max-width: 991px) {
+    .ai-find-leads-location-col,
+    .ai-find-leads-desc-col,
+    #ai_leads_buttons.ai-find-leads-btn-col,
+    #ai_ideal_prospects_col {
+        width: 100%;
+        margin-left: 0;
+    }
+    #ai_find_leads_form_row.ideal-prospects-visible #ai_find_leads_inputs_wrap,
+    #ai_find_leads_form_row.ideal-prospects-visible #ai_ideal_prospects_col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    #ai_find_leads_form_row.ideal-prospects-visible .ai-find-leads-location-col,
+    #ai_find_leads_form_row.ideal-prospects-visible .ai-find-leads-desc-col {
+        width: 100%;
+    }
+    #ai_ideal_prospects_col {
+        padding-top: 20px;
+    }
+    #ai_find_leads_form_row.ideal-prospects-visible #ai_ideal_prospects_col {
+        margin-top: 20px;
+    }
+    #ai_ideal_prospects_col #aiLeadInfo {
+        margin-left: 0;
+    }
+}
+@media (max-width: 767px) {
+    #ai_find_leads_form_row.ideal-prospects-visible #ai_ideal_prospects_col {
+        margin-top: 24px;
+    }
+}
+
+/* ===== resources/views/front/route/findleads.blade.php · <style> block 2 of 2 ===== */
+body { font-family: Arial; }
+
+    /* Right aligned button containers */
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 0 10px 0;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: white  !important;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* List view toggle button: white background, blue text (when on map view) */
+    .ai-leads-list-view-btn {
+      background-color: #fff !important;
+      color: #007bff !important;
+      border: 1px solid #007bff !important;
+    }
+    .ai-leads-list-view-btn:hover {
+      background-color: #f8f9fa !important;
+      color: #0056b3 !important;
+      border-color: #0056b3 !important;
+    }
+
+    /* Map View toggle button: blue outline, blue icon (when on list view) */
+    .btn-outline-primary.ai-leads-map-view-btn,
+    #ai_leads_map_view_btn.btn-outline-primary {
+      background-color: transparent !important;
+      color: #007bff !important;
+      border: 1px solid #007bff !important;
+    }
+    #ai_leads_map_view_btn.btn-outline-primary:hover {
+      background-color: rgba(0, 123, 255, 0.08) !important;
+      color: #0056b3 !important;
+      border-color: #0056b3 !important;
+    }
+
+    .btn:hover { background-color: #0056b3; }
+
+    .loader1 {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #ddd;
+        border-top: 2px solid #555;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        margin: 6px auto;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* AI Find Leads: inline horizontal card under ICP (progress bar + source logos) */
+    .ai-find-leads-progress-card {
+        margin-top: 16px;
+        margin-bottom: 8px;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(18, 74, 198, 0.08), 0 2px 8px rgba(0,0,0,0.06);
+        border: 1px solid rgba(18, 74, 198, 0.12);
+        overflow: hidden;
+    }
+    .ai-find-leads-progress-card-inner { padding: 18px 20px 16px; }
+    .ai-find-leads-progress-card-row {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .ai-find-leads-progress-card-icon-wrap { flex-shrink: 0; }
+    .ai-find-leads-progress-card-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #e8f0ff 0%, #d4e4ff 100%);
+        color: #124ac6;
+        font-size: 20px;
+    }
+    .ai-find-leads-progress-card-body { flex: 1; min-width: 0; }
+    .ai-find-leads-progress-card-title {
+        margin: 0 0 6px 0;
+        font-size: 17px;
+        font-weight: 700;
+        color: #1a1a2e;
+        line-height: 1.35;
+    }
+    .ai-find-leads-progress-card-hint {
+        margin: 0 0 12px 0;
+        font-size: 13px;
+        color: #888;
+    }
+    .ai-find-leads-progress-bar-track {
+        height: 8px;
+        border-radius: 999px;
+        background: #eceff4;
+        overflow: hidden;
+    }
+    .ai-find-leads-progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2ec5e8 0%, #124ac6 100%);
+        transition: width 0.45s ease-out;
+    }
+    .ai-find-leads-progress-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 12px;
+        color: #888;
+    }
+    .ai-find-leads-progress-card-detail {
+        margin: 10px 0 0 0;
+        font-size: 15px;
+        color: #124ac6;
+        font-weight: 600;
+        min-height: 1.5em;
+        line-height: 1.4;
+        display: block;
+        visibility: visible;
+        transition: opacity 0.35s ease;
+    }
+    .ai-find-leads-progress-card-detail.is-fading {
+        opacity: 0.4;
+    }
+    .ai-find-leads-progress-working {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 13px;
+        color: #999;
+    }
+    .ai-find-leads-working-countdown:empty { display: none; }
+    .ai-find-leads-working-countdown {
+        color: #666;
+        font-weight: 500;
+    }
+    .ai-find-leads-progress-dots span {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #124ac6;
+        margin-right: 4px;
+        animation: aiFindLeadsDotPulse 1.2s ease-in-out infinite;
+    }
+    .ai-find-leads-progress-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .ai-find-leads-progress-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes aiFindLeadsDotPulse {
+        0%, 80%, 100% { opacity: 0.35; transform: scale(0.85); }
+        40% { opacity: 1; transform: scale(1); }
+    }
+    .ai-find-leads-progress-sources {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 1px solid #eef1f6;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px 14px;
+    }
+    .ai-find-leads-src-label {
+        font-size: 12px;
+        color: #888;
+        width: 100%;
+    }
+    @media (min-width: 576px) {
+        .ai-find-leads-src-label { width: auto; margin-right: 4px; }
+    }
+    .ai-find-leads-src-logos {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+    .ai-find-leads-src-chip {
+        display: inline-flex;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+        background: #fff;
+        align-items: center;
+        justify-content: center;
+    }
+    .ai-find-leads-src-chip img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .findlead-popup-actions { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; }
+    .findlead-contact-info-btn {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 20px;
+        min-height: 20px;
+        padding: 0 2px;
+        margin-left: 8px;
+        border-radius: 50%;
+        background: #1976D2;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        vertical-align: middle;
+        border: 2px solid #0D47A1;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        margin-top: 2px;
+    }
+    .findlead-contact-info-btn:hover { background: #1565C0; }
+    .findlead-contact-info-msg {
+        font-size: 11px;
+        font-style: italic;
+        margin-top: 6px;
+        color: #555;
+        text-align: right;
+    }
+    #ai_leads_map_view_btn, #ai_leads_list_view_btn {
+        padding: 7px 15px !important;
+    }
+
+    /* Full-screen overlay when saving AI leads after “Next Step” (lasso / grid selection) */
+    .ai-next-step-save-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000050;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(15, 23, 42, 0.72);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        box-sizing: border-box;
+    }
+    .ai-next-step-save-overlay.is-visible {
+        display: flex;
+    }
+    .ai-next-step-save-panel {
+        width: 100%;
+        max-width: 420px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.06);
+        padding: 28px 26px 24px;
+        text-align: center;
+        animation: aiNextStepPanelIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes aiNextStepPanelIn {
+        from { opacity: 0; transform: translateY(16px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .ai-next-step-save-spinner {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 18px;
+        border-radius: 50%;
+        border: 3px solid #e8ecf4;
+        border-top-color: #124ac6;
+        animation: spin 0.85s linear infinite;
+    }
+    .ai-next-step-save-title {
+        margin: 0 0 8px 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        line-height: 1.3;
+    }
+    .ai-next-step-save-sub {
+        margin: 0 0 18px 0;
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.45;
+    }
+    .ai-next-step-save-sub strong {
+        color: #124ac6;
+        font-weight: 700;
+    }
+    .ai-next-step-save-track {
+        height: 10px;
+        border-radius: 999px;
+        background: #eceff4;
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+    .ai-next-step-save-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2ec5e8 0%, #124ac6 55%, #1a5fd4 100%);
+        background-size: 200% 100%;
+        animation: aiNextStepBarShimmer 2.2s ease-in-out infinite;
+        transition: width 0.35s ease-out;
+    }
+    @keyframes aiNextStepBarShimmer {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    .ai-next-step-save-pct {
+        margin: 0 0 14px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #124ac6;
+        letter-spacing: 0.02em;
+    }
+    .ai-next-step-save-tip {
+        margin: 0 0 10px 0;
+        min-height: 2.6em;
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        line-height: 1.35;
+        transition: opacity 0.35s ease;
+    }
+    .ai-next-step-save-tip.is-fading {
+        opacity: 0.45;
+    }
+    .ai-next-step-save-dots {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin-right: 8px;
+        vertical-align: middle;
+    }
+    .ai-next-step-save-dots span {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #124ac6;
+        animation: aiNextStepDotPulse 1.15s ease-in-out infinite;
+    }
+    .ai-next-step-save-dots span:nth-child(2) { animation-delay: 0.18s; }
+    .ai-next-step-save-dots span:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes aiNextStepDotPulse {
+        0%, 80%, 100% { opacity: 0.35; transform: scale(0.88); }
+        40% { opacity: 1; transform: scale(1); }
+    }
+    .ai-next-step-save-hint {
+        margin: 0;
+        font-size: 12px;
+        color: #888;
+        line-height: 1.45;
+    }

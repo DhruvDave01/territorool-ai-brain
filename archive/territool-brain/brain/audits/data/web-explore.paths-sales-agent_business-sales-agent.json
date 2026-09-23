@@ -1,0 +1,213 @@
+{
+ "capturedAt": "2026-09-16T14:01:02.369Z",
+ "base": "https://staging.territool.com",
+ "roles": {
+  "Sales Agent": {
+   "loginPage": "/login",
+   "captchaOnLogin": false,
+   "landed": "/dashboard",
+   "loginOk": true,
+   "loginError": null,
+   "pages": [
+    {
+     "role": "Sales Agent",
+     "requested": "/businessagent/subscription",
+     "final": "/businessagent/subscription",
+     "status": 200,
+     "title": "TerriTool",
+     "h1": "subscriptions All subscriptions in the database",
+     "breadcrumb": "subscriptions",
+     "nav": [
+      "Toggle navigation Toggle navigation Toggle navigation",
+      "8310 Credits",
+      "Report Bug",
+      "Logout",
+      "How To Generate Security Token?",
+      "Home",
+      "Address Book",
+      "Companies",
+      "Contacts",
+      "Companies With Errors",
+      "AI Find Leads",
+      "Add Company",
+      "Recently Added",
+      "Routes",
+      "Lists",
+      "Settings"
+     ],
+     "buttons": [
+      "Upgrade",
+      "×",
+      "Close",
+      "Send",
+      "Cancel Subscription",
+      "Download Invoice",
+      "Submit"
+     ],
+     "forms": [
+      {
+       "action": "/sfdc",
+       "method": "POST",
+       "fields": [
+        "username:email",
+        "password_sfdc:password",
+        "security_token:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "/save-hubspot-api-key",
+       "method": "POST",
+       "fields": [
+        "hubspot_api_key:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "/save-karmacrm-api-key",
+       "method": "POST",
+       "fields": [
+        "karmacrm_api_key:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "subscriptions/cancelsubscribereason",
+       "method": "GET",
+       "fields": [
+        "subscription_cancel_reason:textarea*"
+       ]
+      }
+     ],
+     "tables": [
+      [
+       "Package Name",
+       "Amount",
+       "Start Date",
+       "End Date",
+       "Actions"
+      ],
+      [
+       "Package Name",
+       "Amount",
+       "Start Date",
+       "End Date",
+       "Actions"
+      ]
+     ],
+     "headings": [
+      "Subscription history of Ann (***)",
+      "Get the App!"
+     ],
+     "captcha": false,
+     "requests": [],
+     "error": null
+    }
+   ]
+  },
+  "Business Sales Agent": {
+   "loginPage": "/login",
+   "captchaOnLogin": false,
+   "landed": "/dashboard",
+   "loginOk": true,
+   "loginError": null,
+   "pages": [
+    {
+     "role": "Business Sales Agent",
+     "requested": "/businessagent/subscription",
+     "final": "/businessagent/subscription",
+     "status": 200,
+     "title": "TerriTool",
+     "h1": "subscriptions All subscriptions in the database",
+     "breadcrumb": "subscriptions",
+     "nav": [
+      "Toggle navigation Toggle navigation Toggle navigation",
+      "Report Bug",
+      "Logout",
+      "How To Generate Security Token?",
+      "Home",
+      "Address Book",
+      "Companies",
+      "Contacts",
+      "Find Leads",
+      "Add Company",
+      "Recently Added",
+      "Routes",
+      "Lists",
+      "Settings"
+     ],
+     "buttons": [
+      "Upgrade",
+      "×",
+      "Close",
+      "Send",
+      "Subscribe Now",
+      "Submit"
+     ],
+     "forms": [
+      {
+       "action": "/sfdc",
+       "method": "POST",
+       "fields": [
+        "username:email",
+        "password_sfdc:password",
+        "security_token:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "/save-hubspot-api-key",
+       "method": "POST",
+       "fields": [
+        "hubspot_api_key:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "/save-karmacrm-api-key",
+       "method": "POST",
+       "fields": [
+        "karmacrm_api_key:text",
+        "btnsbt:button"
+       ]
+      },
+      {
+       "action": "subscriptions/cancelsubscribereason",
+       "method": "GET",
+       "fields": [
+        "subscription_cancel_reason:textarea*"
+       ]
+      }
+     ],
+     "tables": [
+      [
+       "Package Name",
+       "Amount",
+       "Start Date",
+       "End Date",
+       "Actions"
+      ],
+      [
+       "Package Name",
+       "Amount",
+       "Start Date",
+       "End Date",
+       "Actions"
+      ]
+     ],
+     "headings": [
+      "Subscription history of Anna (***)",
+      "Get the App!"
+     ],
+     "captcha": false,
+     "requests": [],
+     "error": null
+    }
+   ]
+  }
+ },
+ "probe": {
+  "Sales Agent": {},
+  "Business Sales Agent": {}
+ }
+}

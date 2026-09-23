@@ -1,0 +1,115 @@
+# Read-only exploration: login → dashboard tiles (Address Book, Routes, Lists, AI Find Leads) → Settings.
+# Screenshots only; no save/buy/delete/share taps. Dashboard has no footer; inner screens do.
+# Run: node workspace/test-suites/mobile/run.js --device <UDID> --role "Sales Agent" workspace/test-suites/mobile/F01-login-main-nav.yaml --out <dir>
+# Permissions are pre-granted with `xcrun simctl privacy` on the test simulator, so no "Allow" taps.
+# iOS shows a system "Save Password?" sheet after login; it hides the app from the hierarchy until dismissed.
+appId: com.picwa.appterritool
+name: Explore main navigation (read-only)
+env:
+  SHOT: nav
+---
+- launchApp:
+    clearState: true
+- runFlow:
+    when:
+      visible: "Back to Login"
+    commands:
+      - tapOn: "Back to Login"
+- extendedWaitUntil:
+    visible:
+      id: login.logo
+    timeout: 120000
+- takeScreenshot: ${SHOT}-01-login
+- tapOn:
+    id: login.email
+- inputText: ${LOGIN_EMAIL}
+- tapOn:
+    id: login.logo
+- tapOn:
+    id: login.password
+- inputText: ${LOGIN_PASSWORD}
+- tapOn:
+    id: login.logo
+- tapOn:
+    id: login.submit
+- extendedWaitUntil:
+    visible: "Not Now"
+    timeout: 30000
+    optional: true
+- runFlow:
+    when:
+      visible: "Not Now"
+    commands:
+      - tapOn: "Not Now"
+- extendedWaitUntil:
+    visible:
+      id: screen.dashboard
+    timeout: 60000
+- runFlow:
+    when:
+      visible:
+        id: modal.dash.appUpdate
+    commands:
+      - tapOn:
+          id: confirm.secondary
+- waitForAnimationToEnd:
+    timeout: 5000
+- takeScreenshot: ${SHOT}-02-dashboard
+- scroll
+- takeScreenshot: ${SHOT}-02b-dashboard-scrolled
+- scrollUntilVisible:
+    element: "Address Book"
+    direction: UP
+    timeout: 10000
+- tapOn: "Address Book"
+- extendedWaitUntil:
+    notVisible: "Downloading.*"
+    timeout: 45000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: ${SHOT}-03-address-book
+- tapOn:
+    id: component.customFooter.pressTouchableOpacityD
+- extendedWaitUntil:
+    notVisible: "Downloading.*"
+    timeout: 45000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: ${SHOT}-04-routes
+- tapOn:
+    id: component.customFooter.pressTouchableOpacityE
+- extendedWaitUntil:
+    notVisible: "Downloading.*"
+    timeout: 45000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: ${SHOT}-05-lists
+- tapOn:
+    id: component.customFooter.pressTouchableOpacityB
+- extendedWaitUntil:
+    notVisible: "Downloading.*"
+    timeout: 45000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: ${SHOT}-06-ai-find-leads
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible:
+      id: screen.dashboard
+    timeout: 60000
+- tapOn:
+    id: screen.dashboard.iconsettingsOutline
+- extendedWaitUntil:
+    notVisible: "Downloading.*"
+    timeout: 45000
+    optional: true
+- waitForAnimationToEnd:
+    timeout: 8000
+- takeScreenshot: ${SHOT}-07-settings
+- scroll
+- takeScreenshot: ${SHOT}-07b-settings-scrolled

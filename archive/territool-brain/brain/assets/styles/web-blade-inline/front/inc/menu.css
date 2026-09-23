@@ -1,0 +1,9 @@
+/* ===== resources/views/front/inc/menu.blade.php · <style> block 1 of 1 ===== */
+.creditBadgeDesktop{
+        background-color: #124ac6;
+        color: #fff;
+        font-family: 'DIN 2014 Bold' !important;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 30px;
+    }

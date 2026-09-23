@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "/graph.html", "permanent": false }
+  ],
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 60,
+      "includeFiles": "**/*.md"
+    },
+    "api/gmail/callback.js": {
+      "maxDuration": 30
+    }
+  }
+}

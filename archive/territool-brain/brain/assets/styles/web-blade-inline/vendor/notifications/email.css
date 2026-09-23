@@ -1,0 +1,7 @@
+/* ===== resources/views/vendor/notifications/email.blade.php · <style> block 1 of 1 ===== */
+/* Media Queries */
+        @media only screen and (max-width: 500px) {
+            .button {
+                width: 100% !important;
+            }
+        }

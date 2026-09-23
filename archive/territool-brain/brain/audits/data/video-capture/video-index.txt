@@ -1,0 +1,108 @@
+FRESH DASHBOARD RECORDINGS — 16 September 2026
+
+24 freshly captured H.264 MOV videos, organized by flow. Every delivered video begins on Dashboard. Tool-related idle pauses were trimmed; API processing waits remain visible. These are real Simulator recordings with cuts, not sped-up or fabricated demonstrations. The first Dashboard and AI search attempts were superseded and are excluded.
+
+Device: iPhone 17 Pro Max, iOS 26.5
+Simulator: C73F304D-CF29-425B-8771-61279049E475
+Scheme: TerriTool (Debug), ios/TerriTool.xcworkspace
+App: com.picwa.appterritool, 42.32 (1), development/staging
+Login restored: <staging Sales Agent account>
+Final observed credits: 8320 (existing test credits only)
+No real-money purchases. Current Pro Package was not cancelled.
+
+Verification: first, midpoint, and ending frames decoded for all 24 files; first-frame contact sheet visually checked for Dashboard; SHA-256 hashes matched after copying into Downloads.
+
+Coverage limits and exclusions:
+- Real-money purchases, RevenueCat checkout, and final registration payment were intentionally skipped.
+- Current-package cancellation was opened and dismissed only.
+- Gallery OCR and save passed. Live QR decoding and camera capture cannot be completed on this Simulator; physical-device testing remains.
+- Share and referral forms/validation were recorded. Actual email/SMS sends and password-reset sends were not performed: an explicit destination is still required by the tool-use instructions, and the recipient question has no answer yet.
+- AI map area-selection controls were exercised, but a valid lasso-selected result was not established. Ordinary checkbox selection, imports, map display, and route/list destinations were verified.
+- External navigation/calling/email delivery and third-party CRM connection require their respective external setup; these are not claimed as end-to-end passes.
+- No claim is made that every possible data combination or branch has been tested. The executed paths for each video are listed below.
+
+Observed issues preserved in the recordings:
+- Dashboard displays Current time Invalid Date PT.
+- Editing a one-company list rejects the save with a route-specific minimum-two-waypoints message.
+- Editing Fresh Coffee reversed the default start/end points before saving.
+- After deleting Fresh Contact, the deletion sheet remained over Address Book until closed. Source inspection found the successful delete path navigates without resetting deleteContact to false in App/components/contacts/view.js:1207.
+- A fresh AI search selected two leads, but Create Route received one selected company. The two-stop warning was captured, then a second company was added and the route published. The reason for the dropped imported selection remains unconfirmed.
+
+No source-code edits were made during this re-recording pass. These newly observed issues are evidence, not claims of fixes.
+Build iOS Apps / XcodeBuildMCP were unavailable in this session; the recordings used the existing TerriTool scheme and booted Simulator via Xcode simctl and native UI automation.
+
+FILES AND EXECUTED PATHS
+
+01 Dashboard/Dashboard Activity and Calendar.mov (0:43)
+Recent and Upcoming tabs; calendar month/date navigation; full activity feed and scrolling.
+
+02 Companies/Create Company and Validation.mov (1:06)
+Empty-name validation; manual company entry; address and industry; save.
+
+02 Companies/Company Details and Edit.mov (0:56)
+Address Book search; company details and More Info; edit company name and industry; verify saved values.
+
+02 Companies/Company Activity and Visit.mov (0:58)
+Activity validation; create Visit activity; edit its note; activity tabs.
+
+02 Companies/Contact Notes and Test Data Deletion.mov (1:33)
+Verify saved contact note and role; cancel then confirm contact deletion; close lingering sheet; delete disposable scanned company and verify success.
+
+03 Contacts/Contact Create Edit and Notes.mov (1:26)
+Required fields and invalid email validation; create contact; edit position and notes; verify.
+
+03 Contacts/Address Book Contacts and Purchase Verification.mov (1:01)
+Search Connie Munson; verify purchased phone and enabled email; add contact company to Fresh Coffee route; verify stop.
+
+04 Lists/List Find Contacts Purchase.mov (1:54)
+Dashboard > Lists > Test List Brain 0002 > Find Contacts; review/remove/reselect; buy phone and email for Connie Munson using 2 existing credits. Completion verified in the Contacts video.
+
+04 Lists/List Create Search and Edit.mov (1:38)
+Create Fresh Demo List; one-company edit validation; add second company; save and verify.
+
+04 Lists/List Search Filters Sharing and Map.mov (1:25)
+Find list; no-result company search; visited filter and reset; invalid sharing email; map and zoom.
+
+05 Routes/Route Find Contacts Purchase.mov (1:55)
+Dashboard > Routes > Fresh Coffee > Find Contacts; company contact preview; select/review/remove/reselect; buy email using 1 existing credit; verify saved contact.
+
+05 Routes/Route Creation.mov (1:02)
+Name validation; select companies; review stops; choose endpoints; publish Fresh Demo Route; verify.
+
+05 Routes/Route Visits and Editing.mov (1:25)
+Mark and remove visit; next/previous waypoint; edit route; save; endpoint reversal observed.
+
+05 Routes/Route Search Filters Sharing and Map.mov (1:40)
+Search route and stops; visited filter and reset; invalid sharing email; map zoom; pin details.
+
+06 Lead Discovery/AI Find Leads Search to Route.mov (2:37)
+Clear saved search; ZIP 94043 and Coffee; search; select and import two leads; create Fresh AI route; one imported stop triggers validation; add second stop; publish and verify.
+
+06 Lead Discovery/AI Find Leads Map and List Import.mov (2:00)
+Saved city results; map; start/end/clear area-selection controls; minimum-two validation; select two leads; import into Fresh Demo List; verify company rows.
+
+06 Lead Discovery/Find Leads Search and Import.mov (1:31)
+Dashboard > Address Book > add menu > Find Leads; ZIP 94043 and Coffee; select 41 results; confirm import; verify White Tiger in Address Book.
+
+07 Scanners/Business Card Gallery OCR and Save.mov (1:01)
+Choose existing public sample from Gallery; crop; OCR; review and rename company/contact; clear sample phone; save; verify company/contact.
+
+07 Scanners/QR and Camera Scanner Availability.mov (0:16)
+Open QR scanner; return; try business-card camera; capture Simulator camera-unavailable message.
+
+08 Settings/Settings Tags and App Update.mov (0:30)
+Account information; status-tag color picker; update tags success; development app-update preview; Update Later.
+
+08 Settings/Current Package Modal Open and Close.mov (0:22)
+Pro Package Active; expand plan features; open cancellation form; close with X; reopen; Nevermind. No cancellation submitted.
+
+09 Authentication/Registration Until Payment Setup.mov (1:30)
+Dashboard > Settings > logout > Register; goals; field/B2B role; Google Maps tool; required-field validation; submit test registration; stop at payment setup.
+
+09 Authentication/Login Logout and Password Validation.mov (1:17)
+Logout cancel and confirm; empty login; invalid credentials and wrong-password error; password recovery web form; return; successful login to Dashboard.
+
+10 Referrals and App Lifecycle/Referral Forms and App Lifecycle.mov (0:26)
+Referral empty/invalid email and invalid phone validation; close; background/resume; rotate and restore portrait.
+
+Total: 24 videos, 30:14, 871,158,308 bytes.

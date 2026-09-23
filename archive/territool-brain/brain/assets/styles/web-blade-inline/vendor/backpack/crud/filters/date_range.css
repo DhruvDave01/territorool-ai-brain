@@ -1,0 +1,7 @@
+/* ===== resources/views/vendor/backpack/crud/filters/date_range.blade.php · <style> block 1 of 1 ===== */
+.input-group.date {
+			width: 320px;
+			max-width: 100%; }
+		.daterangepicker.dropdown-menu {
+			z-index: 3001!important;
+		}

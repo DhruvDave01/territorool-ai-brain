@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <title>TerriTool User Guide</title>
+  <style>
+    :root {
+      --primary: #124ac6;
+      --primary-light: #4A90E4;
+      --teal: #12AA9D;
+      --warning: #FFB800;
+      --danger: #E94A5D;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --surface: #F6F7FB;
+      --white: #FFFFFF;
+      --footer-bg: #F6F7FB;
+      --footer-active: #E8EEF8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      font-size: 10.5pt;
+      line-height: 1.5;
+      background: white;
+    }
+    @page { size: Letter; margin: 0.45in; }
+    .page { page-break-after: always; padding: 4px 0 24px; min-height: 9.2in; }
+    .page:last-child { page-break-after: auto; }
+
+    /* Cover */
+    .cover {
+      min-height: 9.5in;
+      background: linear-gradient(135deg, #124ac6, #2963db 55%, #4A90E4);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+    }
+    .cover img.logo { width: 120px; height: 120px; object-fit: contain; border-radius: 24px; background: rgba(255,255,255,0.12); padding: 12px; margin-bottom: 20px; }
+    .cover h1 { font-size: 30pt; margin-bottom: 10px; }
+    .cover p { font-size: 13pt; max-width: 440px; opacity: 0.95; margin-bottom: 28px; }
+    .cover .pill { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 10px 22px; font-weight: 600; }
+
+    /* Page header */
+    .page-num { color: var(--muted); font-size: 9pt; margin-bottom: 6px; }
+    h2.page-title { font-size: 20pt; color: var(--primary); margin-bottom: 10px; border-bottom: 3px solid var(--primary); padding-bottom: 6px; }
+
+    .what-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-left: 5px solid var(--primary);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+    }
+    .what-box h3 { color: var(--primary); font-size: 11pt; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .what-box p { font-size: 10.5pt; }
+
+    .layout { display: flex; gap: 20px; align-items: flex-start; }
+    .layout-col { flex: 1; min-width: 0; }
+
+    /* Phone mockup */
+    .phone {
+      width: 248px;
+      flex-shrink: 0;
+      border: 3px solid #1f2937;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .phone-notch { height: 22px; background: #000; position: relative; }
+    .phone-notch::after { content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 72px; height: 10px; background: #111; border-radius: 8px; }
+    .phone-screen { background: var(--surface); min-height: 420px; position: relative; }
+    .phone-header-blue {
+      background: linear-gradient(180deg, #124ac6, #1b54cf);
+      color: white;
+      padding: 12px 14px 16px;
+    }
+    .phone-header-blue h4 { font-size: 11pt; font-weight: 700; }
+    .phone-header-blue p { font-size: 8pt; opacity: 0.9; margin-top: 2px; }
+    .phone-body { padding: 10px; background: var(--surface); }
+    .phone-white-card { background: white; border-radius: 12px; padding: 10px; border: 1px solid var(--border); margin-bottom: 8px; }
+    .phone-input { background: #FAFBFC; border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 8pt; color: var(--muted); margin-bottom: 6px; }
+    .phone-btn-primary { background: var(--primary); color: white; text-align: center; border-radius: 8px; padding: 9px; font-weight: 700; font-size: 9pt; margin-top: 6px; }
+    .phone-btn-outline { border: 2px solid var(--primary); color: var(--primary); text-align: center; border-radius: 8px; padding: 8px; font-weight: 700; font-size: 8.5pt; margin-top: 6px; background: white; }
+
+    .dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .dash-tile { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 8px 4px; text-align: center; }
+    .dash-tile img { width: 32px; height: 32px; object-fit: contain; }
+    .dash-tile span { display: block; font-size: 7pt; font-weight: 700; color: var(--primary); margin-top: 4px; line-height: 1.2; }
+
+    .phone-footer {
+      display: flex;
+      background: var(--footer-bg);
+      border-top: 1px solid var(--border);
+      padding: 6px 2px 8px;
+    }
+    .phone-footer-item { flex: 1; text-align: center; padding: 4px 2px; border-radius: 8px; }
+    .phone-footer-item.active { background: var(--footer-active); }
+    .phone-footer-item img { width: 22px; height: 22px; object-fit: contain; display: block; margin: 0 auto 2px; }
+    .phone-footer-item label { font-size: 6pt; color: var(--muted); font-weight: 600; display: block; }
+    .phone-footer-item.active label { color: var(--primary); }
+
+    .qa-row { display: flex; gap: 4px; margin: 8px 0; }
+    .qa-btn { flex: 1; background: var(--primary); color: white; border-radius: 8px; padding: 8px 2px; text-align: center; font-size: 6.5pt; font-weight: 600; line-height: 1.2; }
+    .qa-btn ion { display: block; font-size: 14pt; margin-bottom: 2px; }
+    .qa-btn.muted { background: #BCBCBC; color: #fff; }
+
+    .bottom-cta-row { display: flex; gap: 6px; padding: 8px; background: white; border-top: 1px solid var(--border); }
+    .bottom-cta { flex: 1; background: var(--primary); color: white; border-radius: 10px; padding: 10px 4px; text-align: center; font-size: 7.5pt; font-weight: 700; }
+    .bottom-cta.outline { background: white; color: var(--primary); border: 2px solid var(--primary); }
+
+    .modal-overlay { background: rgba(0,0,0,0.35); padding: 16px 8px; min-height: 200px; }
+    .modal-card { background: white; border-radius: 14px; padding: 10px; }
+    .modal-title { font-size: 9pt; font-weight: 700; color: var(--text); }
+    .modal-sub { font-size: 7pt; color: var(--muted); margin-bottom: 8px; }
+    .field-label { font-size: 6.5pt; font-weight: 700; color: var(--muted); text-transform: uppercase; margin: 6px 0 3px; letter-spacing: 0.03em; }
+
+    .callout { font-size: 9pt; margin-bottom: 8px; padding-left: 12px; border-left: 3px solid var(--teal); }
+    .steps { list-style: none; counter-reset: s; }
+    .steps li { counter-increment: s; position: relative; padding: 8px 8px 8px 36px; margin-bottom: 6px; background: var(--surface); border-radius: 8px; border-left: 3px solid var(--primary); font-size: 9.5pt; }
+    .steps li::before { content: counter(s); position: absolute; left: 8px; top: 8px; width: 22px; height: 22px; background: var(--primary); color: white; border-radius: 50%; font-weight: 700; font-size: 9pt; text-align: center; line-height: 22px; }
+    .steps li strong { color: var(--primary); }
+
+    .tip { background: #ECFDF5; border-left: 4px solid var(--teal); padding: 10px 12px; border-radius: 8px; font-size: 9pt; margin-top: 10px; }
+    .warn { background: #FFFBEB; border-left: 4px solid var(--warning); padding: 10px 12px; border-radius: 8px; font-size: 9pt; margin-top: 10px; }
+
+    .toc-list { list-style: none; }
+    .toc-list li { padding: 10px 12px; margin-bottom: 6px; background: var(--surface); border-radius: 8px; border-left: 4px solid var(--primary); font-size: 11pt; font-weight: 600; color: var(--primary); display: flex; justify-content: space-between; }
+    .toc-list li span { color: var(--muted); font-weight: 500; font-size: 9pt; }
+
+    .arrow-label { display: inline-block; background: var(--danger); color: white; font-size: 7pt; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-right: 4px; vertical-align: middle; }
+
+    table.simple { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+    table.simple th { background: var(--primary); color: white; padding: 8px; text-align: left; }
+    table.simple td { padding: 8px; border-bottom: 1px solid var(--border); }
+    table.simple tr:nth-child(even) td { background: var(--surface); }
+
+    .map-placeholder { background: #dbeafe; height: 100px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 8pt; color: var(--primary); font-weight: 600; }
+
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 0: COVER -->
+<section class="page cover">
+  <img class="logo" src="assets/TT_NO_BG.png" alt="TerriTool logo" />
+  <h1>TerriTool User Guide</h1>
+  <p>Picture-by-picture instructions for USA field sales teams. Every page matches what you see on your phone.</p>
+  <div class="pill">TerriTool: AI Field Sales · Simple Steps · Real App Screens</div>
+</section>
+
+<!-- PAGE 1: TOC -->
+<section class="page">
+  <p class="page-num">Page 1</p>
+  <h2 class="page-title">What's Inside — One Topic Per Page</h2>
+  <p style="margin-bottom:14px;color:var(--muted);">Turn to the page number shown. Each section shows the <strong>same icons and buttons</strong> as the mobile app.</p>
+  <ul class="toc-list">
+    <li>2 — Login &amp; Sign Up <span>Start here</span></li>
+    <li>3 — Bottom Menu (6 Icons) <span>Always on screen</span></li>
+    <li>4 — Home Screen <span>Your dashboard</span></li>
+    <li>5 — AI Find Leads <span>Find new companies</span></li>
+    <li>6 — Routes <span>Plan driving days</span></li>
+    <li>7 — Lists <span>Group companies</span></li>
+    <li>8 — Company Page <span>Call, map, contacts</span></li>
+    <li>9 — Add Activity <span>Notes &amp; follow-ups</span></li>
+    <li>10 — Find Contacts <span>Get decision-makers</span></li>
+    <li>11 — Scan Business Card <span>AI reads cards</span></li>
+    <li>12 — Settings &amp; Credits <span>Plan &amp; balance</span></li>
+    <li>13 — Problems &amp; Fixes <span>When stuck</span></li>
+  </ul>
+  <div class="tip" style="margin-top:20px;"><strong>Before you start:</strong> You need internet (Wi‑Fi or cell data). Allow Location when the app asks — maps and routes work better.</div>
+</section>
+
+<!-- PAGE 2: LOGIN -->
+<section class="page">
+  <p class="page-num">Page 2</p>
+  <h2 class="page-title">Login &amp; Sign Up</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Login</strong> opens your saved account so you see your companies, routes, and activities. <strong>Sign Up (Register)</strong> creates a new account and picks a subscription plan. You only do this once — after that, use Login every day.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header-blue" style="padding-top:20px;text-align:center;">
+          <img src="assets/TT_NO_BG.png" alt="" style="width:48px;height:48px;object-fit:contain;margin:0 auto 8px;display:block;" />
+          <h4>TerriTool</h4>
+          <p>AI Field Sales</p>
+        </div>
+        <div class="phone-body" style="background:white;padding:14px;">
+          <div class="field-label">Email Address</div>
+          <div class="phone-input">you@company.com</div>
+          <div class="field-label">Password</div>
+          <div class="phone-input">••••••••</div>
+          <div style="text-align:right;font-size:7pt;color:var(--primary);margin:4px 0 8px;">Forgot Password?</div>
+          <div class="phone-btn-primary">LOGIN</div>
+          <div class="phone-btn-outline">REGISTER</div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <p class="callout"><span class="arrow-label">A</span> Type the email you used when you signed up.</p>
+      <p class="callout"><span class="arrow-label">B</span> Type your password (tap the eye icon to show it).</p>
+      <p class="callout"><span class="arrow-label">C</span> Tap <strong>LOGIN</strong> — wait a few seconds.</p>
+      <p class="callout"><span class="arrow-label">D</span> New user? Tap <strong>REGISTER</strong> instead.</p>
+      <ol class="steps">
+        <li>Open the TerriTool app on your phone.</li>
+        <li>Enter <strong>Email Address</strong> and <strong>Password</strong> exactly as shown above.</li>
+        <li>Tap the blue <strong>LOGIN</strong> button.</li>
+        <li>You land on <strong>Home</strong> (Page 4). If asked about subscription, follow the on-screen steps.</li>
+      </ol>
+      <div class="warn"><strong>Forgot password?</strong> Tap <strong>Forgot Password?</strong>, enter your email, check your inbox.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: BOTTOM NAV -->
+<section class="page">
+  <p class="page-num">Page 3</p>
+  <h2 class="page-title">Bottom Menu — 6 Icons</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p>The <strong>bottom bar</strong> is your main navigation. It stays on almost every screen. Tap an icon to jump to that area. The icon you are on gets a <strong>light blue background</strong> — same as the app.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen" style="min-height:380px;">
+        <div class="phone-body" style="padding-top:40px;">
+          <p style="text-align:center;color:var(--muted);font-size:8pt;">(Any screen — look at the bottom)</p>
+        </div>
+        <div class="phone-footer" style="position:absolute;bottom:0;left:0;right:0;">
+          <div class="phone-footer-item active"><img src="assets/icon_home_active.png" alt="Home" /><label>Home</label></div>
+          <div class="phone-footer-item"><img src="assets/Find_Leads.png" alt="Find" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="Co" /><label>Companies</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_routes.png" alt="Routes" /><label>Routes</label></div>
+          <div class="phone-footer-item"><img src="assets/Supply3.png" alt="Lists" /><label>Lists</label></div>
+          <div class="phone-footer-item"><img src="assets/setting.png" alt="Settings" /><label>Settings</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <table class="simple">
+        <tr><th>Icon (same as app)</th><th>Name</th><th>What it does</th></tr>
+        <tr><td><img src="assets/icon_home.png" width="24" alt="" /></td><td><strong>Home</strong></td><td>Dashboard — shortcuts &amp; activities</td></tr>
+        <tr><td><img src="assets/Find_Leads.png" width="24" alt="" /></td><td><strong>Find Leads</strong></td><td>AI search for new companies on map</td></tr>
+        <tr><td><img src="assets/icon_company.png" width="24" alt="" /></td><td><strong>Companies</strong></td><td>Address Book — all saved companies</td></tr>
+        <tr><td><img src="assets/icon_routes.png" width="24" alt="" /></td><td><strong>Routes</strong></td><td>Your driving routes for field days</td></tr>
+        <tr><td><img src="assets/Supply3.png" width="24" alt="" /></td><td><strong>Lists</strong></td><td>Custom groups of companies</td></tr>
+        <tr><td><img src="assets/setting.png" width="24" alt="" /></td><td><strong>Settings</strong></td><td>Profile, credits, subscription</td></tr>
+      </table>
+      <div class="warn" style="margin-top:12px;"><strong>Subscription expired?</strong> Icons may show a popup — tap <strong>Subscribe</strong> or ask your manager.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: HOME -->
+<section class="page">
+  <p class="page-num">Page 4</p>
+  <h2 class="page-title">Home Screen (Dashboard)</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Home</strong> is your daily starting point. The colored tiles are shortcuts to the main tools. Scroll down to see <strong>Upcoming</strong> and <strong>Recent</strong> activities — tap any activity to open that company.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header-blue">
+          <h4>Welcome back!</h4>
+          <p>Your field sales command center</p>
+        </div>
+        <div class="phone-body">
+          <div class="dash-grid">
+            <div class="dash-tile"><img src="assets/ai_findleads.png" alt="" /><span>AI Find Leads</span></div>
+            <div class="dash-tile"><img src="assets/scan_card.png" alt="" /><span>Scan Card</span></div>
+            <div class="dash-tile"><img src="assets/recently_added.png" alt="" /><span>Add Company</span></div>
+            <div class="dash-tile"><img src="assets/icon_routes.png" alt="" /><span>Routes</span></div>
+            <div class="dash-tile"><img src="assets/Supply3.png" alt="" /><span>Lists</span></div>
+            <div class="dash-tile"><img src="assets/icon_company.png" alt="" /><span>Address Book</span></div>
+          </div>
+          <div class="phone-white-card" style="margin-top:8px;font-size:7pt;color:var(--muted);">↑ Scroll for Upcoming / Recent activity</div>
+        </div>
+        <div class="phone-footer">
+          <div class="phone-footer-item active"><img src="assets/icon_home_active.png" alt="" /><label>Home</label></div>
+          <div class="phone-footer-item"><img src="assets/Find_Leads.png" alt="" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="" /><label>Co</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_routes.png" alt="" /><label>Routes</label></div>
+          <div class="phone-footer-item"><img src="assets/Supply3.png" alt="" /><label>Lists</label></div>
+          <div class="phone-footer-item"><img src="assets/setting.png" alt="" /><label>Settings</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <table class="simple">
+        <tr><th>Tile (real icon)</th><th>What it does</th></tr>
+        <tr><td><img src="assets/ai_findleads.png" width="28" alt="" /> AI Find Leads</td><td>Search for new businesses with AI (uses credits)</td></tr>
+        <tr><td><img src="assets/scan_card.png" width="28" alt="" /> Scan Card</td><td>Take a photo of a business card — AI saves contact</td></tr>
+        <tr><td><img src="assets/recently_added.png" width="28" alt="" /> Add Company</td><td>Add one company manually by name/address</td></tr>
+        <tr><td><img src="assets/icon_routes.png" width="28" alt="" /> Routes</td><td>Open your saved driving routes</td></tr>
+        <tr><td><img src="assets/Supply3.png" width="28" alt="" /> Lists</td><td>Open your company lists</td></tr>
+        <tr><td><img src="assets/icon_company.png" width="28" alt="" /> Address Book</td><td>See every company in your account</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: AI FIND LEADS -->
+<section class="page">
+  <p class="page-num">Page 5</p>
+  <h2 class="page-title">AI Find Leads</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>AI Find Leads</strong> finds businesses that match what you sell. You search on a <strong>map</strong>, pick companies, and save them to your account. This uses <strong>credits</strong> from your plan. Best workflow: Find leads → Build a Route → Find Contacts at each stop.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-body" style="padding:8px;">
+          <div class="map-placeholder">🗺 MAP — pins show companies</div>
+          <div class="phone-white-card" style="margin-top:8px;">
+            <div style="font-size:8pt;font-weight:700;color:var(--primary);">AI Find Leads</div>
+            <div class="phone-input" style="margin-top:6px;">Describe companies you want…</div>
+            <div class="phone-btn-primary" style="margin-top:4px;">Search</div>
+          </div>
+        </div>
+        <div class="phone-footer">
+          <div class="phone-footer-item"><img src="assets/icon_home.png" alt="" /><label>Home</label></div>
+          <div class="phone-footer-item active"><img src="assets/Find_Leads.png" alt="" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="" /><label>Co</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_routes.png" alt="" /><label>Routes</label></div>
+          <div class="phone-footer-item"><img src="assets/Supply3.png" alt="" /><label>Lists</label></div>
+          <div class="phone-footer-item"><img src="assets/setting.png" alt="" /><label>Set</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <ol class="steps">
+        <li>Tap <strong>AI Find Leads</strong> (Home tile or bottom <img src="assets/Find_Leads.png" width="18" style="vertical-align:middle;" alt="" /> icon).</li>
+        <li>Allow <strong>Location</strong> if asked — map centers on you.</li>
+        <li>Type what you want (example: "plumbers in Dallas") and tap <strong>Search</strong>.</li>
+        <li>Tap pins on the map → select companies → <strong>Save</strong>.</li>
+        <li>Next: turn saved companies into a <strong>Route</strong> (Page 6).</li>
+      </ol>
+      <div class="warn"><strong>"Insufficient credits"</strong> — go to Settings (Page 12) to upgrade or ask your manager.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: ROUTES -->
+<section class="page">
+  <p class="page-num">Page 6</p>
+  <h2 class="page-title">Routes — Plan Your Driving Day</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p>A <strong>Route</strong> is an ordered list of companies to visit in one trip. TerriTool optimizes the order to save driving time. Use routes when you are in the field: open a stop → <strong>Navigate</strong> → visit → <strong>Mark Visited</strong> → next stop.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header-blue"><h4>Routes</h4><p>Your driving plans</p></div>
+        <div class="phone-body">
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;">Tuesday — West Side</div><div style="font-size:7pt;color:var(--muted);">7 companies</div></div>
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;">+ Create Route</div></div>
+        </div>
+        <div class="bottom-cta-row">
+          <div class="bottom-cta outline">Add Activity</div>
+          <div class="bottom-cta">Mark Visited</div>
+        </div>
+        <div class="phone-footer">
+          <div class="phone-footer-item"><img src="assets/icon_home.png" alt="" /><label>Home</label></div>
+          <div class="phone-footer-item"><img src="assets/Find_Leads.png" alt="" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="" /><label>Co</label></div>
+          <div class="phone-footer-item active"><img src="assets/icon_routes.png" alt="" /><label>Routes</label></div>
+          <div class="phone-footer-item"><img src="assets/Supply3.png" alt="" /><label>Lists</label></div>
+          <div class="phone-footer-item"><img src="assets/setting.png" alt="" /><label>Set</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <h4 style="color:var(--primary);margin-bottom:8px;">Create a route</h4>
+      <ol class="steps">
+        <li>Tap <img src="assets/icon_routes.png" width="18" alt="" /> <strong>Routes</strong> → <strong>Create Route</strong>.</li>
+        <li>Name it (example: "Friday AM").</li>
+        <li>Add companies. Set start/end on map if asked.</li>
+        <li>Tap <strong>Save</strong> / publish when done.</li>
+      </ol>
+      <h4 style="color:var(--primary);margin:12px 0 8px;">Run your route</h4>
+      <ol class="steps">
+        <li>Open the route → tap first company.</li>
+        <li>Tap <strong>Navigate</strong> → maps open for directions.</li>
+        <li>After the visit tap <strong>Mark Visited</strong>.</li>
+        <li>Use <strong>1/7</strong> arrows at top to go to next company.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 7: LISTS -->
+<section class="page">
+  <p class="page-num">Page 7</p>
+  <h2 class="page-title">Lists — Group Your Companies</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Lists</strong> are folders for companies. Example: "Hot Prospects" or "Trade Show Leads." Lists work like routes — open the list and work through companies one by one. Use lists when you want a custom group that is not tied to a map route.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header-blue"><h4>Lists</h4><p>Your company groups</p></div>
+        <div class="phone-body">
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;">Hot Prospects</div><div style="font-size:7pt;color:var(--muted);">12 companies</div></div>
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;">+ Create List</div></div>
+        </div>
+        <div class="phone-footer">
+          <div class="phone-footer-item"><img src="assets/icon_home.png" alt="" /><label>Home</label></div>
+          <div class="phone-footer-item"><img src="assets/Find_Leads.png" alt="" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="" /><label>Co</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_routes.png" alt="" /><label>Routes</label></div>
+          <div class="phone-footer-item active"><img src="assets/Supply3.png" alt="" /><label>Lists</label></div>
+          <div class="phone-footer-item"><img src="assets/setting.png" alt="" /><label>Set</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <ol class="steps">
+        <li>Tap <img src="assets/Supply3.png" width="18" alt="" /> <strong>Lists</strong> on bottom menu.</li>
+        <li>Tap <strong>Create List</strong> and type a name.</li>
+        <li>Add companies from your Address Book or from AI Find Leads.</li>
+        <li>Open the list anytime to work through those companies.</li>
+      </ol>
+      <div class="tip"><strong>Routes vs Lists:</strong> Routes = driving order on a map. Lists = grouped companies without map optimization. Many reps use both.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 8: COMPANY PAGE -->
+<section class="page">
+  <p class="page-num">Page 8</p>
+  <h2 class="page-title">Company Page — Where You Work</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p>When you tap any company, you see the <strong>Company Page</strong>. This is where you call, get directions, find contacts, log activities, and mark visits. The blue buttons at the top are <strong>quick actions</strong> — same layout as the app.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-body" style="padding:8px;">
+          <div style="font-size:7pt;color:var(--muted);">← 1/7 →</div>
+          <div class="phone-white-card">
+            <div style="font-size:9pt;font-weight:700;">Hannah Construction Inc.</div>
+            <div style="font-size:7pt;color:var(--muted);margin-top:2px;">3870 Quail Ridge Rd, Lafayette, CA</div>
+          </div>
+          <div class="qa-row">
+            <div class="qa-btn"><span style="font-size:12pt;">ℹ️</span>More Info</div>
+            <div class="qa-btn"><span style="font-size:12pt;">🔖</span>Mark</div>
+            <div class="qa-btn"><span style="font-size:12pt;">📞</span>Call</div>
+            <div class="qa-btn"><span style="font-size:12pt;">🧭</span>Navigate</div>
+          </div>
+          <div class="field-label" style="margin-top:6px;">Contacts (0)</div>
+          <div class="phone-white-card" style="font-size:7pt;text-align:center;color:var(--muted);">Find Contacts button below</div>
+          <div class="field-label">Activity</div>
+          <div class="phone-white-card" style="font-size:7pt;color:var(--muted);">Today · Upcoming · Past tabs</div>
+        </div>
+        <div class="bottom-cta-row">
+          <div class="bottom-cta">+ Add Activity</div>
+          <div class="bottom-cta outline">Mark Visited</div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <table class="simple">
+        <tr><th>Button</th><th>What it does</th></tr>
+        <tr><td><strong>More Info</strong></td><td>Phone, website, hours, company details</td></tr>
+        <tr><td><strong>Mark</strong></td><td>Bookmark this company for quick access</td></tr>
+        <tr><td><strong>Call</strong></td><td>Dials the company phone (gray if no number)</td></tr>
+        <tr><td><strong>Navigate</strong></td><td>Opens Google/Apple Maps for driving directions</td></tr>
+        <tr><td><strong>+ Add Activity</strong></td><td>Log a note, call, visit, or schedule follow-up (Page 9)</td></tr>
+        <tr><td><strong>Mark Visited</strong></td><td>Check off this stop on a route or list</td></tr>
+        <tr><td><strong>Find Contacts</strong></td><td>AI search for people at this company (Page 10)</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 9: ADD ACTIVITY -->
+<section class="page">
+  <p class="page-num">Page 9</p>
+  <h2 class="page-title">Add Activity — Notes &amp; Follow-Ups</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Add Activity</strong> records what happened at a company (or what you plan to do later). Examples: "Left voicemail," "Met with owner," "Send quote Friday." You pick a <strong>date</strong> (required), <strong>time</strong> (optional), and an <strong>activity type</strong>. Future dates show button <strong>Schedule</strong>; today/past show <strong>Save</strong>.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="modal-overlay">
+          <div class="modal-card">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+              <span style="color:var(--primary);font-size:14pt;">📅</span>
+              <div><div class="modal-title">Add Activity</div><div class="modal-sub">Company name here</div></div>
+            </div>
+            <div class="field-label">Note</div>
+            <div class="phone-input" style="min-height:36px;">Enter your note…</div>
+            <div class="field-label">Activity type</div>
+            <div class="phone-input">Meeting ▾</div>
+            <div class="field-label">Date</div>
+            <div class="phone-input">28 Jun 2026 📅</div>
+            <div class="field-label">Time (optional)</div>
+            <div class="phone-input">Select time 🕐</div>
+            <div style="display:flex;gap:6px;margin-top:10px;">
+              <div class="phone-btn-outline" style="flex:1;margin:0;">Cancel</div>
+              <div class="phone-btn-primary" style="flex:1;margin:0;">Schedule</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <ol class="steps">
+        <li>On company page tap <strong>+ Add Activity</strong>.</li>
+        <li>Type a <strong>Note</strong> — what happened or your plan.</li>
+        <li>Pick <strong>Activity type</strong>: Meeting, Call, Visit, Message, Email, Reminder, or Appointment.</li>
+        <li>Tap <strong>Date</strong> → use <strong>&lt;</strong> <strong>&gt;</strong> arrows to change month → tap a day.</li>
+        <li><strong>Time (optional)</strong> — tap to set time, or tap <strong>Clear</strong> to skip time.</li>
+        <li>Tap <strong>Save</strong> or <strong>Schedule</strong>.</li>
+      </ol>
+      <div class="tip"><strong>Past date?</strong> App asks "Are you sure?" — tap <strong>Continue</strong> to log yesterday's visit.</div>
+      <div class="tip"><strong>Edit later:</strong> Tap an activity in the list → change fields → <strong>Save</strong> or <strong>Delete</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 10: FIND CONTACTS -->
+<section class="page">
+  <p class="page-num">Page 10</p>
+  <h2 class="page-title">Find Contacts</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Find Contacts</strong> searches the internet and business databases for decision-makers at a company — names, titles, emails, phone numbers. This uses <strong>credits</strong>. Results appear in the <strong>Contacts</strong> section on the company page.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-body">
+          <div class="phone-white-card">
+            <div style="font-size:9pt;font-weight:700;">ABC Roofing LLC</div>
+          </div>
+          <div class="field-label">Contacts (0)</div>
+          <div class="phone-white-card" style="text-align:center;padding:16px;">
+            <div class="phone-btn-primary" style="margin:0;">Find Contacts</div>
+            <div style="font-size:7pt;color:var(--muted);margin-top:8px;">or Add Contact manually</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <ol class="steps">
+        <li>Open a <strong>company page</strong>.</li>
+        <li>Scroll to <strong>Contacts</strong>.</li>
+        <li>Tap the blue <strong>Find Contacts</strong> button.</li>
+        <li>Wait — search can take 30–60 seconds.</li>
+        <li>When contacts appear, tap to <strong>Call</strong>, email, or save.</li>
+      </ol>
+      <div class="warn"><strong>No results?</strong> Not every company has public data. Tap <strong>Add Contact</strong> to type someone in manually.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 11: SCAN CARD -->
+<section class="page">
+  <p class="page-num">Page 11</p>
+  <h2 class="page-title">Scan Business Card</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Scan Card</strong> uses your phone camera and AI to read a business card. It pulls out the name, company, phone, and email — then saves them to your account. Great after trade shows or networking events.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-body" style="text-align:center;padding:20px 10px;">
+          <img src="assets/scan_card.png" alt="" style="width:64px;height:64px;object-fit:contain;margin:0 auto 12px;display:block;" />
+          <div style="font-size:9pt;font-weight:700;color:var(--primary);">Scan Card</div>
+          <div style="font-size:7pt;color:var(--muted);margin:8px 0;">Point camera at business card</div>
+          <div style="background:#111;height:100px;border-radius:8px;margin:8px 0;display:flex;align-items:center;justify-content:center;color:#666;font-size:8pt;">CAMERA VIEW</div>
+          <div class="phone-btn-primary">Capture &amp; Save</div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <ol class="steps">
+        <li>From <strong>Home</strong>, tap tile <img src="assets/scan_card.png" width="22" alt="" /> <strong>Scan Card</strong>.</li>
+        <li>Allow <strong>Camera</strong> when asked.</li>
+        <li>Hold the card flat. Good light. Steady hands.</li>
+        <li>Review the info AI read — fix typos.</li>
+        <li>Tap <strong>Save</strong> — contact + company added.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 12: SETTINGS -->
+<section class="page">
+  <p class="page-num">Page 12</p>
+  <h2 class="page-title">Settings &amp; Credits</h2>
+  <div class="what-box">
+    <h3>What this feature does</h3>
+    <p><strong>Settings</strong> (gear icon) shows your profile, <strong>credit balance</strong>, and <strong>subscription</strong> status. Credits are used for AI Find Leads, Find Contacts, and Scan Card. When credits run out or subscription expires, some features stop until you renew.</p>
+  </div>
+  <div class="layout">
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="phone-header-blue"><h4>Settings</h4><p>Account &amp; plan</p></div>
+        <div class="phone-body">
+          <div class="phone-white-card"><div style="font-size:8pt;">Your Name</div><div style="font-size:7pt;color:var(--muted);">you@email.com</div></div>
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;color:var(--primary);">Credits: 42 remaining</div></div>
+          <div class="phone-white-card"><div style="font-size:8pt;font-weight:700;">Subscription</div><div style="font-size:7pt;color:var(--teal);">Active</div></div>
+          <div class="phone-btn-primary">Subscribe / Upgrade</div>
+        </div>
+        <div class="phone-footer">
+          <div class="phone-footer-item"><img src="assets/icon_home.png" alt="" /><label>Home</label></div>
+          <div class="phone-footer-item"><img src="assets/Find_Leads.png" alt="" /><label>Find</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_company.png" alt="" /><label>Co</label></div>
+          <div class="phone-footer-item"><img src="assets/icon_routes.png" alt="" /><label>Routes</label></div>
+          <div class="phone-footer-item"><img src="assets/Supply3.png" alt="" /><label>Lists</label></div>
+          <div class="phone-footer-item active"><img src="assets/setting.png" alt="" /><label>Settings</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="layout-col">
+      <p><strong>Credits are used for:</strong></p>
+      <ul style="padding-left:18px;font-size:9.5pt;margin:8px 0;">
+        <li>AI Find Leads — finding companies</li>
+        <li>Find Contacts — getting people at a company</li>
+        <li>Scan Card — reading business cards</li>
+      </ul>
+      <ol class="steps">
+        <li>Tap <img src="assets/setting.png" width="18" alt="" /> <strong>Settings</strong> (bottom right).</li>
+        <li>Check <strong>Credits</strong> and <strong>Subscription</strong>.</li>
+        <li>Need more? Tap <strong>Subscribe</strong> or ask your manager.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 13: TROUBLESHOOTING -->
+<section class="page">
+  <p class="page-num">Page 13</p>
+  <h2 class="page-title">Problems &amp; Fixes</h2>
+  <div class="what-box">
+    <h3>What this page is for</h3>
+    <p>Quick answers when something does not work. Try these <strong>before</strong> calling support.</p>
+  </div>
+  <table class="simple">
+    <tr><th>You see this</th><th>Do this</th></tr>
+    <tr><td><strong>No Internet Connection</strong></td><td>Turn on Wi‑Fi or cell data. Move to better signal. Close app fully and reopen.</td></tr>
+    <tr><td><strong>Can't log in</strong></td><td>Check email + password. Try Forgot Password. Turn off Caps Lock.</td></tr>
+    <tr><td><strong>Maps won't open</strong></td><td>Install Google Maps or Apple Maps. Allow Location for TerriTool.</td></tr>
+    <tr><td><strong>Insufficient credits</strong></td><td>Settings → Subscribe. Or ask manager to add credits.</td></tr>
+    <tr><td><strong>Subscription expired</strong></td><td>Settings → Subscribe. Or renew on territool.com.</td></tr>
+    <tr><td><strong>Call button is gray</strong></td><td>No phone number on file. Tap More Info or Add Contact.</td></tr>
+    <tr><td><strong>Wrong month on date</strong></td><td>In date picker tap <strong>&lt;</strong> or <strong>&gt;</strong> arrows at top.</td></tr>
+    <tr><td><strong>App frozen</strong></td><td>Force-close app. Restart phone. Update app in App Store / Play Store.</td></tr>
+  </table>
+  <div class="tip" style="margin-top:16px;"><strong>Daily checklist — Morning:</strong> Open app → check Home → open today's Route → review Upcoming activities.</div>
+  <div class="tip"><strong>After each stop:</strong> Mark Visited → Add Activity (what happened) → Schedule follow-up if needed.</div>
+  <div class="warn" style="margin-top:16px;"><strong>Still stuck?</strong> Email support with: your login email, what screen you were on, what you tapped. Send a screenshot if you can.</div>
+  <p style="text-align:center;margin-top:24px;color:var(--muted);font-size:9pt;"><strong>TerriTool: AI Field Sales</strong> · User Guide · territool.com</p>
+</section>
+
+</body>
+</html>

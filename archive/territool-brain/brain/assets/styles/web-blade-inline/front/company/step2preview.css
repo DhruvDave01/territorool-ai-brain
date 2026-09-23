@@ -1,0 +1,16 @@
+/* ===== resources/views/front/company/step2preview.blade.php · <style> block 1 of 1 ===== */
+table, th, td {
+        border: 1px solid #bbbbbb;
+        border-collapse: collapse;
+        padding: 5px 10px;
+    }
+    table{
+        width: 100%;
+    }
+    tr:nth-child(even) {
+    background-color: rgba(100, 100, 100, 0.1);
+    }
+
+    th:nth-child(even),td:nth-child(even) {
+    background-color: rgba(100, 100, 100, 0.1);
+    }

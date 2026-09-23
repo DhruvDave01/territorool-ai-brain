@@ -1,0 +1,27 @@
+---
+title: End-to-end product map
+---
+flowchart TD
+  Guest[Guest] --> Auth{Has account?}
+  Auth -->|No| Trial[Create account / 7-day trial]
+  Auth -->|Yes| Login[Login]
+  Trial --> Onb[Onboarding]
+  Login --> OnbCheck{Onboarding done?}
+  OnbCheck -->|No| Onb
+  OnbCheck -->|Yes| Role
+  Onb --> Role{Role}
+  Role -->|Field rep| Home[Home dashboard]
+  Role -->|Manager| Mgr[Manager portal]
+  Home --> Leads[AI Find Leads]
+  Home --> AB[Address Book]
+  Home --> Routes[Routes]
+  Home --> Lists[Lists]
+  Home --> Upload[Upload Excel/CSV]
+  Home --> Settings[Settings / CRM / MCP]
+  Home --> Bill[Upgrade / Credits]
+  Home --> Support[Support ticket]
+  Leads -->|1 credit per save| Companies[Saved companies]
+  Companies --> Routes
+  Companies --> Lists
+  Lists -->|Convert / Generate| Routes
+  Routes -->|Publish| Field[Mobile app in the field]

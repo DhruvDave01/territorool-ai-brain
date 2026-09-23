@@ -1,0 +1,51 @@
+Running on iPhone 17 Pro - iOS 26.4 - 095EDDBE-0F92-497F-8BCD-67186827A39C
+ > Flow Explore main navigation (read-only)
+Launch app "com.picwa.appterritool" with clear state... COMPLETED
+Run flow when "Back to Login" is visible...
+Run flow when "Back to Login" is visible... SKIPPED
+Assert that id: login.logo is visible... COMPLETED
+Take screenshot ${SHOT}-01-login... COMPLETED
+Tap on id: login.email... COMPLETED
+Input text ${LOGIN_EMAIL}... COMPLETED
+Tap on id: login.logo... COMPLETED
+Tap on id: login.password... COMPLETED
+Input text ${LOGIN_PASSWORD}... COMPLETED
+Tap on id: login.logo... COMPLETED
+Tap on id: login.submit... COMPLETED
+Assert that (Optional) "Not Now" is visible... COMPLETED
+Run flow when "Not Now" is visible...
+  Tap on "Not Now"... COMPLETED
+Run flow when "Not Now" is visible... COMPLETED
+Assert that id: screen.dashboard is visible... COMPLETED
+Run flow when id: modal.dash.appUpdate is visible...
+Run flow when id: modal.dash.appUpdate is visible... SKIPPED
+Wait for animation to end within 5000 ms... COMPLETED
+Take screenshot ${SHOT}-02-dashboard... COMPLETED
+Scroll vertically... COMPLETED
+Take screenshot ${SHOT}-02b-dashboard-scrolled... COMPLETED
+Scrolling UP until "Address Book" is visible with speed 40, visibility percentage 100%, timeout 10000 ms, with centering disabled... COMPLETED
+Tap on "Address Book"... COMPLETED
+Assert that (Optional) "Downloading.*" is not visible... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot ${SHOT}-03-address-book... COMPLETED
+Tap on id: component.customFooter.pressTouchableOpacityD... COMPLETED
+Assert that (Optional) "Downloading.*" is not visible... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot ${SHOT}-04-routes... COMPLETED
+Tap on id: component.customFooter.pressTouchableOpacityE... COMPLETED
+Assert that (Optional) "Downloading.*" is not visible... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot ${SHOT}-05-lists... COMPLETED
+Tap on id: component.customFooter.pressTouchableOpacityB... COMPLETED
+Assert that (Optional) "Downloading.*" is not visible... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot ${SHOT}-06-ai-find-leads... COMPLETED
+Launch app "com.picwa.appterritool"... COMPLETED
+Assert that id: screen.dashboard is visible... COMPLETED
+Tap on id: screen.dashboard.iconsettingsOutline... COMPLETED
+Assert that (Optional) "Downloading.*" is not visible... COMPLETED
+Wait for animation to end within 8000 ms... COMPLETED
+Take screenshot ${SHOT}-07-settings... COMPLETED
+Scroll vertically... COMPLETED
+Take screenshot ${SHOT}-07b-settings-scrolled... COMPLETED
+exit 0

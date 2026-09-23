@@ -1,0 +1,1352 @@
+#findleadsModal1 .form-control{
+    height: 25px !important;  
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-top: 0px !important;
+    box-shadow: inset 0 0px 0px rgba(0,0,0,.075) !important;
+    border-radius:0px !important;
+    padding:0px !important;
+}
+
+/* List view — company detail modal refinements */
+#findleadsModal1.cdm-modal.in,
+#viewmapcompanyModal.cdm-modal.in {
+    z-index: 1050;
+}
+
+#findleadsModal1.cdm-modal .no-content-box,
+#viewmapcompanyModal.cdm-modal .no-content-box {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 0;
+    margin: 0;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-btn,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-btn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-day,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-day {
+    font-weight: 700;
+    color: #64748b;
+}
+
+#findleadsModal1.cdm-modal .company-activity-header,
+#viewmapcompanyModal.cdm-modal .company-activity-header {
+    margin-bottom: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-activity-add-btn,
+#viewmapcompanyModal.cdm-modal .company-activity-add-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active {
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active::after,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active::after {
+    background: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill--muted,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill--muted {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+#findleadsModal1.cdm-modal .company-activity-table-card,
+#viewmapcompanyModal.cdm-modal .company-activity-table-card {
+    border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    #findleadsModal1.cdm-modal .modal-dialog.cdm-modal-dialog,
+#viewmapcompanyModal.cdm-modal .modal-dialog.cdm-modal-dialog {
+        width: 88%;
+        max-width: 980px;
+    }
+}
+.miles-desc{
+    position: absolute;
+    top: 68px;
+    left: 10px;
+    font-size: 13px;
+}
+.existingName {
+    max-width: 17ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+@media only screen and (min-width: 768px) {
+    #confirmleadsModal .modal-dialog, #creditleadsModal .modal-dialog{
+        width:33% !important;
+        min-width:33% !important;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #route_list{
+        background: #ffffff;
+        position: relative;
+    }
+    #route_list .company-card {
+        border: 1px solid #e0e0e0;
+        margin: 10px -2px;
+        padding: 10px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    #route_list .company-card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    #route_list .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+    }
+    #route_list .header-content {
+        flex: 1;
+        min-width: 0;
+        padding-right: 10px;
+    }
+    #route_list .expand-icon {
+        align-self: center;
+        transition: transform 0.3s ease;
+        color: #007bff;
+        cursor: pointer;
+    }
+    #route_list .expand-icon.rotated {
+        transform: rotate(180deg);
+    }
+    #route_list .extra-info {
+        padding-top: 5px;
+        border-top: 1px solid #eee;
+        margin-top: 5px;
+        width: 100%;
+        padding-left: 33px;
+    }
+    #route_list .company-card .header-content h5,
+    #route_list .company-card .header-content h5 a {
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        color: #124ac6;
+    }
+    #route_list .company-card .header-content > p,
+    #route_list .company-card .header-content > p a {
+        margin: 4px 0;
+        font-size: 15px;
+        color: #124ac6;
+        line-height: 1.4;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    #route_list .company-card p i {
+        width: 16px;
+        color: #007bff;
+        margin-right: 5px;
+    }
+    #route_list .company-card h5 i {
+        color: #007bff;
+        margin-right: 5px;
+    }
+    #route_list .company-card p strong {
+        color: #495057;
+    }
+    #route_list .company-card .actions {
+        margin-top: 5px;
+        display: flex;
+        gap: 8px;
+        flex-direction: row-reverse;
+    }
+    #route_list .company-card a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    #route_list .company-card a:hover {
+        text-decoration: underline;
+    }
+    .select-all-btn:hover {
+        box-shadow: 0 4px 8px rgba(0,123,255,0.4);
+        transform: translateY(-1px);
+    }
+    #selectAllContainer {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 0px;
+    }
+    #selectAllContainer .select-all-btn {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+    #selectAllContainer #companyCountBadge {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+    }
+    #selectAllContainer #bulkContactBtn {
+        flex: 0 0 auto;
+        min-width: 120px;
+    }
+    .page-info {
+        margin: 0 15px;
+        font-weight: 500;
+        color: #495057;
+    }
+    .card-vertical-separator {
+        border-left: 2px dashed #ccc;
+        height: 40px;
+        margin: 0px 10px 0px 20px;
+        width: 0;
+        float:left;
+    }
+    .route-segment-info {
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 8px;
+        font-size: 12px;
+        color: #666;
+    }
+    .route-segment-info strong {
+        color: #007bff;
+        margin: 0 5px;
+    }
+}
+.order-id-badge {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    display: inline-block;
+    white-space: nowrap;
+    margin-top: 5px;
+}
+.order-id-badge-mobile {
+    background-color: #007bff;
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    margin: 12px 2px;
+}
+#route_map_loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    background-image: url('/images/loading-tr.gif');
+    background-size: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    opacity: 0.6;
+}
+#route_view_toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+#route_view_toggle .ai-leads-list-view-btn {
+    background-color: #fff !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
+}
+#route_view_toggle .ai-leads-list-view-btn:hover {
+    background-color: #f8f9fa !important;
+    color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+#route_view_toggle #route_map_view_btn.btn-outline-primary {
+    background-color: transparent !important;
+    color: #007bff !important;
+    border: 1px solid #007bff !important;
+}
+#route_view_toggle #route_map_view_btn.btn-outline-primary:hover {
+    background-color: rgba(0, 123, 255, 0.08) !important;
+    color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+@media only screen and (max-width: 767px) {
+    #ViewListPage {
+        --tt-blue: #124ac6;
+        --tt-blue-dark: #0e3da6;
+        --tt-blue-light: #e6eefb;
+        --tt-sky: #00bcf0;
+        --tt-sky-dark: #00a3d1;
+        --tt-sky-light: #e0f5fd;
+        --tt-teal: #00a99d;
+        --tt-teal-dark: #008f85;
+        --tt-teal-light: #e0f7f5;
+        --tt-border: #e5e5e5;
+        --tt-text: #1a1a1a;
+        --tt-red: #ef4444;
+        --tt-red-dark: #dc2626;
+    }
+    #ViewListPage .route-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        line-height: 1.2;
+        margin: 0;
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        width: 100%;
+    }
+    #ViewListPage .route-btn .fa {
+        font-size: 14px;
+    }
+    #ViewListPage .route-btn-pdf {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewListPage .route-btn-csv {
+        background: var(--tt-sky-light) !important;
+        border-color: var(--tt-sky) !important;
+        color: #0a5165 !important;
+    }
+    #ViewListPage .route-btn-csv.route-btn-disabled,
+    #ViewListPage .route-btn-csv[disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    #ViewListPage .route-btn-filter {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+    }
+    #ViewListPage .route-btn-map {
+        background: #fff !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        box-shadow: none !important;
+    }
+    #ViewListPage .route-btn-delete {
+        background: var(--tt-red) !important;
+        border-color: var(--tt-red-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-route {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-list {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal) !important;
+        color: #fff !important;
+    }
+    #ViewListPage #companyButtons {
+        flex-direction: column;
+        gap: 8px;
+        padding: 0px 10px;
+        margin-bottom: 8px;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    #ViewListPage .route-mobile-toolbar-row {
+        display: flex;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    #ViewListPage .route-mobile-toolbar-row #showMore-btn,
+    #ViewListPage .route-mobile-toolbar-row #viewOnMapMobile,
+    #ViewListPage .route-mobile-toolbar-row #route_view_toggle {
+        flex: 1 1 calc(50% - 4px);
+        min-width: 0;
+        max-width: calc(50% - 4px);
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        width: calc(50% - 4px) !important;
+        margin: 0 !important;
+    }
+    #ViewListPage .route-mobile-toolbar-row #route_view_toggle {
+        display: flex;
+    }
+    #ViewListPage .route-mobile-toolbar-row #route_view_toggle .btn {
+        flex: 1 1 auto;
+        width: 100%;
+        margin: 0 !important;
+    }
+    #ViewListPage #moreOptionsButtons {
+        display: none;
+        width: 100%;
+        min-height: 0 !important;
+    }
+    #ViewListPage #moreOptionsButtons #datatable_button_stack {
+        float: none !important;
+        text-align: left !important;
+        width: 100%;
+        padding: 0;
+    }
+    #ViewListPage #moreOptionsButtons #datatable_button_stack > div {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+    }
+    #ViewListPage #moreOptionsButtons #datatable_button_stack span {
+        display: block;
+        width: 100%;
+    }
+    #ViewListPage #moreOptionsButtons .route-btn {
+        width: 100%;
+    }
+    #ViewListPage .route-view-bulk-wrap {
+        margin-bottom: 0;
+    }
+    #ViewListPage .route-mobile-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 0px 10px !important;
+        background: transparent;
+        border: none;
+    }
+    #ViewListPage .route-mobile-actions .route-mobile-bulk-btn {
+        display: none;
+        width: 100%;
+        float: none !important;
+        position: static !important;
+        top: auto !important;
+        margin: 0 !important;
+    }
+    #ViewListPage.route-more-open .route-mobile-actions .route-mobile-bulk-btn {
+        display: inline-flex;
+    }
+    #ViewListPage .route-mobile-toolbar-row #showMore-btn {
+        width: calc(50% - 4px) !important;
+    }
+    #ViewListPage #deletecompany,
+    #ViewListPage #addToRoute,
+    #ViewListPage #addToList {
+        position: static !important;
+        top: auto !important;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+    #ViewListPage .route-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 4px;
+    }
+    #ViewListPage .route-title-row .existingName {
+        flex: 1;
+        min-width: 0;
+        max-width: none;
+    }
+    #ViewListPage .route-title-filter-btn {
+        position: static !important;
+        top: auto !important;
+        left: auto !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+        padding: 6px 12px;
+    }
+    #ViewListPage #filter,
+    #ViewListPage .route-footer-filter {
+        display: none !important;
+    }
+    .route-top-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+    .route-top-actions .btn {
+        margin: 0 !important;
+        padding: 6px 12px;
+    }
+    #ViewListPage .route-form-send {
+        display: none !important;
+    }
+    #ViewListPage #editRouteButton {
+        position: static !important;
+        top: auto !important;
+        right: auto !important;
+        width: auto !important;
+    }
+    .route-page-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: nowrap;
+        padding-bottom: 15px;
+    }
+    #ViewListPage .route-view-table-panel {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 10px !important;
+        overflow: visible !important;
+    }
+}
+@media only screen and (min-width: 768px) {
+    #ViewListPage {
+        --tt-blue: #124ac6;
+        --tt-blue-dark: #0e3da6;
+        --tt-blue-light: #e6eefb;
+        --tt-sky: #00bcf0;
+        --tt-sky-dark: #00a3d1;
+        --tt-sky-light: #e0f5fd;
+        --tt-teal: #00a99d;
+        --tt-teal-dark: #008f85;
+        --tt-teal-light: #e0f7f5;
+        --tt-border: #e5e5e5;
+        --tt-text: #1a1a1a;
+        --tt-red: #ef4444;
+        --tt-red-dark: #dc2626;
+    }
+    #ViewListPage .route-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        padding: 9px 16px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600 !important;
+        line-height: 1.2;
+        margin: 0;
+        border: 1px solid transparent;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewListPage .route-btn .fa {
+        font-size: 14px;
+    }
+    #ViewListPage .route-btn-back {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+    }
+    #ViewListPage .route-btn-back:hover,
+    #ViewListPage .route-btn-back:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewListPage .route-btn-pdf {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewListPage .route-btn-pdf:hover,
+    #ViewListPage .route-btn-pdf:focus {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-edit {
+        background: var(--tt-teal-light) !important;
+        border-color: var(--tt-teal) !important;
+        color: var(--tt-teal-dark) !important;
+    }
+    #ViewListPage .route-btn-edit:hover,
+    #ViewListPage .route-btn-edit:focus {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-csv {
+        background: var(--tt-sky-light) !important;
+        border-color: var(--tt-sky) !important;
+        color: #0a5165 !important;
+    }
+    #ViewListPage .route-btn-csv:hover,
+    #ViewListPage .route-btn-csv:focus {
+        background: var(--tt-sky) !important;
+        border-color: var(--tt-sky-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-csv.route-btn-disabled,
+    #ViewListPage .route-btn-csv[disabled] {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    #ViewListPage .route-btn-send {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+        font-weight: 600 !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewListPage .route-btn-send:hover,
+    #ViewListPage .route-btn-send:focus {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    #ViewListPage .route-btn-send .ladda-label {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+    }
+    #ViewListPage .route-btn-add {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-add:hover,
+    #ViewListPage .route-btn-add:focus {
+        background: var(--tt-blue-dark) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-leads {
+        background: var(--tt-sky) !important;
+        border-color: var(--tt-sky) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-leads:hover,
+    #ViewListPage .route-btn-leads:focus {
+        background: var(--tt-sky-dark) !important;
+        border-color: var(--tt-sky-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-contacts {
+        background: var(--tt-blue-dark) !important;
+        border-color: #0c348f !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-contacts:hover,
+    #ViewListPage .route-btn-contacts:focus {
+        background: #0c348f !important;
+        border-color: #0a2d7a !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-map {
+        background: #fff !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+        box-shadow: none !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+    }
+    #ViewListPage .route-btn-map:hover,
+    #ViewListPage .route-btn-map:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: var(--tt-blue-dark) !important;
+    }
+    #ViewListPage .route-btn-map.btn-outline-primary,
+    #ViewListPage .route-btn-map.ai-leads-list-view-btn {
+        font-family: "DIN 2014 bold", sans-serif !important;
+        font-weight: 500 !important;
+    }
+    #ViewListPage .route-btn-filter {
+        background: #fff !important;
+        border-color: var(--tt-border) !important;
+        color: var(--tt-text) !important;
+        font-family: "DIN 2014 Light", sans-serif !important;
+        font-weight: 500 !important;
+    }
+    #ViewListPage .route-btn-filter:hover,
+    #ViewListPage .route-btn-filter:focus {
+        background: var(--tt-blue-light) !important;
+        border-color: var(--tt-blue) !important;
+        color: var(--tt-blue) !important;
+    }
+    #ViewListPage .route-btn-filter.ladda-button,
+    #ViewListPage .route-btn-filter .ladda-label {
+        font-family: inherit !important;
+        font-weight: inherit !important;
+    }
+    #ViewListPage .route-btn-delete {
+        background: var(--tt-red) !important;
+        border-color: var(--tt-red-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-delete:hover,
+    #ViewListPage .route-btn-delete:focus {
+        background: var(--tt-red-dark) !important;
+        border-color: #b91c1c !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-route {
+        background: var(--tt-blue) !important;
+        border-color: var(--tt-blue) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-route:hover,
+    #ViewListPage .route-btn-route:focus {
+        background: var(--tt-blue-dark) !important;
+        border-color: var(--tt-blue-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-list {
+        background: var(--tt-teal) !important;
+        border-color: var(--tt-teal) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-btn-list:hover,
+    #ViewListPage .route-btn-list:focus {
+        background: var(--tt-teal-dark) !important;
+        border-color: var(--tt-teal-dark) !important;
+        color: #fff !important;
+    }
+    #ViewListPage .route-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
+    #ViewListPage .route-view-box {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+    #ViewListPage .route-view-box > .box-body,
+    #ViewListPage .route-view-box > .box-header {
+        border: none;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #ViewListPage .route-view-header {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        margin-bottom: 10px;
+    }
+    #ViewListPage .route-view-header-main {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+        width: 100%;
+        padding-top:20px;
+    }
+    #ViewListPage .route-view-header-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+    }
+    #ViewListPage .route-back-btn {
+        align-self: flex-start;
+        margin-bottom: 0;
+    }
+    #ViewListPage .existingName {
+        max-width: none;
+        width: auto;
+        font-size: 28px;
+        color: #1e293b !important;
+        margin: 0 0 4px;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    #ViewListPage .route-view-title-wrap {
+        width: 100%;
+    }
+    #ViewListPage .route-view-header-info .existingName {
+        margin: 0;
+    }
+    #ViewListPage .route-view-created {
+        color: #64748b;
+        font-size: 14px;
+        margin: 0;
+        font-weight: bold !important;
+    }
+    #ViewListPage .route-view-header-actions {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0 0;
+        width: 100%;
+    }
+    #ViewListPage #moreOptionsButtons #datatable_button_stack > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    #ViewListPage #moreOptionsButtons #datatable_button_stack span {
+        display: inline-block;
+    }
+    #ViewListPage .box-body.pb-0 .form-group {
+        margin-bottom: 0;
+    }
+    #ViewListPage .box-body.pb-0 .route-title-row,
+    #ViewListPage .box-body.pb-0 .editName,
+    #ViewListPage .box-body.pb-0 .saveNameInView,
+    #ViewListPage .box-body.pb-0 .miles-desc,
+    #ViewListPage .box-body.pb-0 .route-form-send {
+        display: none !important;
+    }
+    #ViewListPage .box-body.pb-0 {
+        padding-bottom: 0 !important;
+        min-height: 0;
+    }
+    #ViewListPage .route-page-top-bar {
+        display: none;
+    }
+    .route-view-top-row {
+        display: none;
+    }
+    #ViewListPage #companyButtons #moreOptionsButtons {
+        display: none !important;
+    }
+    #ViewListPage #companyButtons #showMore-btn {
+        display: none !important;
+    }
+    #ViewListPage .route-mobile-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        background: transparent;
+        border: none;
+        padding: 0 4px 12px !important;
+    }
+    #ViewListPage .route-view-bulk-wrap {
+        margin-bottom: 12px;
+    }
+    #ViewListPage .route-view-bulk-wrap .route-mobile-actions {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    #ViewListPage .route-view-header .route-view-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        gap: 12px;
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 520px;
+        max-width: none;
+        margin-bottom: 0;
+        padding-top: 15px;
+    }
+    #ViewListPage .route-view-header .route-stat-card {
+        min-height: 88px;
+    }
+    #ViewListPage .route-stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 15px 12px  0px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        position: relative;
+        overflow: hidden;
+        min-width: 250px;
+    }
+    #ViewListPage .route-stat-card::after {
+        content: "";
+        position: absolute;
+        top: -18px;
+        right: -18px;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        opacity: 0.12;
+    }
+    #ViewListPage .route-stat-stops::after { background: #124ac6; }
+    #ViewListPage .route-stat-distance::after { background: #0ea5e9; }
+    #ViewListPage .route-stat-time::after { background: #00dbdb; }
+    #ViewListPage .route-stat-contacts::after { background: #22c55e; }
+    #ViewListPage .route-stat-label {
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 8px;
+        padding-left:5px;
+    }
+    #ViewListPage .route-stat-value {
+        display: block;
+        font-size: 22px;
+        line-height: 1.2;
+        color: #0f172a;
+    }
+    #ViewListPage .route-stat-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #fff;
+    }
+    #ViewListPage .route-stat-stops .route-stat-icon { background: #124ac6; }
+    #ViewListPage .route-stat-distance .route-stat-icon { background: #0ea5e9; }
+    #ViewListPage .route-stat-time .route-stat-icon { background: #00dbdb; }
+    #ViewListPage .route-stat-contacts .route-stat-icon { background: #22c55e; }
+    #ViewListPage .route-view-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    }
+    #ViewListPage .route-view-search {
+        flex: 1 1 260px;
+        position: relative;
+        min-width: 220px;
+    }
+    #ViewListPage .route-view-search .fa-search {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+        pointer-events: none;
+    }
+    #ViewListPage .route-view-search input {
+        width: 100%;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 10px 12px 10px 38px;
+        height: 40px;
+        background: #f3f4f6;
+        color: #111827;
+        box-shadow: none;
+    }
+    #ViewListPage .route-view-search input:focus {
+        background: #f3f4f6;
+        border-color: #d1d5db;
+        outline: none;
+        box-shadow: none;
+    }
+    #ViewListPage .route-view-search input::placeholder {
+        color: #9ca3af;
+    }
+    #ViewListPage .route-view-toolbar-actions,
+    #ViewListPage .route-view-toolbar-secondary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    #ViewListPage .route-view-toolbar-actions .route-btn,
+    #ViewListPage .route-view-toolbar-secondary .route-btn {
+        margin: 0;
+    }
+    #ViewListPage .route-view-table-panel {
+        background: #fff !important;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+        padding: 0 !important;
+        overflow: visible;
+        max-width: 100%;
+        margin-bottom: 4px;
+    }
+    #ViewListPage .route-view-table-panel #route_list.territool-jqx-company-grid {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    #ViewListPage .route-view-table-panel .jqx-grid-content {
+        overflow-x: auto !important;
+    }
+    #ViewListPage .route-view-bulk-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 0;
+        padding: 0 4px;
+    }
+    #ViewListPage .route-view-actions-row {
+        background: transparent;
+        border: none;
+        padding: 0 4px 12px !important;
+    }
+    #ViewListPage {
+       
+    }
+    #ViewListPage #route_list.territool-jqx-company-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0;
+    }
+    #ViewListPage .route-bulk-label {
+        color: #64748b;
+        font-size: 14px;
+        margin-right: 4px;
+    }
+    #ViewListPage .route-view-bulk-row .btn:not(.route-btn),
+    #ViewListPage .route-mobile-actions .btn:not(.route-btn) {
+        border-radius: 8px;
+        margin: 0;
+    }
+    #ViewListPage .route-view-bulk-row .route-btn,
+    #ViewListPage .route-mobile-actions .route-btn {
+        margin: 0;
+    }
+    #ViewListPage .route-footer-filter .fa,
+    #ViewListPage .route-mobile-actions .ladda-label .fa {
+        margin-right: 5px;
+    }
+    #ViewListPage .route-view-bulk-row .pull-left {
+        float: none;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-filter,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-filter-alt {
+        display: none !important;
+    }
+    #ViewListPage .territool-jqx-company-grid.jqx-grid,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-content,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-table,
+    #ViewListPage .territool-jqx-company-grid .jqx-widget-header-bootstrap {
+        background: #fff !important;
+    }
+    #ViewListPage .territool-jqx-company-grid.jqx-grid {
+        box-shadow: none !important;
+        border-radius: 12px !important;
+        border: none !important;
+        overflow: visible;
+        min-width: 0;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-content {
+        overflow-x: auto !important;
+    }
+    #ViewListPage .miles-desc {
+        display: none;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-header {
+        background: #fff !important;
+        border-bottom: 1px solid #e5e7eb !important;
+        box-shadow: none !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-alt.jqx-grid-cell-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+        background: #fff !important;
+        border-color: #f1f5f9 !important;
+        color: #374151;
+        overflow: hidden;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap {
+        font-size: 14px !important;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #6b7280 !important;
+        font-weight: 600 !important;
+        background: #f8fafc !important;
+        border-color: #e5e7eb !important;
+        min-height: 44px;
+        overflow: hidden;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox),
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-bootstrap:has(.jqx-checkbox) {
+        text-align: center !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox) > div {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        margin: 0 auto !important;
+        display: flex;
+        justify-content: center;
+        width: 65% !important;
+        height: 100%;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap:has(.jqx-checkbox) .jqx-checkbox {
+        margin: 0 auto;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-hover-bootstrap:not(.jqx-grid-cell-selected-bootstrap) {
+        background: #f8fafc !important;
+        border-color: #e2e8f0 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap {
+        background: #eff6ff !important;
+        border-color: #bfdbfe !important;
+        box-shadow: none !important;
+        color: #374151 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-content .jqx-grid-cell-selected-bootstrap > div > div {
+        color: #374151 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap a {
+        color: #2563eb !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .comtitle,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .route-company-name .comtitle {
+        color: #111827 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .route-row-index {
+        background: #dbeafe !important;
+        color: #1d4ed8 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .singleNoteView {
+        color: #64748b !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap select {
+        color: #374151 !important;
+        background: #fff !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager {
+        background: #fff !important;
+        border-top: 1px solid #e5e7eb !important;
+        padding: 0px 140px 0px 0px !important;
+        min-height: 52px;
+        height: auto !important;
+        overflow: visible !important;
+        box-sizing: border-box;
+        color: #374151 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager > div {
+        overflow: visible !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-input,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        min-width: 30px;
+        min-height: 30px;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-button,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-dropdownlist,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager-label,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-normal-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-hover-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-pressed-bootstrap {
+        border-radius: 6px !important;
+        border-color: #e5e7eb !important;
+        background-color: #fff !important;
+        color: #374151 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-number-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-number {
+        min-width: 28px;
+        min-height: 28px;
+        line-height: 26px;
+        text-align: center;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-button-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-left-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-right-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-left,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-grid-pager-button .jqx-icon-arrow-right {
+        width: 16px !important;
+        height: 16px !important;
+        min-width: 16px !important;
+        min-height: 16px !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-pager .jqx-fill-state-hover-bootstrap {
+        background-color: #f9fafb !important;
+        border-color: #d1d5db !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-row-index {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        margin: 4px;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-company-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        padding: 0 4px;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-company-avatar {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-company-name {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-company-name .comtitle {
+        color: #111827 !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .route-company-name .comtitle:hover {
+        color: #2563eb !important;
+    }
+    #ViewListPage .territool-jqx-company-grid select {
+        background: #fff !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 6px !important;
+        color: #374151 !important;
+        height: 32px;
+        max-width: 100%;
+        padding: 2px 8px;
+    }
+    #ViewListPage .territool-jqx-company-grid .btn-find-contacts-route,
+    #ViewListPage .territool-jqx-company-grid .addPhoneSingle,
+    #ViewListPage .territool-jqx-company-grid .addNoteSingle {
+        background: #fff !important;
+        border: 1px solid #bfdbfe !important;
+        color: #2563eb !important;
+        box-shadow: none !important;
+        border-radius: 6px !important;
+        font-size: 13px !important;
+        padding: 4px 10px !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .btn-find-contacts-route:hover,
+    #ViewListPage .territool-jqx-company-grid .btn-find-contacts-route:focus,
+    #ViewListPage .territool-jqx-company-grid .addPhoneSingle:hover,
+    #ViewListPage .territool-jqx-company-grid .addNoteSingle:hover {
+        background: #eff6ff !important;
+        border-color: #93c5fd !important;
+        color: #1d4ed8 !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .btn-find-contacts-route,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .addPhoneSingle,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-selected-bootstrap .addNoteSingle {
+        background: #fff !important;
+        border-color: #bfdbfe !important;
+        color: #2563eb !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .singleNoteView {
+        color: #64748b !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .add_to_list,
+    #ViewListPage .territool-jqx-company-grid .add_to_route {
+        background: #fff !important;
+        border: 1px solid #e5e7eb !important;
+        color: #374151 !important;
+        border-radius: 6px !important;
+    }
+}
+
+/* Small desktop: stack stat cards below title + action buttons */
+@media only screen and (min-width: 768px) and (max-width: 1600px) {
+    #ViewListPage .route-view-header-main {
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 16px;
+    }
+    #ViewListPage .route-view-header-info {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 100%;
+    }
+    #ViewListPage .route-view-header .route-view-stats {
+        flex: 1 1 100%;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #ViewListPage .route-view-header .route-view-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* List view: two stat cards (companies + contacts) */
+#ViewListPage .route-view-header .route-view-stats {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    min-width: 280px;
+}
+
+/* List grid: fit container width on desktop — no horizontal scroll */
+@media only screen and (min-width: 768px) {
+    #ViewListPage .route-view-table-panel {
+        overflow: hidden;
+        max-width: 100%;
+    }
+    #ViewListPage .route-view-table-panel #route_list.territool-jqx-company-grid,
+    #ViewListPage .route-view-table-panel #route_list.territool-jqx-company-grid.jqx-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-content {
+        overflow-x: hidden !important;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-table {
+        width: 100% !important;
+        max-width: 100% !important;
+        table-layout: fixed;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-bootstrap,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap {
+        overflow: hidden;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-bootstrap > div,
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-column-header-bootstrap > div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    #ViewListPage .territool-jqx-company-grid .jqx-grid-cell-bootstrap .btn {
+        white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

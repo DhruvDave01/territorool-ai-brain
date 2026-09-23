@@ -1,0 +1,15 @@
+/* ===== resources/views/front/layout.blade.php · <style> block 1 of 1 ===== */
+@media (max-width: 767px) {
+        .mobile-app-btn {
+          display: none !important;
+        }
+        .navbar-right-menu{
+          margin-top: 25px !important;
+        }
+        .main-header .logo, .sidebar-menu {
+            margin: 15px 0px !important;
+        }
+        .sidebar-toggle:before{
+          display:none !important
+        }
+      }

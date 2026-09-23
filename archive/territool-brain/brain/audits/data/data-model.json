@@ -1,0 +1,1846 @@
+{
+ "models": [
+  {
+   "class": "Activity",
+   "file": "app/Models/Activity.php",
+   "line": 9,
+   "table": "activities",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "title",
+    "description",
+    "module"
+   ],
+   "relations": []
+  },
+  {
+   "class": "BusinessClient",
+   "file": "app/BusinessClient.php",
+   "line": 10,
+   "table": "business_clients",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "name",
+    "email",
+    "password",
+    "place_id",
+    "preferences",
+    "tour_info",
+    "amount_of_licenses",
+    "parent_id",
+    "monthly_cost",
+    "cost_per_user",
+    "payment_period",
+    "billing_name",
+    "billing_email",
+    "subscribe_month"
+   ],
+   "relations": []
+  },
+  {
+   "class": "BusinessclientSalesagentCredit",
+   "file": "app/Models/BusinessclientSalesagentCredit.php",
+   "line": 8,
+   "table": "businessclient_salesagent_credits",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "total_credit",
+    "used_credit",
+    "date",
+    "alloted_credits"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Cities",
+   "file": "app/Cities.php",
+   "line": 8,
+   "table": "cities",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": [
+    "users → hasMany(User)"
+   ]
+  },
+  {
+   "class": "Cities",
+   "file": "app/Models/Cities.php",
+   "line": 8,
+   "table": "cities",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": [
+    "users → hasMany(User)"
+   ]
+  },
+  {
+   "class": "City",
+   "file": "app/Models/MongoDB/City.php",
+   "line": 17,
+   "table": "cities_collection",
+   "tableDeclared": true,
+   "connection": "mongodb",
+   "fillable": [
+    "title",
+    "city_code",
+    "longitude",
+    "latitude"
+   ],
+   "relations": [
+    "locations → hasMany(Location)",
+    "country → belongsTo(Country)"
+   ]
+  },
+  {
+   "class": "ClaudeContactLookup",
+   "file": "app/Models/ClaudeContactLookup.php",
+   "line": 7,
+   "table": "claude_contact_lookups",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "lookup_hash",
+    "company_name",
+    "address",
+    "response_json",
+    "name_address_match",
+    "owners_count",
+    "hit_count"
+   ],
+   "relations": []
+  },
+  {
+   "class": "CompaniesSession",
+   "file": "app/Models/CompaniesSession.php",
+   "line": 10,
+   "table": "companies_session",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "hs_object_id",
+    "user_session_id",
+    "title",
+    "address",
+    "city_id",
+    "addressofsheet",
+    "city",
+    "state",
+    "postal_code",
+    "website",
+    "phone_number",
+    "linkedin_url",
+    "employees",
+    "latitude",
+    "longitude",
+    "place_id",
+    "note",
+    "session_status",
+    "session_error",
+    "company_status_id",
+    "karmacrm_object_id",
+    "annual_revenue",
+    "uc_category_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Company",
+   "file": "app/Api/V1/Model/Company.php",
+   "line": 10,
+   "table": "companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "title",
+    "address",
+    "city_id",
+    "postal_code",
+    "website",
+    "phone_number",
+    "linkedin_url"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "city → belongsTo(Cities)"
+   ]
+  },
+  {
+   "class": "Company",
+   "file": "app/Api/V2/Model/Company.php",
+   "line": 10,
+   "table": "companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "title",
+    "address",
+    "city_id",
+    "postal_code",
+    "website",
+    "phone_number"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "city → belongsTo(Cities)"
+   ]
+  },
+  {
+   "class": "Company",
+   "file": "app/Models/Company.php",
+   "line": 11,
+   "table": "companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "sf_id",
+    "title",
+    "address",
+    "city_id",
+    "postal_code",
+    "website",
+    "company_email",
+    "phone_number",
+    "linkedin_url",
+    "instagram_url",
+    "facebook_url",
+    "employees",
+    "latitude",
+    "longitude",
+    "place_id",
+    "note",
+    "company_status",
+    "company_status_id",
+    "hs_object_id",
+    "karmacrm_object_id",
+    "annual_revenue",
+    "uc_category_id",
+    "is_temp_company",
+    "type",
+    "source",
+    "rating",
+    "review_count",
+    "report_flag"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "city → belongsTo(Cities)",
+    "contacts → hasMany(Contacts)"
+   ]
+  },
+  {
+   "class": "CompanyTime",
+   "file": "app/Models/CompanyTime.php",
+   "line": 9,
+   "table": "company_time",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "day",
+    "status",
+    "open_time",
+    "close_time",
+    "created_at",
+    "updated_at"
+   ],
+   "relations": [
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "Contacts",
+   "file": "app/Api/V1/Model/Contacts.php",
+   "line": 9,
+   "table": "contacts",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "first_name",
+    "last_name",
+    "company",
+    "user_id",
+    "position",
+    "city_id",
+    "email",
+    "phone_no",
+    "mobile_no",
+    "status",
+    "notes"
+   ],
+   "relations": [
+    "company → belongsTo(UserCompanies)"
+   ]
+  },
+  {
+   "class": "Contacts",
+   "file": "app/Api/V2/Model/Contacts.php",
+   "line": 9,
+   "table": "contacts",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "contact_name",
+    "company",
+    "user_id",
+    "position",
+    "city_id",
+    "email",
+    "phone_no",
+    "mobile_no",
+    "status",
+    "notes"
+   ],
+   "relations": [
+    "company → belongsTo(UserCompanies)"
+   ]
+  },
+  {
+   "class": "Contacts",
+   "file": "app/Models/Contacts.php",
+   "line": 10,
+   "table": "contacts",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "cognism_id",
+    "sfdc_id",
+    "contact_name",
+    "position",
+    "city_id",
+    "city",
+    "state",
+    "notes",
+    "company",
+    "user_id",
+    "status",
+    "email",
+    "phone_no",
+    "mobile_no",
+    "linkedin_url",
+    "contact_status_id",
+    "first_name",
+    "last_name",
+    "hs_object_id",
+    "karmacrm_object_id",
+    "hs_associated_company_id",
+    "contact_status_id",
+    "uc_stage_id",
+    "source",
+    "report_flag"
+   ],
+   "relations": [
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "ContactsSession",
+   "file": "app/Models/ContactsSession.php",
+   "line": 8,
+   "table": "contacts_session",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "sfdc_id",
+    "user_session_id",
+    "company_id",
+    "contact_name",
+    "company",
+    "position",
+    "city_id",
+    "email",
+    "phone_no",
+    "mobile_no",
+    "status",
+    "notes",
+    "session_status",
+    "session_error",
+    "company_contact_count"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Countries",
+   "file": "app/Models/Countries.php",
+   "line": 8,
+   "table": "countries",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": []
+  },
+  {
+   "class": "Country",
+   "file": "app/Models/MongoDB/Country.php",
+   "line": 17,
+   "table": "countries_collection",
+   "tableDeclared": true,
+   "connection": "mongodb",
+   "fillable": [
+    "title",
+    "country_code"
+   ],
+   "relations": [
+    "cities → hasMany(City)"
+   ]
+  },
+  {
+   "class": "DiscountSpecial",
+   "file": "app/Models/DiscountSpecial.php",
+   "line": 8,
+   "table": "special_discount",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "email",
+    "discount",
+    "expirydate",
+    "validity",
+    "type"
+   ],
+   "relations": []
+  },
+  {
+   "class": "HubspotMapping",
+   "file": "app/Models/HubspotMapping.php",
+   "line": 9,
+   "table": "hubspot_mappings",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "company_mapping",
+    "contact_mapping"
+   ],
+   "relations": []
+  },
+  {
+   "class": "HubspotSyncDetail",
+   "file": "app/Models/HubspotSyncDetail.php",
+   "line": 9,
+   "table": "hubspot_sync_details",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "sync_type"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Location",
+   "file": "app/Models/MongoDB/Location.php",
+   "line": 17,
+   "table": "locations_collection",
+   "tableDeclared": true,
+   "connection": "mongodb",
+   "fillable": [
+    "title",
+    "street_number",
+    "route",
+    "postal_code",
+    "latitude",
+    "longitude",
+    "source_type",
+    "data"
+   ],
+   "relations": []
+  },
+  {
+   "class": "LogMeeting",
+   "file": "app/Models/LogMeeting.php",
+   "line": 9,
+   "table": "log_meetings",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "company_id",
+    "meeting_datetime",
+    "meeting_duration",
+    "description",
+    "created_at",
+    "updated_at",
+    "hs_object_id",
+    "hs_associated_company_id"
+   ],
+   "relations": [
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "Notes",
+   "file": "app/Models/Notes.php",
+   "line": 10,
+   "table": "company_notes",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "company_id",
+    "note",
+    "note_type",
+    "date_time",
+    "hs_object_id",
+    "hs_associated_company_id",
+    "updated_at"
+   ],
+   "relations": [
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "NotesSession",
+   "file": "app/Models/NotesSession.php",
+   "line": 9,
+   "table": "company_notes_session",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "company_id",
+    "note",
+    "date_time",
+    "hs_object_id",
+    "hs_associated_company_id",
+    "updated_at"
+   ],
+   "relations": [
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "Package",
+   "file": "app/Models/Package.php",
+   "line": 9,
+   "table": "packages",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "title",
+    "amount",
+    "duration",
+    "status"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Package",
+   "file": "app/Package.php",
+   "line": 6,
+   "table": "packages",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "title",
+    "amount",
+    "duration",
+    "status"
+   ],
+   "relations": []
+  },
+  {
+   "class": "PackageAddOns",
+   "file": "app/Models/PackageAddOns.php",
+   "line": 9,
+   "table": "packages_addons",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "amount",
+    "credit"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Roles",
+   "file": "app/Models/Roles.php",
+   "line": 8,
+   "table": "roles",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": [
+    "users → hasMany(User)"
+   ]
+  },
+  {
+   "class": "RoleUsers",
+   "file": "app/Models/RoleUsers.php",
+   "line": 8,
+   "table": "role_users",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": []
+  },
+  {
+   "class": "RoutesSession",
+   "file": "app/Models/RoutesSession.php",
+   "line": 8,
+   "table": "user_companies_session",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_name",
+    "company_id",
+    "user_id",
+    "notes",
+    "company_status",
+    "distance",
+    "excel_file",
+    "session_status",
+    "session_error",
+    "user_session_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Sfdc",
+   "file": "app/Sfdc.php",
+   "line": 4,
+   "table": "sfdc",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "username",
+    "password_sfdc",
+    "security_token"
+   ],
+   "relations": []
+  },
+  {
+   "class": "ShareRouteList",
+   "file": "app/Models/ShareRouteList.php",
+   "line": 8,
+   "table": "share_route_list",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "route_id",
+    "list_id",
+    "shared_by",
+    "new_route_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Subscription",
+   "file": "app/Models/Subscription.php",
+   "line": 9,
+   "table": "user_packages",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "package_id",
+    "start_date",
+    "end_date",
+    "amount",
+    "payment_info",
+    "promo_id"
+   ],
+   "relations": [
+    "salesperson → belongsTo(User)",
+    "package → belongsTo(Package)"
+   ]
+  },
+  {
+   "class": "SupportTicket",
+   "file": "app/Models/SupportTicket.php",
+   "line": 8,
+   "table": "support_ticket",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": [
+    "users → hasMany(User)"
+   ]
+  },
+  {
+   "class": "SyncFailure",
+   "file": "app/Models/SyncFailure.php",
+   "line": 10,
+   "table": "google_sheet_sync_failures",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "operation",
+    "field_name",
+    "field_value",
+    "error_message",
+    "retry_count",
+    "created_at",
+    "resolved_at"
+   ],
+   "relations": []
+  },
+  {
+   "class": "TestModel",
+   "file": "app/Models/MongoDB/TestModel.php",
+   "line": 8,
+   "table": "locations_collections",
+   "tableDeclared": true,
+   "connection": "mongodb",
+   "fillable": [
+    "user_name"
+   ],
+   "relations": []
+  },
+  {
+   "class": "User",
+   "file": "app/Api/User.php",
+   "line": 13,
+   "table": "users",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "name",
+    "email",
+    "password",
+    "amount_of_licenses",
+    "monthly_cost",
+    "cost_per_user",
+    "payment_period",
+    "billing_name",
+    "billing_email",
+    "subscribe_month",
+    "parent_id",
+    "status",
+    "promocode"
+   ],
+   "relations": [
+    "skills → belongsToMany(Skill)",
+    "docs → belongsToMany(User)"
+   ]
+  },
+  {
+   "class": "User",
+   "file": "app/User.php",
+   "line": 12,
+   "table": "users",
+   "tableDeclared": false,
+   "connection": "mysql (default)",
+   "fillable": [
+    "name",
+    "email",
+    "password",
+    "phone",
+    "amount_of_licenses",
+    "monthly_cost",
+    "cost_per_user",
+    "payment_period",
+    "billing_name",
+    "billing_email",
+    "subscribe_month",
+    "parent_id",
+    "status",
+    "promocode",
+    "country",
+    "total_credits",
+    "yelp_leads",
+    "cancel_feedback",
+    "conversion_rate",
+    "isupgrade",
+    "register_from"
+   ],
+   "relations": [
+    "businessClient → belongsTo(static)",
+    "businessClientSalesperson → hasMany(static)"
+   ]
+  },
+  {
+   "class": "UserAISearch",
+   "file": "app/Models/UserAISearch.php",
+   "line": 9,
+   "table": "user_ai_search",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "website",
+    "city",
+    "ideal_prospects",
+    "search_result",
+    "sell_description",
+    "ai_search_by",
+    "status",
+    "progress",
+    "progress_message",
+    "error_message",
+    "geo_lat",
+    "geo_lng",
+    "stage2_page_tokens",
+    "stage2_raw_places",
+    "stage2_geo_points",
+    "stage2_raw_places"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserCities",
+   "file": "app/Models/UserCities.php",
+   "line": 8,
+   "table": "user_cities",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": []
+  },
+  {
+   "class": "UserCities",
+   "file": "app/UserCities.php",
+   "line": 8,
+   "table": "user_cities",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [],
+   "relations": []
+  },
+  {
+   "class": "UserCompanies",
+   "file": "app/Api/V1/Model/UserCompanies.php",
+   "line": 8,
+   "table": "user_companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "user_id",
+    "notes",
+    "company_status",
+    "distance",
+    "excel_file"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "UserCompanies",
+   "file": "app/Api/V2/Model/UserCompanies.php",
+   "line": 8,
+   "table": "user_companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "user_id",
+    "notes",
+    "company_status",
+    "distance",
+    "excel_file"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "company → belongsTo(Company)"
+   ]
+  },
+  {
+   "class": "UserCompanies",
+   "file": "app/Models/UserCompanies.php",
+   "line": 8,
+   "table": "user_route_companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "user_id",
+    "company_status",
+    "route_id",
+    "cluster_id",
+    "company_status_id",
+    "is_visited",
+    "route_order",
+    "distance",
+    "time",
+    "bookmark"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "company → belongsTo(Company)",
+    "userRoute → belongsTo(UserRoute)",
+    "cluster → belongsTo(UserRouteClusters)"
+   ]
+  },
+  {
+   "class": "UserContactsCredit",
+   "file": "app/Models/UserContactsCredit.php",
+   "line": 9,
+   "table": "user_contacts_credits",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "total_credit",
+    "used_credit",
+    "date"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserContactsCreditCharge",
+   "file": "app/Models/UserContactsCreditCharge.php",
+   "line": 9,
+   "table": "user_contacts_credit_charge",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "payment_info"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserCredit",
+   "file": "app/Models/UserCredit.php",
+   "line": 9,
+   "table": "user_credits",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "total_credit",
+    "used_credit",
+    "date",
+    "package_credits_applied"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserCreditCard",
+   "file": "app/Models/UserCreditCard.php",
+   "line": 9,
+   "table": "user_credit_card",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "cc_no",
+    "cc_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserCreditCharge",
+   "file": "app/Models/UserCreditCharge.php",
+   "line": 9,
+   "table": "user_credit_charge",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "payment_info"
+   ],
+   "relations": []
+  },
+  {
+   "class": "Userdevices",
+   "file": "app/Models/Userdevices.php",
+   "line": 9,
+   "table": "user_devices",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "device_id",
+    "device_type",
+    "status"
+   ],
+   "relations": [
+    "user → belongsTo(User)"
+   ]
+  },
+  {
+   "class": "UserInvitee",
+   "file": "app/Models/UserInvitee.php",
+   "line": 8,
+   "table": "user_invitee",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "email_id",
+    "phone"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserList",
+   "file": "app/Models/UserList.php",
+   "line": 8,
+   "table": "user_lists",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "title",
+    "is_list_open"
+   ],
+   "relations": [
+    "listCompanies → hasMany(UserListCompanies)"
+   ]
+  },
+  {
+   "class": "UserListCompanies",
+   "file": "app/Models/UserListCompanies.php",
+   "line": 8,
+   "table": "user_list_companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "user_id",
+    "list_id"
+   ],
+   "relations": [
+    "user → belongsTo(User)",
+    "company → belongsTo(Company)",
+    "userList → belongsTo(UserList)"
+   ]
+  },
+  {
+   "class": "UserListRoute",
+   "file": "app/Models/UserListRoute.php",
+   "line": 8,
+   "table": "user_list_route",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "list_id",
+    "route_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserMcpConnection",
+   "file": "app/McpClient/UserMcpConnection.php",
+   "line": 7,
+   "table": "user_mcp_connections",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "name",
+    "url",
+    "bearer_token",
+    "oauth_client_id",
+    "oauth_client_secret",
+    "oauth_refresh_token",
+    "oauth_state",
+    "oauth_pending_json",
+    "tools_json",
+    "status",
+    "last_error"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserMcpRequestLog",
+   "file": "app/UserMcp/Models/UserMcpRequestLog.php",
+   "line": 7,
+   "table": "user_mcp_request_logs",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "session_id",
+    "client",
+    "method",
+    "tool",
+    "jsonrpc_id",
+    "http_status",
+    "request",
+    "response",
+    "headers",
+    "is_error",
+    "duration_ms",
+    "created_at"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserMcpSearchLog",
+   "file": "app/UserMcp/Models/UserMcpSearchLog.php",
+   "line": 7,
+   "table": "user_mcp_search_logs",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "search_id",
+    "territories",
+    "sell_description",
+    "ai_search_by",
+    "status",
+    "lead_count",
+    "results",
+    "source_tool"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserMcpToolLog",
+   "file": "app/UserMcp/Models/UserMcpToolLog.php",
+   "line": 7,
+   "table": "user_mcp_tool_logs",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "session_id",
+    "client",
+    "tool",
+    "arguments",
+    "result",
+    "result_summary",
+    "search_id",
+    "list_id",
+    "route_id",
+    "is_error",
+    "duration_ms",
+    "created_at"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserNavigateMe",
+   "file": "app/Models/UserNavigateMe.php",
+   "line": 9,
+   "table": "user_navigate_me",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "user_id"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserPackageAddOns",
+   "file": "app/Models/UserPackageAddOns.php",
+   "line": 9,
+   "table": "user_package_addons",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "amount",
+    "payment_info",
+    "date"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserPromocode",
+   "file": "app/Models/UserPromocode.php",
+   "line": 8,
+   "table": "user_promocode",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "stripe_id",
+    "code",
+    "discount",
+    "validity",
+    "repeating_months",
+    "usagelimit",
+    "special_discount",
+    "type"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserRoute",
+   "file": "app/Models/UserRoute.php",
+   "line": 8,
+   "table": "user_routes",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "title",
+    "route_type",
+    "file_name",
+    "status",
+    "meta_data",
+    "total_distance",
+    "total_time",
+    "filter_with",
+    "resume_page",
+    "comp_add_change",
+    "is_active",
+    "uid",
+    "company_status_id",
+    "is_route_open"
+   ],
+   "relations": [
+    "routeCompanies → hasMany(UserCompanies)"
+   ]
+  },
+  {
+   "class": "UserRouteClusters",
+   "file": "app/Models/UserRouteClusters.php",
+   "line": 8,
+   "table": "user_route_clusters",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "route_id",
+    "title",
+    "is_visited",
+    "cities"
+   ],
+   "relations": [
+    "userRoute → belongsTo(UserRoute)"
+   ]
+  },
+  {
+   "class": "UserSession",
+   "file": "app/Models/UserSession.php",
+   "line": 10,
+   "table": "user_session",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "user_id",
+    "type",
+    "file_name",
+    "mapping_data",
+    "progress_percentage"
+   ],
+   "relations": []
+  },
+  {
+   "class": "UserVisitedCompanies",
+   "file": "app/Models/UserVisitedCompanies.php",
+   "line": 8,
+   "table": "user_visited_companies",
+   "tableDeclared": true,
+   "connection": "mysql (default)",
+   "fillable": [
+    "company_id",
+    "route_id",
+    "visit_time"
+   ],
+   "relations": []
+  }
+ ],
+ "queryBuilderTables": {
+  "role_users": {
+   "uses": 18,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/Concerns/ResolvesUserRoles.php",
+    "app/Http/Controllers/Admin/BusinessclientController.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "users": {
+   "uses": 28,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/SalesAgentsService.php",
+    "app/Globals/Helper.php",
+    "app/Http/Controllers/Admin/BusinessclientController.php",
+    "app/Http/Controllers/Admin/HomeController.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/Admin/SpecialdiscountController.php",
+    "app/Http/Controllers/Auth/B2bSignupController.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/CronController.php",
+    "app/Http/Controllers/HomeController.php",
+    "app/Jobs/SendOnboardingSegmentEmail.php",
+    "app/Services/Manager/ManagerDashboardService.php"
+   ]
+  },
+  "companies": {
+   "uses": 33,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/SalesAgentsService.php",
+    "app/Globals/Helper.php",
+    "app/Helpers/helpers.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ContactController.php",
+    "app/Http/Controllers/HomeController.php",
+    "app/Http/Controllers/SalespersonController.php",
+    "app/Http/Controllers/SfdcController.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/Services/Manager/ManagerFindLeadsService.php",
+    "app/UserMcp/Console/ContactSearchQaCommand.php",
+    "app/UserMcp/Console/SearchCompaniesQaCommand.php",
+    "app/UserMcp/Services/RouteEndpointPicker.php"
+   ]
+  },
+  "user_routes": {
+   "uses": 24,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/SalesAgentsService.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/Admin/HomeController.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/HomeController.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/Services/OnboardingSegmentClassifier.php",
+    "app/Services/UserDataService.php",
+    "app/User.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/RoutesTools.php"
+   ]
+  },
+  "user_ai_search": {
+   "uses": 5,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/SalesAgentsService.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Services/OnboardingSegmentClassifier.php",
+    "app/Services/UserDataService.php",
+    "app/User.php"
+   ]
+  },
+  "usertoken": {
+   "uses": 17,
+   "connection": "default",
+   "files": [
+    "app/AdminMcp/Services/SalesAgentsService.php",
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Console/Commands/ExportChurnedTrialSignupsCsvCommand.php",
+    "app/Globals/Helper.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/Admin/SubscriptionController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Jobs/SendTrialNudgePush.php",
+    "app/Services/GoogleSheets/GoogleSheetsClient.php"
+   ]
+  },
+  "notification_master": {
+   "uses": 12,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Globals/Helper.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Jobs/SendTrialNudgePush.php",
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "leads_user": {
+   "uses": 5,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/CronController.php",
+    "app/Http/Controllers/HomeController.php"
+   ]
+  },
+  "user_status": {
+   "uses": 171,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Api/V2/Controllers/CompanyController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Globals/Helper.php",
+    "app/Globals/Routes.php",
+    "app/Helpers/helpers.php",
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ContactController.php",
+    "app/Http/Controllers/HubSpotController.php",
+    "app/Http/Controllers/KarmaCrmController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Http/Controllers/RoutesController.php",
+    "app/Http/Controllers/SalespersonController.php",
+    "app/Http/Controllers/SfdcController.php",
+    "app/Jobs/BuyContactsBulkJob.php",
+    "app/McpClient/Services/HubSpotMcpSyncService.php",
+    "app/McpClient/Services/SalesforceMcpSyncService.php",
+    "app/UserMcp/Console/QaCommand.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php"
+   ]
+  },
+  "user_contact_stage": {
+   "uses": 29,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Globals/Helper.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ContactController.php",
+    "app/Http/Controllers/HubSpotController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Http/Controllers/SalespersonController.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php"
+   ]
+  },
+  "user_company_categories": {
+   "uses": 21,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/AuthController.php",
+    "app/Api/V2/Controllers/CompanyController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/HubSpotController.php",
+    "app/Http/Controllers/SalespersonController.php"
+   ]
+  },
+  "user_route_companies": {
+   "uses": 22,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/CompanyController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/UserMcp/Console/QaCommand.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php"
+   ]
+  },
+  "user_list_companies": {
+   "uses": 14,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/CompanyController.php",
+    "app/Api/V2/Controllers/ListController.php",
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/UserMcp/Console/QaCommand.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php",
+    "app/UserMcp/Services/Tools/RoutesTools.php"
+   ]
+  },
+  "user_invitee": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/InviteController.php"
+   ]
+  },
+  "user_lists": {
+   "uses": 8,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/ListController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/Services/UserDataService.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/RoutesTools.php"
+   ]
+  },
+  "user_route_clusters": {
+   "uses": 3,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/RouteController.php"
+   ]
+  },
+  "user_visited_companies": {
+   "uses": 18,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Http/Controllers/RoutesController.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/Services/UserDataService.php",
+    "app/UserMcp/Services/Tools/RoutesTools.php"
+   ]
+  },
+  "user_list_route": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/RouteController.php"
+   ]
+  },
+  "settings": {
+   "uses": 4,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/RouteController.php",
+    "app/Http/Controllers/Admin/SettingController.php"
+   ]
+  },
+  "support_ticket": {
+   "uses": 13,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/SupportController.php",
+    "app/Http/Controllers/Admin/SupportController.php",
+    "app/Http/Controllers/SupportController.php",
+    "app/Services/Manager/ManagerDashboardService.php"
+   ]
+  },
+  "contacts": {
+   "uses": 18,
+   "connection": "default",
+   "files": [
+    "app/Api/V2/Controllers/WebhookController.php",
+    "app/Globals/Helper.php",
+    "app/Helpers/helpers.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/ContactController.php",
+    "app/Http/Controllers/SfdcController.php",
+    "app/Services/GoogleSheets/GoogleSheetsClient.php",
+    "app/Services/Manager/ManagerDashboardService.php",
+    "app/Services/UserDataService.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php"
+   ]
+  },
+  "user_packages": {
+   "uses": 13,
+   "connection": "default",
+   "files": [
+    "app/Console/Commands/ExportChurnedTrialSignupsCsvCommand.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/SubscriptionController.php",
+    "app/Http/Controllers/UserauthController.php",
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "companies_session": {
+   "uses": 10,
+   "connection": "default",
+   "files": [
+    "app/Globals/Helper.php",
+    "app/Helpers/helpers.php",
+    "app/Http/Controllers/CompanylController.php"
+   ]
+  },
+  "contacts_session": {
+   "uses": 11,
+   "connection": "default",
+   "files": [
+    "app/Globals/Helper.php",
+    "app/Helpers/helpers.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/HubSpotController.php"
+   ]
+  },
+  "company_notes": {
+   "uses": 25,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/HomeController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php",
+    "app/Http/Controllers/CompanylController.php",
+    "app/Http/Controllers/HomeController.php",
+    "app/Http/Controllers/ListController.php",
+    "app/Http/Controllers/RouteController.php",
+    "app/Http/Controllers/RoutesController.php",
+    "app/Services/Manager/ManagerDashboardService.php"
+   ]
+  },
+  "user_promocode": {
+   "uses": 12,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/PromocodeController.php",
+    "app/Http/Controllers/Admin/SpecialdiscountController.php",
+    "app/Http/Controllers/Auth/RegisterController.php",
+    "app/Http/Controllers/SubscriptionController.php"
+   ]
+  },
+  "activities": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Services/Manager/ManagerDashboardService.php"
+   ]
+  },
+  "sessions": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php"
+   ]
+  },
+  "oauth_access_tokens": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/SalespersonController.php",
+    "app/Http/Controllers/BusinesssalespersonController.php"
+   ]
+  },
+  "special_discount": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/Admin/SpecialdiscountController.php"
+   ]
+  },
+  "user_navigate_me": {
+   "uses": 3,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/BusinesssalespersonController.php"
+   ]
+  },
+  "company_time": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/CompanylController.php"
+   ]
+  },
+  "company_notes_session": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/CompanylController.php"
+   ]
+  },
+  "cities": {
+   "uses": 12,
+   "connection": "default",
+   "files": [
+    "app/Http/Controllers/HubSpotController.php",
+    "app/UserMcp/Console/QaCommand.php",
+    "app/UserMcp/Services/Tools/CompaniesTools.php",
+    "app/UserMcp/Services/Tools/ContactsTools.php"
+   ]
+  },
+  "packages": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "businessclient_salesagent_credits": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "user_credits": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/Services/UserDataService.php",
+    "app/UserMcp/Services/Tools/AccountTools.php"
+   ]
+  },
+  "user_contacts_credits": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/Services/UserDataService.php"
+   ]
+  },
+  "countries": {
+   "uses": 2,
+   "connection": "default",
+   "files": [
+    "app/UserMcp/Services/Tools/CompaniesTools.php"
+   ]
+  },
+  "app_oauth_clients": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/UserMcp/database/migrations/2026_07_08_120000_consolidate_mcp_oauth_shared_schema.php"
+   ]
+  },
+  "app_oauth_access_tokens": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/UserMcp/database/migrations/2026_07_08_120000_consolidate_mcp_oauth_shared_schema.php"
+   ]
+  },
+  "app_oauth_authorization_codes": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/UserMcp/database/migrations/2026_07_08_120000_consolidate_mcp_oauth_shared_schema.php"
+   ]
+  },
+  "app_oauth_refresh_tokens": {
+   "uses": 1,
+   "connection": "default",
+   "files": [
+    "app/UserMcp/database/migrations/2026_07_08_120000_consolidate_mcp_oauth_shared_schema.php"
+   ]
+  }
+ },
+ "migrations": [
+  {
+   "file": "database/migrations/2014_10_12_000000_create_users_table.php",
+   "creates": [
+    "users"
+   ]
+  },
+  {
+   "file": "database/migrations/2014_10_12_100000_create_password_resets_table.php",
+   "creates": [
+    "password_resets"
+   ]
+  },
+  {
+   "file": "database/migrations/2015_08_04_131614_create_settings_table.php",
+   "creates": [
+    "settings"
+   ]
+  },
+  {
+   "file": "database/migrations/2016_05_25_121918_create_pages_table.php",
+   "creates": [
+    "pages"
+   ]
+  },
+  {
+   "file": "database/migrations/2018_04_06_083803_create_jobs_table.php",
+   "creates": [
+    "jobs"
+   ]
+  },
+  {
+   "file": "database/migrations/2018_04_17_130401_create_failed_jobs_table.php",
+   "creates": [
+    "failed_jobs"
+   ]
+  },
+  {
+   "file": "app/McpClient/database/migrations/2026_08_14_112600_create_user_mcp_connections_table.php",
+   "creates": [
+    "user_mcp_connections"
+   ]
+  },
+  {
+   "file": "app/UserMcp/database/migrations/2026_08_17_151500_create_user_mcp_audit_tables.php",
+   "creates": [
+    "user_mcp_tool_logs",
+    "user_mcp_search_logs"
+   ]
+  },
+  {
+   "file": "app/UserMcp/database/migrations/2026_08_17_153000_create_user_mcp_request_logs_table.php",
+   "creates": [
+    "user_mcp_request_logs"
+   ]
+  }
+ ],
+ "realm": [
+  {
+   "schema": "FCMNotication",
+   "file": "App/storage/fcmrealm.js",
+   "line": 24,
+   "primaryKey": "id",
+   "properties": [
+    "id",
+    "notification_title",
+    "notification_desc"
+   ]
+  },
+  {
+   "schema": "JWTToken",
+   "file": "App/storage/realm.js",
+   "line": 34,
+   "primaryKey": "id",
+   "properties": [
+    "id",
+    "value",
+    "name",
+    "notifi_count",
+    "user_id",
+    "email",
+    "country",
+    "domain",
+    "env",
+    "role",
+    "is_register",
+    "is_production"
+   ]
+  },
+  {
+   "schema": "offlineRoute",
+   "file": "App/storage/realm.js",
+   "line": 58,
+   "primaryKey": "id",
+   "properties": [
+    "id",
+    "value",
+    "data"
+   ]
+  },
+  {
+   "schema": "TourSchema",
+   "file": "App/storage/realm.js",
+   "line": 73,
+   "primaryKey": "id",
+   "properties": [
+    "id",
+    "create_route",
+    "edit_route",
+    "company_detail",
+    "fetch_contact",
+    "notes"
+   ]
+  },
+  {
+   "schema": "AIFindLeads",
+   "file": "App/storage/realm.js",
+   "line": 91,
+   "primaryKey": "id",
+   "properties": [
+    "id",
+    "website",
+    "city",
+    "territoryMode",
+    "sellDetails",
+    "aiResponse",
+    "aiLeads"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+/* ===== resources/views/front/route/list.blade.php · <style> block 1 of 1 ===== */
+#allCompaniesTable tr.unread-item-row > td,
+        #selectedCompaniesTable tr.unread-item-row > td {
+            background-color: #e8f0fe !important;
+        }
+        #allCompaniesTable tr.unread-item-row td a,
+        #selectedCompaniesTable tr.unread-item-row td a,
+        a.unread-item-link {
+            font-weight: 700;
+        }
+        .route-card.unread-item-row {
+            background-color: #e8f0fe !important;
+            border-left: 4px solid #124ac6 !important;
+        }
+        .route-card.unread-item-row h4 {
+            font-weight: 700;
+        }

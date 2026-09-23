@@ -1,0 +1,20 @@
+---
+title: Field-rep happy path use cases (captured 15 Sep 2026)
+---
+flowchart TD
+  A[UC-AUTH-02 Create 7-day trial<br/>60 credits, no card] --> B[UC-ONB-01 Goals]
+  B --> C[UC-ONB-02 I'm in the field]
+  C --> D[UC-ONB-03 Sell to Businesses B2B]
+  D --> E[UC-LEAD-01 Search Multiple<br/>Los Angeles + restaurants]
+  E --> F[UC-LEAD-05 Save leads<br/>1 credit each]
+  F --> G[UC-LEAD-06 Create route R123]
+  G --> H[UC-RTE-06 Generate start/end]
+  H --> I[UC-RTE-07 View published route]
+  F --> J[UC-LEAD-08 Create list L123]
+  J --> K[UC-LST-07 View list / convert to route]
+  F --> L[UC-CO-04 Company profile]
+  L --> M[UC-CT-03 Create contact]
+  L --> N[UC-ACT-01 Add activity]
+  L --> O[UC-SET-03 Add MCP connector]
+  O --> P[UC-BIL-01 Subscription history]
+  P --> Q[UC-SUP-01 Support ticket]

@@ -1,0 +1,16 @@
+/* ===== resources/views/front/subscription/creditsaddonmobile.blade.php · <style> block 1 of 1 ===== */
+.main-header, .content-header, .fa-angle-double-left:before, .text-lowercase, .row a:first-of-type {
+            display:none;
+        }
+		.next-pages a{
+			display:block !important;
+		}
+        .sidebar-mini .content-wrapper, .content, body{
+            margin-top:0px;
+        }
+        .content{
+            padding-top:0px;
+        }
+        .alert-success{
+            display:none !important;
+        }

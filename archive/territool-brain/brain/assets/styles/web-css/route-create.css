@@ -1,0 +1,642 @@
+/* Route create — toolbar + button styles (aligned with route detail) */
+#routepage,
+.route-create-page {
+    --tt-blue: #124ac6;
+    --tt-blue-dark: #0e3da6;
+    --tt-blue-light: #e6eefb;
+    --tt-sky: #00bcf0;
+    --tt-sky-dark: #00a3d1;
+    --tt-sky-light: #e0f5fd;
+    --tt-border: #e5e5e5;
+    --tt-text: #1a1a1a;
+    --tt-amber: #f59e0b;
+    --tt-amber-dark: #d97706;
+}
+
+#routepage .route-view-toolbar,
+.route-create-page .route-view-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: none;
+}
+
+#routepage .route-view-toolbar-actions,
+#routepage .route-view-toolbar-secondary,
+.route-create-page .route-view-toolbar-actions,
+.route-create-page .route-view-toolbar-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#routepage .route-view-toolbar-secondary,
+.route-create-page .route-view-toolbar-secondary {
+    margin-left: auto;
+}
+
+#routepage .route-create-footer,
+.route-create-page .route-create-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 14px 16px;
+    border-top: 1px solid #f0f0f0;
+}
+
+#routepage .route-create-footer .route-create-footer-actions,
+.route-create-page .route-create-footer .route-create-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+#routepage .route-btn,
+.route-create-page .route-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.2;
+    margin: 0;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    float: none !important;
+    position: static !important;
+    width: auto !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    z-index: auto !important;
+}
+
+#routepage .route-btn .fa,
+.route-create-page .route-btn .fa {
+    font-size: 14px;
+}
+
+#routepage .route-btn-draft,
+.route-create-page .route-btn-draft {
+    background: #fff !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text) !important;
+}
+
+#routepage .route-btn-draft:hover,
+#routepage .route-btn-draft:focus,
+.route-create-page .route-btn-draft:hover,
+.route-create-page .route-btn-draft:focus {
+    background: #f8fafc !important;
+    border-color: #d1d5db !important;
+    color: var(--tt-text) !important;
+}
+
+#routepage .route-btn-map,
+.route-create-page .route-btn-map {
+    background: #fff !important;
+    border-color: var(--tt-blue) !important;
+    color: var(--tt-blue) !important;
+    box-shadow: none !important;
+}
+
+#routepage .route-btn-map:hover,
+#routepage .route-btn-map:focus,
+.route-create-page .route-btn-map:hover,
+.route-create-page .route-btn-map:focus {
+    background: var(--tt-blue-light) !important;
+    border-color: var(--tt-blue) !important;
+    color: var(--tt-blue-dark) !important;
+}
+
+#routepage .route-btn-leads,
+.route-create-page .route-btn-leads {
+    background: var(--tt-sky) !important;
+    border-color: var(--tt-sky) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-leads:hover,
+#routepage .route-btn-leads:focus,
+.route-create-page .route-btn-leads:hover,
+.route-create-page .route-btn-leads:focus {
+    background: var(--tt-sky-dark) !important;
+    border-color: var(--tt-sky-dark) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-add,
+.route-create-page .route-btn-add {
+    background: var(--tt-blue) !important;
+    border-color: var(--tt-blue) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-add:hover,
+#routepage .route-btn-add:focus,
+.route-create-page .route-btn-add:hover,
+.route-create-page .route-btn-add:focus {
+    background: var(--tt-blue-dark) !important;
+    border-color: var(--tt-blue-dark) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-filter,
+.route-create-page .route-btn-filter {
+    background: #fff !important;
+    border-color: var(--tt-border) !important;
+    color: var(--tt-text) !important;
+}
+
+#routepage .route-btn-filter:hover,
+#routepage .route-btn-filter:focus,
+.route-create-page .route-btn-filter:hover,
+.route-create-page .route-btn-filter:focus {
+    background: #f8fafc !important;
+    border-color: #d1d5db !important;
+    color: var(--tt-text) !important;
+}
+
+#routepage .route-btn-route,
+.route-create-page .route-btn-route {
+    background: var(--tt-blue) !important;
+    border-color: var(--tt-blue) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-route:hover,
+#routepage .route-btn-route:focus,
+.route-create-page .route-btn-route:hover,
+.route-create-page .route-btn-route:focus {
+    background: var(--tt-blue-dark) !important;
+    border-color: var(--tt-blue-dark) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-generate,
+.route-create-page .route-btn-generate {
+    background: var(--tt-amber) !important;
+    border-color: var(--tt-amber) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-generate:hover:not([disabled]),
+#routepage .route-btn-generate:focus:not([disabled]),
+.route-create-page .route-btn-generate:hover:not([disabled]),
+.route-create-page .route-btn-generate:focus:not([disabled]) {
+    background: var(--tt-amber-dark) !important;
+    border-color: var(--tt-amber-dark) !important;
+    color: #fff !important;
+}
+
+#routepage .route-btn-generate[disabled],
+.route-create-page .route-btn-generate[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+#routepage .box.route-view-box,
+.route-create-page .box.route-view-box {
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.06);
+    border: 1px solid #e5e7eb;
+}
+
+/* Tabs */
+#routepage #companies_nav_tabs {
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 10px;
+}
+#routepage #companies_nav_tabs > li > a {
+    border: none;
+    border-radius: 8px 8px 0 0;
+    color: #64748b;
+    font-weight: 600;
+    padding: 10px 16px;
+}
+#routepage #companies_nav_tabs > li.active > a,
+#routepage #companies_nav_tabs > li.active > a:hover,
+#routepage #companies_nav_tabs > li.active > a:focus {
+    background: #fff;
+    color: var(--tt-blue);
+    border: 1px solid #e5e7eb;
+    border-bottom-color: #fff;
+}
+#routepage #companies_nav_tabs .badge {
+    background: var(--tt-blue);
+    margin-left: 6px;
+}
+
+/* DataTables wrapper — visual only, no layout changes */
+#routepage #allCompaniesTable_wrapper,
+#routepage #selectedCompaniesTable_wrapper {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 6px 20px rgba(15, 23, 42, 0.06);
+    margin-bottom: 12px;
+}
+
+#routepage #allCompaniesTable_wrapper .row,
+#routepage #selectedCompaniesTable_wrapper .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Top controls bar — cosmetic padding only */
+#routepage #allCompaniesTable_wrapper > .row:first-child,
+#routepage #selectedCompaniesTable_wrapper > .row:first-child {
+    padding: 8px 14px;
+    background: #fafbfc;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Bottom info/pagination bar — cosmetic padding only */
+#routepage #allCompaniesTable_wrapper > .row:last-child,
+#routepage #selectedCompaniesTable_wrapper > .row:last-child {
+    padding: 8px 14px;
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_length label,
+#routepage #selectedCompaniesTable_wrapper .dataTables_length label,
+#routepage #allCompaniesTable_wrapper .dataTables_filter label,
+#routepage #selectedCompaniesTable_wrapper .dataTables_filter label,
+#routepage #allCompaniesTable_wrapper .dataTables_info,
+#routepage #selectedCompaniesTable_wrapper .dataTables_info {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_length select,
+#routepage #selectedCompaniesTable_wrapper .dataTables_length select {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    height: 34px;
+    padding: 4px 24px 4px 10px;
+    background: #fff;
+    color: #374151;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_filter input,
+#routepage #selectedCompaniesTable_wrapper .dataTables_filter input {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    height: 34px;
+    padding: 6px 12px;
+    background: #f3f4f6;
+    color: #111827;
+    box-shadow: none;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_filter input:focus,
+#routepage #selectedCompaniesTable_wrapper .dataTables_filter input:focus {
+    background: #fff;
+    border-color: #cbd5e1;
+    outline: none;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button {
+    border-radius: 6px !important;
+    background: #fff !important;
+    color: #374151 !important;
+    box-shadow: none !important;
+    font-size: 13px;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button:hover,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #f8fafc !important;
+    border-color: #d1d5db !important;
+    color: #111827 !important;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button.current,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button.current,
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button.current:hover,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: var(--tt-blue) !important;
+    border-color: var(--tt-blue) !important;
+    color: #fff !important;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button.disabled,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button.disabled,
+#routepage #allCompaniesTable_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+#routepage #selectedCompaniesTable_wrapper .dataTables_paginate .paginate_button.disabled:hover {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: #fff !important;
+    color: #9ca3af !important;
+}
+
+#routepage #allCompaniesTable_wrapper .dataTables_processing,
+#routepage #selectedCompaniesTable_wrapper .dataTables_processing {
+    background: rgba(255, 255, 255, 0.92) !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    color: #64748b !important;
+}
+
+/* Table body */
+#routepage .route-create-datatable {
+    width: 100% !important;
+    margin: 0 !important;
+    border: none !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+}
+
+#routepage .route-create-datatable thead th {
+    font-size: 12px !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6b7280 !important;
+    font-weight: 600 !important;
+    background: #f8fafc !important;
+    border-color: #e5e7eb !important;
+    padding: 11px 14px !important;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#routepage .route-create-datatable thead tr:nth-child(2) th {
+    text-transform: none;
+    letter-spacing: normal;
+    background: #fff !important;
+    padding: 8px 10px !important;
+    font-size: 13px !important;
+}
+
+#routepage .route-create-datatable thead tr:nth-child(2) th .form-control {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    height: 34px;
+    box-shadow: none;
+    font-size: 13px;
+    background: #f9fafb;
+}
+
+#routepage .route-create-datatable thead tr:nth-child(2) th .form-control:focus {
+    background: #fff;
+    border-color: #cbd5e1;
+    outline: none;
+}
+
+#routepage .route-create-datatable tbody td {
+    border-color: #f1f5f9 !important;
+    color: #374151;
+    padding: 11px 14px !important;
+    vertical-align: middle;
+    font-size: 14px;
+    background: #fff !important;
+    transition: background 0.12s ease;
+}
+
+#routepage .route-create-datatable.table-striped > tbody > tr:nth-of-type(odd) > td {
+    background: #fafbfc !important;
+}
+
+#routepage .route-create-datatable tbody tr:hover td {
+    background: #f8fafc !important;
+}
+
+#routepage .route-create-datatable tbody tr.selected td,
+#routepage .route-create-datatable.table-striped > tbody > tr.selected > td,
+#routepage .route-create-datatable.table-striped > tbody > tr.selected:nth-of-type(odd) > td,
+#routepage .route-create-datatable.table-striped > tbody > tr.selected:nth-of-type(even) > td {
+    background: #eff6ff !important;
+    border-color: #dbeafe !important;
+    color: #1e3a5f !important;
+}
+
+#routepage .route-create-datatable tbody tr.selected:hover td,
+#routepage .route-create-datatable.table-striped > tbody > tr.selected:hover > td {
+    background: #dbeafe !important;
+}
+
+#routepage .route-create-datatable .comtitle {
+    color: var(--tt-blue);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+#routepage .route-create-datatable .comtitle:hover {
+    color: var(--tt-blue-dark);
+    text-decoration: underline;
+}
+
+#routepage .route-create-datatable tbody tr.selected .comtitle {
+    color: #1d4ed8;
+}
+
+#routepage .route-create-datatable .dt-body-center {
+    text-align: center;
+}
+
+#routepage .route-create-datatable.dataTable.no-footer {
+    border-bottom: none;
+}
+
+/* Mobile cards */
+#routepage #mobile-cards .company-card,
+#routepage #mobile-selected-cards .company-card {
+    border: 1px solid #e5e7eb;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff 0%, #f8fafc 100%);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+#routepage #mobile-cards .company-card:has(.card-checkbox:checked),
+#routepage #mobile-selected-cards .company-card:has(.card-checkbox:checked) {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border-color: #93c5fd;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.15);
+}
+
+#routepage #mobile-cards .card-header,
+#routepage #mobile-selected-cards .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+#routepage #mobile-cards .header-content h5,
+#routepage #mobile-selected-cards .header-content h5 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+#routepage #mobile-cards .header-content p,
+#routepage #mobile-selected-cards .header-content p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #475569;
+}
+
+@media only screen and (max-width: 767px) {
+    #routepage .route-view-toolbar,
+    .route-create-page .route-view-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 10px 12px;
+    }
+
+    #routepage .route-view-toolbar-actions,
+    #routepage .route-view-toolbar-secondary,
+    .route-create-page .route-view-toolbar-actions,
+    .route-create-page .route-view-toolbar-secondary {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #routepage .route-view-toolbar-secondary,
+    .route-create-page .route-view-toolbar-secondary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #routepage .route-btn,
+    .route-create-page .route-btn {
+        width: 100% !important;
+        padding: 10px 14px;
+    }
+
+    #routepage .route-create-footer,
+    .route-create-page .route-create-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #routepage .route-create-footer .route-create-footer-actions,
+    .route-create-page .route-create-footer .route-create-footer-actions {
+        width: 100%;
+        margin-left: 0;
+        flex-direction: column;
+    }
+
+    #routepage #nextRouteStep2,
+    .route-create-page #btnPublishRoute2,
+    .route-create-page #btnPublishRoute4 {
+        grid-column: 1 / -1;
+    }
+    #routepage .route-btn-route,
+    .route-create-page .route-btn-route {
+        height: 39px !important;
+        margin-top: 10px;
+    }
+    .select-all-btn{
+        margin:10px;
+    }
+}
+@media (min-width: 768px) {
+    #all-companies .col-sm-12, #selected-companies .col-sm-12 {
+        padding: 0 !important;
+    }
+}
+
+#all-companies .dataTables_length, #selected-companies .dataTables_length {
+    position: absolute;
+    z-index: 9;
+}
+
+/* Route create map — company detail modal refinements */
+#findleadsModal1.cdm-modal.in,
+#viewmapcompanyModal.cdm-modal.in {
+    z-index: 1050;
+}
+
+#findleadsModal1.cdm-modal .no-content-box,
+#viewmapcompanyModal.cdm-modal .no-content-box {
+    background: #f8fafc;
+    padding: 24px;
+    border-radius: 0;
+    margin: 0;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-btn,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-btn {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-hours-section .company-hour-day,
+#viewmapcompanyModal.cdm-modal .company-hours-section .company-hour-day {
+    font-weight: 700;
+    color: #64748b;
+}
+
+#findleadsModal1.cdm-modal .company-activity-header,
+#viewmapcompanyModal.cdm-modal .company-activity-header {
+    margin-bottom: 12px;
+}
+
+#findleadsModal1.cdm-modal .company-activity-add-btn,
+#viewmapcompanyModal.cdm-modal .company-activity-add-btn {
+    background: #2563eb;
+    border-color: #2563eb;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active {
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-tab.is-active::after,
+#viewmapcompanyModal.cdm-modal .company-activity-tab.is-active::after {
+    background: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+#findleadsModal1.cdm-modal .company-activity-type-pill--muted,
+#viewmapcompanyModal.cdm-modal .company-activity-type-pill--muted {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+#findleadsModal1.cdm-modal .company-activity-table-card,
+#viewmapcompanyModal.cdm-modal .company-activity-table-card {
+    border-radius: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    #findleadsModal1.cdm-modal .modal-dialog.cdm-modal-dialog,
+    #viewmapcompanyModal.cdm-modal .modal-dialog.cdm-modal-dialog {
+        width: 88%;
+        max-width: 980px;
+    }
+}

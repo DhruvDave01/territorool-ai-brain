@@ -1,0 +1,31 @@
+/*
+ * Territool project fonts for brain mockups and artifact pages.
+ * Files are copies from the apps (brain/assets/fonts). No external or substitute fonts.
+ * Link this file together with tokens/tt-tokens.css (web) or use tokens/tokens.js values (mobile).
+ */
+
+/* Web: same family names and files as repos/web public/vendor/adminlte/dist/css/AdminLTE.min.css.
+   The web app sets body to "DIN 2014 Bold" at font-weight 400 and uses "DIN 2014 Light" for lighter text. */
+@font-face {
+  font-family: "DIN 2014 Bold";
+  src: url("../fonts/web/DinBold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "DIN 2014 Light";
+  src: url("../fonts/web/DinLight.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* Mobile: family names are the iOS PostScript names used in App/styles/fonts.js.
+   Android uses the file names (DIN-Condensed-Bold, DIN-Condensed-Regular). */
+@font-face {
+  font-family: "DINCondensed-Bold";
+  src: url("../fonts/mobile/DIN-Condensed-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "DIN-Regular";
+  src: url("../fonts/mobile/DIN-Condensed-Regular.ttf") format("truetype");
+  font-display: swap;
+}

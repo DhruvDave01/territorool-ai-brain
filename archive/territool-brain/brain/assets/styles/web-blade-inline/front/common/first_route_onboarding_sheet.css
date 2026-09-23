@@ -1,0 +1,321 @@
+/* ===== resources/views/front/common/first_route_onboarding_sheet.blade.php · <style> block 1 of 1 ===== */
+@media (max-width: 767px) {
+    .mobile-title-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+    }
+    .mobile-title-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+    }
+    .route-view-help-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #124ac6;
+        font-size: 14px;
+        line-height: 1;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .route-view-help-btn--mobile {
+        height: 24px;
+        padding: 0 8px;
+        border-radius: 12px;
+        border: 1.5px solid #124ac6;
+        background: #fff;
+    }
+    .route-view-help-btn--mobile:active {
+        background: #e8eefb;
+    }
+
+    .first-route-onboarding-section {
+        --fro-blue: #124ac6;
+        --fro-blue-light: #e8eefb;
+        margin: 16px 0 24px;
+        padding: 20px 16px;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .fro-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--fro-blue-light);
+        color: var(--fro-blue);
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 999px;
+    }
+    .fro-badge-icon {
+        flex-shrink: 0;
+        display: block;
+        width: 16px;
+        height: 16px;
+    }
+    .fro-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin: 0 0 10px;
+        line-height: 1.25;
+        padding-top: 10px;
+    }
+    .fro-subtitle {
+        font-size: 15px;
+        color: #6b7280;
+        margin: 0 0 18px;
+    }
+    .fro-body {
+        font-size: 15px;
+        color: #6b7280;
+        line-height: 1.5;
+        margin: 0 0 16px;
+    }
+
+    .fro-btn {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        text-align: left;
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+    }
+    .fro-btn:last-child { margin-bottom: 0; }
+    .fro-btn:active { opacity: 0.85; }
+    .fro-btn.is-loading,
+    .fro-peeked-btn.is-loading {
+        opacity: 0.75;
+        pointer-events: none;
+        cursor: wait;
+    }
+    .fro-btn-primary {
+        background: var(--fro-blue);
+        border: 2px solid var(--fro-blue);
+        color: #fff;
+    }
+    .fro-btn-outline {
+        background: #fff;
+        border: 2px solid var(--fro-blue);
+        color: var(--fro-blue);
+    }
+    .fro-btn-icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        width: 28px;
+        text-align: center;
+    }
+    .fro-btn-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .fro-btn-text strong {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    .fro-btn-text small {
+        font-size: 13px;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+    .fro-btn-outline .fro-btn-text strong { font-weight: 600; }
+
+    .fro-patch-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .fro-patch-list li { margin-bottom: 10px; }
+    .fro-patch-option {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: #fff;
+        text-align: left;
+        cursor: pointer;
+    }
+    .fro-patch-option:active { background: #f9fafb; }
+    .fro-patch-option:disabled,
+    .fro-patch-option--disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        pointer-events: none;
+        background: #f9fafb;
+    }
+    .fro-patch-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: #f3f4f6;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    .fro-patch-icon--blue {
+        background: var(--fro-blue-light);
+        color: var(--fro-blue);
+    }
+    .fro-patch-icon--home {
+        background: #fefce8;
+        color: #ca8a04;
+    }
+    .fro-patch-copy {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+    .fro-patch-copy strong {
+        font-size: 16px;
+        color: #111827;
+    }
+    .fro-patch-copy small {
+        font-size: 13px;
+        color: #6b7280;
+    }
+    .fro-patch-chevron {
+        color: #d1d5db;
+        font-size: 14px;
+    }
+
+    .fro-panel--patch {
+        position: relative;
+    }
+    .fro-close-btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 0;
+        background: transparent;
+        color: #9ca3af;
+        font-size: 28px;
+        line-height: 1;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+    }
+    .fro-panel--patch .fro-title {
+        padding-right: 28px;
+    }
+
+    .fro-residential-popup {
+        position: fixed;
+        inset: 0;
+        z-index: 10050;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        background: rgba(17, 24, 39, 0.45);
+    }
+    .fro-residential-popup[hidden] {
+        display: none !important;
+    }
+    .fro-residential-popup-card {
+        width: 100%;
+        max-width: 360px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 28px 24px 24px;
+        text-align: center;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+    .fro-residential-popup-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 16px;
+        border-radius: 50%;
+        background: #fffbeb;
+        color: #ca8a04;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+    .fro-residential-popup-message {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #374151;
+        margin: 0 0 20px;
+    }
+    .fro-residential-popup-close {
+        justify-content: center;
+        margin-bottom: 0;
+    }
+
+    .fro-peeked-label {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        color: #374151;
+        margin: 0 0 14px;
+    }
+    .fro-peeked-actions {
+        display: flex;
+        gap: 10px;
+    }
+    .fro-peeked-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 10px;
+        padding: 12px 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        min-height: 48px;
+    }
+    .fro-peeked-btn span { line-height: 1.2; }
+    .fro-peeked-btn-primary {
+        background: var(--fro-blue);
+        border: 2px solid var(--fro-blue);
+        color: #fff;
+    }
+    .fro-peeked-btn-outline {
+        background: #fff;
+        border: 2px solid var(--fro-blue);
+        color: var(--fro-blue);
+    }
+
+    .first-route-onboarding-section .fro-toast {
+        margin-top: 12px;
+        background: #111827;
+        color: #fff;
+        font-size: 14px;
+        padding: 12px 18px;
+        border-radius: 10px;
+        text-align: center;
+        display: none;
+    }
+    .first-route-onboarding-section .fro-toast.is-visible {
+        display: block;
+    }
+    .first-route-onboarding-section.fro-highlight {
+        box-shadow: 0 0 0 3px rgba(18, 74, 198, 0.35);
+    }
+}

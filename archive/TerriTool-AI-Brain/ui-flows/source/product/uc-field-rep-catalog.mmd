@@ -1,0 +1,43 @@
+---
+title: Field-rep use case catalog
+---
+flowchart TB
+  subgraph Auth["Auth"]
+    A1[UC-AUTH-01 Sign in]
+    A2[UC-AUTH-02 Trial]
+    A3[UC-AUTH-03 Forgot password]
+  end
+  subgraph Onb["Onboarding"]
+    O1[UC-ONB-01 Goals]
+    O2[UC-ONB-02 Role]
+    O3[UC-ONB-03 B2B vs homeowners]
+  end
+  subgraph Leads["AI Find Leads"]
+    L1[UC-LEAD-01 Search Multiple]
+    L5[UC-LEAD-05 Save 1 cr each]
+    L6[UC-LEAD-06 New/existing route]
+    L8[UC-LEAD-08 New/existing list]
+  end
+  subgraph Routes["Routes"]
+    R2[UC-RTE-02 Select companies]
+    R5[UC-RTE-05 Save draft]
+    R6[UC-RTE-06 Generate]
+    R7[UC-RTE-07 Work published]
+  end
+  subgraph Lists["Lists"]
+    S1[UC-LST-01 Create]
+    S6[UC-LST-06 Send / CSV / map]
+    S8[UC-LST-08 Convert to route]
+  end
+  subgraph Co["Companies and contacts"]
+    C1[UC-CO-01 Address Book]
+    C4[UC-CO-04 Profile]
+    T1[UC-CT-01/02 Fetch contacts<br/>FE 2cr / Claude 1cr]
+    T3[UC-CT-03 Create contact]
+    N1[UC-ACT-01 Add activity]
+  end
+  Auth --> Onb --> Leads
+  Leads --> Routes
+  Leads --> Lists
+  Lists --> Routes
+  Leads --> Co

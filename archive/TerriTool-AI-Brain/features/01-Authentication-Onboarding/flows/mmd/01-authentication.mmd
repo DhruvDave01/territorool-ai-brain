@@ -1,0 +1,21 @@
+---
+title: Authentication
+---
+flowchart TD
+  Start[Open TerriTool] --> Choice{Action}
+  Choice -->|Login| Creds[Email + password]
+  Creds --> Remember{Remember Me?}
+  Remember --> Authn{Valid?}
+  Authn -->|No| Err[Show error]
+  Err --> Creds
+  Authn -->|Yes| Active{Activated?}
+  Active -->|No| Activate[Activation link]
+  Active -->|Yes| App[Onboarding or Home]
+  Choice -->|Forgot password| Reset[Email reset]
+  Reset --> Creds
+  Choice -->|Create Account| Trial[Name phone email password captcha]
+  Trial --> Dup{Email unique + captcha OK?}
+  Dup -->|No| Trial
+  Dup -->|Yes| Grant[60 credits, 7-day trial]
+  Grant --> Onb[Onboarding]
+  Choice -->|QR / stores| Mobile[iOS or Android app]

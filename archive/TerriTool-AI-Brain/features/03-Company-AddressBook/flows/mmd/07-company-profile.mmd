@@ -1,0 +1,22 @@
+---
+title: Company profile
+---
+flowchart TD
+  Open[Open company] --> See[Phone website hours status]
+  See --> Act{Action}
+  Act --> Route[Add to Route]
+  Act --> List[Add to List]
+  Act --> Edit[Edit fields / status]
+  Act --> Report[Report issue]
+  Report --> Reason{Wrong address / phone / site / closed / duplicate / other}
+  Reason --> Submit[Submit report]
+  Act --> FC[Find Contacts]
+  FC --> Prov{FullEnrich or Claude}
+  Prov -->|FullEnrich| FE[Buy: 2 credits each]
+  Prov -->|Claude| CL[Buy: 1 credit each]
+  FE --> Debit[Confirm then debit]
+  CL --> Debit
+  Debit -->|No credits| Pay[Buy credits]
+  Act --> Manual[Create Contact]
+  Act --> Activity[+ Add Activity]
+  Activity --> Tabs[Today / Upcoming / Past]

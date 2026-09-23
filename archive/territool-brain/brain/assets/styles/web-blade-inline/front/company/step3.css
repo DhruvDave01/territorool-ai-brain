@@ -1,0 +1,16 @@
+/* ===== resources/views/front/company/step3.blade.php · <style> block 1 of 1 ===== */
+.loader{
+    position: absolute;
+    top:0px;
+    right:0px;
+    width:100%;
+    height:100%;
+    background-color:#000000;
+    background-image:url("{{ URL::to('/')}}/images/loading-tr.gif");
+    background-size: 100px;
+    background-repeat:no-repeat;
+    background-position:center;
+    z-index:10000000;
+    opacity: 0.6;
+    filter: alpha(opacity=40);
+}

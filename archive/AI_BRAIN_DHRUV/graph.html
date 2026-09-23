@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI_BRAIN graph</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: #1a1a1a; color: #ececec; font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+    .shell { display: grid; grid-template-columns: minmax(0,1fr) 280px; height: 100%; min-height: 0; }
+    .shell.chat-open { grid-template-columns: minmax(300px, 400px) minmax(0,1fr) 280px; }
+    .stage { position: relative; background: #1a1a1a; min-height: 0; overflow: hidden; }
+    .title { display: none; }
+    .hint {
+      position: absolute; top: 14px; left: 0; right: 0; margin: 0;
+      text-align: center; color: #8a8a8a; font-size: 11px; pointer-events: none; z-index: 2;
+    }
+    .zoom-hud {
+      position: absolute; left: 12px; top: 12px; display: flex; flex-direction: column; gap: 6px; z-index: 2;
+    }
+    .zoom-hud button {
+      width: 36px; height: 36px; margin: 0; padding: 0; border-radius: 8px;
+      background: #2a2a2a; color: #ececec; border: 1px solid #444; font-size: 18px;
+    }
+    .zoom-hud #chat-toggle, .zoom-hud #gmail-link {
+      width: auto; padding: 0 8px; font-size: 12px; text-decoration: none;
+      display: grid; place-items: center; height: 36px; border-radius: 8px;
+      background: #2a2a2a; color: #ececec; border: 1px solid #444;
+    }
+    .chat-drawer {
+      display: none; flex-direction: column; background: #1c1f3a;
+      border-right: 1px solid #2a3154; min-height: 0; overflow: hidden;
+    }
+    .shell.chat-open .chat-drawer { display: flex; }
+    .chat-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 14px; border-bottom: 1px solid #2a3154; font-weight: 500;
+    }
+    .chat-head button { width: auto; margin: 0; padding: 4px 10px; background: #2a3154; color: #e8eaf4; }
+    .chat-status { padding: 8px 14px; color: #8b93b5; font-size: 11px; }
+    .chat-log {
+      flex: 1 1 0; min-height: 0; overflow: auto; padding: 12px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .chat-bubble { padding: 10px 12px; border-radius: 12px; max-width: 100%; }
+    .chat-bubble.user { background: #124ac6; color: #fff; align-self: flex-end; white-space: pre-wrap; }
+    .chat-bubble.assistant { background: #121428; color: #e8eaf4; line-height: 1.5; }
+    .chat-bubble.error { background: #3a1c28; color: #fca5a5; white-space: pre-wrap; }
+    .chat-bubble.assistant p { margin: 0 0 0.55em; }
+    .chat-bubble.assistant p:last-child,
+    .chat-bubble.assistant ul:last-child,
+    .chat-bubble.assistant ol:last-child,
+    .chat-bubble.assistant .chat-md-table-wrap:last-child,
+    .chat-bubble.assistant pre:last-child { margin-bottom: 0; }
+    .chat-bubble.assistant strong { font-weight: 600; }
+    .chat-bubble.assistant em { font-style: italic; }
+    .chat-bubble.assistant h1, .chat-bubble.assistant h2,
+    .chat-bubble.assistant h3, .chat-bubble.assistant h4 {
+      margin: 0.15em 0 0.45em; font-size: 13px; font-weight: 650;
+    }
+    .chat-bubble.assistant code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11.5px; background: #2a3154; padding: 1px 5px; border-radius: 4px;
+    }
+    .chat-bubble.assistant pre {
+      background: #0d0f1c; padding: 8px; border-radius: 8px; overflow-x: auto; margin: 0 0 0.6em;
+    }
+    .chat-bubble.assistant pre code { background: none; padding: 0; }
+    .chat-md-table-wrap { overflow-x: auto; margin: 0 0 0.7em; }
+    .chat-bubble.assistant table { border-collapse: collapse; width: 100%; font-size: 12px; }
+    .chat-bubble.assistant th, .chat-bubble.assistant td {
+      border: 1px solid #343c66; padding: 6px 8px; text-align: left; vertical-align: top;
+      word-break: break-word;
+    }
+    .chat-bubble.assistant th { background: #2a3154; font-weight: 600; white-space: nowrap; }
+    .chat-bubble.assistant ul, .chat-bubble.assistant ol { margin: 0 0 0.6em; padding-left: 1.25em; }
+    .chat-bubble.assistant li { margin: 0.15em 0; }
+    .chat-form {
+      display: flex; gap: 8px; padding: 12px; border-top: 1px solid #2a3154;
+      flex: none; background: #1c1f3a; position: relative; z-index: 3;
+    }
+    .chat-form textarea {
+      flex: 1; resize: none; min-height: 44px; max-height: 120px;
+      background: #121428; color: #e8eaf4; border: 1px solid #343c66;
+      border-radius: 8px; padding: 8px;
+    }
+    .chat-form button { width: auto; margin: 0; padding: 8px 14px; }
+    .chat-sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; position: relative; z-index: 1; }
+    .chat-sources button {
+      width: auto; margin: 0; padding: 3px 8px; font-size: 11px; font-weight: 500;
+      background: #2a3154; color: #c9d0ee; border-radius: 999px; position: relative; z-index: 1;
+    }
+    .chat-secret {
+      display: none; gap: 8px; padding: 8px 14px 0;
+    }
+    .chat-secret.is-on { display: flex; }
+    .chat-secret input {
+      flex: 1; background: #121428; color: #e8eaf4; border: 1px solid #343c66;
+      border-radius: 8px; padding: 6px 8px;
+    }
+    svg { width: 100%; height: 100%; display: block; cursor: grab; }
+    svg.is-panning { cursor: grabbing; }
+    svg circle { cursor: pointer; }
+    .label {
+      fill: #ececec; font-size: 11px; pointer-events: none; text-anchor: middle;
+      paint-order: stroke; stroke: #1a1a1a; stroke-width: 4px; stroke-linejoin: round;
+    }
+    .group-title {
+      fill: #c8c8c8; font-size: 13px; font-weight: 650; text-anchor: middle;
+      pointer-events: none; paint-order: stroke; stroke: #1a1a1a; stroke-width: 4px;
+    }
+    .hull { pointer-events: none; }
+    .selected {
+      position: absolute; left: 16px; bottom: 14px; margin: 0; max-width: calc(100% - 48px);
+      color: #c9d0ee; background: rgba(18,20,40,.8); padding: 6px 10px; border-radius: 8px; z-index: 2;
+    }
+    .panel {
+      background: #222; border-left: 1px solid #333; padding: 14px; overflow: auto;
+    }
+    details { margin-bottom: 16px; }
+    summary { cursor: pointer; font-weight: 500; margin-bottom: 8px; }
+    label { display: grid; gap: 6px; color: #c5cce6; margin-bottom: 10px; }
+    .row { display: flex; align-items: center; gap: 8px; }
+    .group { justify-content: space-between; }
+    .group span:nth-child(2) { flex: 1; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .count { color: #8b93b5; font-variant-numeric: tabular-nums; }
+    input[type="search"] {
+      width: 100%; background: #121428; color: #e8eaf4; border: 1px solid #343c66;
+      border-radius: 8px; padding: 7px 8px;
+    }
+    input[type="range"] { width: 100%; }
+    button {
+      width: 100%; margin-top: 4px; background: #5eead4; color: #10222a; border: 0;
+      border-radius: 8px; padding: 9px 10px; font-weight: 500; cursor: pointer;
+    }
+    button.ghost { background: #2a3154; color: #e8eaf4; }
+    circle:focus { outline: 2px solid #5eead4; outline-offset: 2px; }
+    @media (max-width: 800px) {
+      .shell { grid-template-columns: 1fr; grid-template-rows: minmax(420px, 1fr) auto; }
+      .shell.chat-open { grid-template-columns: 1fr; grid-template-rows: minmax(220px, 40vh) minmax(280px, 1fr) auto; }
+      .panel { border-left: 0; border-top: 1px solid #2a3154; max-height: 46vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell" id="shell">
+    <aside class="chat-drawer" id="chat-drawer" aria-label="Ask the brain">
+      <div class="chat-head">
+        <span>Ask the brain</span>
+        <button type="button" id="chat-close">Close</button>
+      </div>
+      <p class="chat-status" id="chat-status">Checking chat server…</p>
+      <div class="chat-secret" id="chat-secret-row">
+        <input id="chat-secret" type="password" autocomplete="off" placeholder="Shared secret">
+      </div>
+      <div class="chat-log" id="chat-log"></div>
+      <form class="chat-form" id="chat-form">
+        <textarea id="chat-input" rows="2" placeholder="Ask about credits, routes, MCP, screens…"></textarea>
+        <button type="submit" id="chat-send">Ask</button>
+      </form>
+    </aside>
+    <div class="stage">
+      <p class="title">Graph view</p>
+      <p class="hint">Color = folder · click a note · scroll to zoom</p>
+      <div class="zoom-hud" aria-label="Zoom">
+        <button type="button" id="chat-toggle" title="Ask the brain">Ask</button>
+        <a href="/gmail.html" id="gmail-link" title="Connect Gmail">Gmail</a>
+        <button type="button" id="zoom-in" title="Zoom in">+</button>
+        <button type="button" id="zoom-out" title="Zoom out">−</button>
+        <button type="button" id="zoom-fit" title="Fit">⤢</button>
+      </div>
+      <svg id="svg" role="img" aria-label="AI_BRAIN note link graph"></svg>
+      <p class="selected" id="selected" hidden></p>
+    </div>
+    <aside class="panel" aria-label="Graph filters">
+      <details open>
+        <summary>Filters</summary>
+        <label>Search notes
+          <input id="search" type="search" placeholder="ClusterList, credits, mcp">
+        </label>
+        <label class="row"><input id="orphans" type="checkbox" checked> Orphans</label>
+      </details>
+      <details open>
+        <summary>Groups</summary>
+        <div id="groups"></div>
+      </details>
+      <details open>
+        <summary>Display</summary>
+        <label class="row"><input id="cluster" type="checkbox" checked> Keep folders nearby</label>
+        <label class="row"><input id="hulls" type="checkbox"> Folder outlines</label>
+        <label class="row"><input id="arrows" type="checkbox"> Arrows</label>
+        <label>Show labels if links ≥ <output id="fade-out">0</output>
+          <input id="fade" type="range" min="0" max="30" value="0">
+        </label>
+        <label>Node size <output id="nsize-out">1.0</output>
+          <input id="nsize" type="range" min="0.5" max="2" step="0.1" value="1">
+        </label>
+        <label>Link thickness <output id="lthick-out">1.0</output>
+          <input id="lthick" type="range" min="0.4" max="2.5" step="0.1" value="1">
+        </label>
+        <button type="button" id="animate">Animate</button>
+        <button type="button" class="ghost" id="reset">Reset highlight</button>
+      </details>
+      <details>
+        <summary>Forces</summary>
+        <label>Center force <output id="center-out">0.06</output>
+          <input id="center" type="range" min="0" max="1" step="0.05" value="0.06">
+        </label>
+        <label>Repel force <output id="repel-out">120</output>
+          <input id="repel" type="range" min="10" max="200" step="5" value="120">
+        </label>
+        <label>Link force <output id="lforce-out">0.25</output>
+          <input id="lforce" type="range" min="0" max="1" step="0.05" value="0.25">
+        </label>
+        <label>Link distance <output id="ldist-out">78</output>
+          <input id="ldist" type="range" min="12" max="160" step="2" value="78">
+        </label>
+      </details>
+    </aside>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+  <script>
+  const DATA = {"nodes":[{"id":"01-project-overview.md","label":"Project overview","g":"core","deg":7},{"id":"02-commands.md","label":"Commands","g":"core","deg":7},{"id":"03-architecture.md","label":"Architecture and data flows","g":"core","deg":11},{"id":"04-style-guide.md","label":"Style guide","g":"core","deg":11},{"id":"05-constraints-and-drift.md","label":"Durable facts, constraints, known drift","g":"core","deg":20},{"id":"06-users-and-roles.md","label":"Users and roles","g":"core","deg":8},{"id":"07-vocabulary.md","label":"Vocabulary","g":"core","deg":8},{"id":"09-credits-billing.md","label":"Credits, packages, billing","g":"core","deg":16},{"id":"10-mobile-app.md","label":"Mobile app","g":"core","deg":14},{"id":"11-web-backend.md","label":"Web and backend","g":"core","deg":12},{"id":"12-mobile-api.md","label":"Mobile API catalog","g":"core","deg":11},{"id":"13-web-urls.md","label":"Web URL catalog","g":"core","deg":17},{"id":"14-mcp.md","label":"MCP servers and tools","g":"core","deg":20},{"id":"15-voice-policy.md","label":"Voice agent policy","g":"core","deg":7},{"id":"16-data-models.md","label":"Data models","g":"core","deg":7},{"id":"17-integrations.md","label":"Integrations","g":"core","deg":5},{"id":"18-cross-system-flows.md","label":"Cross-system flows","g":"core","deg":9},{"id":"19-testing-qa.md","label":"Testing and QA","g":"core","deg":4},{"id":"20-how-to-update.md","label":"How to update this brain","g":"core","deg":13},{"id":"2026-09-15.md","label":"Ingest log (2026-09-15)","g":"core","deg":4},{"id":"2026-09-16.md","label":"Ingest log (2026-09-16)","g":"core","deg":3},{"id":"2026-09-17.md","label":"Ingest log (2026-09-17)","g":"core","deg":5},{"id":"2026-09-18.md","label":"Ingest log (2026-09-18)","g":"core","deg":3},{"id":"AGENTS.md","label":"TerriTool AI Brain (Codex / agents)","g":"core","deg":0},{"id":"CLAUDE.md","label":"TerriTool AI Brain (Claude Code)","g":"core","deg":0},{"id":"README.md","label":"TerriTool AI Brain","g":"core","deg":1},{"id":"Untitled.md","label":"Untitled","g":"core","deg":0},{"id":"appendix-a-google-source.md","label":"Appendix A \u2014 Google AI Mode source","g":"appendix","deg":3},{"id":"appendix-b-reading-order.md","label":"Appendix B \u2014 Reading order for a new agent","g":"appendix","deg":21},{"id":"appendix-c-footer-tabs.md","label":"Appendix C \u2014 Mobile footer tabs","g":"appendix","deg":6},{"id":"brains/README.md","label":"Sub brains","g":"brains","deg":24},{"id":"brains/api.md","label":"Web and Mobile API Brain","g":"brains","deg":16},{"id":"brains/mobile-code.md","label":"Mobile Code Brain","g":"brains","deg":13},{"id":"brains/mobile-ui.md","label":"Mobile UI Brain","g":"brains","deg":13},{"id":"brains/ui-ux-guardian.md","label":"UI/UX Guardian","g":"brains","deg":16},{"id":"brains/web-code.md","label":"Web Code Brain","g":"brains","deg":12},{"id":"brains/web-design.md","label":"Web Design Brain","g":"brains","deg":12},{"id":"code/MOBILE_CODEBASE_BRAIN.md","label":"Mobile application \u2014 codebase brain","g":"code","deg":19},{"id":"code/README.md","label":"Code maps","g":"code","deg":9},{"id":"code/WEB_CODEBASE_BRAIN.md","label":"Web / API / MCP \u2014 codebase brain","g":"code","deg":18},{"id":"code/mobile-code-details.md","label":"Mobile code details","g":"code","deg":9},{"id":"code/web-code-details.md","label":"Web / backend code details","g":"code","deg":11},{"id":"data/database-columns.md","label":"Database column lists","g":"data","deg":4},{"id":"data/formdata-dictionary.md","label":"FormData field dictionary","g":"data","deg":9},{"id":"design/01-Brand-Guidelines/Brand-Usage-Rules.md","label":"Brand usage rules (observed)","g":"design","deg":3},{"id":"design/01-Brand-Guidelines/Colors.md","label":"Colors","g":"design","deg":4},{"id":"design/01-Brand-Guidelines/Icons.md","label":"Icons","g":"design","deg":3},{"id":"design/01-Brand-Guidelines/Logos.md","label":"Logos & branding","g":"design","deg":3},{"id":"design/01-Brand-Guidelines/README.md","label":"\u2014 Brand Guidelines","g":"design","deg":13},{"id":"design/01-Brand-Guidelines/Shadows-and-Elevation.md","label":"Shadows and elevation","g":"design","deg":1},{"id":"design/01-Brand-Guidelines/Shapes-and-Radius.md","label":"Shapes and radius","g":"design","deg":1},{"id":"design/01-Brand-Guidelines/Spacing.md","label":"Spacing","g":"design","deg":1},{"id":"design/01-Brand-Guidelines/Typography.md","label":"Typography","g":"design","deg":2},{"id":"design/02-User-Interface/Components.md","label":"Shared components","g":"design","deg":4},{"id":"design/02-User-Interface/Feedback-and-Notifications.md","label":"Feedback and notifications","g":"design","deg":2},{"id":"design/02-User-Interface/Forms.md","label":"Forms","g":"design","deg":1},{"id":"design/02-User-Interface/Maps.md","label":"Maps","g":"design","deg":2},{"id":"design/02-User-Interface/Modals-and-Popups.md","label":"Modals and popups","g":"design","deg":2},{"id":"design/02-User-Interface/Navigation.md","label":"Navigation","g":"design","deg":2},{"id":"design/02-User-Interface/Platform-Differences.md","label":"Platform differences","g":"design","deg":2},{"id":"design/02-User-Interface/README.md","label":"\u2014 User Interface","g":"design","deg":12},{"id":"design/02-User-Interface/Screen-Inventory.md","label":"Screen inventory","g":"design","deg":11},{"id":"design/02-User-Interface/States.md","label":"UI states","g":"design","deg":2},{"id":"design/03-Assets/Asset-Inventory.md","label":"Runtime asset inventory","g":"design","deg":5},{"id":"design/03-Assets/Fonts/README.md","label":"Fonts (copies)","g":"design","deg":5},{"id":"design/03-Assets/Icons/README.md","label":"Icons (copies)","g":"design","deg":3},{"id":"design/03-Assets/Images/README.md","label":"Images folder","g":"design","deg":4},{"id":"design/03-Assets/Logos/README.md","label":"Logos (copies)","g":"design","deg":3},{"id":"design/03-Assets/README.md","label":"\u2014 Assets","g":"design","deg":8},{"id":"design/04-User-Flows/App-Launch.md","label":"App launch","g":"design","deg":2},{"id":"design/04-User-Flows/Authentication.md","label":"Authentication","g":"design","deg":3},{"id":"design/04-User-Flows/Calendar-and-Activity.md","label":"Calendar and activity","g":"design","deg":2},{"id":"design/04-User-Flows/Companies-and-Contacts.md","label":"Companies and contacts","g":"design","deg":2},{"id":"design/04-User-Flows/Dashboard.md","label":"Dashboard","g":"design","deg":3},{"id":"design/04-User-Flows/Enrichment-and-Credits.md","label":"Enrichment and credits","g":"design","deg":4},{"id":"design/04-User-Flows/Error-and-Recovery.md","label":"Error and recovery","g":"design","deg":2},{"id":"design/04-User-Flows/Find-Leads.md","label":"Find Leads (AI)","g":"design","deg":2},{"id":"design/04-User-Flows/Lists.md","label":"Lists","g":"design","deg":2},{"id":"design/04-User-Flows/Main-Navigation.md","label":"Main navigation","g":"design","deg":3},{"id":"design/04-User-Flows/Maps-and-Active-Route.md","label":"Maps and active route","g":"design","deg":3},{"id":"design/04-User-Flows/Onboarding.md","label":"Onboarding (Register flow)","g":"design","deg":5},{"id":"design/04-User-Flows/Permissions.md","label":"Permissions","g":"design","deg":2},{"id":"design/04-User-Flows/README.md","label":"\u2014 User flows","g":"design","deg":27},{"id":"design/04-User-Flows/Routes.md","label":"Routes","g":"design","deg":2},{"id":"design/04-User-Flows/Scan-Business-Card.md","label":"Scan Business Card","g":"design","deg":2},{"id":"design/04-User-Flows/Settings.md","label":"Settings","g":"design","deg":3},{"id":"design/04-User-Flows/Subscription.md","label":"Subscription and payment","g":"design","deg":6},{"id":"design/05-Design-System/Component-States.md","label":"Component states","g":"design","deg":1},{"id":"design/05-Design-System/Components.md","label":"Design-system components","g":"design","deg":3},{"id":"design/05-Design-System/Design-Tokens.md","label":"Design tokens","g":"design","deg":4},{"id":"design/05-Design-System/README.md","label":"\u2014 Design system","g":"design","deg":7},{"id":"design/05-Design-System/Token-Inconsistencies.md","label":"Token inconsistencies (do not normalize)","g":"design","deg":7},{"id":"design/05-Design-System/Usage-Rules.md","label":"Usage rules for a new screen","g":"design","deg":5},{"id":"design/06-Coverage/Deferred-Scope.md","label":"Deferred scope (updated 2026-09-16, numbered iOS pack)","g":"design","deg":12},{"id":"design/06-Coverage/Functionality-Coverage-Matrix.md","label":"Functionality coverage matrix","g":"design","deg":6},{"id":"design/06-Coverage/Mobile-Screenshot-Flow.md","label":"Mobile screenshot flow (canonical pack)","g":"design","deg":38},{"id":"design/06-Coverage/Needs-Manual-Verification.md","label":"Needs Manual Verification","g":"design","deg":6},{"id":"design/06-Coverage/README.md","label":"Coverage","g":"design","deg":7},{"id":"design/06-Coverage/Screenshot-Video-Index.md","label":"Screenshot and video index","g":"design","deg":8},{"id":"design/MASTER-DESIGN-BRAIN.md","label":"TerriTool Mobile \u2014 Master Design Brain","g":"design","deg":21},{"id":"design/MINI-DESIGN-BRAIN.md","label":"TerriTool Mobile \u2014 Mini Design Brain","g":"design","deg":26},{"id":"design/README.md","label":"Design pack (mobile UI as it ships)","g":"design","deg":18},{"id":"design-web/03-Assets/README.md","label":"Web Archive assets","g":"design-web","deg":2},{"id":"design-web/Deferred-Scope.md","label":"Deferred visual scope (web)","g":"design-web","deg":6},{"id":"design-web/MINI-DESIGN-BRAIN.md","label":"TerriTool Web \u2014 Mini Design Brain","g":"design-web","deg":21},{"id":"design-web/Navigation.md","label":"Web navigation","g":"design-web","deg":5},{"id":"design-web/Page-Inventory.md","label":"Web page inventory","g":"design-web","deg":8},{"id":"design-web/README.md","label":"Design pack (web UI as it ships)","g":"design-web","deg":15},{"id":"design-web/Screenshot-Index.md","label":"Screenshot index (web Archive, short pass)","g":"design-web","deg":4},{"id":"design-web/Token-Inconsistencies.md","label":"Token inconsistencies (web) \u2014 do not normalize","g":"design-web","deg":4},{"id":"design-web/Tokens.md","label":"Web design tokens","g":"design-web","deg":5},{"id":"design-web/Usage-Rules.md","label":"Usage rules \u2014 new web page","g":"design-web","deg":5},{"id":"features/01-auth-and-account.md","label":"Feature: Auth and account","g":"features","deg":7},{"id":"features/02-dashboard.md","label":"Feature: Dashboard and home","g":"features","deg":5},{"id":"features/03-companies.md","label":"Feature: Companies (Address Book)","g":"features","deg":9},{"id":"features/04-notes.md","label":"Feature: Notes","g":"features","deg":5},{"id":"features/05-activities.md","label":"Feature: Activities and meetings","g":"features","deg":6},{"id":"features/06-contacts.md","label":"Feature: Contacts","g":"features","deg":6},{"id":"features/07-ai-find-leads.md","label":"Feature: AI Find Leads","g":"features","deg":11},{"id":"features/08-lists.md","label":"Feature: Lists","g":"features","deg":4},{"id":"features/09-routes.md","label":"Feature: Routes and driving","g":"features","deg":10},{"id":"features/10-credits-subscription.md","label":"Feature: Credits, subscription, referrals","g":"features","deg":4},{"id":"features/11-crm-sync.md","label":"Feature: CRM sync","g":"features","deg":5},{"id":"features/12-manager-portal.md","label":"Feature: Manager portal","g":"features","deg":9},{"id":"features/13-admin-hq.md","label":"Feature: Admin HQ","g":"features","deg":6},{"id":"features/14-support.md","label":"Feature: Support","g":"features","deg":4},{"id":"features/15-maps-and-geo.md","label":"Feature: Maps and geo","g":"features","deg":5},{"id":"features/16-notifications.md","label":"Feature: Notifications and analytics","g":"features","deg":4},{"id":"features/17-minor-edge.md","label":"Feature: Minor / edge","g":"features","deg":4},{"id":"features/README.md","label":"Features","g":"features","deg":20},{"id":"index.md","label":"knowledge vault","g":"core","deg":85},{"id":"ops/README.md","label":"Ops / data notes","g":"ops","deg":9},{"id":"ops/decision-log.md","label":"Decision log","g":"ops","deg":7},{"id":"ops/env-inventory.md","label":"Env / secrets inventory (names only)","g":"ops","deg":5},{"id":"ops/known-bugs.md","label":"Known bugs / gaps / recurring issues","g":"ops","deg":7},{"id":"ops/release-flavor-matrix.md","label":"Release / flavor matrix","g":"ops","deg":5},{"id":"ops/workspace-owner.md","label":"Workspace owner (not customer data)","g":"ops","deg":1},{"id":"prompts/generate-brain.md","label":"Generator prompt \u2014 same-type AI Brain for another project","g":"core","deg":2},{"id":"schema.md","label":"Schema \u2014 how this vault is structured","g":"core","deg":5},{"id":"screens/how-it-works.md","label":"Per-screen how it works","g":"screens","deg":16},{"id":"screens/manager-mcp-how-it-works.md","label":"Manager MCP how it works (assign \u2192 route \u2192 contacts)","g":"screens","deg":19},{"id":"screens/navigation-map.md","label":"Mobile navigation map","g":"screens","deg":19},{"id":"screens/web-how-it-works.md","label":"Web how it works (User / Manager / Admin)","g":"screens","deg":26},{"id":"AI_BRAIN.md","label":"frontal lobe","g":"frontal","deg":0}],"links":[{"s":"01-project-overview.md","t":"06-users-and-roles.md"},{"s":"01-project-overview.md","t":"03-architecture.md"},{"s":"01-project-overview.md","t":"07-vocabulary.md"},{"s":"01-project-overview.md","t":"12-mobile-api.md"},{"s":"01-project-overview.md","t":"14-mcp.md"},{"s":"02-commands.md","t":"10-mobile-app.md"},{"s":"02-commands.md","t":"11-web-backend.md"},{"s":"02-commands.md","t":"19-testing-qa.md"},{"s":"02-commands.md","t":"05-constraints-and-drift.md"},{"s":"02-commands.md","t":"13-web-urls.md"},{"s":"03-architecture.md","t":"10-mobile-app.md"},{"s":"03-architecture.md","t":"11-web-backend.md"},{"s":"03-architecture.md","t":"14-mcp.md"},{"s":"03-architecture.md","t":"18-cross-system-flows.md"},{"s":"03-architecture.md","t":"screens/web-how-it-works.md"},{"s":"03-architecture.md","t":"appendix-c-footer-tabs.md"},{"s":"03-architecture.md","t":"07-vocabulary.md"},{"s":"03-architecture.md","t":"09-credits-billing.md"},{"s":"03-architecture.md","t":"features/07-ai-find-leads.md"},{"s":"04-style-guide.md","t":"05-constraints-and-drift.md"},{"s":"04-style-guide.md","t":"10-mobile-app.md"},{"s":"04-style-guide.md","t":"11-web-backend.md"},{"s":"04-style-guide.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"04-style-guide.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"04-style-guide.md","t":"09-credits-billing.md"},{"s":"04-style-guide.md","t":"15-voice-policy.md"},{"s":"04-style-guide.md","t":"brains/ui-ux-guardian.md"},{"s":"05-constraints-and-drift.md","t":"04-style-guide.md"},{"s":"05-constraints-and-drift.md","t":"20-how-to-update.md"},{"s":"05-constraints-and-drift.md","t":"screens/navigation-map.md"},{"s":"05-constraints-and-drift.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"05-constraints-and-drift.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"05-constraints-and-drift.md","t":"2026-09-17.md"},{"s":"05-constraints-and-drift.md","t":"screens/web-how-it-works.md"},{"s":"05-constraints-and-drift.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"06-users-and-roles.md","t":"01-project-overview.md"},{"s":"06-users-and-roles.md","t":"14-mcp.md"},{"s":"06-users-and-roles.md","t":"features/12-manager-portal.md"},{"s":"06-users-and-roles.md","t":"features/13-admin-hq.md"},{"s":"06-users-and-roles.md","t":"screens/web-how-it-works.md"},{"s":"06-users-and-roles.md","t":"09-credits-billing.md"},{"s":"07-vocabulary.md","t":"09-credits-billing.md"},{"s":"07-vocabulary.md","t":"15-voice-policy.md"},{"s":"09-credits-billing.md","t":"features/10-credits-subscription.md"},{"s":"09-credits-billing.md","t":"14-mcp.md"},{"s":"09-credits-billing.md","t":"16-data-models.md"},{"s":"09-credits-billing.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"10-mobile-app.md","t":"02-commands.md"},{"s":"10-mobile-app.md","t":"04-style-guide.md"},{"s":"10-mobile-app.md","t":"appendix-c-footer-tabs.md"},{"s":"10-mobile-app.md","t":"screens/navigation-map.md"},{"s":"10-mobile-app.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"10-mobile-app.md","t":"05-constraints-and-drift.md"},{"s":"11-web-backend.md","t":"02-commands.md"},{"s":"11-web-backend.md","t":"13-web-urls.md"},{"s":"11-web-backend.md","t":"14-mcp.md"},{"s":"11-web-backend.md","t":"screens/web-how-it-works.md"},{"s":"11-web-backend.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"11-web-backend.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"12-mobile-api.md","t":"10-mobile-app.md"},{"s":"13-web-urls.md","t":"11-web-backend.md"},{"s":"13-web-urls.md","t":"features/12-manager-portal.md"},{"s":"13-web-urls.md","t":"features/13-admin-hq.md"},{"s":"13-web-urls.md","t":"screens/web-how-it-works.md"},{"s":"13-web-urls.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"14-mcp.md","t":"06-users-and-roles.md"},{"s":"14-mcp.md","t":"09-credits-billing.md"},{"s":"14-mcp.md","t":"15-voice-policy.md"},{"s":"14-mcp.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"14-mcp.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"15-voice-policy.md","t":"07-vocabulary.md"},{"s":"15-voice-policy.md","t":"14-mcp.md"},{"s":"15-voice-policy.md","t":"04-style-guide.md"},{"s":"16-data-models.md","t":"10-mobile-app.md"},{"s":"16-data-models.md","t":"11-web-backend.md"},{"s":"16-data-models.md","t":"09-credits-billing.md"},{"s":"17-integrations.md","t":"features/11-crm-sync.md"},{"s":"17-integrations.md","t":"features/15-maps-and-geo.md"},{"s":"17-integrations.md","t":"features/16-notifications.md"},{"s":"18-cross-system-flows.md","t":"03-architecture.md"},{"s":"18-cross-system-flows.md","t":"14-mcp.md"},{"s":"18-cross-system-flows.md","t":"features/07-ai-find-leads.md"},{"s":"18-cross-system-flows.md","t":"screens/navigation-map.md"},{"s":"18-cross-system-flows.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"18-cross-system-flows.md","t":"screens/web-how-it-works.md"},{"s":"18-cross-system-flows.md","t":"screens/how-it-works.md"},{"s":"19-testing-qa.md","t":"02-commands.md"},{"s":"19-testing-qa.md","t":"14-mcp.md"},{"s":"20-how-to-update.md","t":"schema.md"},{"s":"20-how-to-update.md","t":"05-constraints-and-drift.md"},{"s":"20-how-to-update.md","t":"design/README.md"},{"s":"20-how-to-update.md","t":"design-web/README.md"},{"s":"20-how-to-update.md","t":"brains/ui-ux-guardian.md"},{"s":"20-how-to-update.md","t":"brains/README.md"},{"s":"20-how-to-update.md","t":"screens/navigation-map.md"},{"s":"20-how-to-update.md","t":"screens/how-it-works.md"},{"s":"20-how-to-update.md","t":"screens/web-how-it-works.md"},{"s":"20-how-to-update.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"20-how-to-update.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"20-how-to-update.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"2026-09-15.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"2026-09-15.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"2026-09-15.md","t":"index.md"},{"s":"2026-09-16.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"2026-09-16.md","t":"2026-09-15.md"},{"s":"2026-09-16.md","t":"index.md"},{"s":"2026-09-17.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"2026-09-17.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"2026-09-17.md","t":"index.md"},{"s":"2026-09-18.md","t":"screens/web-how-it-works.md"},{"s":"2026-09-18.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"2026-09-18.md","t":"index.md"},{"s":"README.md","t":"index.md"},{"s":"appendix-a-google-source.md","t":"schema.md"},{"s":"appendix-a-google-source.md","t":"05-constraints-and-drift.md"},{"s":"appendix-b-reading-order.md","t":"01-project-overview.md"},{"s":"appendix-b-reading-order.md","t":"05-constraints-and-drift.md"},{"s":"appendix-b-reading-order.md","t":"07-vocabulary.md"},{"s":"appendix-b-reading-order.md","t":"09-credits-billing.md"},{"s":"appendix-b-reading-order.md","t":"brains/README.md"},{"s":"appendix-b-reading-order.md","t":"brains/ui-ux-guardian.md"},{"s":"appendix-b-reading-order.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"appendix-b-reading-order.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"appendix-b-reading-order.md","t":"14-mcp.md"},{"s":"appendix-b-reading-order.md","t":"15-voice-policy.md"},{"s":"appendix-b-reading-order.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"appendix-b-reading-order.md","t":"brains/mobile-ui.md"},{"s":"appendix-b-reading-order.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"appendix-b-reading-order.md","t":"brains/web-design.md"},{"s":"appendix-b-reading-order.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"appendix-b-reading-order.md","t":"brains/api.md"},{"s":"appendix-b-reading-order.md","t":"screens/navigation-map.md"},{"s":"appendix-b-reading-order.md","t":"screens/how-it-works.md"},{"s":"appendix-b-reading-order.md","t":"screens/web-how-it-works.md"},{"s":"appendix-b-reading-order.md","t":"13-web-urls.md"},{"s":"appendix-c-footer-tabs.md","t":"10-mobile-app.md"},{"s":"appendix-c-footer-tabs.md","t":"features/02-dashboard.md"},{"s":"brains/README.md","t":"brains/ui-ux-guardian.md"},{"s":"brains/README.md","t":"brains/mobile-code.md"},{"s":"brains/README.md","t":"code/mobile-code-details.md"},{"s":"brains/README.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"brains/README.md","t":"10-mobile-app.md"},{"s":"brains/README.md","t":"screens/navigation-map.md"},{"s":"brains/README.md","t":"brains/mobile-ui.md"},{"s":"brains/README.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"brains/README.md","t":"brains/web-code.md"},{"s":"brains/README.md","t":"code/web-code-details.md"},{"s":"brains/README.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"brains/README.md","t":"11-web-backend.md"},{"s":"brains/README.md","t":"brains/web-design.md"},{"s":"brains/README.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"brains/README.md","t":"brains/api.md"},{"s":"brains/README.md","t":"12-mobile-api.md"},{"s":"brains/README.md","t":"13-web-urls.md"},{"s":"brains/README.md","t":"data/formdata-dictionary.md"},{"s":"brains/README.md","t":"05-constraints-and-drift.md"},{"s":"brains/README.md","t":"2026-09-17.md"},{"s":"brains/api.md","t":"brains/README.md"},{"s":"brains/api.md","t":"brains/mobile-code.md"},{"s":"brains/api.md","t":"brains/web-code.md"},{"s":"brains/api.md","t":"12-mobile-api.md"},{"s":"brains/api.md","t":"13-web-urls.md"},{"s":"brains/api.md","t":"data/formdata-dictionary.md"},{"s":"brains/api.md","t":"screens/how-it-works.md"},{"s":"brains/api.md","t":"09-credits-billing.md"},{"s":"brains/api.md","t":"14-mcp.md"},{"s":"brains/api.md","t":"05-constraints-and-drift.md"},{"s":"brains/api.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"brains/api.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"brains/mobile-code.md","t":"brains/mobile-ui.md"},{"s":"brains/mobile-code.md","t":"brains/api.md"},{"s":"brains/mobile-code.md","t":"brains/README.md"},{"s":"brains/mobile-code.md","t":"brains/ui-ux-guardian.md"},{"s":"brains/mobile-code.md","t":"code/mobile-code-details.md"},{"s":"brains/mobile-code.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"brains/mobile-code.md","t":"data/formdata-dictionary.md"},{"s":"brains/mobile-code.md","t":"screens/how-it-works.md"},{"s":"brains/mobile-code.md","t":"screens/navigation-map.md"},{"s":"brains/mobile-code.md","t":"05-constraints-and-drift.md"},{"s":"brains/mobile-code.md","t":"10-mobile-app.md"},{"s":"brains/mobile-ui.md","t":"brains/mobile-code.md"},{"s":"brains/mobile-ui.md","t":"brains/README.md"},{"s":"brains/mobile-ui.md","t":"brains/api.md"},{"s":"brains/mobile-ui.md","t":"brains/ui-ux-guardian.md"},{"s":"brains/mobile-ui.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"brains/mobile-ui.md","t":"design/05-Design-System/Usage-Rules.md"},{"s":"brains/mobile-ui.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"brains/mobile-ui.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"brains/mobile-ui.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"brains/mobile-ui.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"brains/mobile-ui.md","t":"appendix-c-footer-tabs.md"},{"s":"brains/ui-ux-guardian.md","t":"brains/mobile-ui.md"},{"s":"brains/ui-ux-guardian.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"brains/ui-ux-guardian.md","t":"brains/web-design.md"},{"s":"brains/ui-ux-guardian.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"brains/ui-ux-guardian.md","t":"brains/mobile-code.md"},{"s":"brains/ui-ux-guardian.md","t":"brains/web-code.md"},{"s":"brains/web-code.md","t":"brains/web-design.md"},{"s":"brains/web-code.md","t":"brains/api.md"},{"s":"brains/web-code.md","t":"brains/README.md"},{"s":"brains/web-code.md","t":"brains/ui-ux-guardian.md"},{"s":"brains/web-code.md","t":"code/web-code-details.md"},{"s":"brains/web-code.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"brains/web-code.md","t":"13-web-urls.md"},{"s":"brains/web-code.md","t":"screens/web-how-it-works.md"},{"s":"brains/web-code.md","t":"14-mcp.md"},{"s":"brains/web-code.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"brains/web-design.md","t":"brains/web-code.md"},{"s":"brains/web-design.md","t":"brains/README.md"},{"s":"brains/web-design.md","t":"brains/ui-ux-guardian.md"},{"s":"brains/web-design.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"brains/web-design.md","t":"design-web/Tokens.md"},{"s":"brains/web-design.md","t":"design-web/Page-Inventory.md"},{"s":"brains/web-design.md","t":"design-web/Navigation.md"},{"s":"brains/web-design.md","t":"design-web/Usage-Rules.md"},{"s":"brains/web-design.md","t":"screens/web-how-it-works.md"},{"s":"brains/web-design.md","t":"design-web/Deferred-Scope.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"code/mobile-code-details.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"screens/navigation-map.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"design/04-User-Flows/README.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"data/database-columns.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"12-mobile-api.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"data/formdata-dictionary.md"},{"s":"code/MOBILE_CODEBASE_BRAIN.md","t":"screens/how-it-works.md"},{"s":"code/README.md","t":"brains/mobile-code.md"},{"s":"code/README.md","t":"brains/web-code.md"},{"s":"code/README.md","t":"code/mobile-code-details.md"},{"s":"code/README.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"code/README.md","t":"code/web-code-details.md"},{"s":"code/README.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"code/README.md","t":"prompts/generate-brain.md"},{"s":"code/README.md","t":"brains/api.md"},{"s":"code/README.md","t":"14-mcp.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"code/web-code-details.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"design-web/Page-Inventory.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"13-web-urls.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"screens/web-how-it-works.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"code/WEB_CODEBASE_BRAIN.md","t":"ops/env-inventory.md"},{"s":"code/mobile-code-details.md","t":"10-mobile-app.md"},{"s":"code/mobile-code-details.md","t":"04-style-guide.md"},{"s":"code/mobile-code-details.md","t":"12-mobile-api.md"},{"s":"code/web-code-details.md","t":"11-web-backend.md"},{"s":"code/web-code-details.md","t":"13-web-urls.md"},{"s":"code/web-code-details.md","t":"14-mcp.md"},{"s":"code/web-code-details.md","t":"16-data-models.md"},{"s":"code/web-code-details.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"data/database-columns.md","t":"16-data-models.md"},{"s":"data/formdata-dictionary.md","t":"12-mobile-api.md"},{"s":"data/formdata-dictionary.md","t":"screens/how-it-works.md"},{"s":"design/01-Brand-Guidelines/Brand-Usage-Rules.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/01-Brand-Guidelines/Brand-Usage-Rules.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"design/01-Brand-Guidelines/Brand-Usage-Rules.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/01-Brand-Guidelines/Colors.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"design/01-Brand-Guidelines/Icons.md","t":"design/03-Assets/Asset-Inventory.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Colors.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Typography.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Logos.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Icons.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Spacing.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Shapes-and-Radius.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Shadows-and-Elevation.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/01-Brand-Guidelines/Brand-Usage-Rules.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/01-Brand-Guidelines/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/01-Brand-Guidelines/Shadows-and-Elevation.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/01-Brand-Guidelines/Shapes-and-Radius.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/01-Brand-Guidelines/Spacing.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/01-Brand-Guidelines/Typography.md","t":"design/03-Assets/Fonts/README.md"},{"s":"design/02-User-Interface/Feedback-and-Notifications.md","t":"design/02-User-Interface/README.md"},{"s":"design/02-User-Interface/Feedback-and-Notifications.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/02-User-Interface/Forms.md","t":"design/02-User-Interface/README.md"},{"s":"design/02-User-Interface/Modals-and-Popups.md","t":"design/02-User-Interface/README.md"},{"s":"design/02-User-Interface/Modals-and-Popups.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Components.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Navigation.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/States.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Forms.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Modals-and-Popups.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Feedback-and-Notifications.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Maps.md"},{"s":"design/02-User-Interface/README.md","t":"design/02-User-Interface/Platform-Differences.md"},{"s":"design/02-User-Interface/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/02-User-Interface/Screen-Inventory.md","t":"screens/navigation-map.md"},{"s":"design/02-User-Interface/Screen-Inventory.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/02-User-Interface/Screen-Inventory.md","t":"design/04-User-Flows/Onboarding.md"},{"s":"design/02-User-Interface/Screen-Inventory.md","t":"design/04-User-Flows/README.md"},{"s":"design/02-User-Interface/Screen-Inventory.md","t":"design/06-Coverage/Functionality-Coverage-Matrix.md"},{"s":"design/03-Assets/Asset-Inventory.md","t":"design/03-Assets/Fonts/README.md"},{"s":"design/03-Assets/Asset-Inventory.md","t":"design/01-Brand-Guidelines/Icons.md"},{"s":"design/03-Assets/Asset-Inventory.md","t":"design/01-Brand-Guidelines/Logos.md"},{"s":"design/03-Assets/Fonts/README.md","t":"design/01-Brand-Guidelines/Typography.md"},{"s":"design/03-Assets/Icons/README.md","t":"design/01-Brand-Guidelines/Icons.md"},{"s":"design/03-Assets/Icons/README.md","t":"design/03-Assets/README.md"},{"s":"design/03-Assets/Images/README.md","t":"design/03-Assets/README.md"},{"s":"design/03-Assets/Images/README.md","t":"design/03-Assets/Logos/README.md"},{"s":"design/03-Assets/Images/README.md","t":"design/03-Assets/Icons/README.md"},{"s":"design/03-Assets/Images/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/03-Assets/Logos/README.md","t":"design/01-Brand-Guidelines/Logos.md"},{"s":"design/03-Assets/Logos/README.md","t":"design/03-Assets/README.md"},{"s":"design/03-Assets/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/03-Assets/README.md","t":"design/03-Assets/Asset-Inventory.md"},{"s":"design/03-Assets/README.md","t":"design/03-Assets/Logos/README.md"},{"s":"design/03-Assets/README.md","t":"design/03-Assets/Icons/README.md"},{"s":"design/03-Assets/README.md","t":"design/03-Assets/Images/README.md"},{"s":"design/03-Assets/README.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"design/04-User-Flows/App-Launch.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Authentication.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Authentication.md","t":"design/04-User-Flows/Onboarding.md"},{"s":"design/04-User-Flows/Calendar-and-Activity.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Companies-and-Contacts.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Dashboard.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Enrichment-and-Credits.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Enrichment-and-Credits.md","t":"design/04-User-Flows/Subscription.md"},{"s":"design/04-User-Flows/Enrichment-and-Credits.md","t":"09-credits-billing.md"},{"s":"design/04-User-Flows/Error-and-Recovery.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Find-Leads.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Lists.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Main-Navigation.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Main-Navigation.md","t":"design/04-User-Flows/Dashboard.md"},{"s":"design/04-User-Flows/Maps-and-Active-Route.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Maps-and-Active-Route.md","t":"design/02-User-Interface/Maps.md"},{"s":"design/04-User-Flows/Onboarding.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Onboarding.md","t":"design/04-User-Flows/Subscription.md"},{"s":"design/04-User-Flows/Permissions.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/README.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/04-User-Flows/README.md","t":"screens/navigation-map.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/App-Launch.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Authentication.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Onboarding.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Subscription.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Main-Navigation.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Dashboard.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Find-Leads.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Routes.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Lists.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Companies-and-Contacts.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Maps-and-Active-Route.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Enrichment-and-Credits.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Scan-Business-Card.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Calendar-and-Activity.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Settings.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Permissions.md"},{"s":"design/04-User-Flows/README.md","t":"design/04-User-Flows/Error-and-Recovery.md"},{"s":"design/04-User-Flows/Routes.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Scan-Business-Card.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Settings.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Settings.md","t":"design/04-User-Flows/Subscription.md"},{"s":"design/04-User-Flows/Subscription.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/04-User-Flows/Subscription.md","t":"09-credits-billing.md"},{"s":"design/04-User-Flows/Subscription.md","t":"design/04-User-Flows/Onboarding.md"},{"s":"design/05-Design-System/Component-States.md","t":"design/05-Design-System/README.md"},{"s":"design/05-Design-System/Components.md","t":"design/02-User-Interface/Components.md"},{"s":"design/05-Design-System/Design-Tokens.md","t":"design/01-Brand-Guidelines/Colors.md"},{"s":"design/05-Design-System/Design-Tokens.md","t":"design/03-Assets/Fonts/README.md"},{"s":"design/05-Design-System/README.md","t":"design/05-Design-System/Design-Tokens.md"},{"s":"design/05-Design-System/README.md","t":"design/05-Design-System/Components.md"},{"s":"design/05-Design-System/README.md","t":"design/05-Design-System/Component-States.md"},{"s":"design/05-Design-System/README.md","t":"design/05-Design-System/Usage-Rules.md"},{"s":"design/05-Design-System/README.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"design/05-Design-System/Usage-Rules.md","t":"brains/ui-ux-guardian.md"},{"s":"design/06-Coverage/Deferred-Scope.md","t":"screens/navigation-map.md"},{"s":"design/06-Coverage/Deferred-Scope.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/06-Coverage/Functionality-Coverage-Matrix.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/06-Coverage/Functionality-Coverage-Matrix.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"design/06-Coverage/Functionality-Coverage-Matrix.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/README.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/App-Launch.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Authentication.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Onboarding.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Subscription.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Dashboard.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Calendar-and-Activity.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Find-Leads.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Companies-and-Contacts.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Enrichment-and-Credits.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Lists.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Routes.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Maps-and-Active-Route.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Settings.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Scan-Business-Card.md"},{"s":"design/06-Coverage/Mobile-Screenshot-Flow.md","t":"design/04-User-Flows/Error-and-Recovery.md"},{"s":"design/06-Coverage/Needs-Manual-Verification.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/06-Coverage/README.md","t":"design/06-Coverage/Functionality-Coverage-Matrix.md"},{"s":"design/06-Coverage/README.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"design/06-Coverage/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/06-Coverage/README.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/06-Coverage/README.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/06-Coverage/Screenshot-Video-Index.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/06-Coverage/Screenshot-Video-Index.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/06-Coverage/Screenshot-Video-Index.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/03-Assets/Fonts/README.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/05-Design-System/Design-Tokens.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/02-User-Interface/Navigation.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"screens/navigation-map.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/02-User-Interface/Components.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/05-Design-System/Components.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/03-Assets/Asset-Inventory.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/04-User-Flows/README.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/06-Coverage/Screenshot-Video-Index.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/02-User-Interface/States.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/02-User-Interface/Platform-Differences.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/06-Coverage/Functionality-Coverage-Matrix.md"},{"s":"design/MASTER-DESIGN-BRAIN.md","t":"design/05-Design-System/Usage-Rules.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/01-Brand-Guidelines/Colors.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"screens/navigation-map.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/02-User-Interface/Components.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/02-User-Interface/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/03-Assets/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/03-Assets/Fonts/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/04-User-Flows/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/05-Design-System/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/06-Coverage/README.md"},{"s":"design/MINI-DESIGN-BRAIN.md","t":"design/MASTER-DESIGN-BRAIN.md"},{"s":"design/README.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"design/README.md","t":"design/MASTER-DESIGN-BRAIN.md"},{"s":"design/README.md","t":"brains/ui-ux-guardian.md"},{"s":"design/README.md","t":"screens/how-it-works.md"},{"s":"design/README.md","t":"09-credits-billing.md"},{"s":"design/README.md","t":"design/06-Coverage/Needs-Manual-Verification.md"},{"s":"design/README.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"design/README.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"design/README.md","t":"design/01-Brand-Guidelines/README.md"},{"s":"design/README.md","t":"design/02-User-Interface/README.md"},{"s":"design/README.md","t":"design/03-Assets/README.md"},{"s":"design/README.md","t":"design/04-User-Flows/README.md"},{"s":"design/README.md","t":"design/05-Design-System/README.md"},{"s":"design/README.md","t":"design/06-Coverage/README.md"},{"s":"design-web/03-Assets/README.md","t":"design-web/Screenshot-Index.md"},{"s":"design-web/03-Assets/README.md","t":"design-web/README.md"},{"s":"design-web/Deferred-Scope.md","t":"design-web/Screenshot-Index.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Tokens.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Navigation.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Page-Inventory.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Token-Inconsistencies.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Screenshot-Index.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Deferred-Scope.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design-web/Usage-Rules.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"13-web-urls.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"code/web-code-details.md"},{"s":"design-web/MINI-DESIGN-BRAIN.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"design-web/Navigation.md","t":"screens/web-how-it-works.md"},{"s":"design-web/Page-Inventory.md","t":"13-web-urls.md"},{"s":"design-web/Page-Inventory.md","t":"code/web-code-details.md"},{"s":"design-web/Page-Inventory.md","t":"screens/web-how-it-works.md"},{"s":"design-web/README.md","t":"design/README.md"},{"s":"design-web/README.md","t":"data/formdata-dictionary.md"},{"s":"design-web/README.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"design-web/README.md","t":"screens/web-how-it-works.md"},{"s":"design-web/README.md","t":"brains/ui-ux-guardian.md"},{"s":"design-web/README.md","t":"design-web/Deferred-Scope.md"},{"s":"design-web/README.md","t":"design-web/Tokens.md"},{"s":"design-web/README.md","t":"design-web/Page-Inventory.md"},{"s":"design-web/README.md","t":"design-web/Navigation.md"},{"s":"design-web/README.md","t":"design-web/Usage-Rules.md"},{"s":"design-web/README.md","t":"design-web/Token-Inconsistencies.md"},{"s":"design-web/README.md","t":"design-web/Screenshot-Index.md"},{"s":"design-web/README.md","t":"design-web/03-Assets/README.md"},{"s":"design-web/Screenshot-Index.md","t":"design-web/Deferred-Scope.md"},{"s":"design-web/Tokens.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"design-web/Tokens.md","t":"design-web/Token-Inconsistencies.md"},{"s":"design-web/Usage-Rules.md","t":"brains/ui-ux-guardian.md"},{"s":"features/01-auth-and-account.md","t":"06-users-and-roles.md"},{"s":"features/01-auth-and-account.md","t":"12-mobile-api.md"},{"s":"features/01-auth-and-account.md","t":"18-cross-system-flows.md"},{"s":"features/01-auth-and-account.md","t":"screens/web-how-it-works.md"},{"s":"features/02-dashboard.md","t":"appendix-c-footer-tabs.md"},{"s":"features/02-dashboard.md","t":"features/16-notifications.md"},{"s":"features/02-dashboard.md","t":"features/05-activities.md"},{"s":"features/03-companies.md","t":"features/04-notes.md"},{"s":"features/03-companies.md","t":"features/06-contacts.md"},{"s":"features/03-companies.md","t":"07-vocabulary.md"},{"s":"features/03-companies.md","t":"12-mobile-api.md"},{"s":"features/04-notes.md","t":"features/03-companies.md"},{"s":"features/04-notes.md","t":"features/05-activities.md"},{"s":"features/04-notes.md","t":"07-vocabulary.md"},{"s":"features/05-activities.md","t":"features/03-companies.md"},{"s":"features/05-activities.md","t":"features/04-notes.md"},{"s":"features/05-activities.md","t":"15-voice-policy.md"},{"s":"features/06-contacts.md","t":"features/03-companies.md"},{"s":"features/06-contacts.md","t":"09-credits-billing.md"},{"s":"features/06-contacts.md","t":"14-mcp.md"},{"s":"features/06-contacts.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"features/07-ai-find-leads.md","t":"03-architecture.md"},{"s":"features/07-ai-find-leads.md","t":"09-credits-billing.md"},{"s":"features/07-ai-find-leads.md","t":"14-mcp.md"},{"s":"features/07-ai-find-leads.md","t":"screens/navigation-map.md"},{"s":"features/07-ai-find-leads.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"features/07-ai-find-leads.md","t":"screens/how-it-works.md"},{"s":"features/08-lists.md","t":"features/09-routes.md"},{"s":"features/08-lists.md","t":"features/03-companies.md"},{"s":"features/09-routes.md","t":"features/08-lists.md"},{"s":"features/09-routes.md","t":"features/03-companies.md"},{"s":"features/09-routes.md","t":"15-voice-policy.md"},{"s":"features/09-routes.md","t":"appendix-c-footer-tabs.md"},{"s":"features/09-routes.md","t":"ops/known-bugs.md"},{"s":"features/09-routes.md","t":"screens/navigation-map.md"},{"s":"features/09-routes.md","t":"screens/web-how-it-works.md"},{"s":"features/10-credits-subscription.md","t":"09-credits-billing.md"},{"s":"features/10-credits-subscription.md","t":"features/01-auth-and-account.md"},{"s":"features/11-crm-sync.md","t":"12-mobile-api.md"},{"s":"features/11-crm-sync.md","t":"13-web-urls.md"},{"s":"features/11-crm-sync.md","t":"17-integrations.md"},{"s":"features/12-manager-portal.md","t":"06-users-and-roles.md"},{"s":"features/12-manager-portal.md","t":"features/07-ai-find-leads.md"},{"s":"features/12-manager-portal.md","t":"14-mcp.md"},{"s":"features/12-manager-portal.md","t":"screens/web-how-it-works.md"},{"s":"features/12-manager-portal.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"features/12-manager-portal.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"features/13-admin-hq.md","t":"06-users-and-roles.md"},{"s":"features/13-admin-hq.md","t":"14-mcp.md"},{"s":"features/13-admin-hq.md","t":"screens/web-how-it-works.md"},{"s":"features/14-support.md","t":"13-web-urls.md"},{"s":"features/14-support.md","t":"16-data-models.md"},{"s":"features/15-maps-and-geo.md","t":"features/09-routes.md"},{"s":"features/15-maps-and-geo.md","t":"features/07-ai-find-leads.md"},{"s":"features/15-maps-and-geo.md","t":"17-integrations.md"},{"s":"features/16-notifications.md","t":"features/02-dashboard.md"},{"s":"features/16-notifications.md","t":"17-integrations.md"},{"s":"features/17-minor-edge.md","t":"05-constraints-and-drift.md"},{"s":"features/17-minor-edge.md","t":"10-mobile-app.md"},{"s":"features/README.md","t":"index.md"},{"s":"features/README.md","t":"features/01-auth-and-account.md"},{"s":"features/README.md","t":"features/02-dashboard.md"},{"s":"features/README.md","t":"features/03-companies.md"},{"s":"features/README.md","t":"features/04-notes.md"},{"s":"features/README.md","t":"features/05-activities.md"},{"s":"features/README.md","t":"features/06-contacts.md"},{"s":"features/README.md","t":"features/07-ai-find-leads.md"},{"s":"features/README.md","t":"features/08-lists.md"},{"s":"features/README.md","t":"features/09-routes.md"},{"s":"features/README.md","t":"features/10-credits-subscription.md"},{"s":"features/README.md","t":"features/11-crm-sync.md"},{"s":"features/README.md","t":"features/12-manager-portal.md"},{"s":"features/README.md","t":"screens/web-how-it-works.md"},{"s":"features/README.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"features/README.md","t":"features/13-admin-hq.md"},{"s":"features/README.md","t":"features/14-support.md"},{"s":"features/README.md","t":"features/15-maps-and-geo.md"},{"s":"features/README.md","t":"features/16-notifications.md"},{"s":"features/README.md","t":"features/17-minor-edge.md"},{"s":"index.md","t":"schema.md"},{"s":"index.md","t":"brains/mobile-code.md"},{"s":"index.md","t":"brains/mobile-ui.md"},{"s":"index.md","t":"brains/web-code.md"},{"s":"index.md","t":"brains/web-design.md"},{"s":"index.md","t":"brains/api.md"},{"s":"index.md","t":"brains/ui-ux-guardian.md"},{"s":"index.md","t":"brains/README.md"},{"s":"index.md","t":"01-project-overview.md"},{"s":"index.md","t":"02-commands.md"},{"s":"index.md","t":"03-architecture.md"},{"s":"index.md","t":"04-style-guide.md"},{"s":"index.md","t":"05-constraints-and-drift.md"},{"s":"index.md","t":"06-users-and-roles.md"},{"s":"index.md","t":"07-vocabulary.md"},{"s":"index.md","t":"features/01-auth-and-account.md"},{"s":"index.md","t":"features/02-dashboard.md"},{"s":"index.md","t":"features/03-companies.md"},{"s":"index.md","t":"features/04-notes.md"},{"s":"index.md","t":"features/05-activities.md"},{"s":"index.md","t":"features/06-contacts.md"},{"s":"index.md","t":"features/07-ai-find-leads.md"},{"s":"index.md","t":"features/08-lists.md"},{"s":"index.md","t":"features/09-routes.md"},{"s":"index.md","t":"features/10-credits-subscription.md"},{"s":"index.md","t":"features/11-crm-sync.md"},{"s":"index.md","t":"features/12-manager-portal.md"},{"s":"index.md","t":"features/13-admin-hq.md"},{"s":"index.md","t":"features/14-support.md"},{"s":"index.md","t":"features/15-maps-and-geo.md"},{"s":"index.md","t":"features/16-notifications.md"},{"s":"index.md","t":"features/17-minor-edge.md"},{"s":"index.md","t":"09-credits-billing.md"},{"s":"index.md","t":"10-mobile-app.md"},{"s":"index.md","t":"11-web-backend.md"},{"s":"index.md","t":"12-mobile-api.md"},{"s":"index.md","t":"13-web-urls.md"},{"s":"index.md","t":"14-mcp.md"},{"s":"index.md","t":"15-voice-policy.md"},{"s":"index.md","t":"16-data-models.md"},{"s":"index.md","t":"17-integrations.md"},{"s":"index.md","t":"18-cross-system-flows.md"},{"s":"index.md","t":"19-testing-qa.md"},{"s":"index.md","t":"20-how-to-update.md"},{"s":"index.md","t":"code/mobile-code-details.md"},{"s":"index.md","t":"code/MOBILE_CODEBASE_BRAIN.md"},{"s":"index.md","t":"code/web-code-details.md"},{"s":"index.md","t":"code/WEB_CODEBASE_BRAIN.md"},{"s":"index.md","t":"design/MINI-DESIGN-BRAIN.md"},{"s":"index.md","t":"design/README.md"},{"s":"index.md","t":"design/02-User-Interface/Screen-Inventory.md"},{"s":"index.md","t":"design/04-User-Flows/README.md"},{"s":"index.md","t":"design/05-Design-System/Usage-Rules.md"},{"s":"index.md","t":"design/05-Design-System/Token-Inconsistencies.md"},{"s":"index.md","t":"design/06-Coverage/Deferred-Scope.md"},{"s":"index.md","t":"design/06-Coverage/Mobile-Screenshot-Flow.md"},{"s":"index.md","t":"2026-09-15.md"},{"s":"index.md","t":"2026-09-16.md"},{"s":"index.md","t":"2026-09-17.md"},{"s":"index.md","t":"2026-09-18.md"},{"s":"index.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"index.md","t":"design-web/README.md"},{"s":"index.md","t":"design-web/Tokens.md"},{"s":"index.md","t":"design-web/Page-Inventory.md"},{"s":"index.md","t":"design-web/Navigation.md"},{"s":"index.md","t":"design-web/Usage-Rules.md"},{"s":"index.md","t":"design-web/Token-Inconsistencies.md"},{"s":"index.md","t":"design-web/Deferred-Scope.md"},{"s":"index.md","t":"screens/how-it-works.md"},{"s":"index.md","t":"screens/web-how-it-works.md"},{"s":"index.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"index.md","t":"screens/navigation-map.md"},{"s":"index.md","t":"data/formdata-dictionary.md"},{"s":"index.md","t":"data/database-columns.md"},{"s":"index.md","t":"ops/env-inventory.md"},{"s":"index.md","t":"ops/workspace-owner.md"},{"s":"index.md","t":"ops/decision-log.md"},{"s":"index.md","t":"ops/known-bugs.md"},{"s":"index.md","t":"ops/release-flavor-matrix.md"},{"s":"index.md","t":"appendix-a-google-source.md"},{"s":"index.md","t":"appendix-b-reading-order.md"},{"s":"index.md","t":"appendix-c-footer-tabs.md"},{"s":"index.md","t":"prompts/generate-brain.md"},{"s":"ops/README.md","t":"design/README.md"},{"s":"ops/README.md","t":"screens/how-it-works.md"},{"s":"ops/README.md","t":"screens/navigation-map.md"},{"s":"ops/README.md","t":"data/formdata-dictionary.md"},{"s":"ops/README.md","t":"data/database-columns.md"},{"s":"ops/README.md","t":"ops/env-inventory.md"},{"s":"ops/README.md","t":"ops/decision-log.md"},{"s":"ops/README.md","t":"ops/known-bugs.md"},{"s":"ops/README.md","t":"ops/release-flavor-matrix.md"},{"s":"ops/decision-log.md","t":"04-style-guide.md"},{"s":"ops/decision-log.md","t":"05-constraints-and-drift.md"},{"s":"ops/decision-log.md","t":"screens/web-how-it-works.md"},{"s":"ops/decision-log.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"ops/decision-log.md","t":"brains/ui-ux-guardian.md"},{"s":"ops/env-inventory.md","t":"ops/release-flavor-matrix.md"},{"s":"ops/env-inventory.md","t":"17-integrations.md"},{"s":"ops/known-bugs.md","t":"05-constraints-and-drift.md"},{"s":"ops/known-bugs.md","t":"19-testing-qa.md"},{"s":"ops/known-bugs.md","t":"screens/navigation-map.md"},{"s":"ops/known-bugs.md","t":"ops/release-flavor-matrix.md"},{"s":"ops/release-flavor-matrix.md","t":"02-commands.md"},{"s":"ops/release-flavor-matrix.md","t":"ops/env-inventory.md"},{"s":"schema.md","t":"05-constraints-and-drift.md"},{"s":"schema.md","t":"brains/README.md"},{"s":"screens/how-it-works.md","t":"screens/navigation-map.md"},{"s":"screens/how-it-works.md","t":"code/mobile-code-details.md"},{"s":"screens/how-it-works.md","t":"data/formdata-dictionary.md"},{"s":"screens/how-it-works.md","t":"18-cross-system-flows.md"},{"s":"screens/how-it-works.md","t":"design/04-User-Flows/README.md"},{"s":"screens/how-it-works.md","t":"screens/web-how-it-works.md"},{"s":"screens/how-it-works.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"screens/manager-mcp-how-it-works.md","t":"screens/web-how-it-works.md"},{"s":"screens/manager-mcp-how-it-works.md","t":"14-mcp.md"},{"s":"screens/navigation-map.md","t":"ops/known-bugs.md"},{"s":"screens/navigation-map.md","t":"screens/how-it-works.md"},{"s":"screens/navigation-map.md","t":"design/04-User-Flows/README.md"},{"s":"screens/web-how-it-works.md","t":"design-web/MINI-DESIGN-BRAIN.md"},{"s":"screens/web-how-it-works.md","t":"screens/how-it-works.md"},{"s":"screens/web-how-it-works.md","t":"design-web/Navigation.md"},{"s":"screens/web-how-it-works.md","t":"design-web/Page-Inventory.md"},{"s":"screens/web-how-it-works.md","t":"screens/manager-mcp-how-it-works.md"},{"s":"screens/web-how-it-works.md","t":"design-web/Deferred-Scope.md"}]};
+  const COLORS = {
+    frontal: "#e8e8e8",
+    core: "#7dba7d",
+    features: "#c4b44a",
+    design: "#d4a017",
+    "design-web": "#5bb8c9",
+    code: "#d4894a",
+    data: "#7b86d4",
+    ops: "#d46a6a",
+    screens: "#b07bc9",
+    appendix: "#9a9a9a",
+    brains: "#e07ab0"
+  };
+  const GROUP_LABEL = {
+    frontal: "Frontal lobe",
+    core: "Core",
+    features: "Features",
+    design: "Mobile design",
+    "design-web": "Web design",
+    code: "Code maps",
+    data: "Data",
+    ops: "Ops",
+    screens: "Screens",
+    appendix: "Appendix",
+    brains: "Sub brains"
+  };
+
+  const svgEl = document.getElementById("svg");
+  const svg = d3.select(svgEl);
+  const selectedEl = document.getElementById("selected");
+  const groupsEl = document.getElementById("groups");
+  const searchEl = document.getElementById("search");
+  const orphanEl = document.getElementById("orphans");
+  const fadeEl = document.getElementById("fade");
+  const nsizeEl = document.getElementById("nsize");
+  const lthickEl = document.getElementById("lthick");
+  const arrowsEl = document.getElementById("arrows");
+  const clusterEl = document.getElementById("cluster");
+  const hullsEl = document.getElementById("hulls");
+  const centerEl = document.getElementById("center");
+  const repelEl = document.getElementById("repel");
+  const lforceEl = document.getElementById("lforce");
+  const ldistEl = document.getElementById("ldist");
+  const groupOn = {};
+  Object.keys(COLORS).forEach((g) => { groupOn[g] = true; });
+
+  Object.keys(COLORS).forEach((g) => {
+    const count = DATA.nodes.filter((n) => n.g === g).length;
+    const lab = document.createElement("label");
+    lab.className = "row group";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = true;
+    cb.setAttribute("aria-label", "Show " + GROUP_LABEL[g]);
+    cb.addEventListener("change", () => { groupOn[g] = cb.checked; applyFilters(); });
+    const dot = document.createElement("span");
+    dot.className = "dot";
+    dot.style.background = COLORS[g];
+    const name = document.createElement("span");
+    name.textContent = GROUP_LABEL[g];
+    const cnt = document.createElement("span");
+    cnt.className = "count";
+    cnt.textContent = String(count);
+    lab.append(cb, dot, name, cnt);
+    groupsEl.appendChild(lab);
+  });
+
+  const nodes = DATA.nodes.map((n) => ({ id: n.id, label: n.label, g: n.g, deg: n.deg, t: "" }));
+  const links = DATA.links.map((e) => ({ source: e.s, target: e.t }));
+  const adj = new Map();
+  nodes.forEach((n) => adj.set(n.id, new Set()));
+  DATA.links.forEach((e) => {
+    adj.get(e.s).add(e.t);
+    adj.get(e.t).add(e.s);
+  });
+
+  let sim, linkSel, nodeSel, labelSel, hullSel, groupTitleSel, viewport, zoom, worldW, worldH;
+  let hoverId = null;
+  let selectedId = null;
+  let zoomK = 1;
+  let clusterCenters = {};
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const GROUP_ORDER = Object.keys(COLORS);
+
+  function radius(d) {
+    const scale = Number(nsizeEl.value);
+    if (d.g === "brains") return 7.5 * scale;
+    if (d.g === "frontal" || isHub(d)) return 6.2 * scale;
+    return 5.2 * scale;
+  }
+  function isHub(d) {
+    return /(?:^|\/)(?:README|index|AI_BRAIN|MINI-DESIGN-BRAIN|MASTER-DESIGN-BRAIN)\.md$/.test(d.id)
+      || d.g === "brains";
+  }
+  function nodeById(id) {
+    return nodes.find((n) => n.id === id);
+  }
+  function designSub(d) {
+    if (d.g !== "design") return null;
+    const m = d.id.match(/^design\/(\d{2}-[^/]+)\//);
+    return m ? m[1] : "root";
+  }
+  const DESIGN_SUBS = [
+    "01-Brand-Guidelines", "02-User-Interface", "03-Assets",
+    "04-User-Flows", "05-Design-System", "06-Coverage", "root"
+  ];
+  function nodeHome(d) {
+    const c = clusterCenters[d.g] || { x: worldW / 2, y: worldH / 2 };
+    const sub = designSub(d);
+    if (!sub) return c;
+    const i = Math.max(0, DESIGN_SUBS.indexOf(sub));
+    const ang = -Math.PI / 2 + (2 * Math.PI * i) / DESIGN_SUBS.length;
+    const r = 130;
+    return { x: c.x + Math.cos(ang) * r, y: c.y + Math.sin(ang) * r };
+  }
+  function titleFont() {
+    return Math.max(13, 17 / Math.max(zoomK, 0.18));
+  }
+  function searchHay(d) {
+    return (d.id + " " + d.label + " " + (d.t || "")).toLowerCase();
+  }
+  function visible(d) {
+    if (!groupOn[d.g]) return false;
+    if (!orphanEl.checked && d.deg === 0 && d.id !== selectedId) return false;
+    if (d.id === selectedId) return true;
+    const q = searchEl.value.trim().toLowerCase();
+    if (!q) return true;
+    return q.split(/\s+/).every((term) => term && searchHay(d).includes(term));
+  }
+  function sid(e) { return e.source.id || e.source; }
+  function tid(e) { return e.target.id || e.target; }
+  function connected(a, b) {
+    return a === b || (adj.get(a) && adj.get(a).has(b));
+  }
+
+  function applyFilters() {
+    if (!nodeSel) return;
+    nodeSel.style("display", (d) => visible(d) ? null : "none");
+    refreshLabels();
+    linkSel.style("display", (d) => {
+      const a = nodeById(sid(d));
+      const b = nodeById(tid(d));
+      return a && b && visible(a) && visible(b) ? null : "none";
+    });
+    nodeSel.attr("r", radius);
+    linkSel.attr("stroke-width", Number(lthickEl.value) * 0.7);
+    linkSel.attr("marker-end", arrowsEl.checked ? "url(#agv-arrow)" : null);
+    paintFocus();
+    drawClusters();
+  }
+
+  function labelVisible(d) {
+    if (!visible(d)) return false;
+    if (d.id === hoverId || d.id === selectedId) return true;
+    if (searchEl.value.trim() && nodes.filter(visible).length <= 24) return true;
+    const fade = Number(fadeEl.value);
+    if (d.deg >= fade) return true;
+    if (isHub(d)) return true;
+    return false;
+  }
+  function refreshLabels() {
+    if (!labelSel) return;
+    const fade = Number(fadeEl.value);
+    const shown = [];
+    const ordered = nodes.slice().sort((a, b) => {
+      const ah = isHub(a) || a.id === hoverId || a.id === selectedId ? 1 : 0;
+      const bh = isHub(b) || b.id === hoverId || b.id === selectedId ? 1 : 0;
+      return bh - ah || b.deg - a.deg;
+    });
+    const keep = new Set();
+    ordered.forEach((d) => {
+      if (!labelVisible(d)) return;
+      if (fade === 0 || d.id === hoverId || d.id === selectedId || isHub(d)) {
+        keep.add(d.id);
+        return;
+      }
+      const w = Math.min(140, d.label.length * 6.2);
+      const box = { x: d.x - w / 2, y: d.y + 8, w, h: 13 };
+      const hit = shown.some((s) =>
+        box.x < s.x + s.w && box.x + box.w > s.x && box.y < s.y + s.h && box.y + box.h > s.y
+      );
+      if (hit) return;
+      shown.push(box);
+      keep.add(d.id);
+    });
+    labelSel.style("display", (d) => keep.has(d.id) ? null : "none");
+  }
+
+  function paintFocus() {
+    const focus = hoverId || selectedId;
+    if (!focus) {
+      nodeSel.attr("opacity", 1);
+      linkSel.attr("stroke", (e) => {
+        const a = nodeById(sid(e));
+        const b = nodeById(tid(e));
+        return a && b && a.g === b.g ? "rgba(200,200,200,0.28)" : "rgba(160,160,160,0.12)";
+      });
+      refreshLabels();
+      return;
+    }
+    nodeSel.attr("opacity", (n) => connected(focus, n.id) ? 1 : 0.14);
+    linkSel.attr("stroke", (e) => {
+      const s = sid(e), t = tid(e);
+      return s === focus || t === focus ? "rgba(255,255,255,0.55)" : "rgba(180,190,220,0.05)";
+    });
+    refreshLabels();
+  }
+
+  function pick(d) {
+    selectedId = d.id;
+    selectedEl.hidden = false;
+    selectedEl.textContent = d.id + " · " + d.deg + " links · " + GROUP_LABEL[d.g];
+    paintFocus();
+  }
+
+  function resetHighlight() {
+    selectedId = null;
+    hoverId = null;
+    selectedEl.hidden = true;
+    paintFocus();
+  }
+
+  function hullPath(members) {
+    const pts = members.map((n) => [n.x, n.y]);
+    const pad = 28;
+    if (pts.length === 1) {
+      const r = radius(members[0]) + pad;
+      return `M ${pts[0][0] - r},${pts[0][1]} a ${r},${r} 0 1,0 ${r * 2},0 a ${r},${r} 0 1,0 ${-r * 2},0`;
+    }
+    const cx = d3.mean(pts, (p) => p[0]);
+    const cy = d3.mean(pts, (p) => p[1]);
+    const inflated = pts.map(([x, y]) => {
+      const dx = x - cx, dy = y - cy;
+      const len = Math.hypot(dx, dy) || 1;
+      return [x + (dx / len) * pad, y + (dy / len) * pad];
+    });
+    if (inflated.length === 2) {
+      inflated.push([cx, cy]);
+    }
+    const hull = d3.polygonHull(inflated);
+    if (!hull) return null;
+    return "M" + hull.map((p) => p.join(",")).join("L") + "Z";
+  }
+  function drawClusters() {
+    if (!hullSel) return;
+    const on = hullsEl && hullsEl.checked;
+    const groups = on
+      ? GROUP_ORDER.map((g) => [g, nodes.filter((n) => n.g === g && visible(n))]).filter(([, pts]) => pts.length)
+      : [];
+    hullSel = hullSel.data(groups, (d) => d[0]).join("path")
+      .attr("class", "hull")
+      .attr("fill", (d) => COLORS[d[0]])
+      .attr("fill-opacity", 0.05)
+      .attr("stroke", (d) => COLORS[d[0]])
+      .attr("stroke-opacity", 0.25)
+      .attr("stroke-width", 1)
+      .attr("d", (d) => hullPath(d[1]));
+    groupTitleSel = groupTitleSel.data(groups, (d) => d[0]).join("text")
+      .attr("class", "group-title")
+      .text((d) => GROUP_LABEL[d[0]])
+      .attr("x", (d) => d3.mean(d[1], (n) => n.x))
+      .attr("y", (d) => d3.min(d[1], (n) => n.y) - 18)
+      .style("font-size", titleFont() + "px")
+      .style("display", on ? null : "none");
+  }
+
+  function ticked() {
+    if (!linkSel) return;
+    linkSel
+      .attr("x1", (d) => d.source.x).attr("y1", (d) => d.source.y)
+      .attr("x2", (d) => d.target.x).attr("y2", (d) => d.target.y);
+    nodeSel.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+    labelSel.attr("x", (d) => d.x).attr("y", (d) => d.y + radius(d) + 12);
+    drawClusters();
+    refreshLabels();
+  }
+
+  function layoutClusters() {
+    const cx = worldW / 2, cy = worldH / 2;
+    const R = Math.min(worldW, worldH) * 0.42;
+    const out = {};
+    GROUP_ORDER.forEach((g, i) => {
+      const ang = -Math.PI / 2 + (2 * Math.PI * i) / GROUP_ORDER.length;
+      const count = DATA.nodes.filter((n) => n.g === g).length;
+      const bump = Math.min(70, Math.sqrt(count) * 8);
+      out[g] = { x: cx + Math.cos(ang) * (R + bump * 0.15), y: cy + Math.sin(ang) * (R + bump * 0.15) };
+    });
+    return out;
+  }
+
+  function applyForces() {
+    if (!sim) return;
+    const center = Number(centerEl.value);
+    const repel = Number(repelEl.value);
+    const lforce = Number(lforceEl.value);
+    const ldist = Number(ldistEl.value);
+    const clustered = clusterEl.checked;
+    clusterCenters = layoutClusters();
+    sim.force("link", d3.forceLink(links).id((d) => d.id)
+      .distance((d) => {
+        const a = d.source.g || nodeById(sid(d))?.g;
+        const b = d.target.g || nodeById(tid(d))?.g;
+        const hub = sid(d) === "index.md" || tid(d) === "index.md";
+        if (hub) return clustered ? 160 : ldist * 1.15;
+        return a === b ? ldist : ldist * (clustered ? 1.85 : 1.35);
+      })
+      .strength((d) => {
+        const a = d.source.g || nodeById(sid(d))?.g;
+        const b = d.target.g || nodeById(tid(d))?.g;
+        const hub = sid(d) === "index.md" || tid(d) === "index.md";
+        if (hub) return clustered ? 0.02 : lforce * 0.25;
+        if (a === b) return Math.min(0.85, lforce + 0.25);
+        return clustered ? 0.035 : lforce * 0.4;
+      }));
+    sim.force("charge", d3.forceManyBody().strength((d) => d.deg === 0 ? -40 : -repel - Math.min(d.deg, 20) * 1.2));
+    sim.force("center", d3.forceCenter(worldW / 2, worldH / 2).strength(clustered ? Math.min(center, 0.08) : center));
+    sim.force("collide", d3.forceCollide().radius((d) => radius(d) + (isHub(d) ? 18 : 12)).iterations(2));
+    if (clustered) {
+      sim.force("x", d3.forceX((d) => nodeHome(d).x).strength(0.05));
+      sim.force("y", d3.forceY((d) => nodeHome(d).y).strength(0.05));
+      sim.force("radial", null);
+    } else {
+      sim.force("x", null);
+      sim.force("y", null);
+    sim.force("radial", d3.forceRadial(
+      (d) => d.deg === 0 ? Math.min(worldW, worldH) * 0.42 : 0,
+      worldW / 2, worldH / 2
+    ).strength((d) => d.deg === 0 && orphanEl.checked ? 0.9 : 0));
+    }
+  }
+
+  function sizeSvg() {
+    const rect = svgEl.getBoundingClientRect();
+    const width = Math.max(320, Math.floor(rect.width));
+    const height = Math.max(420, Math.floor(rect.height));
+    svg.attr("viewBox", `0 0 ${width} ${height}`);
+    return { width, height };
+  }
+
+  function fitView(kPad, instant) {
+    const vis = nodes.filter(visible);
+    if (!vis.length || !zoom) return;
+    const { width, height } = sizeSvg();
+    const xs = vis.map((n) => n.x);
+    const ys = vis.map((n) => n.y);
+    const minX = Math.min.apply(null, xs);
+    const maxX = Math.max.apply(null, xs);
+    const minY = Math.min.apply(null, ys);
+    const maxY = Math.max.apply(null, ys);
+    const few = vis.length <= 3;
+    const one = vis.length === 1;
+    const minBox = one ? 90 : few ? 48 : 40;
+    const bw = Math.max(minBox, maxX - minX);
+    const bh = Math.max(minBox, maxY - minY);
+    const pad = one ? 120 : few ? 96 : 72;
+    const kMax = one ? 2.6 : few ? 4 : 4;
+    const k = Math.min((width - pad) / bw, (height - pad) / bh, kMax) * (kPad || 0.92);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(k).translate(-cx, -cy);
+    zoomK = k;
+    if (viewport) viewport.attr("transform", t);
+    if (instant || reduce) svg.call(zoom.transform, t);
+    else svg.transition().duration(350).call(zoom.transform, t);
+  }
+
+  function zoomBy(factor) {
+    svg.transition().duration(reduce ? 0 : 180).call(zoom.scaleBy, factor);
+  }
+
+  function zoomToNode(d, scale) {
+    if (!d || d.x == null || !zoom) return;
+    const { width, height } = sizeSvg();
+    const t = d3.zoomIdentity.translate(width / 2, height / 2).scale(scale || 2.6).translate(-d.x, -d.y);
+    svg.transition().duration(reduce ? 0 : 280).call(zoom.transform, t);
+  }
+
+  function fitSearchHits() {
+    const vis = nodes.filter(visible);
+    const q = searchEl.value.trim();
+    if (!q) {
+      fitView(0.88);
+      return;
+    }
+    if (!vis.length) return;
+    if (vis.length === 1) {
+      pick(vis[0]);
+      fitView(0.9);
+      return;
+    }
+    fitView(vis.length <= 8 ? 0.72 : 0.88);
+  }
+
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
+
+  function dragstarted(event, d) {
+    event.sourceEvent.stopPropagation();
+    if (!event.active) sim.alphaTarget(0.25).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  function dragended(event, d) {
+    if (!event.active) sim.alphaTarget(0);
+  }
+
+  function init() {
+    const { width, height } = sizeSvg();
+    worldW = 2200;
+    worldH = 1500;
+    clusterCenters = layoutClusters();
+    nodes.forEach((n) => {
+      const home = nodeHome(n);
+      n.x = home.x + (Math.random() - 0.5) * 90;
+      n.y = home.y + (Math.random() - 0.5) * 90;
+    });
+
+    svg.selectAll("*").remove();
+    svg.append("defs").append("marker")
+      .attr("id", "agv-arrow")
+      .attr("viewBox", "0 -4 8 8")
+      .attr("refX", 10)
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-4L8,0L0,4")
+      .attr("fill", "rgba(200,210,240,0.7)");
+
+    viewport = svg.append("g").attr("class", "viewport");
+    const hullG = viewport.append("g").attr("class", "hulls");
+    const linkG = viewport.append("g").attr("class", "links");
+    const nodeG = viewport.append("g").attr("class", "nodes");
+    const titleG = viewport.append("g").attr("class", "group-titles");
+    const textG = viewport.append("g").attr("class", "labels");
+    hullSel = hullG.selectAll("path");
+    groupTitleSel = titleG.selectAll("text");
+
+    zoom = d3.zoom()
+      .scaleExtent([0.12, 8])
+      .filter((event) => {
+        if (event.type === "wheel") return true;
+        if (event.type === "touchstart" && event.touches && event.touches.length > 1) return true;
+        if (event.target && event.target.tagName === "circle") return false;
+        return event.button === 0;
+      })
+      .on("start", () => svgEl.classList.add("is-panning"))
+      .on("end", () => svgEl.classList.remove("is-panning"))
+      .on("zoom", (event) => {
+        viewport.attr("transform", event.transform);
+        zoomK = event.transform.k;
+        refreshLabels();
+        if (groupTitleSel) groupTitleSel.style("font-size", titleFont() + "px");
+      });
+
+    svg.call(zoom);
+    svg.on("dblclick.zoom", null);
+
+    svg.on("click", (event) => {
+      if (event.target === svgEl) resetHighlight();
+    });
+
+    linkSel = linkG.selectAll("line").data(links).enter().append("line")
+      .attr("stroke", "rgba(180,180,180,0.22)")
+      .attr("stroke-width", 0.8);
+
+    nodeSel = nodeG.selectAll("circle").data(nodes).enter().append("circle")
+      .attr("fill", (d) => COLORS[d.g])
+      .attr("stroke", "none")
+      .attr("tabindex", 0)
+      .attr("role", "button")
+      .attr("aria-label", (d) => `${d.label}, ${d.id}, ${d.deg} links`)
+      .call(d3.drag()
+        .container(viewport.node())
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended))
+      .on("click", (event, d) => {
+        event.stopPropagation();
+        if (event.defaultPrevented) return;
+        pick(d);
+      })
+      .on("dblclick", (event, d) => {
+        event.stopPropagation();
+        pick(d);
+        zoomToNode(d);
+      })
+      .on("mouseenter", (event, d) => { hoverId = d.id; paintFocus(); })
+      .on("mouseleave", () => { hoverId = null; paintFocus(); })
+      .on("keydown", (event, d) => {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); pick(d); }
+      });
+
+    labelSel = textG.selectAll("text").data(nodes).enter().append("text")
+      .attr("class", "label")
+      .text((d) => d.label);
+
+    sim = d3.forceSimulation(nodes);
+    applyForces();
+    sim.on("tick", ticked);
+    sim.stop();
+    for (let i = 0; i < 420; i++) sim.tick();
+    ticked();
+    applyFilters();
+    fitView(0.88, true);
+    setTimeout(() => fitView(0.88, true), 200);
+  }
+
+  if (!window.d3) {
+    selectedEl.hidden = false;
+    selectedEl.textContent = "Could not load D3. Check your network, then refresh.";
+  } else {
+    init();
+    fetch("graph-search.json").then((r) => r.ok ? r.json() : {}).then((blob) => {
+      const map = blob && typeof blob === "object" ? blob : {};
+      nodes.forEach((n) => { n.t = map[n.id] || ""; });
+      applyFilters();
+      if (searchEl.value.trim()) fitSearchHits();
+    }).catch(() => {});
+    window.addEventListener("resize", () => {
+      sizeSvg();
+      fitView(0.88, true);
+    });
+  }
+
+  fadeEl.addEventListener("input", () => {
+    document.getElementById("fade-out").textContent = fadeEl.value;
+    applyFilters();
+  });
+  nsizeEl.addEventListener("input", () => {
+    document.getElementById("nsize-out").textContent = Number(nsizeEl.value).toFixed(1);
+    applyFilters();
+  });
+  lthickEl.addEventListener("input", () => {
+    document.getElementById("lthick-out").textContent = Number(lthickEl.value).toFixed(1);
+    applyFilters();
+  });
+  clusterEl.addEventListener("change", () => {
+    applyForces();
+    if (sim) {
+      nodes.forEach((n) => { n.fx = null; n.fy = null; });
+      sim.alpha(0.85).restart();
+    }
+    applyFilters();
+    setTimeout(() => fitView(0.9), reduce ? 0 : 700);
+  });
+  arrowsEl.addEventListener("change", applyFilters);
+  hullsEl.addEventListener("change", () => { drawClusters(); });
+  let searchFitTimer;
+  searchEl.addEventListener("input", () => {
+    applyFilters();
+    clearTimeout(searchFitTimer);
+    searchFitTimer = setTimeout(fitSearchHits, 160);
+  });
+  orphanEl.addEventListener("change", () => {
+    applyForces();
+    if (sim) sim.alpha(0.4).restart();
+    applyFilters();
+  });
+  function retune() {
+    document.getElementById("center-out").textContent = Number(centerEl.value).toFixed(2);
+    document.getElementById("repel-out").textContent = String(Math.round(Number(repelEl.value)));
+    document.getElementById("lforce-out").textContent = Number(lforceEl.value).toFixed(2);
+    document.getElementById("ldist-out").textContent = String(Math.round(Number(ldistEl.value)));
+    applyForces();
+    if (sim) sim.alpha(0.35).restart();
+  }
+  ["center", "repel", "lforce", "ldist"].forEach((id) => {
+    document.getElementById(id).addEventListener("input", retune);
+  });
+  document.getElementById("animate").addEventListener("click", () => {
+    if (!sim || reduce) return;
+    nodes.forEach((n) => { n.fx = null; n.fy = null; });
+    sim.alpha(0.85).restart();
+  });
+  document.getElementById("reset").addEventListener("click", resetHighlight);
+  document.getElementById("zoom-in").addEventListener("click", () => zoomBy(1.25));
+  document.getElementById("zoom-out").addEventListener("click", () => zoomBy(0.8));
+  document.getElementById("zoom-fit").addEventListener("click", () => {
+    if (searchEl.value.trim()) fitSearchHits();
+    else fitView(0.92);
+  });
+
+  const shell = document.getElementById("shell");
+  const chatStatus = document.getElementById("chat-status");
+  const chatLog = document.getElementById("chat-log");
+  const chatInput = document.getElementById("chat-input");
+  const chatHistory = [];
+
+  function scrollChatEnd() {
+    requestAnimationFrame(() => {
+      chatLog.scrollTop = chatLog.scrollHeight;
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+    }[c]));
+  }
+  function inlineMd(s) {
+    return s
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[^*])\*([^*]+)\*/g, "$1<em>$2</em>");
+  }
+  function isTableSep(line) {
+    return /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(line.trim());
+  }
+  function splitCells(line) {
+    return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+  }
+  function renderMarkdown(src) {
+    const fences = [];
+    const text = escapeHtml(src).replace(/```[\t ]*[\w-]*\n?([\s\S]*?)```/g, (_, code) => {
+      const i = fences.length;
+      fences.push("<pre><code>" + code.replace(/^\n+|\n+$/g, "") + "</code></pre>");
+      return "\n%%FENCE" + i + "%%\n";
+    });
+    const lines = text.split("\n");
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      const fence = line.trim().match(/^%%FENCE(\d+)%%$/);
+      if (fence) {
+        out.push(fences[Number(fence[1])]);
+        i += 1;
+        continue;
+      }
+      if (line.includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+        const header = splitCells(line);
+        i += 2;
+        const body = [];
+        while (i < lines.length && lines[i].includes("|") && !isTableSep(lines[i])) {
+          body.push(splitCells(lines[i]));
+          i += 1;
+        }
+        let html = '<div class="chat-md-table-wrap"><table><thead><tr>';
+        header.forEach((c) => { html += "<th>" + inlineMd(c) + "</th>"; });
+        html += "</tr></thead><tbody>";
+        body.forEach((row) => {
+          html += "<tr>";
+          header.forEach((_, idx) => { html += "<td>" + inlineMd(row[idx] || "") + "</td>"; });
+          html += "</tr>";
+        });
+        html += "</tbody></table></div>";
+        out.push(html);
+        continue;
+      }
+      if (/^\s*[-*] /.test(line)) {
+        out.push("<ul>");
+        while (i < lines.length && /^\s*[-*] /.test(lines[i])) {
+          out.push("<li>" + inlineMd(lines[i].replace(/^\s*[-*] /, "")) + "</li>");
+          i += 1;
+        }
+        out.push("</ul>");
+        continue;
+      }
+      if (/^\s*\d+\. /.test(line)) {
+        out.push("<ol>");
+        while (i < lines.length && /^\s*\d+\. /.test(lines[i])) {
+          out.push("<li>" + inlineMd(lines[i].replace(/^\s*\d+\. /, "")) + "</li>");
+          i += 1;
+        }
+        out.push("</ol>");
+        continue;
+      }
+      if (/^#{1,4}\s+/.test(line.trim())) {
+        const level = Math.min(4, line.trim().match(/^#+/)[0].length);
+        out.push("<h" + level + ">" + inlineMd(line.trim().replace(/^#{1,4}\s+/, "")) + "</h" + level + ">");
+        i += 1;
+        continue;
+      }
+      if (!line.trim()) {
+        i += 1;
+        continue;
+      }
+      const para = [];
+      while (i < lines.length && lines[i].trim() && !/^\s*[-*] /.test(lines[i]) && !/^\s*\d+\. /.test(lines[i]) && !/^%%FENCE/.test(lines[i].trim()) && !/^#{1,4}\s+/.test(lines[i].trim())) {
+        if (lines[i].includes("|") && i + 1 < lines.length && isTableSep(lines[i + 1])) break;
+        para.push(lines[i]);
+        i += 1;
+      }
+      if (!para.length) {
+        out.push("<p>" + inlineMd(line) + "</p>");
+        i += 1;
+        continue;
+      }
+      out.push("<p>" + inlineMd(para.join(" ")) + "</p>");
+    }
+    return out.join("");
+  }
+  function addBubble(role, text) {
+    const el = document.createElement("div");
+    el.className = "chat-bubble " + role;
+    if (role === "assistant") el.innerHTML = renderMarkdown(text);
+    else el.textContent = text;
+    chatLog.appendChild(el);
+    scrollChatEnd();
+    return el;
+  }
+  function renderSources(el, sources) {
+    if (!el || !sources || !sources.length) return;
+    const wrap = document.createElement("div");
+    wrap.className = "chat-sources";
+    sources.forEach((path) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = path;
+      b.title = "Select this note on the graph";
+      b.addEventListener("click", () => {
+        const n = nodeById(path);
+        if (!n) return;
+        pick(n);
+        applyFilters();
+        zoomToNode(n, 2.6);
+      });
+      wrap.appendChild(b);
+    });
+    el.appendChild(wrap);
+    scrollChatEnd();
+    wrap.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }
+  function chatHeaders() {
+    const headers = { "content-type": "application/json" };
+    const secret = (document.getElementById("chat-secret").value || localStorage.getItem("brain_secret") || "").trim();
+    if (secret) {
+      headers["x-brain-secret"] = secret;
+      localStorage.setItem("brain_secret", secret);
+    }
+    return headers;
+  }
+  async function readChatResponse(res, bubble) {
+    const ctype = res.headers.get("content-type") || "";
+    if (ctype.includes("text/event-stream") && res.body) {
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buf = "";
+      let text = "";
+      let sources = [];
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const parts = buf.split("\n\n");
+        buf = parts.pop() || "";
+        for (const block of parts) {
+          const line = block.split("\n").find((l) => l.startsWith("data:"));
+          if (!line) continue;
+          let ev;
+          try { ev = JSON.parse(line.slice(5).trim()); } catch { continue; }
+          if (ev.type === "delta" && ev.data) {
+            text += ev.data;
+            bubble.innerHTML = renderMarkdown(text);
+            scrollChatEnd();
+          } else if (ev.type === "error") {
+            bubble.className = "chat-bubble error";
+            bubble.textContent = ev.data || "Chat error.";
+          } else if (ev.type === "done") {
+            sources = Array.isArray(ev.data) ? ev.data : [];
+          }
+        }
+      }
+      renderSources(bubble, sources);
+      return { reply: text, sources };
+    }
+    const data = await res.json();
+    const reply = data.reply || data.error || "No reply.";
+    if (data.error && !data.reply) {
+      bubble.className = "chat-bubble error";
+      bubble.textContent = reply;
+    } else {
+      bubble.innerHTML = renderMarkdown(reply);
+    }
+    renderSources(bubble, data.sources);
+    return data;
+  }
+
+  function setChatOpen(on) {
+    shell.classList.toggle("chat-open", on);
+    if (typeof sizeSvg === "function") sizeSvg();
+    if (on) chatInput.focus();
+  }
+
+  document.getElementById("chat-toggle").addEventListener("click", () => {
+    setChatOpen(!shell.classList.contains("chat-open"));
+  });
+  document.getElementById("chat-close").addEventListener("click", () => setChatOpen(false));
+
+  const savedSecret = localStorage.getItem("brain_secret") || "";
+  if (savedSecret) document.getElementById("chat-secret").value = savedSecret;
+  fetch("/api/health").then((r) => r.json()).then((info) => {
+    const row = document.getElementById("chat-secret-row");
+    if (info.auth_required) {
+      row.classList.add("is-on");
+      chatStatus.textContent = info.has_key
+        ? "Ask is locked. Enter the shared secret, then click a node to focus a note."
+        : "Ask is locked, and ANTHROPIC_API_KEY is missing.";
+    } else if (info.has_key) {
+      chatStatus.textContent = "Claude is ready. Click a node to focus that note.";
+    } else {
+      chatStatus.textContent = "No ANTHROPIC_API_KEY. Copy .env.example to .env and restart graph-server.py.";
+    }
+  }).catch(() => {
+    chatStatus.textContent = "Open this page via graph-server.py (http://127.0.0.1:8765/graph.html), not as a file.";
+  });
+
+  document.getElementById("chat-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+    chatInput.value = "";
+    addBubble("user", message);
+    chatHistory.push({ role: "user", content: message });
+    const sendBtn = document.getElementById("chat-send");
+    sendBtn.disabled = true;
+    const bubble = addBubble("assistant", "…");
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: chatHeaders(),
+        body: JSON.stringify({
+          message,
+          selected: selectedId || null,
+          history: chatHistory.slice(0, -1),
+          stream: true
+        })
+      });
+      if (res.status === 401) {
+        document.getElementById("chat-secret-row").classList.add("is-on");
+        bubble.className = "chat-bubble error";
+        bubble.textContent = "Ask is locked. Enter the shared secret.";
+        sendBtn.disabled = false;
+        return;
+      }
+      const data = await readChatResponse(res, bubble);
+      const reply = data.reply || data.error || "";
+      if (reply && !data.error) chatHistory.push({ role: "assistant", content: reply });
+    } catch (err) {
+      bubble.className = "chat-bubble error";
+      bubble.textContent = "Chat server is not running. Start: python3 AI_BRAIN/graph-server.py";
+    }
+    sendBtn.disabled = false;
+  });
+  chatInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      document.getElementById("chat-form").requestSubmit();
+    }
+  });
+  </script>
+</body>
+</html>

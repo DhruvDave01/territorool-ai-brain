@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Find Leads — iOS chat flow</title>
+  <style>
+    @font-face {
+      font-family: "DIN Condensed";
+      src: url("../assets/fonts/mobile/DIN-Condensed-Bold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "DIN Condensed";
+      src: url("../assets/fonts/mobile/DIN-Condensed-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    :root {
+      --blue: #124ac6;
+      --blue-press: #0e3ea8;
+      --red: #cf5b51;
+      --surface: #f6f7fb;
+      --ink: #1c2430;
+      --muted: #667085;
+      --line: #e4e8ee;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "DIN Condensed", "Avenir Next Condensed", "Helvetica Neue", sans-serif;
+      background: #d5dbe3;
+      color: var(--ink);
+      min-height: 100vh;
+    }
+    .review {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 18px 16px 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .review h1 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .review p { margin: 0 0 12px; color: #526070; font-size: 14px; line-height: 1.4; }
+    .review a { color: var(--blue); font-weight: 700; }
+    .picks { display: flex; flex-wrap: wrap; gap: 8px; }
+    .picks button, .linkish {
+      border: 1px solid #c5ced8;
+      background: #fff;
+      color: #243140;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .picks button.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+    .stage { display: flex; justify-content: center; padding: 22px 16px 40px; }
+    .phone {
+      width: 390px;
+      height: min(844px, calc(100vh - 168px));
+      min-height: 680px;
+      background: #0e1218;
+      border-radius: 46px;
+      padding: 10px;
+      box-shadow: 0 18px 40px rgba(16, 24, 40, 0.28);
+    }
+    .screen {
+      height: 100%;
+      border-radius: 36px;
+      overflow: hidden;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .status {
+      height: 48px;
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 22px 6px;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+    .island {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      width: 118px;
+      height: 28px;
+      margin-left: -59px;
+      background: #0e1218;
+      border-radius: 16px;
+      z-index: 3;
+    }
+    .hdr {
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 4px 14px 16px;
+      gap: 8px;
+    }
+    .hdr button {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .hdr h2 {
+      flex: 1;
+      margin: 0;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .cred { text-align: right; font-size: 16px; line-height: 1; font-weight: 700; }
+    .cred span { display: block; font-size: 11px; font-weight: 400; opacity: 0.85; margin-top: 2px; }
+    .view { flex: 1; min-height: 0; display: none; flex-direction: column; }
+    .view.on { display: flex; }
+    .bubble-wrap { padding: 12px 12px 0; }
+    .bubble {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    .map {
+      flex: 1;
+      margin: 10px;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      background: #e4edf5;
+      touch-action: none;
+      cursor: crosshair;
+      border: 1px solid #d5dee8;
+    }
+    .map svg { width: 100%; height: 100%; display: block; }
+    .hint {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 46%;
+      text-align: center;
+      background: rgba(255,255,255,.94);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 16px;
+      line-height: 1.25;
+      pointer-events: none;
+    }
+    .ring {
+      position: absolute;
+      border: 3px solid var(--blue);
+      background: rgba(18, 74, 198, 0.16);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .ring b {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 3px 7px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .sheet {
+      margin: 0 10px 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .sheet p { margin: 0 0 8px; font-size: 16px; }
+    .bar, .result-bar {
+      display: flex;
+      gap: 8px;
+      padding: 0 10px 12px;
+    }
+    .bar button, .result-bar button, .send, .choice button, .mini {
+      border: 0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    .ghost {
+      background: var(--red);
+      color: #fff;
+      flex: 0.7;
+      height: 46px;
+    }
+    .primary {
+      background: var(--blue);
+      color: #fff;
+      flex: 1.3;
+      height: 46px;
+    }
+    .primary:disabled, .send:disabled { opacity: 0.4; cursor: default; }
+    .thread {
+      flex: 1;
+      overflow: auto;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .msg {
+      max-width: 86%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    .msg.bot { background: #fff; border: 1px solid var(--line); align-self: flex-start; }
+    .msg.user { background: var(--blue); color: #fff; align-self: flex-end; }
+    .msg ul { margin: 6px 0 0; padding-left: 16px; }
+    .composer {
+      display: flex;
+      gap: 8px;
+      padding: 8px 10px 12px;
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+    .composer input {
+      flex: 1;
+      border: 1px solid #d0d7e2;
+      border-radius: 10px;
+      padding: 12px;
+      font: inherit;
+      font-size: 16px;
+    }
+    .send { background: var(--blue); color: #fff; padding: 0 14px; }
+    .search {
+      margin: auto 16px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 22px 16px;
+      text-align: center;
+      border: 1px solid var(--line);
+    }
+    .search h3 { margin: 0 0 6px; font-size: 20px; }
+    .search p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+    .track { height: 8px; background: #e6ebf2; border-radius: 99px; overflow: hidden; }
+    .track i { display: block; height: 100%; width: 0; background: var(--blue); animation: fill 1.5s linear forwards; }
+    @keyframes fill { to { width: 100%; } }
+    .recap {
+      margin: 10px 10px 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      font-size: 14px;
+    }
+    .recap button, .textbtn {
+      border: 0;
+      background: transparent;
+      color: var(--blue);
+      font: inherit;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .tools { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 0; }
+    .tools span { font-size: 15px; color: var(--muted); }
+    .list { flex: 1; overflow: auto; padding: 8px 10px 0; }
+    .lead {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      cursor: pointer;
+    }
+    .lead b { display: block; font-size: 16px; }
+    .lead em { display: block; font-style: normal; color: var(--muted); font-size: 13px; }
+    .chip {
+      background: #eef3ff;
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 4px 6px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .pins { flex: 1; margin: 8px 10px 0; position: relative; }
+    .pin {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--blue);
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+    .result-bar { background: #fff; border-top: 1px solid var(--line); padding: 10px; }
+    .result-bar .mini {
+      flex: 1;
+      height: 42px;
+      background: #fff;
+      color: var(--blue);
+      border: 1.5px solid var(--blue);
+    }
+    .result-bar .mini.go { background: var(--blue); color: #fff; }
+    .result-bar .mini:disabled { opacity: 0.4; }
+    .toast {
+      position: absolute;
+      top: 96px;
+      left: 24px;
+      right: 24px;
+      background: #c2410c;
+      color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 15px;
+      display: none;
+      z-index: 5;
+    }
+    .mask {
+      position: absolute;
+      inset: 0;
+      background: rgba(16, 24, 40, 0.35);
+      display: none;
+      align-items: flex-end;
+      z-index: 6;
+    }
+    .mask.on { display: flex; }
+    .choice {
+      background: #fff;
+      width: 100%;
+      border-radius: 18px 18px 28px 28px;
+      padding: 16px 14px 22px;
+    }
+    .choice h3 { margin: 0 0 4px; font-size: 20px; }
+    .choice p { margin: 0 0 12px; color: var(--muted); font-size: 15px; }
+    .choice button { display: block; width: 100%; height: 46px; margin-top: 8px; background: var(--blue); color: #fff; }
+    .choice button.alt { background: #fff; color: var(--blue); border: 1.5px solid var(--blue); }
+    .done { margin: auto 20px; text-align: center; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <div class="review">
+    <h1>iOS · AI Find Leads for a field rep</h1>
+    <p>Drag on the map to draw one circle. A second drag replaces it. Drag inside to move, drag the edge to resize. Then describe the businesses. The lead list is the current one. <a href="ai-find-leads-chat-web.html">Open the web screen</a></p>
+    <div class="picks" id="picks">
+      <button type="button" data-flow="ask" class="on">Chat asks, map answers</button>
+      <button type="button" data-flow="stages">Map, then chat</button>
+      <button type="button" data-flow="split">Map with a chat sheet</button>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="phone">
+      <div class="screen">
+        <div class="island"></div>
+        <div class="status"><span>9:41</span><span>5G</span></div>
+        <header class="hdr">
+          <button type="button" id="back" aria-label="Back">‹</button>
+          <h2>AI Find Leads</h2>
+          <div class="cred">8392<span>Credits</span></div>
+        </header>
+
+        <section class="view on" id="view-area">
+          <div class="bubble-wrap" id="bubble">
+            <div class="bubble">Circle the area you sell in. One area for this search.</div>
+          </div>
+          <div class="map" id="map" role="application" aria-label="Search map">
+            <svg viewBox="0 0 600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="600" height="800" fill="#e4edf5"/>
+              <path d="M0 0 H230 C210 90 270 150 200 240 C130 330 250 400 170 500 C100 590 210 660 150 800 H0 Z" fill="#c5d9ee"/>
+              <ellipse cx="430" cy="160" rx="78" ry="42" fill="#d5e7cc"/>
+              <ellipse cx="360" cy="470" rx="100" ry="38" fill="#d5e7cc"/>
+              <g stroke="#fff" stroke-width="7" fill="none">
+                <path d="M250 0 V800"/><path d="M390 0 V800"/><path d="M500 0 V800"/>
+                <path d="M180 180 H600"/><path d="M160 340 H600"/><path d="M140 520 H600"/><path d="M150 680 H600"/>
+              </g>
+              <g stroke="#f7f9fb" stroke-width="2" fill="none">
+                <path d="M280 0 V800"/><path d="M330 0 V800"/><path d="M450 0 V800"/>
+                <path d="M170 80 H600"/><path d="M170 260 H600"/><path d="M150 430 H600"/><path d="M145 600 H600"/>
+              </g>
+              <g fill="#5d6d7e" font-size="22" font-family="Helvetica, Arial, sans-serif">
+                <text x="70" y="300">Bay</text>
+                <text x="300" y="230">Downtown</text>
+                <text x="300" y="400">Temescal</text>
+                <text x="300" y="590">Fruitvale</text>
+              </g>
+            </svg>
+            <div class="hint" id="hint">Drag to circle the area you sell in</div>
+            <div class="ring" id="ring" style="display:none"><b id="ring-label">Search area</b></div>
+          </div>
+          <div class="sheet" id="sheet" style="display:none">
+            <p id="sheet-copy">Circle one area. I'll ask what businesses you want next.</p>
+            <div class="composer" id="sheet-form" style="display:none;padding:0;border:0;background:transparent">
+              <input id="sheet-input" type="text" placeholder="Plumbing companies, exclude national chains" aria-label="Ideal businesses">
+              <button class="send" id="sheet-send" type="button">Send</button>
+            </div>
+          </div>
+          <div class="bar" id="area-bar">
+            <button class="ghost" id="clear" type="button">Clear</button>
+            <button class="primary" id="use" type="button" disabled>Use this area</button>
+          </div>
+        </section>
+
+        <section class="view" id="view-chat">
+          <div class="thread" id="thread"></div>
+          <form class="composer" id="chat-form">
+            <input id="chat-input" type="text" placeholder="Plumbing companies, exclude national chains" aria-label="Ideal businesses">
+            <button class="send" id="chat-send" type="submit">Send</button>
+          </form>
+        </section>
+
+        <section class="view" id="view-search">
+          <div class="search">
+            <h3>Searching this area</h3>
+            <p id="search-copy">This usually takes about 60 seconds.</p>
+            <div class="track"><i></i></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-results">
+          <div class="recap">
+            <span id="recap">Search area</span>
+            <button type="button" id="change">Change</button>
+          </div>
+          <div class="tools">
+            <span id="count">6 leads</span>
+            <button class="textbtn" id="map-toggle" type="button">Map view</button>
+          </div>
+          <div class="list" id="list"></div>
+          <div class="pins" id="pins" style="display:none"></div>
+          <div class="result-bar">
+            <button class="mini" id="select-all" type="button">Select all</button>
+            <button class="mini go" id="next" type="button">Next step</button>
+          </div>
+        </section>
+
+        <section class="view" id="view-done">
+          <div class="done" id="done-copy"></div>
+        </section>
+
+        <div class="toast" id="toast"></div>
+        <div class="mask" id="mask">
+          <div class="choice">
+            <h3>Leads confirmed</h3>
+            <p>Your selected leads are ready. What should we do with them?</p>
+            <button type="button" data-next="route">Add to a route</button>
+            <button type="button" data-next="list">Add to a list</button>
+            <button class="alt" type="button" data-next="home">Return to Dashboard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LEADS = [
+      ["Pipe Spy", "1108 26th St, Oakland, CA", "4"],
+      ["Big Smile Plumbing", "3115 Beaumont Ave, Oakland, CA", "2"],
+      ["Ehret Co Plumbing", "887 71st Ave, Oakland, CA", "3"],
+      ["Harry Clark Plumbing", "3026 Broadway, Oakland, CA", "3"],
+      ["Oakland Rooter", "1614 Fruitvale Ave, Oakland, CA", "2"],
+      ["Allen & Sons Plumbing", "7645 MacArthur Blvd, Oakland, CA", "2"]
+    ];
+    const PINS = [[28, 36], [62, 28], [44, 52], [70, 48], [38, 70], [58, 64]];
+
+    const state = {
+      flow: new URLSearchParams(location.search).get("flow") || "ask",
+      phase: "area",
+      circle: null,
+      place: "Oakland",
+      miles: "",
+      query: "",
+      selected: new Set(),
+      showMap: false,
+      searchTimer: 0
+    };
+
+    const map = document.getElementById("map");
+    const ring = document.getElementById("ring");
+    const hint = document.getElementById("hint");
+    const useBtn = document.getElementById("use");
+    let drag = null;
+
+    function placeFrom(y, h) {
+      const t = y / h;
+      if (t < 0.34) return "Downtown Oakland";
+      if (t < 0.62) return "Temescal";
+      return "Fruitvale";
+    }
+
+    function paintCircle() {
+      const c = state.circle;
+      if (!c) {
+        ring.style.display = "none";
+        hint.style.display = "block";
+        useBtn.disabled = true;
+        return;
+      }
+      hint.style.display = "none";
+      ring.style.display = "block";
+      ring.style.left = (c.x - c.r) + "px";
+      ring.style.top = (c.y - c.r) + "px";
+      ring.style.width = ring.style.height = (c.r * 2) + "px";
+      const miles = Math.max(1, Math.min(31, (c.r / 72) * 3));
+      state.miles = miles.toFixed(1);
+      state.place = placeFrom(c.y, map.clientHeight);
+      document.getElementById("ring-label").textContent = "Search area · " + state.miles + " mi";
+      useBtn.disabled = c.r < 28;
+    }
+
+    map.addEventListener("pointerdown", (e) => {
+      if (state.phase !== "area") return;
+      const rect = map.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const c = state.circle;
+      let mode = "draw";
+      if (c) {
+        const d = Math.hypot(x - c.x, y - c.y);
+        if (Math.abs(d - c.r) < 16) mode = "resize";
+        else if (d < c.r - 4) mode = "move";
+      }
+      if (mode === "draw") state.circle = { x, y, r: 10 };
+      drag = { mode, x, y, ox: state.circle.x, oy: state.circle.y, or: state.circle.r };
+      try { map.setPointerCapture(e.pointerId); } catch (err) { /* untrusted events */ }
+      paintCircle();
+    });
+    map.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      const rect = map.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const c = state.circle;
+      if (drag.mode === "move") {
+        c.x = Math.max(c.r, Math.min(rect.width - c.r, drag.ox + (x - drag.x)));
+        c.y = Math.max(c.r, Math.min(rect.height - c.r, drag.oy + (y - drag.y)));
+      } else if (drag.mode === "resize") {
+        c.r = Math.max(18, Math.min(150, Math.hypot(x - c.x, y - c.y)));
+      } else {
+        c.x = drag.x;
+        c.y = drag.y;
+        c.r = Math.max(10, Math.min(150, Math.hypot(x - drag.x, y - drag.y)));
+      }
+      paintCircle();
+    });
+    map.addEventListener("pointerup", () => { drag = null; });
+
+    document.getElementById("clear").onclick = () => {
+      state.circle = null;
+      paintCircle();
+    };
+
+    function recapText() {
+      return state.place + " · " + state.miles + " mi · " + state.query;
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => { toast.style.display = "none"; }, 1600);
+    }
+
+    function renderThread() {
+      const thread = document.getElementById("thread");
+      thread.innerHTML = "";
+      const area = document.createElement("div");
+      area.className = "msg user";
+      area.textContent = "One area · " + state.place + " · " + state.miles + " mi";
+      const ask = document.createElement("div");
+      ask.className = "msg bot";
+      ask.textContent = "What businesses should we find?";
+      thread.append(area, ask);
+      if (state.query) {
+        const mine = document.createElement("div");
+        mine.className = "msg user";
+        mine.textContent = state.query;
+        const reply = document.createElement("div");
+        reply.className = "msg bot";
+        reply.innerHTML = "Ideal prospects<ul><li>Local plumbing companies in " + state.place + ".</li><li>Small to medium-sized plumbing businesses.</li><li>Excludes large national chains.</li></ul>";
+        thread.append(mine, reply);
+      }
+    }
+
+    function renderList() {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+      LEADS.forEach((lead, i) => {
+        const row = document.createElement("div");
+        row.className = "lead";
+        row.innerHTML = "<input type='checkbox' " + (state.selected.has(i) ? "checked" : "") + " aria-label='" + lead[0] + "'><div><b>" + lead[0] + "</b><em>" + lead[1] + "</em></div><span class='chip'>" + lead[2] + "</span>";
+        row.onclick = () => {
+          if (state.selected.has(i)) state.selected.delete(i);
+          else state.selected.add(i);
+          renderList();
+        };
+        list.append(row);
+      });
+      document.getElementById("select-all").textContent = state.selected.size === LEADS.length ? "Unselect all" : "Select all";
+    }
+
+    function renderPins() {
+      const pins = document.getElementById("pins");
+      pins.innerHTML = "";
+      const svg = map.querySelector("svg").cloneNode(true);
+      svg.style.position = "absolute";
+      svg.style.inset = "0";
+      pins.append(svg);
+      PINS.forEach((p) => {
+        const dot = document.createElement("div");
+        dot.className = "pin";
+        dot.style.left = p[0] + "%";
+        dot.style.top = p[1] + "%";
+        pins.append(dot);
+      });
+    }
+
+    function show() {
+      const flow = state.flow;
+      const phase = state.phase;
+      document.querySelectorAll("#picks button").forEach((btn) => {
+        btn.classList.toggle("on", btn.dataset.flow === flow);
+      });
+      const splitChat = flow === "split" && phase === "chat";
+      document.getElementById("view-area").classList.toggle("on", phase === "area" || splitChat);
+      document.getElementById("view-chat").classList.toggle("on", phase === "chat" && flow !== "split");
+      document.getElementById("view-search").classList.toggle("on", phase === "search");
+      document.getElementById("view-results").classList.toggle("on", phase === "results");
+      document.getElementById("view-done").classList.toggle("on", phase === "done");
+      document.getElementById("bubble").style.display = flow === "ask" && phase === "area" ? "block" : "none";
+      document.getElementById("sheet").style.display = flow === "split" && (phase === "area" || phase === "chat") ? "block" : "none";
+      document.getElementById("sheet-copy").style.display = phase === "chat" ? "none" : "block";
+      document.getElementById("sheet-form").style.display = phase === "chat" ? "flex" : "none";
+      document.getElementById("area-bar").style.display = phase === "area" ? "flex" : "none";
+      document.getElementById("list").style.display = state.showMap ? "none" : "block";
+      document.getElementById("pins").style.display = state.showMap ? "block" : "none";
+      document.getElementById("map-toggle").textContent = state.showMap ? "List" : "Map view";
+      document.getElementById("recap").textContent = recapText();
+      if (phase === "chat" && flow !== "split") renderThread();
+      if (phase === "results") {
+        renderList();
+        if (state.showMap) renderPins();
+      }
+      paintCircle();
+    }
+
+    function goSearch() {
+      state.phase = "search";
+      document.getElementById("search-copy").textContent = "Searching " + state.place + ". This usually takes about 60 seconds.";
+      show();
+      clearTimeout(state.searchTimer);
+      state.searchTimer = setTimeout(() => {
+        state.phase = "results";
+        state.showMap = false;
+        show();
+      }, 1600);
+    }
+
+    function submitQuery(value) {
+      const query = value.trim();
+      if (!query) return;
+      state.query = query;
+      if (state.flow !== "split") renderThread();
+      setTimeout(goSearch, state.flow === "split" ? 200 : 700);
+    }
+
+    document.getElementById("use").onclick = () => {
+      if (!state.circle || state.circle.r < 28) return;
+      state.phase = "chat";
+      show();
+    };
+
+    document.getElementById("chat-form").onsubmit = (e) => {
+      e.preventDefault();
+      submitQuery(document.getElementById("chat-input").value);
+    };
+    document.getElementById("sheet-send").onclick = () => {
+      submitQuery(document.getElementById("sheet-input").value);
+    };
+
+    document.getElementById("change").onclick = () => {
+      state.phase = "area";
+      state.showMap = false;
+      show();
+    };
+    document.getElementById("back").onclick = () => {
+      if (state.phase === "results" || state.phase === "done") {
+        state.phase = "chat";
+        show();
+        return;
+      }
+      if (state.phase === "chat") {
+        state.phase = "area";
+        show();
+      }
+    };
+    document.getElementById("map-toggle").onclick = () => {
+      state.showMap = !state.showMap;
+      show();
+    };
+    document.getElementById("select-all").onclick = () => {
+      if (state.selected.size === LEADS.length) state.selected.clear();
+      else LEADS.forEach((_, i) => state.selected.add(i));
+      renderList();
+    };
+    document.getElementById("next").onclick = () => {
+      if (state.selected.size < 2) {
+        showToast("Select at least 2 leads");
+        return;
+      }
+      document.getElementById("mask").classList.add("on");
+    };
+    document.getElementById("mask").onclick = (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      document.getElementById("mask").classList.remove("on");
+      const where = btn.dataset.next;
+      state.phase = "done";
+      const copy = {
+        route: "Next is the current create-route flow, with these leads selected.",
+        list: "Next is the current list picker. A list is still a group, not a route.",
+        home: "Back on the dashboard. Search was free. Saving a company is still 1 credit."
+      };
+      document.getElementById("done-copy").textContent = copy[where];
+      show();
+    };
+
+    document.getElementById("picks").onclick = (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      state.flow = btn.dataset.flow;
+      state.phase = "area";
+      state.query = "";
+      state.selected.clear();
+      state.showMap = false;
+      document.getElementById("chat-input").value = "";
+      document.getElementById("sheet-input").value = "";
+      document.getElementById("mask").classList.remove("on");
+      const url = new URL(location.href);
+      url.searchParams.set("flow", state.flow);
+      history.replaceState(null, "", url);
+      show();
+    };
+
+    show();
+  </script>
+</body>
+</html>

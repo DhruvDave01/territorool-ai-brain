@@ -1,0 +1,14 @@
+---
+title: TerriTool actors
+---
+flowchart LR
+  Guest[Guest<br/>login / trial / forgot password]
+  Field[Field Rep<br/>Home, Find Leads, Routes, Lists]
+  Mgr[Manager<br/>team dashboard, assign leads]
+  Admin[Admin<br/>promocodes, subscriptions]
+  Mcp[MCP Agent<br/>Claude / ChatGPT tools]
+  Guest -->|creates account| Field
+  Guest -->|I lead a team| Mgr
+  Field -->|MCP connector| Mcp
+  Mgr -->|invites| Field
+  Admin -->|credits / trial| Field

@@ -1,0 +1,38 @@
+{
+ "_note": "Curated feature -> concrete implementation files, from verified code reading (architecture.md, api-map.md, roles-permissions.md). Used by brain-graph.js to link a feature to its real code when the web-graph route-attribution misses it (e.g. the /manager and /hq route groups). Only accurate mappings; brain-graph ignores any file that is not already a code node.",
+ "F23": [
+  "app/Http/Controllers/Manager/ManagerDashboardController.php",
+  "app/Services/Manager/ManagerDashboardService.php",
+  "app/Services/Manager/ManagerFindLeadsService.php",
+  "app/Services/Manager/UserDataService.php"
+ ],
+ "F25": [
+  "app/Http/Controllers/Admin/PromocodeController.php",
+  "app/Http/Controllers/Admin/SpecialdiscountController.php",
+  "app/Http/Controllers/Admin/SettingController.php",
+  "app/Http/Controllers/Admin/UserController.php",
+  "app/Http/Controllers/Admin/CitiesCrudController.php"
+ ],
+ "F32": [
+  "App/utils/crashRecovery.js",
+  "App/utils/SentryHelper.js",
+  "App/utils/sentrySanitize.js"
+ ],
+ "F30": [
+  "app/AdminMcp/Http/Controllers/CancelledSubscriptionsController.php",
+  "app/AdminMcp/Http/Controllers/McpHttpController.php",
+  "app/AdminMcp/Http/Controllers/McpToolsController.php",
+  "app/AdminMcp/Http/Controllers/SalesAgentsController.php",
+  "app/AdminMcp/Services/McpProtocolService.php"
+ ],
+ "F31": [
+  "app/McpClient/Http/Controllers/SalespersonMcpController.php",
+  "app/McpClient/Services/HttpMcpClient.php",
+  "app/McpClient/Services/HubSpotMcpSyncService.php",
+  "app/McpClient/Services/McpConnectionVendor.php",
+  "app/McpClient/Services/McpHttpException.php",
+  "app/McpClient/Services/McpOAuthHelper.php",
+  "app/McpClient/Services/McpSyncRouter.php",
+  "app/McpClient/Services/SalesforceMcpSyncService.php"
+ ]
+}

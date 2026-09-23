@@ -1,0 +1,10 @@
+---
+title: Support
+---
+flowchart TD
+  Bug[Report Bug] --> Form[Title + description + optional image]
+  Form --> Valid{Title and description filled?}
+  Valid -->|No| Form
+  Valid -->|Yes| Add[Add ticket]
+  Add --> Inbox[Support list]
+  Inbox --> View[View / reply]

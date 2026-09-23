@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unlock 50 free credits</title>
+  <style>
+    @font-face {
+      font-family: "DIN 2014";
+      src: url("../assets/fonts/web/DinBold.ttf") format("truetype");
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "DIN 2014";
+      src: url("../assets/fonts/web/DinLight.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    :root {
+      --blue: #124ac6;
+      --blue-hover: #0e3ea8;
+      --page: #eef1f5;
+      --text: #333;
+      --muted: #666;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--page);
+      min-height: 100vh;
+    }
+    .top {
+      height: 60px;
+      background: #fff;
+      border-bottom: 1px solid #eceff3;
+      display: flex;
+      align-items: center;
+      padding: 0 18px 0 14px;
+      gap: 16px;
+    }
+    .brand {
+      width: 168px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .brand img {
+      display: block;
+      height: 28px;
+      width: auto;
+    }
+    .upgrade, .credits, .btn {
+      background: var(--blue);
+      color: #fff;
+      border: 0;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .upgrade { width: 150px; height: 36px; cursor: default; }
+    .top-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+    .credits { border-radius: 5px; padding: 8px 12px; }
+    .store {
+      display: inline-flex;
+      align-items: center;
+      height: 32px;
+      padding: 0 10px;
+      border-radius: 6px;
+      background: #111;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .top-link { color: #555; text-decoration: none; font-size: 13px; }
+    .shell { display: flex; min-height: calc(100vh - 60px); }
+    .side {
+      width: 78px;
+      background: #fff;
+      border-right: 1px solid #eceff3;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .side a {
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      color: #8a93a3;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .side a svg { display: block; margin: 0 auto 4px; }
+    .side a.active { color: var(--blue); }
+    .main { flex: 1; padding: 14px 24px 40px; }
+    .crumb { margin: 0 0 4px; color: #888; font-size: 13px; }
+    .crumb b { color: #555; font-weight: 600; }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #222;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #e4e8ee;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+      padding: 22px 24px 16px;
+      max-width: 860px;
+    }
+    .panel h2 {
+      margin: 0 0 4px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #222;
+    }
+    .lead {
+      margin: 0 0 18px;
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .offer {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border: 1px solid #e6eaef;
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .mark {
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .offer-body { flex: 1; min-width: 0; }
+    .offer-body h3 { margin: 0 0 2px; font-size: 16px; }
+    .offer-body p { margin: 0; color: var(--muted); font-size: 13px; }
+    .reward {
+      font-size: 18px;
+      font-weight: 700;
+      color: #222;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .reward small {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+    }
+    .btn {
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:hover { background: var(--blue-hover); }
+    .note {
+      margin: 4px 0 0;
+      padding: 10px 12px;
+      background: #f8f9fa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .help { margin: 12px 0 4px; text-align: center; color: #888; font-size: 13px; }
+    .help a { color: var(--blue); font-weight: 600; text-decoration: none; }
+    .menu-toggle { display: none; }
+    @media (max-width: 767px) {
+      .top { height: 52px; padding: 8px 12px; }
+      .brand { width: auto; flex: 1; font-size: 16px; }
+      .upgrade, .store, .top-link { display: none; }
+      .credits { font-size: 12px; padding: 7px 10px; }
+      .side { display: none; }
+      .side.open {
+        display: flex;
+        position: absolute;
+        z-index: 5;
+        top: 52px;
+        bottom: 0;
+        left: 0;
+        width: 88px;
+        box-shadow: 4px 0 16px rgba(0,0,0,.08);
+      }
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 0;
+        background: transparent;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+      }
+      .main { padding: 12px; }
+      .offer { flex-wrap: wrap; }
+      .reward { margin-left: 60px; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="#dashboard">
+      <img src="../assets/logos/territool-wordmark-blue.png" alt="TerriTool">
+    </a>
+    <button class="menu-toggle" id="menu" type="button" aria-label="Menu">☰</button>
+    <button class="upgrade" type="button">Upgrade</button>
+    <div class="top-right">
+      <span class="credits">24 Credits</span>
+      <span class="store">Google Play</span>
+      <span class="store">App Store</span>
+      <a class="top-link" href="#support">Report Bug</a>
+      <a class="top-link" href="#logout">Logout</a>
+    </div>
+  </header>
+  <div class="shell">
+    <aside class="side" id="side">
+      <a class="active" href="#dashboard">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#124ac6" stroke-width="1.7"><path d="M4 11 L12 4 L20 11 V20 H4 Z"/></svg>
+        Home
+      </a>
+      <a href="#address-book">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/></svg>
+        Address Book
+      </a>
+      <a href="#find-leads">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg>
+        AI Find Leads
+      </a>
+      <a href="#recent">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><circle cx="10" cy="8" r="3"/><path d="M4 19c1-3 3-4.5 6-4.5M18 8v6M15 11h6"/></svg>
+        Recently Added
+      </a>
+      <a href="#routes">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/></svg>
+        Routes
+      </a>
+      <a href="#lists">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><path d="M8 6h11M8 12h11M8 18h11"/></svg>
+        Lists
+      </a>
+      <a href="#settings">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8a93a3" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2"/></svg>
+        Settings
+      </a>
+    </aside>
+    <main class="main">
+      <p class="crumb">Home / <b>Unlock Credits</b></p>
+      <h1>Unlock 50 free credits</h1>
+      <section class="panel">
+        <h2>Share your TerriTool experience</h2>
+        <p class="lead">Leave an honest review. We add credits after we verify it — usually within 1–2 business days. Available to every account.</p>
+        <article class="offer">
+          <div class="mark"><img src="../screenshots/feature-evidence/02-Dashboard/evidence/review-credits/g2-logo.png" alt="G2"></div>
+          <div class="offer-body">
+            <h3>G2</h3>
+            <p>Leave a review on our G2.com profile</p>
+          </div>
+          <div class="reward">30 <small>credits</small></div>
+          <a class="btn" href="https://www.g2.com/contributor/territool-ai-field-sales-agent-review-collection-aace6d2c-4008-4c82-8232-6a0e40d5c9c6" target="_blank" rel="noopener noreferrer">Leave a G2 review</a>
+        </article>
+        <article class="offer">
+          <div class="mark"><img src="../screenshots/feature-evidence/02-Dashboard/evidence/review-credits/producthunt-logo.png" alt="Product Hunt"></div>
+          <div class="offer-body">
+            <h3>Product Hunt</h3>
+            <p>Leave a review on Product Hunt</p>
+          </div>
+          <div class="reward">20 <small>credits</small></div>
+          <a class="btn" href="https://www.producthunt.com/products/territool-field-sales-ai?utm_source=twitter&utm_medium=social" target="_blank" rel="noopener noreferrer">Leave a Product Hunt review</a>
+        </article>
+        <p class="note">Reviews are verified before credits are added to your account. We never ask for a positive rating — just an honest review.</p>
+        <p class="help">Need help? <a href="#support">Contact support</a></p>
+      </section>
+    </main>
+  </div>
+  <script>
+    document.getElementById("menu").addEventListener("click", function () {
+      document.getElementById("side").classList.toggle("open");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2172 @@
+{
+  "base": "https://staging.territool.com/index.php/api/",
+  "startedAt": "2026-09-17T10:26:45.111Z",
+  "finishedAt": "2026-09-17T10:27:42.553Z",
+  "summary": {
+    "total": 109,
+    "pass": 88,
+    "fail": 0,
+    "gap": 19,
+    "blocked": 2
+  },
+  "results": [
+    {
+      "id": "TC-F01-010",
+      "flow": "F01",
+      "title": "A 260-character unknown email is refused cleanly",
+      "type": "edge-data",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-001",
+      "flow": "F01",
+      "title": "Sales Agent logs in with valid credentials",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 16,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-002",
+      "flow": "F01",
+      "title": "Wrong password is rejected without leaking whether the account exists",
+      "type": "negative",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "W2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 11,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-003",
+      "flow": "F01",
+      "title": "Unknown account gets the same message as a wrong password",
+      "type": "security",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "W2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 9,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-004",
+      "flow": "F01",
+      "title": "Missing password is rejected by validation",
+      "type": "validation",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "W2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 9,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-005",
+      "flow": "F01",
+      "title": "Missing email is rejected by validation",
+      "type": "validation",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "W2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 9,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-006",
+      "flow": "F01",
+      "title": "Business Sales Agent logs in and is always treated as in free trial",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 11,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-007",
+      "flow": "F01",
+      "title": "Business Agent (Manager) cannot log in to the mobile API",
+      "type": "permission",
+      "role": "Business Agent",
+      "priority": "P0",
+      "refs": [
+        "BT-1",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 10,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-008",
+      "flow": "F01",
+      "title": "Admin is blocked on the mobile API (BT-1 target behaviour)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P0",
+      "refs": [
+        "BT-1"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 9,
+      "failed": 2,
+      "failures": [
+        {
+          "msg": "BT-1: Admin must be refused on the mobile API",
+          "detail": "expected \"0\", got \"1\""
+        },
+        {
+          "msg": "BT-1: no token is issued to Admin",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F01-009",
+      "flow": "F01",
+      "title": "A login without a device token fails cleanly, not with an SQL error",
+      "type": "negative",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "W12",
+        "S5.4"
+      ],
+      "knownGap": "UI-API-04",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 2,
+      "failures": [
+        {
+          "msg": "no HTTP 5xx",
+          "detail": null
+        },
+        {
+          "msg": "no SQL error text in the body",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F02-004",
+      "flow": "F02",
+      "title": "A 300-character name with emoji and no password is refused cleanly",
+      "type": "edge-data",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "KG-P2",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F02-005",
+      "flow": "F02",
+      "title": "A refused registration returns no token and no server internals",
+      "type": "security",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "S0.4",
+        "UI-SEC-02"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F02-001",
+      "flow": "F02",
+      "title": "Registration with nothing but an email is refused by validation",
+      "type": "validation",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "KG-P2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F02-002",
+      "flow": "F02",
+      "title": "An email that is already registered is refused",
+      "type": "negative",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "KG-P2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F02-003",
+      "flow": "F02",
+      "title": "API registration rejects a malformed email (BT target: match web)",
+      "type": "validation",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "KG-P2"
+      ],
+      "knownGap": "KG-P2",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "the first error is about the email",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-004",
+      "flow": "F03",
+      "title": "`getuserdata` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-005",
+      "flow": "F03",
+      "title": "`getuserdata` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-006",
+      "flow": "F03",
+      "title": "Admin is refused by `getusercredit` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P0",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-001",
+      "flow": "F03",
+      "title": "Sales Agent subscription block is complete",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 8,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-002",
+      "flow": "F03",
+      "title": "An active Sales Agent is not flagged as expired",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F03-003",
+      "flow": "F03",
+      "title": "Purchase, upgrade and cancel are not exercised",
+      "type": "waived",
+      "role": "Sales Agent",
+      "priority": "P0",
+      "refs": [
+        "S6.4"
+      ],
+      "knownGap": null,
+      "verdict": "BLOCKED",
+      "checks": 0,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": "Waived (owner): no payment setup, S6.4 / U-PAY-01",
+      "error": null
+    },
+    {
+      "id": "TC-F05-005",
+      "flow": "F05",
+      "title": "`getUserActivity` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F05-006",
+      "flow": "F05",
+      "title": "`getUserActivity` treats an unknown scope as \"all activity\" (documented fallback)",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F05-001",
+      "flow": "F05",
+      "title": "Sales Agent credit balance has the shape the header pill reads",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 6,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F05-002",
+      "flow": "F05",
+      "title": "Business Sales Agent credits come from the manager allotment",
+      "type": "permission",
+      "role": "Business Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.2"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F05-003",
+      "flow": "F05",
+      "title": "Recent activity returns at most five items",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F05-004",
+      "flow": "F05",
+      "title": "A missing token gets 401 without server internals",
+      "type": "security",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S0.4",
+        "W13"
+      ],
+      "knownGap": "UI-SEC-02",
+      "verdict": "KNOWN GAP",
+      "checks": 3,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "no `debug` block (file, line, trace) is exposed",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-004",
+      "flow": "F06",
+      "title": "`getAiLeadData` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-005",
+      "flow": "F06",
+      "title": "`getAiLeadData` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-006",
+      "flow": "F06",
+      "title": "Admin is refused by `getAiLeadData` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-001",
+      "flow": "F06",
+      "title": "Sales Agent saved AI search can be read",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-002",
+      "flow": "F06",
+      "title": "Business Sales Agent saved AI search can be read",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F06-003",
+      "flow": "F06",
+      "title": "Search and save are not exercised",
+      "type": "waived",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S6.4"
+      ],
+      "knownGap": null,
+      "verdict": "BLOCKED",
+      "checks": 0,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": "Waived: provider cost and credit spend (S6.4)",
+      "error": null
+    },
+    {
+      "id": "TC-F07-001",
+      "flow": "F07",
+      "title": "`getYelpLeads` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F08-003",
+      "flow": "F08",
+      "title": "`routelist` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F08-004",
+      "flow": "F08",
+      "title": "`routelist` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F08-005",
+      "flow": "F08",
+      "title": "Admin is refused by `routelist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F08-001",
+      "flow": "F08",
+      "title": "Sales Agent routes library lists draft and published routes",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F08-002",
+      "flow": "F08",
+      "title": "Business Sales Agent routes library lists draft and published routes",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-003",
+      "flow": "F09",
+      "title": "`simplerouteview` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-004",
+      "flow": "F09",
+      "title": "`simplerouteview` rejects a missing route_id cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-005",
+      "flow": "F09",
+      "title": "`simplerouteview` handles a route id that cannot exist",
+      "type": "edge-data",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "BT-5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-006",
+      "flow": "F09",
+      "title": "Admin is refused by `routelist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-001",
+      "flow": "F09",
+      "title": "My already-open route loads with its stops",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F09-002",
+      "flow": "F09",
+      "title": "Another user's route is not returned (S3.8)",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": "UI-SEC-11",
+      "verdict": "KNOWN GAP",
+      "checks": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "no stops from another account",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F10-003",
+      "flow": "F10",
+      "title": "`getlastvisitedentry` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F10-004",
+      "flow": "F10",
+      "title": "`getlastvisitedentry` rejects a missing company_id cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F10-005",
+      "flow": "F10",
+      "title": "`getlastvisitedentry` handles a company id that cannot exist",
+      "type": "edge-data",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "BT-5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F10-001",
+      "flow": "F10",
+      "title": "Visit log for one of my companies",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F10-002",
+      "flow": "F10",
+      "title": "Another user's visit log is not returned (S3.8)",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.8",
+        "KG-BT4"
+      ],
+      "knownGap": "UI-SEC-10",
+      "verdict": "KNOWN GAP",
+      "checks": 1,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "no entries for a company the caller does not own",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-003",
+      "flow": "F11",
+      "title": "`getlist` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-004",
+      "flow": "F11",
+      "title": "`getlist` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-005",
+      "flow": "F11",
+      "title": "Admin is refused by `getlist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-008",
+      "flow": "F11",
+      "title": "`createList` rejects a list with no name (refused before any insert, V2/ListController.php:97-110) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-001",
+      "flow": "F11",
+      "title": "Sales Agent lists screen data",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F11-002",
+      "flow": "F11",
+      "title": "Business Sales Agent lists screen data",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-004",
+      "flow": "F12",
+      "title": "`companylist` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-005",
+      "flow": "F12",
+      "title": "`companydetail` rejects a missing company_id cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-006",
+      "flow": "F12",
+      "title": "`companylist` handles a page far past the last one",
+      "type": "edge-data",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "BT-5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-007",
+      "flow": "F12",
+      "title": "Admin is refused by `companylist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-001",
+      "flow": "F12",
+      "title": "Address Book first page",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "M3",
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-002",
+      "flow": "F12",
+      "title": "A request with no parameters fails cleanly, not with an SQL error",
+      "type": "negative",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "W12",
+        "S5.4"
+      ],
+      "knownGap": "UI-API-02",
+      "verdict": "KNOWN GAP",
+      "checks": 3,
+      "failed": 3,
+      "failures": [
+        {
+          "msg": "no HTTP 5xx",
+          "detail": null
+        },
+        {
+          "msg": "no SQL error text in the body",
+          "detail": null
+        },
+        {
+          "msg": "no `debug` block",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F12-003",
+      "flow": "F12",
+      "title": "Another user's company detail is not returned (S3.8)",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 1,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-003",
+      "flow": "F13",
+      "title": "`contactlist` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-004",
+      "flow": "F13",
+      "title": "`contactlist` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-005",
+      "flow": "F13",
+      "title": "`contactlist` handles a page far past the last one",
+      "type": "edge-data",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "BT-5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-006",
+      "flow": "F13",
+      "title": "Admin is refused by `contactlist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-007",
+      "flow": "F13",
+      "title": "`addcontact` rejects a contact with no name or status (refused before any insert, V2/ContactSellController.php:57-73) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-001",
+      "flow": "F13",
+      "title": "Sales Agent contact list first page",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F13-002",
+      "flow": "F13",
+      "title": "Business Sales Agent contact list first page",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-003",
+      "flow": "F14",
+      "title": "`getcompanyactivities` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-004",
+      "flow": "F14",
+      "title": "`getnotes` rejects a missing company_id cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-005",
+      "flow": "F14",
+      "title": "`getnotes` handles a company id that cannot exist",
+      "type": "edge-data",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "BT-5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-006",
+      "flow": "F14",
+      "title": "Admin is refused by `getcompanyactivities` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P1",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-007",
+      "flow": "F14",
+      "title": "`addnote` rejects a note with no company or text (refused before save, V2/CompanyController.php:851-866) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-001",
+      "flow": "F14",
+      "title": "All my activities",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.6"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F14-002",
+      "flow": "F14",
+      "title": "Another user's company activities are not returned",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P1",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 1,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F15-001",
+      "flow": "F15",
+      "title": "`fetchAllContacts` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P0",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F16-003",
+      "flow": "F16",
+      "title": "`reportcompany` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F16-004",
+      "flow": "F16",
+      "title": "`reportcontact` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F16-001",
+      "flow": "F16",
+      "title": "reportcompany with no target is refused before any report is created",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F16-002",
+      "flow": "F16",
+      "title": "reportcontact with no target is refused before any report is created",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F17-001",
+      "flow": "F17",
+      "title": "`shareRouteList` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F18-001",
+      "flow": "F18",
+      "title": "Status details the card flow reads are returned",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F18-002",
+      "flow": "F18",
+      "title": "`addcompany` rejects a card company with no fields (refused before any insert, V2/CompanyController.php:235-250) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F18-003",
+      "flow": "F18",
+      "title": "`addcompany` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F19-001",
+      "flow": "F19",
+      "title": "`scan-qr-code` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F19-002",
+      "flow": "F19",
+      "title": "`scan-qr-code` rejects a scan with no route_id (refused before any lookup) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-005",
+      "flow": "F20",
+      "title": "`getuserstatus` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-006",
+      "flow": "F20",
+      "title": "Admin is refused by `getuserstatus` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P2",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-007",
+      "flow": "F20",
+      "title": "`updateuserstatus` rejects an update with no status details (returns before any update, V2/RouteController.php:3936, 3955-3958) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-001",
+      "flow": "F20",
+      "title": "Sales Agent status tags have id, name and colour",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "M3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-002",
+      "flow": "F20",
+      "title": "Business Sales Agent status tags have id, name and colour",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P2",
+      "refs": [
+        "M3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-003",
+      "flow": "F20",
+      "title": "`getcategories` without a token is refused with 401",
+      "type": "security",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": "UI-API-03",
+      "verdict": "KNOWN GAP",
+      "checks": 3,
+      "failed": 2,
+      "failures": [
+        {
+          "msg": "HTTP 401, not 500",
+          "detail": "expected 401, got 500"
+        },
+        {
+          "msg": "no `debug` block",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F20-004",
+      "flow": "F20",
+      "title": "`getusercontactstage` without a token is refused with 401",
+      "type": "security",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": "UI-API-03",
+      "verdict": "KNOWN GAP",
+      "checks": 3,
+      "failed": 2,
+      "failures": [
+        {
+          "msg": "HTTP 401, not 500",
+          "detail": "expected 401, got 500"
+        },
+        {
+          "msg": "no `debug` block",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F21-001",
+      "flow": "F21",
+      "title": "`hubspot-last-sync` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P2",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-003",
+      "flow": "F26",
+      "title": "`getticket` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P3",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-004",
+      "flow": "F26",
+      "title": "`getticket` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-005",
+      "flow": "F26",
+      "title": "Admin is refused by `unreadticketcount` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P3",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-008",
+      "flow": "F26",
+      "title": "`addticket` rejects a ticket with no title (refused before any insert, V2/SupportController.php:40-45) cleanly",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "S2.4",
+        "W12"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-001",
+      "flow": "F26",
+      "title": "Ticket list for the signed-in user",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "S3.8"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F26-002",
+      "flow": "F26",
+      "title": "Unread ticket count",
+      "type": "happy",
+      "role": "Business Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "M3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F27-002",
+      "flow": "F27",
+      "title": "`notificationlist` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P3",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F27-003",
+      "flow": "F27",
+      "title": "`notificationlist` payload carries no credential fields or SQL text",
+      "type": "security",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "S0.4",
+        "QG-12",
+        "UI-SEC-05"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F27-004",
+      "flow": "F27",
+      "title": "Admin is refused by `notificationlist` (mobile API is not for Admin)",
+      "type": "permission",
+      "role": "Admin",
+      "priority": "P3",
+      "refs": [
+        "BT-1",
+        "S3"
+      ],
+      "knownGap": "BT-1",
+      "verdict": "KNOWN GAP",
+      "checks": 2,
+      "failed": 1,
+      "failures": [
+        {
+          "msg": "Admin is refused (HTTP 200, status 1)",
+          "detail": null
+        }
+      ],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F27-001",
+      "flow": "F27",
+      "title": "Alert list with unread count",
+      "type": "happy",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "M3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F28-003",
+      "flow": "F28",
+      "title": "`invite-user` refuses a missing or malformed token",
+      "type": "negative",
+      "role": "Public",
+      "priority": "P3",
+      "refs": [
+        "S2.4",
+        "M5"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 4,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F28-001",
+      "flow": "F28",
+      "title": "Invite with neither email nor phone is refused, nothing sent",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "KG-REF3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 3,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    },
+    {
+      "id": "TC-F28-002",
+      "flow": "F28",
+      "title": "Invite with a malformed phone is refused",
+      "type": "validation",
+      "role": "Sales Agent",
+      "priority": "P3",
+      "refs": [
+        "KG-REF3"
+      ],
+      "knownGap": null,
+      "verdict": "PASS",
+      "checks": 2,
+      "failed": 0,
+      "failures": [],
+      "blockedReason": null,
+      "error": null
+    }
+  ]
+}

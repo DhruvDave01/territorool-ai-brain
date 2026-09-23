@@ -1,0 +1,18 @@
+/* ===== resources/views/front/list/list.blade.php · <style> block 1 of 1 ===== */
+section.content-header.desktop_only {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        section.content-header.desktop_only > .breadcrumb {
+            float: right;
+            position: absolute;
+            top: 15px;
+            right: 10px;
+            left: auto;
+            margin: 0;
+            background: transparent;
+        }
+        @media (max-width: 768px) {
+            .desktop_only { display: none !important; }
+        }
