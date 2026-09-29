@@ -29,3 +29,5 @@
 | Code gate | [gates/code-gate.md](gates/code-gate.md) |
 | Features | [features/README.md](features/README.md) |
 | Oversized videos, watched | [reviews/oversized-video-watch-2026-09-23.md](reviews/oversized-video-watch-2026-09-23.md) |
+| Live code, 2026-09-28 | [reviews/live-code-2026-09-28.md](reviews/live-code-2026-09-28.md) |
+| Live code, 2026-09-29 — Voice Mode, web chat revert | [reviews/live-code-2026-09-29.md](reviews/live-code-2026-09-29.md) |

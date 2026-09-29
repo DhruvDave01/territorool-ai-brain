@@ -33,6 +33,7 @@ Pins use the company’s **status color**. Opening hours can filter open vs clos
 - Open an address in Google Maps
 - Directions on a published route
 - **Navigate Me** on a stop (logged; managers see it in KPIs)
+- Voice Mode (mobile, staging and dev builds): `ActiveRouteMap` has a mic before the filter button. While a session runs, the voice mini-bar sits below the map, not over it, because the map has no footer. See [22 — Voice Mode](22-Voice-Mode.md).
 
 ## Rules
 
@@ -61,7 +62,7 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 
 | Surface | Screen | File / still | Primary action | Loading | Empty | Error |
 |---|---|---|---|---|---|---|
-| Mobile | `ActiveRouteMap` | `activeroutemap/index.js` · [RouteFlow](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.02.12.png>) | Next stop, navigate | `screen.mapActive.loading`, polyline `screen.mapActive.polylineLoading` | "No Data found related to your filters." | "Check that location services are enabled and try again." |
+| Mobile | `ActiveRouteMap` | `activeroutemap/index.js` · [RouteFlow](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.02.12.png>) · [voice mini-bar render](voice-mode-mobile-map-minibar.png) | Next stop, navigate; the mic opens Voice Mode (staging and dev builds) | `screen.mapActive.loading`, polyline `screen.mapActive.polylineLoading` | "No Data found related to your filters." | "Check that location services are enabled and try again." |
 | Mobile | `LassoMap` | `route/lassoMap.js` | Draw a lasso | `screen.mapLasso.loading` … `loadingC` | — | "Oops! Something went wrong. Please check your internet connection or try again." (toast) |
 | Mobile | Address Book map | `company/list.js` map mode (`companylistmap`) | Tap a pin | `screen.companyList.loadingB` | "No companies match your filters." | "Oops! Something went wrong. Please check your internet connection or try again." (toast) |
 | Manager | Territory map on `/manager/dashboard` and circles on `/manager/ai-find-leads` | [circles](../screenshots/web-stills/03-manager-ai-circles.png) | Draw circles | "Loading territory…", "Loading map…" | — | "Could not load map." |

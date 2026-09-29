@@ -45,9 +45,9 @@ Stills:
 
 - **From** — home card
 - **Do** — search, then open the company in Address Book
-- **Copy** — classic Find Leads, then the company list
+- **Copy** — classic Find Leads, then the company list. The Search Multiple tab of `/findleads` is the city or ZIP form, headed “Set your selling territory — we’ll do the rest.” A chat version was added in late September and reverted on 2026-09-29 (`abe88426`), so these stills show the live page
 - **Next** — contacts on that company, or a route
-- **Stop** — do not use the manager Find Leads island on this page
+- **Stop** — do not use the manager Find Leads island on this page. Do not rebuild the reverted chat as if it were live
 
 Stills:
 
@@ -57,6 +57,23 @@ Stills:
 - [Company list, short still](../screenshots/web-stills/04-classic-company-list.png)
 - [Contacts](../screenshots/web/sales-agent/web_04_contact_w1440.png)
 - [Recently added](../screenshots/web/sales-agent/web_07_recent-company_w1440.png)
+
+## 3b. Find Contacts in bulk
+
+- **From** — the “Find Contacts” button on route detail, list detail, or Address Book
+- **Do** — Select Contacts on a company, tick people, then Add Contact(s). A company with no database match shows “Searching {source}…” while a Claude lookup runs
+- **Copy** — the modal “Find Contacts”, “Prospect and manage leads within your selected company list.” All Companies is on the left, with counts and Load More Companies. Selected Contacts is on the right, with the contact and credit totals and Add Contact(s)
+- **Next** — the progress card (“Aggregating contact data from multiple sources”, “You may exit this screen and contacts will load in the background”), then “Bulk contacts completed” with “Deducted credit”. If the modal is closed, a panel at the bottom right shows “Adding contacts” and “{n} of {total} saved”
+- **Stop** — a contact costs 2 credits, or 1 on the Claude path. The modal’s progress bar is a timer, not real progress. The saved count is the real one. Insufficient credits opens Cancel / Upgrade. See [09 — Contact Enrichment](../features/09-Contact-Enrichment-Credits.md)
+
+Stills:
+
+- [Find Contacts modal, from a route](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 12.58.37 PM.png>)
+- [People at one company](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 12.58.51 PM.png>)
+- [Selected contacts and the credit total](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 12.59.17 PM.png>)
+- [Progress card](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 12.59.26 PM.png>)
+- [Bulk contacts completed](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 1.04.44 PM.png>)
+- [Insufficient credits: Cancel / Upgrade](<../screenshots/web-owner/Salespeople/Screenshot 2026-09-15 at 1.53.47 PM.png>)
 
 ## 4. Route or list
 

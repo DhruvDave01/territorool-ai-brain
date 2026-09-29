@@ -25,6 +25,7 @@ One page per product module. Behavior below is the module spec. The four oversiz
 | 19 — Background jobs and provider callbacks | [19-Cron-Jobs-Webhooks](19-Cron-Jobs-Webhooks.md) |
 | 20 — MCP and voice (Claude / Cursor / ChatGPT / voice) | [20-MCP](20-MCP.md) |
 | 21 — Business Team (older screens) | [21-Business-Team](21-Business-Team.md) |
+| 22 — Voice Mode (mobile, hands-free driving; built 2026-09-29, staging and dev builds) | [22-Voice-Mode](22-Voice-Mode.md) · [mobile build plan](22-Voice-Mode-mobile-plan.md) · [rep guide (PDF)](voice-mode-guide-2026-09-29.pdf) · [quick-start sheet](voice-mode-guide-2026-09-29-quick-start.jpg) |
 
 Full-flow sheets, one PNG per module and surface, with every step's shipped still and caption: [flows/README.md](flows/README.md).
 

@@ -67,6 +67,22 @@ Redeem can run in the background; the user waits on progress until the provider 
 5. Buy as a batch with progress (**2** FullEnrich / **1** Claude)
 6. Primary vs secondary contact marking is supported
 
+### How the buy runs today (read 2026-09-28)
+
+- **Web: the modal.** The Bulk Contacts modal (`#bulkContactsModal` in `front/company/modal.blade.php`, script `public/js/modalScript.js`) opens from Address Book, list detail and route detail.
+  - **Counts:** from `company/getBulkContactsCompanies`, 10 companies a page, with one FullEnrich search per company. Companies with none get `company/getClaudeContactCount`, one Claude lookup per row.
+  - **First open:** on each page load, the modal first waits for 47 source logos, about 18 MB when they are not cached.
+- **Web: the buy.** Buy posts `company/buyContactsAsync`, which queues `BuyContactsBulkJob`. The job enriches **one contact at a time** (`Helper::redeemFullEnrichContact`): it sends a one-person request to FullEnrich’s bulk endpoint, then checks every 7 seconds, up to 45 checks.
+  - **Progress:** the saved count comes from `company/buyContactsProgress`, polled every 3 s by `public/js/bulk-buy-source-progress.js`.
+  - **Visibility:** that panel is hidden while the modal is open. The modal shows a timer bar that stops at 90% after 120 s.
+- **Mobile.** `BulkContactReview` calls `buyQueuedBulkContacts` (`App/utils/bulkContactProgress.js`). That sends one `buyContacts` request per contact, in sequence. Each request runs the same per-contact loop before it answers. The row updates as each one returns.
+- **Unused path.** `company/buyContactsV2` → `RedeemFullEnrichBulkJob` sends every contact in one FullEnrich request and saves them from the `contact_finished` webhook. No screen calls it. As written it has three problems:
+  - It does not charge the 1 credit for Claude contacts.
+  - Its credit helper, `applyCreditsForBulkRedeem`, has no Business Sales Agent branch.
+  - A retried webhook saves the contact and charges again.
+
+Fix before switching any screen to it.
+
 ## Wallet
 
 - `total_credit` / `used_credit` on a billing window (`date`)
@@ -78,12 +94,12 @@ Redeem can run in the background; the user waits on progress until the provider 
 
 - Never treat buy/fetch contacts as free.
 - FullEnrich buy = **2** credits; Claude buy = **1** credit; apply on **every** redeem path.
-- FullEnrich is async; wait for progress + webhook.
+- FullEnrich enrichment is async. The live web and mobile buys poll it per contact, every 7 s. The webhook path (`buyContactsV2`) is not wired to any screen.
 - BSA empty wallet → manager message, not Stripe.
 
 ## Code
 
-`CompanylController` buy/bulk/Claude, `RoutesController` fetch-on-map, `ClaudeContactFinderService`, `BuyContactsBulkJob`, `RedeemFullEnrichBulkJob`, FullEnrich webhooks, `UserCredit`, `UserContactsCredit`.
+`CompanylController` buy/bulk/Claude (`buyContacts`, `buyContactsAsync`, `buyContactsJobProgress`, `getBulkContactsCompanies`, `getClaudeContactCount`; `buyContactsV2` is unused), `RoutesController` fetch-on-map, `ClaudeContactFinderService`, `BuyContactsBulkJob`, `RedeemFullEnrichBulkJob`, FullEnrich webhooks, `UserCredit`, `UserContactsCredit`. The web modal is `public/js/modalScript.js` and `public/js/bulk-buy-source-progress.js`. Mobile is `App/utils/bulkContactProgress.js` and `bulkContactSelect.js`.
 
 ## Related
 
@@ -106,6 +122,7 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 | Mobile | Buy on `ContactsView` | `contacts/view.js` | Buy details (2 credits, 1 on the Claude/biz path) | `screen.contactsView.loadingB`; provider marks from `assets/images/mobile/fetchSources` | "No contacts found for this company." | "Failed to load contacts."; "We are trying to find a mobile number for you. Please try again." |
 | Mobile | Credits pill and Settings card | `customheader/index.js`, `dashboard/editstatus.js` · [Setting](<../screenshots/mobile-owner/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.37.23.png>) | Buy extra credits (opens web) | header fetch on mount | — | — |
 | Classic web | `/subscription` credits add-ons | feature-evidence 09 flows | Buy add-on | `#cover-spin` | — | Stripe error text |
+| Classic web | Bulk Contacts modal on `/company`, `/list/{id}`, `/route/view/{id}` | `front/company/modal.blade.php`, `public/js/modalScript.js`, `public/js/bulk-buy-source-progress.js` | Select Contacts, then buy | “Loading companies...”; row loader “Searching {source}…”; buy overlay “Aggregating contact data from multiple sources” and “You may exit this screen and contacts will load in the background”; sticky panel “Adding contacts”, “{n} of {total} saved” | “No companies found”; “No contacts found”; “No selected contacts yet. Select companies on the left and add contacts to cart.” | “Error loading companies. Please try again.”; “Error loading contact results. Please try again.”; “Please select at least one contact to purchase.”; “Insufficient credits, please subscribe to add credits.” |
 | Manager | Credit allocation on `/manager/salespeople/{id}` | [Edit salesperson](../screenshots/web-owner/Manager/Edit-Salesperson-TerriTool-09-15-2026_01_27_PM.png) | Allocate credits | "Loading…" | — | Toast on `#manager-toast-root` |
 
 Costs are the constants in `App/utils/contactBuyCredits.js`. Confirm with `AppConfirmModal` before any spend.

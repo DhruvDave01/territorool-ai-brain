@@ -1,6 +1,6 @@
 # Mobile components — props and call shapes
 
-Read 2026-09-22 from `TerriTool/App/components/`. When this page and the file disagree, the file wins. Screen files: [mobile screens](mobile-screens.md). Pixels: [mobile UI](../brains/mobile-ui.md).
+Read 2026-09-22 from `TerriTool/App/components/`. Voice pieces read 2026-09-29. When this page and the file disagree, the file wins. Screen files: [mobile screens](mobile-screens.md). Pixels: [mobile UI](../brains/mobile-ui.md).
 
 Every new logged-in screen is built from these five pieces in this order: `CustomHeader`, the curved body, content, `AppButton` for actions, `AppConfirmModal` for confirms, `CustomFooter` only if the screen is one of the six footer sections.
 
@@ -38,7 +38,7 @@ Class `PureComponent`. Fetches credits itself on mount with `API.get(GET_CREDIT_
 | `showBack` | `true` | Hide the arrow on a root screen |
 | `showRight` | `false` | Render `rightContent` |
 | `rightContent` | — | Node in the right slot. Use `HeaderIconButton` from the same folder (`name` is an Ionicons name). |
-| `leftContent` | — | Replaces the arrow |
+| `leftContent` | — | Replaces the arrow. `BasicRouteDetail` passes a back `HeaderIconButton` plus `VoiceHeaderButton` here, because share and edit fill the right slot. |
 | `showCredit` | `false` | Credits pill (Dashboard style) |
 | `subText` | — | Line under the title |
 | `titleStyle` | — | Override for the title only |
@@ -92,11 +92,31 @@ A delete confirm is `primaryTone="danger"` with `primaryLabel="Delete"`. A plain
 
 ## `CustomFooter` — `customfooter/index.js`
 
-Six image tabs. Pass `selectedIndex` 1–6 and the screen's `props` so it can navigate. Index 2 pushes `MultipleAIWaypoint` with `{ fromDashboard: true, latitude, longitude }`. There is no index 0. Dashboard and Find Leads render no footer.
+Six image tabs. Pass `selectedIndex` 1–6 and the screen's `props` so it can navigate. Index 2 pushes `AIFindLeadsChat` with `{ fromDashboard: true, latitude, longitude }`. There is no index 0. Dashboard and both Find Leads screens render no footer.
+
+`onVoiceScreen` (new 2026-09-29) is set only by `VoiceScreen` and `VoiceHistory` with `selectedIndex={4}`. Routes is lit, but tapping it still opens `Routes`, so voice keeps running. Without that prop, the footer renders `VoiceMiniBar` above the tabs while a voice session runs. It reports focus to `setFooterFocused` so the floating bar steps aside.
+
+## Voice pieces — `voice/VoiceParts.js`
+
+Function components. Each returns nothing when `VOICE_MODE_ENABLED` is false. They read the shared session through `useVoice()` (`App/voice/useVoice.js`). Behaviour and strings: [22 — Voice Mode](../features/22-Voice-Mode.md).
+
+| Export | Props | Mounted in |
+|---|---|---|
+| `VoiceMiniBarHost` | `navigationRef`, `children` | `App/App.js`, around `NavigationContainer`. On a screen without a focused footer it shows the mini-bar below the navigator and gives screens a bottom inset of 0. |
+| `VoiceMiniBar` | `navigation` | `CustomFooter`, and the host above |
+| `VoiceHeaderButton` | `navigation`, `routeId` | `BasicRouteDetail` (left slot), `ActiveRouteMap` (right slot). Also runs the “Start when I open a route” auto-start for the active route. |
+| `DriveWithVoiceRow` | `onPress` | `Dashboard`, first scroll row. Renders only while a route is active. |
+| `FirstRunSheet` | `visible`, `onClose`, `onTurnedOn` | `Dashboard`, `VoiceScreen`. A `react-native-modal` bottom sheet. The mic permission is asked on “Turn on Voice Mode”. |
+| `VoiceSettingsCard` | `navigation` | `EditStatus`, between the profile card and Tags |
+| `ActionButton` | `icon`, `label`, `variant`, `onPress`, `disabled`, `loading`, `testID` | The voice action bar. `AppButton` with an Ionicons icon, `minHeight` 52, radius 12. |
+| `Bubble` | `who` (`rep` / `agent`), `text`, `live` | Voice screen and history |
+| `MicBadge` | `size` | Dashboard row, first-run sheet |
+| `openVoice(navigation)` | — | Navigates to `VoiceScreen` with `{ start: true }` |
+| `setFooterFocused(footer, focused)` | — | Called by `CustomFooter` on focus and blur |
 
 ## Data and state
 
-- `API.post(url, formdata, props, signal, options)` and `API.get(url, props)` from `App/utils/API.js`. FormData only. Copy `formdata.append` keys from the sibling screen; the endpoint list is [API endpoints](../brains/api-endpoints.md).
+- `API.post(url, formdata, props, signal, options)` and `API.get(url, props)` from `App/utils/API.js`. FormData only. Copy `formdata.append` keys from the sibling screen; the endpoint list is [API endpoints](../brains/api-endpoints.md). The one exception is Voice Mode: `App/voice/voiceApi.js` sends JSON with `fetch` to `voice/session` and `voice/tool`.
 - Loader: `ActivityIndicator` with `testID="screen.<screenKey>.loading"`. Second loader on the same screen is `loadingB`.
 - Error toast: `Toast.show({ type: "error", text1: "…", visibilityTime: 4000, position: "top" })`. The shared string is "Oops! Something went wrong. Please check your internet connection or try again."
 - Empty copy per screen is on the feature page's Screens block, for example "No lists yet. Create one to get started." on Lists and "No Routes Found" on Routes.

@@ -14,6 +14,7 @@ One product. Browser, iOS, Android, and MCP read and write the same companies, c
 |---|---|---|
 | Any new or changed UI | [UI/UX Guardian](brains/ui-ux-guardian.md) | [Screenshot review](screenshots/REVIEW.md) and the matching UI brain |
 | Mobile screen or navigation | [Mobile code](brains/mobile-code.md) | [Mobile code review](code/mobile-review.md) |
+| Voice Mode screen, session, or card | [22 — Voice Mode](features/22-Voice-Mode.md) | [Mobile code](brains/mobile-code.md), then the [shipped stills](screenshots/mobile-owner/VoiceMode) |
 | Mobile chrome, type, color | [Mobile UI](brains/mobile-ui.md) | A still in [screenshots](screenshots/REVIEW.md) |
 | Laravel, Blade, manager React | [Web code](brains/web-code.md) | [Web code review](code/web-review.md) |
 | Web pixels | [Web design](brains/web-design.md) | The still for that stack |
@@ -36,7 +37,7 @@ Map of the six brains: [brains/README.md](brains/README.md). Product rules: [pro
 2. Copy the nearest shipped screen. Do not invent a new visual language.
 3. Classic web, manager portal, and Admin HQ are three stacks. Do not mix fonts, CSS, or components across them.
 4. `composer.lock` installs Laravel **5.3.31**. `composer.json` also mentions `^7.0`. Write PHP 7.2-compatible code. Do not use Laravel 8+ or PHP 8 syntax.
-5. Mobile posts are multipart FormData through `API.post`. Do not invent a JSON client.
+5. Mobile posts are multipart FormData through `API.post`. Do not invent a JSON client. The one exception is Voice Mode’s `App/voice/voiceApi.js`, which sends JSON to `voice/session` and `voice/tool`. Keep voice calls in that file.
 6. Search is free. Saving an AI lead costs 1 credit. Buying a contact costs 2 (name-only and email/phone) or 1 for the Claude/biz path. Manual add-contact is free.
 7. If the still and the filename disagree, the still wins.
 8. If this note and the live file disagree, the live file wins. The reviews name the files.

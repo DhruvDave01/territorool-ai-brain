@@ -46,13 +46,13 @@ Stills:
 
 ## 3. AI Find Leads
 
-- **From** — home tile or footer
-- **Do** — search, then confirm selected leads
-- **Copy** — Find Leads chrome. This screen has no footer
+- **From** — home tile or footer index 2. Both open `AIFindLeadsChat`
+- **Do** — drag the one circle over the area (1–10 miles), tap Confirm area, describe the businesses, then pick and save leads. “Type a city or ZIP instead” switches to a typed area on the same screen
+- **Copy** — the chat on `AIFindLeadsChat`, then the existing Search Leads / Selected Leads results. This screen has no footer
 - **Next** — the saved companies are in Address Book
-- **Stop** — search is free. Do not charge it. Do not save with the manual add-company action
+- **Stop** — search is free. Saving costs 1 credit per lead. Do not save with the manual add-company action. Since 2026-09-29 the map-circle search fails on the server (web commit `abe88426`). Typed city or ZIP still works. See [05 — Find Leads](../features/05-Find-Leads.md)
 
-Stills:
+Stills. These show the older city and ZIP form (`MultipleAIWaypoint`), which the chat can still switch to. There is no still of the chat yet:
 
 - [Find Leads](<../screenshots/mobile-owner/AIFindLeadsFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.42.05.png>)
 - [Same flow](<../screenshots/mobile-owner/AIFindLeadsFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.42.09.png>)
@@ -72,6 +72,24 @@ Stills:
 - [Routes, next frame](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.02.16.png>)
 - [Lists](<../screenshots/mobile-owner/List/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.32.png>)
 - [Lists, next frame](<../screenshots/mobile-owner/List/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.36.png>)
+
+## 4b. Find Contacts for a route or list (bulk)
+
+- **From** — route detail or list detail, the “Find Contacts” button
+- **Do** — the screen checks every stop (“Finding contacts · 0 of 4 stops”, “Checking FullEnrich…”). Tap View on a stop, tick people (the price sits on each person), then Review, then confirm
+- **Copy** — `Contact` (“Find Contacts”, “{route} · N stops”), then `BulkContactPeople` (the company and its address), then `BulkContactReview` (“Review”, “Credits are used only when you confirm.”)
+- **Next** — “Getting details for N contacts”, then “All N contacts ready”. The contacts appear under each company
+- **Stop** — nothing is charged until the rep confirms. A contact costs 2 credits, or 1 on the Claude path. Each contact is bought in its own request, one after another, so a large selection takes minutes. See [09 — Contact Enrichment](../features/09-Contact-Enrichment-Credits.md)
+
+Stills:
+
+- [Find Contacts, checking each stop](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.32.png>)
+- [Stops checked](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.36.png>)
+- [People at a stop](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.53.png>)
+- [Ticked, with the credit total](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.08.56.png>)
+- [Review](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.09.05.png>)
+- [Getting details](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.10.05.png>)
+- [All contacts ready](<../screenshots/mobile-owner/RouteFlow/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 20.13.18.png>)
 
 ## 5. Address Book and add company
 
@@ -101,6 +119,27 @@ Stills:
 - [Settings](<../screenshots/mobile-owner/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.37.23.png>)
 - [Settings, next frame](<../screenshots/mobile-owner/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.37.29.png>)
 - [Calendar, if the requirement is activity](<../screenshots/mobile-owner/ActivityCalendar/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.40.14.png>)
+
+## 7. Voice Mode (staging and dev builds)
+
+- **From** — the home row “Drive with Voice Mode” (only while a route is active), the mic in the route-detail or map header, or the Voice Mode card in Settings
+- **Do** — the first time, “Turn on Voice Mode” on the sheet “Voice for the drive” (the mic permission is asked here). Then talk: next stop, last stop, “I went in…”, log or edit an activity, notes, saved companies, lists, routes. Pause keeps the session. End closes it.
+- **Copy** — the shipped VoiceMode stills: state card, transcript, section cards, End with Pause. Footer index 4 with Routes lit. The mini-bar on other screens.
+- **Next** — a card opens `WaypointDetail`, `ViewCompany`, `BasicRouteDetail`, or `AIFindLeadsChat`, and voice keeps running. The history button opens “Voice history”.
+- **Stop** — no push-to-talk and no text box. Voice does not find new leads, look up new contacts, delete, edit routes or lists, share, or spend credits. It hands off to the app instead.
+
+Stills:
+
+- [Listening, refusal hand-off, last stop](../screenshots/mobile-owner/VoiceMode/04-mobile-answers.jpg)
+- [Speaking, next stop](../screenshots/mobile-owner/VoiceMode/09-route-switch-result.jpg)
+- [Check before repeating](../screenshots/mobile-owner/VoiceMode/12-unknown-write.jpg)
+- [Connection lost: End / Reconnect](../screenshots/mobile-owner/VoiceMode/10-connection-error.jpg)
+- [Voice history](../screenshots/mobile-owner/VoiceMode/16-fixed-clean-history.jpg) · [empty](../screenshots/mobile-owner/VoiceMode/02-history-empty.jpg)
+- [Settings card](../screenshots/mobile-owner/VoiceMode/14-settings-enabled.jpg)
+- [Route detail with the mic and the mini-bar](../screenshots/mobile-owner/VoiceMode/15-auto-start.jpg)
+- No shipped still yet for the home row or the first-run sheet. Use the [22 — Voice Mode](../features/22-Voice-Mode.md) renders and strings.
+
+Rep-facing journeys and example phrases: [Voice Mode guide](../features/voice-mode-guide-2026-09-29.pdf) (pages 3–5, six journeys) and its [quick-start sheet](../features/voice-mode-guide-2026-09-29-quick-start.jpg). They are for help and onboarding copy, not pixels. Where they differ from the app is listed on the feature page.
 
 ## New requirement
 

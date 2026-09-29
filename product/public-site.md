@@ -51,17 +51,17 @@ Cube only, small export: [territool-mark-blue.png](../assets/logos/territool-mar
 
 In the app, the cube is [TerriTool_logo_NEW.jpg](../assets/images/mobile/TerriTool_logo_NEW.jpg) on white and [TT_NO_BG.png](../assets/images/mobile/TT_NO_BG.png) on black. Folder: [images/mobile](../assets/images/mobile/README.md).
 
-![Black wordmark, for a light background](../assets/logos/territool-wordmark-black.png)
+![The file named black: white letters on a transparent background](../assets/logos/territool-wordmark-black.png)
 
-Black lockup: [territool-wordmark-black.png](../assets/logos/territool-wordmark-black.png).
+File named black: [territool-wordmark-black.png](../assets/logos/territool-wordmark-black.png). The letters are white on a transparent background, so it disappears on a white page. There is no dark lockup for light backgrounds.
 
 ![Blue wordmark on black](../assets/logos/territool-wordmark-blue.png)
 
 Blue lockup, black canvas: [territool-wordmark-blue.png](../assets/logos/territool-wordmark-blue.png).
 
-![White wordmark on black](../assets/logos/territool-wordmark-white.png)
+![White wordmark, transparent background](../assets/logos/territool-wordmark-white.png)
 
-White lockup, black canvas: [territool-wordmark-white.png](../assets/logos/territool-wordmark-white.png). Use this on a blue or black bar. The file includes the black canvas.
+White lockup on a transparent background: [territool-wordmark-white.png](../assets/logos/territool-wordmark-white.png). Use this on a blue or black bar. The file has no canvas of its own.
 
 ## Do not copy into the product app
 

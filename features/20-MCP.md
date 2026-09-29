@@ -10,6 +10,7 @@ This module used to be split across `05-MCP/` and `08-Example-Conversations/`; i
 
 - **Sales Agent / Business Sales Agent** — through the sales-rep MCP (`app/UserMcp`, published as `user-territool-app`) and the Find MCP (`app/FindMcp`).
 - **Admin** — through a separate Admin MCP (`app/AdminMcp`) that is HQ-style lookup only; it is not the customer catalog and never exposes `/hq/*` as sales-rep tools.
+- **Mobile Voice Mode** (staging and dev builds, 2026-09-29) is a voice client on the phone. It does not call these MCP servers. The phone sends each tool call to a voice server (`voice/tool`). Today that is the reference demo at `VOICE_DEMO_URL`, which runs 22 whitelisted tools against the v2 API as the rep. The planned Laravel `voice/tool` would run the `app/UserMcp/Services/Tools` code. See [22 — Voice Mode](22-Voice-Mode.md).
 - **In-app custom MCP connectors** (Settings → MCP Chat / MCP Sync) are a different thing: the *user* connects an external MCP server to TerriTool. That lives in 13-CRM-Integrations / 14-Settings-Profile, not here.
 
 ## The three servers
@@ -73,7 +74,7 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 |---|---|---|---|
 | Classic web | MCP connections on `/settings` | feature-evidence 20 flows | Connect, refresh tools |
 
-No mobile screen. Chat clients call the MCP servers named in [API](../brains/api.md).
+Chat clients call the MCP servers named in [API](../brains/api.md). The only mobile agent surface is Voice Mode (staging and dev builds): [22 — Voice Mode](22-Voice-Mode.md).
 
 ## Screenshots in this brain
 

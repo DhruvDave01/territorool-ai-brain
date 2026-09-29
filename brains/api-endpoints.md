@@ -119,7 +119,7 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 |---|---|---|---|---|---|
 | `aiLeadGoogleSearch` | POST | `CompanyController@AILeadGoogleSearch` | jwt | `URL_GET_AI_COMPANIES_LIST` |  |
 | `getAILeads` | POST | `CompanyController@getAILeads` | jwt | `URL_GET_AI_COMPANIES` |  |
-| `getAILeadsV2` | POST | `CompanyController@getAILeadsV2` | jwt | `URL_GET_AI_COMPANIES_V2` | 0 |
+| `getAILeadsV2` | POST | `CompanyController@getAILeadsV2` | jwt | `URL_GET_AI_COMPANIES_V2` | 0. Since web commit `abe88426` (2026-09-29), a request with `radius_miles` fails. See [API](api.md). |
 | `getAiLeadData` | GET | `CompanyController@getAiLeadData` | jwt | `URL_GET_AI_LEAD_DATA` | 0 |
 | `getTop50AILeads` | POST | `CompanyController@getTop50AILeads` | jwt | `URL_GET_TOP50_AI_COMPANIES` |  |
 | `getYelpLeads` | POST | `CompanyController@getYelpLeads` | jwt |  |  |
@@ -221,5 +221,9 @@ These exports exist in `App/config/index.js` but no v2 route matches. Do not cal
 | `URL_RE_ROUTE` | `routeRegenerate` — prefix of `routeRegenerate/{id}`, so the app appends the id |
 | `URL_SEND_REFERRAL_INVITE` | `sendReferralInvite` |
 | `URL_USER_FORGOT` | `forgotPassword` |
+| `URL_VOICE_SESSION` | `voice/session` — GET, Voice Mode key |
+| `URL_VOICE_TOOL` | `voice/tool` — POST JSON, one tool call |
+
+The two voice constants are not Laravel routes yet. Staging returned 404 on 2026-09-28. In staging and dev builds, `App/voice/voiceApi.js` sends them to the reference voice server (`VOICE_DEMO_URL`) with JSON over `fetch`, not `API.post`. Shapes: [API](api.md#voice-mode-mobile).
 
 Web-link constants that are not API calls: `DYNAMIC_LOGIN` (`mobilelogin/`), `DYNAMIC_CREDIT_UPGRADE_LOGIN` (`mobilelogin/credits/`), `DYNAMIC_REFERRAL_LOGIN` (`mobilelogin/referral/`). They open the web app in Safari with the JWT, for plan and credit pages.

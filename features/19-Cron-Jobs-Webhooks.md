@@ -37,6 +37,15 @@ HTTP cron URLs are currently unauthenticated — do not add destructive new cron
 
 A route stays **processing** until generate jobs finish.
 
+## Queue worker (read 2026-09-28)
+
+- **One queue:** the local `.env` has `QUEUE_DRIVER=database`. `config/queue.php` `database` uses queue `default` and `retry_after` 900. No job sets `onQueue`, so route generation, route PDFs, bulk contact buys, emails and, outside local, Google Sheets all share that one queue.
+- **Job limits are ignored:** Laravel 5.3 reads only the worker’s `--tries` and `--timeout`. Job properties such as `BuyContactsBulkJob::$tries = 1` and `$timeout = 7200` do nothing.
+- **Reruns after 15 minutes:** a job still reserved after `retry_after` becomes available again. A second worker would run it a second time unless workers use `--tries=1`.
+- **Killed after about a minute:** `queue:work` defaults to `--timeout=60`. As a daemon with pcntl loaded, it kills a job after about 63 seconds. That job is then retried after `retry_after`.
+- **Worker command:** the `package.json` script `queue` is `php artisan queue:listen --tries=3 --timeout=0`. The production worker command is not in the repo. Check it before adding workers or long jobs.
+- **FullEnrich webhooks:** `fullenrich-webhook/bulk/{jobId}` returns 200 on its first line, and the rest of that method never runs. `fullenrich-webhook/bulk/{jobId}/contact` saves one contact and charges for it. It is not idempotent.
+
 ## Inbound provider callbacks
 
 - FullEnrich single company and bulk job/contact (live fetch, **2 credits**)
@@ -47,7 +56,7 @@ TikTok ads events are marketing, not a user module.
 
 ## Rules
 
-- Credit jobs must be idempotent.
+- Credit jobs must be idempotent. The FullEnrich `contact_finished` webhook is not today: a retried callback saves and charges again.
 - FullEnrich callbacks must match bulk-job progress keys.
 
 ## Code

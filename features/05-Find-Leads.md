@@ -10,6 +10,29 @@ Sales Agent, Business Sales Agent. Sales Agents with no plan at all must subscri
 
 ## AI Find Leads
 
+### Shipped chat, reviewed 2026-09-28
+
+The Dashboard tile and footer index 2 open `AIFindLeadsChat` (`findLeads/aiFindLeadsChat.js`). `MultipleAIWaypoint` (`aiFindLeads.js`) stays registered. The chat link “Type a city or ZIP instead” switches to a city or ZIP field on that same screen. “Select on the map instead” returns to the circle. Neither link deletes the old screen.
+
+One circle. Default radius 1 mile. Drag inside to move. Drag a border handle to resize. The radius is clamped from 1 to 10 miles. The badge reads “Search area · N.N mi”. Confirm area reverse-geocodes the center. If no city comes back, the toast is “No matching location found”.
+
+The first line is “Hi {first name}, where do you want to find leads today? Drag the circle over your search area.” After confirm, the next line is “Got it. What kinds of businesses should I find there? You can also tell me what to skip.” Search still posts `getAILeadsV2`. A map circle also sends `lat`, `lng`, and `radius_miles`. Search stays free. Save stays `saveAILeads` at 1 credit each. Results stay on Search Leads / Selected Leads. This screen has no footer.
+
+**Broken since 2026-09-29.** Web commit `abe88426` reverted the web chat, and with it removed the server code that read `lat` and `lng`. `AILeadFinderController` now leaves `$territoryGeo` unset. Mobile `getAILeadsV2` runs that controller, so every map-circle search that sends `radius_miles` fails. With PHP notices suppressed, the reply is 422 “Could not map "{city}" to a map location…”. “Type a city or ZIP instead” sends no radius and still works. Detail: [live code 2026-09-29](../reviews/live-code-2026-09-29.md).
+
+### Classic web chat — reverted 2026-09-29
+
+Web commit `abe88426` (“ai find leads chat UI - revert”) deleted `front/route/ai_find_leads_chat.blade.php` and its scripts file. The Search Multiple tab of `/findleads` is the older city or ZIP form again, headed “Set your selling territory — we’ll do the rest.” The mobile chat above is unchanged.
+
+What the reverted web chat had, kept in case it returns:
+
+- **Layout:** the same three beats as the mobile chat, on the Search Multiple tab. The map was on the left and the chat took the right 38%.
+- **Step 1:** titled “Step 1 — Circle your search area”, with the button “Confirm area”. The legend said the border resizes from 1.0 mi to 10 mi.
+- **Fields:** city and ZIP stayed on the chat column, ZIP max 8 characters.
+- **Step 3:** showed the existing results table.
+
+The three renders at 390 wide show that removed chat, not the live page: [web 390 step 1](find-leads-web-390-1-circle-area.png), [web 390 step 2](find-leads-web-390-2-describe.png), [web 390 step 3](find-leads-web-390-3-results.png). Do not copy them as the live web page.
+
 ### What the user enters
 
 - Territory: **city** or **ZIP** (ZIP max 8 characters)

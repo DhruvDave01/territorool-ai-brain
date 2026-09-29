@@ -2,6 +2,8 @@
 
 Paste everything below the line into the coding agent. It builds the same module on both stacks and wires it into the Dashboard. Written 2026-09-23 from the six stills in this folder.
 
+Status 2026-09-29: the mobile chat shipped (`AIFindLeadsChat`). The web chat shipped, then was reverted by web commit `abe88426`. That revert also broke mobile map-circle searches. See [05 — Find Leads](05-Find-Leads.md).
+
 ---
 
 You are building one TerriTool module on two surfaces: the React Native app and the classic Laravel web app. The module is **AI Find Leads** as a chat flow with one map circle. Same steps, same strings, same behavior, same credit rules on both surfaces. Only the chrome differs, and that chrome is copied from the shipped screens.

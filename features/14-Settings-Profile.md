@@ -46,6 +46,17 @@ JSON on the user (onboarding, hide tour, AI defaults). Can be updated from Setti
 
 Connect external AI tools, refresh their tool list, chat, OAuth callback. Stored per user. That is **in-app custom MCP**, not native Salesforce. Customer Claude/Cursor tools and credit rules: 20-MCP, api-surfaces.md.
 
+### Voice Mode (mobile, staging and dev builds)
+
+A card in `EditStatus`, between the profile card and Tags (`VoiceSettingsCard`):
+
+- **“Voice Mode”:** an On / Off pill. Turning it on opens `VoiceScreen` with the first-run sheet. Off ends any session.
+- **“Keep listening with the screen off”:** default on.
+- **“Start when I open a route”:** default off.
+- **“Voice history”:** “500 latest turns · this phone only”, with Clear.
+
+Settings live on the phone (AsyncStorage `voice.settings.v1`), not on the server. Still: [Settings card](../screenshots/mobile-owner/VoiceMode/14-settings-enabled.jpg). See [22 — Voice Mode](22-Voice-Mode.md).
+
 ## Rules
 
 - Never trust a user id in the URL for self-settings.
@@ -75,12 +86,13 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 | Surface | Screen | File / still | Primary action | Loading | Empty | Error |
 |---|---|---|---|---|---|---|
 | Mobile | `EditStatus` (Settings) | `dashboard/editstatus.js`, styles `editstatus.styles.js` · [Setting](<../screenshots/mobile-owner/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.37.23.png>) | Edit Status (Tags); Upgrade; Buy extra credits | `screen.editStatus.loading` | Tags line reads "0 status tags · Tap Edit Status to change" | HubSpot row `screen.editStatus.hubspotSyncErrorRow`; "Oops! Something went wrong. Please check your internet connection or try again." (toast) |
+| Mobile | Voice Mode card (staging and dev builds) | `voice/VoiceParts.js` `VoiceSettingsCard` · [Settings card](../screenshots/mobile-owner/VoiceMode/14-settings-enabled.jpg) | On / Off; Keep listening; Start when I open a route; Clear history | — | “500 latest turns · this phone only” | Clear asks “Clear voice history?” / “This removes the Voice Mode chat saved on this phone.” |
 | Mobile | Edit Status sheet | same file · [Setting](<../screenshots/mobile-owner/Setting/Simulator Screenshot - iPhone 17 Pro Max - 2026-09-15 at 19.37.50.png>) | Rename a tag, change a color, add | `screen.editStatus.rateUsLoading` on rate-us | — | Invalid hex rejected |
 | Classic web | `/settings` | feature-evidence 14 (`TerriTool-09-15-2026_11_08_AM.png`) | Save profile, statuses, categories, stages, CRM | `#cover-spin` | — | Laravel validation |
 | Manager | `/manager/settings` | [Manager settings](../screenshots/web-owner/Manager/Settings-TerriTool-09-15-2026_01_30_PM.png) | Save | "Loading…" | — | Toast on `#manager-toast-root` |
 | HQ | Edit user | [Admin](../screenshots/web-owner/Admin/TerriTool-Admin-09-15-2026_01_35_PM.png) | Save | Backpack | — | Backpack validation |
 
-What lives where: the phone shows profile, credits, subscription, and Tags only. Categories, contact stages, CRM connections, preferences, and MCP connections are web-only on `/settings` (classic) and `/manager/settings` (manager). A mobile mock that adds a CRM panel is wrong.
+What lives where: the phone shows profile, credits, subscription, the Voice Mode card (staging and dev builds only), and Tags. Categories, contact stages, CRM connections, preferences, and MCP connections are web-only on `/settings` (classic) and `/manager/settings` (manager). A mobile mock that adds a CRM panel is wrong.
 
 Generated picture for the totals request: [settings-mobile-totals.png](settings-mobile-totals.png) (Companies, Routes, Lists card between the profile card and Tags).
 

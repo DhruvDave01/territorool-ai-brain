@@ -10,7 +10,7 @@ The requested UI must feel like the existing product. The goal is not a cleaner 
 
 1. Name the surface: mobile, classic web, manager, or HQ.
 2. Open the still for that surface in [the screenshot review](../screenshots/REVIEW.md).
-3. Open the sibling screen in the repo. [Mobile screens](../code/mobile-screens.md) names the file for each of the 46 screens; [mobile components](../code/mobile-components.md) has the props.
+3. Open the sibling screen in the repo. [Mobile screens](../code/mobile-screens.md) names the file for each of the 52 screens; [mobile components](../code/mobile-components.md) has the props.
 4. Reuse header, button, modal, list, and empty state from that sibling.
 5. Write the consistency report below before drawing or coding. It is short. It stops an inferred token or an unknown string from shipping as fact.
 6. Check [the design gate](../gates/design-gate.md) before calling the screen done.

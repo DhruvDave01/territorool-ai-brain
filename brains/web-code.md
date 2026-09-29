@@ -13,7 +13,7 @@ Reviewed 2026-09-22 against `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_
 | Company web UI | `app/Http/Controllers/CompanylController.php` — the extra **l** is the live class name. |
 | Mobile JSON | `app/Api/V2/Controllers/` and `routes/api.php` inside `$api->version('v2')`. JWT group middleware is `jwt.refresh`. The v1 group is commented. Do not revive it. |
 | Helpers | `app/Helpers/helpers.php` (`App\Helpers\Helper`) is not `app/Globals/Helper.php` (`App\Globals\Helper`). |
-| Classic AJAX | `FormData` with `contentType: false` and `processData: false`. |
+| Classic AJAX | `FormData` with `contentType: false` and `processData: false`. The Search Multiple tab of `/findleads` is the older city or ZIP form. The chat include was reverted on 2026-09-29 (`abe88426`). |
 | Tables | Address Book and Find Leads use jqxGrid. Route and list index pages use DataTables. Match the sibling page. |
 | Manager | `routes/web.php` prefix `manager`, middleware `web`, `auth`, `manager.only`, namespace `Manager`. React islands in `resources/manager-portal/`, entry `main.jsx`. |
 | HQ | `routes/web.php` prefix `hq`, middleware `web`, `role`, namespace `Admin`. Backpack. Not the manager portal. |

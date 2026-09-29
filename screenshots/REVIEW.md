@@ -4,7 +4,7 @@ Open a still before generating UI. The image in this folder is the spec. The fil
 
 When the job is to generate a screen, the handoff is a PNG of that screen. Rules: [UI/UX Guardian](../brains/ui-ux-guardian.md). Do not hand back an HTML page.
 
-The owner set below is 233 stills across 10 flows, reviewed as a set on 2026-09-15, plus the 2026-09-22 Dashboard still. Each flow folder’s first clean frame is the one to open. Frames that are permission sheets, loaders, or failures are called out in the filename table.
+The owner set below is 233 stills across 10 flows, reviewed as a set on 2026-09-15, plus the 2026-09-22 Dashboard still, plus 10 Voice Mode stills from the 2026-09-28 QA run. Each flow folder’s first clean frame is the one to open. Frames that are permission sheets, loaders, or failures are called out in the filename table.
 
 Method:
 
@@ -31,6 +31,9 @@ iPhone 17 Pro Max simulator, 2026-09-15. 233 stills. Folder name is the flow. Th
 | Routes | 81 | Route library, create, detail, map | [RouteFlow](mobile-owner/RouteFlow) |
 | Lists | 42 | List library and detail | [List](mobile-owner/List) |
 | Settings | 7 | Settings, plan, credits | [Setting](mobile-owner/Setting) |
+| Voice Mode | 10 | Voice screen states and cards, Voice history, the Settings card, the mini-bar on route detail | [VoiceMode](mobile-owner/VoiceMode) |
+
+Voice Mode stills come from `TerriTool/qa/voice-mode-2026-09-28/evidence/`: same simulator, staging, a dev build, 368 × 800. The file names say what each shows. The “Refreshing…” strip at the top of several is the dev build’s refresh banner. Do not draw it. In `10-connection-error` that strip covers the state card. There is no still yet for the Dashboard row or the first-run sheet. For those, use the renders listed on [22 — Voice Mode](../features/22-Voice-Mode.md).
 
 Home chrome to copy is the 2026-09-22 1:45 still: black bezel, small island in the status bar, credits pill, six tiles, empty Upcoming, and “Tue, Sep 22 · 8:15 AM PT”. That still’s banner still says “Want 20 more credits?”. The live banner is “Want 50 more credits?” with “G2: 30 · Product Hunt: 20”, and it opens the review sheet: [ready](mobile-owner/Dashboard/review-rewards-ready.png), [both pending](mobile-owner/Dashboard/review-rewards-pending.png), [G2 verified](mobile-owner/Dashboard/review-rewards-g2-verified.png). The island does not cover the header. The 12:56 still is the same home a few minutes earlier. The 19.36.33 still is that home with activity rows. The 19.36.28 still is the OS location prompt. The 19.37.00 still shows “Invalid Date PT”. That string is a bug.
 

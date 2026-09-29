@@ -84,6 +84,36 @@ Opening a review posts `invite-user` with FormData `type` `g2` or `ph`. Status `
 
 Tile labels on this screen use the system face at the weights in `dashboard.styles.js`. DIN stays for screens that actually set `dinBold`.
 
+## Voice Mode
+
+Shipped 2026-09-29 in staging and dev builds. Stills: [screenshots/mobile-owner/VoiceMode](../screenshots/mobile-owner/VoiceMode). Styles: `App/components/voice/voice.styles.js`. Behaviour and strings: [22 — Voice Mode](../features/22-Voice-Mode.md).
+
+| Part | What ships |
+|---|---|
+| Chrome | `CustomHeader` (“Voice Mode” / “Voice history”), the curved body, and footer index 4 with Routes lit. Same header and footer as route detail. |
+| State card | White card, radius 16, 1 px `border`, faint shadow, padding 14, min height 112. Orb 58 on the left with one to three rings. Pill and hint on the right. |
+| Pill | Round, a dot plus the state word, on the tone’s pill colour |
+| Bubbles | Radius 14, max width 84%, text 18 dinLight. Rep: primary blue with white text, on the right. Assistant: white with a `border` hairline, on the left, with a `sparkles` avatar. A live line ends in a caret. |
+| Section labels | 13 dinBold, grey `#6B7280`, letter spacing 0.6, uppercase: NEXT STOP, LOGGED, ACTIVITIES, CHECK BEFORE REPEATING. The right label reads, for example, “1 OF 2 LEFT”. |
+| Stop row | `BASIC_ROUTE_COMPANY_ROW` from route detail, compact. The visited badge is a green check. |
+| Tool chip | `#EEF0F3`, radius 8, the tool name, then a ✓ or ✗ and the seconds |
+| Outline button | 1.5 px primary border, radius 10, min height 40, white fill (“Open”, “Clear”) |
+| Action bar | `ActionButton` over `AppButton`. End is `danger` `#CF5B51`. Pause, Resume and Reconnect are `primary`. Min height 52, radius 12, icon before the label. |
+| Mini-bar | Primary blue, radius 14. A 10 px state dot, “Voice on · {state}” in 17 dinBold white, “Next: …” in 14 dinLight at 85% white. A pause button on a 16% white square, then a chevron. Below the navigator it sits on a `#F6F7FB` strip. |
+| Lost-write card | `#FFF6F5` fill, `#F3B4B0` border, radius 16, a `wifi-off` icon, and an outline button |
+
+Tones (`TONES`), one set per state:
+
+| Tone | Fill | Ring | Pill | Ink | States |
+|---|---|---|---|---|---|
+| blue | `#124ac6` | `#BFD0F5` | `#E0E8FA` | `#124ac6` | Connecting, Thinking, Speaking; the Listening orb fill |
+| teal | `ttGreen` `#12AA9D` | `#9FDDD7` | `#DDF3F1` | `#0B7A71` | Listening ring and pill, Hearing you, the live mini-bar dot, the Settings “On” pill |
+| amber | `#124ac6` | `#F5A623` | `#FDF0D5` | `#9A5B00` | Working |
+| grey | `#6B7280` | `#D1D5DB` | `#EEF0F3` | `#4B5563` | Off, the Paused orb, the paused dot, the Settings “Off” pill |
+| red | `danger` `#E94A5D` | `#F5B8BF` | `#FDE3E5` | `#B42331` | Connection lost, the Paused pill |
+
+Do not recolor these to one teal. The teal here is `ttGreen`, which the tokens table above keeps separate from `primaryDark`.
+
 ## Copy from
 
 | New thing | Copy |
@@ -93,5 +123,6 @@ Tile labels on this screen use the system face at the weights in `dashboard.styl
 | Confirm | An existing `AppConfirmModal` caller |
 | Button | The `AppButton` variant already on that screen |
 | Map | `activeroutemap` or `findLeads`. Do not recolor map circles to one teal. |
+| Voice UI (orb, bubbles, cards, mini-bar) | `App/components/voice/` and the [VoiceMode stills](../screenshots/mobile-owner/VoiceMode). Where the 2026-09-28 renders in `features/` differ, the stills win. |
 
 Fonts, icons, images, and logos for new art are in [assets/fonts](../assets/fonts), [assets/icons](../assets/icons), [assets/images/mobile](../assets/images/mobile/README.md), and [assets/logos](../assets/logos/README.md). The login and header mark is `TerriTool_logo_NEW.jpg`. The same cube on black is `TT_NO_BG.png`. Font files in `App/assets/fonts` are `DIN-Condensed-Bold.ttf`, `DIN-Condensed-Regular.ttf`, `Inter-Regular.ttf`, `Inter-Medium.ttf`. Only the two DIN files are referenced from JS. Do not pull a Google Font or an icon CDN, and do not redraw the cube.
