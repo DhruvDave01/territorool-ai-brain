@@ -36,6 +36,10 @@ Sales Agent, Business Sales Agent, from Settings.
 - Sync contacts
 - Sync companies (geocoded into cities)
 
+## Google Calendar (not a CRM)
+
+A one-way push of Meetings and Appointments to the rep’s Google Calendar, started from the dashboard Activity panel, not from Settings. It does not use the mapping, sync-detail or failure tables. Web on `master`; mobile on `TT_80` only. Page: [23 — Calendar Sync](23-Calendar-Sync.md).
+
 ## Rules
 
 - After HubSpot connect, always mapping first if it is not done.
@@ -49,7 +53,7 @@ Sales Agent, Business Sales Agent, from Settings.
 
 ## Related
 
-**Modules** — 02-Dashboard, 03-Company-AddressBook, 04-Contacts, 10-Bulk-Upload, 14-Settings-Profile, 19-Cron-Jobs-Webhooks
+**Modules** — 02-Dashboard, 03-Company-AddressBook, 04-Contacts, 10-Bulk-Upload, 14-Settings-Profile, 19-Cron-Jobs-Webhooks, 23-Calendar-Sync
 
 **This feature** — Use cases, Flows, Evidence
 
@@ -66,7 +70,7 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 | Classic web | CRM panel on `/settings` | feature-evidence 13 flows | Connect, sync | `#cover-spin` | Not connected | Sync error list |
 | Mobile | HubSpot error row on Settings | `dashboard/editstatus.js`, `screen.editStatus.hubspotSyncErrorRow` | Fix or delete the failed company | — | Row hidden | Row text from `hubspot-sync-error-list` |
 
-Connecting a CRM is web-only. The phone only surfaces sync errors.
+Connecting a CRM is web-only. Once HubSpot is connected, the phone’s Settings shows a “HubSpot Sync” card whose “Sync” button opens a modal with “Sync Contacts”, “Sync Companies” and “Sync Both” and, when `hubspot-last-sync` reports `is_hubspot_sync_error`, the error row (`dashboard/editstatus.js:2470-2506`, `:3078`, `:3117-3165`, since `c9f95605`, also on `Production`). On `TT_80`, Voice Mode’s `sync_crm` also starts a HubSpot sync ([22 — Voice Mode](22-Voice-Mode.md)). Read against `TT_80` `daf50eeb` on 2026-11-02 ([live code, 2026-11-02](../reviews/live-code-2026-11-02.md)).
 
 ## Screenshots in this brain
 

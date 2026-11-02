@@ -2,7 +2,7 @@
 
 Paste everything below the line into the coding agent. It builds the same module on both stacks and wires it into the Dashboard. Written 2026-09-23 from the six stills in this folder.
 
-Status 2026-09-29: the mobile chat shipped (`AIFindLeadsChat`). The web chat shipped, then was reverted by web commit `abe88426`. That revert also broke mobile map-circle searches. See [05 — Find Leads](05-Find-Leads.md).
+Status 2026-11-02: both chats are gone. The web chat was reverted by web commit `abe88426` on 29 September, and mobile commit `5865546a` deleted `AIFindLeadsChat` on 30 September (it is in the store build). Both apps use the older multiple-waypoint form again (`MultipleAIWaypoint` on mobile). This prompt is history, not a spec. See [05 — Find Leads](05-Find-Leads.md) and [live code, 2026-11-02](../reviews/live-code-2026-11-02.md)..
 
 ---
 

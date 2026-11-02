@@ -15,5 +15,6 @@ Run this before calling a new or changed screen done. Rules: [UI/UX Guardian](..
 | Footer | Mobile footer is absent on Dashboard and Find Leads |
 | States | Loading, empty, and error exist. The strings come from the Screens block on the feature page, not from memory |
 | Credits | Visible cost matches [product overview](../product/overview.md) or the control does not spend credits |
+| Reads as TerriTool | None of the generic tells in the [draft review](../methods/draft-review.md) is present. Someone who knows the product would not call the screen generic |
 | Assets | Fonts, icons, and images come from [fonts](../assets/fonts), [icons](../assets/icons), and [mobile images](../assets/images/mobile/README.md), not a CDN |
 | Usability | Mobile: every tappable has `accessibilityLabel` and `accessibilityRole`, a minimum height of 48 (44 with `hitSlop`), and text comes from `theme.typography` so it scales. Web: the changed control works from the keyboard, shows focus, and the page still does the job at 390 wide. Every failure has a way back: the error copy from the Screens block plus a retry or a back control |

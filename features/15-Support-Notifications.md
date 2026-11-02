@@ -23,10 +23,15 @@ Report Bug uses the same create path.
 - Inbox of route-ready and system messages
 - Mark read / remove
 - New-release notice and app version details
-- Push via FCM when a device is registered
+- Push via FCM when a device is registered. In the foreground the app shows the push itself through `@notifee/react-native`.
+- Local device notifications, not FCM: `showLocalContactNotification` (`App/utils/FCMHelper.js:206-247`) fires when contacts are saved. On TT_80 Voice Mode also uses it for the HubSpot sync result, titled “CRM sync finished” or “CRM sync failed” (`App/voice/VoiceSession.js:129-152`). It never asks for permission; on iOS it shows only if notifications are already allowed.
 - Route-ready cron also writes these messages
 
 Polling unread items marks them read so toasts do not repeat.
+
+Local contact notifications by branch. Production (`68fbd1ff`) repeats the in-app success text from `CongContact` and `bizContacts`, or “All contacts saved” after a bulk buy. TT_80 (`7e8984dd`) sends one notification per company after a bulk buy, titled with the company name: “1 contact downloaded” or “{n} contacts downloaded” (`route/contact/review.js:191-203`). `CongContact` does the same when it knows the count (`route/congContact/index.js:1466-1474`).
+
+New-contact badge, TT_80 only (`7e8984dd`): the same bulk buy adds “+{n} New Contact” to that company's row on route detail and list detail. Counts are kept per company in AsyncStorage key `tt_new_contact_badges` (`App/utils/newContactBadge.js:3`) and cleared when the rep opens that stop. Source: [live code 2026-11-02](../reviews/live-code-2026-11-02.md).
 
 ## Email
 
@@ -39,7 +44,7 @@ Invite/activation, appointment, welcome/onboarding, trial nudge, support replies
 
 ## Code
 
-`SupportController`, Admin support, `MailController`, `SupportTicket`, FCM / `userdevices`.
+`SupportController`, Admin support, `MailController`, `SupportTicket`, FCM / `userdevices`. Mobile: `App/utils/FCMHelper.js`, `App/utils/newContactBadge.js`.
 
 ## Related
 
@@ -53,7 +58,7 @@ Invite/activation, appointment, welcome/onboarding, trial nudge, support replies
 
 ## Screens
 
-Per surface. "File" is under `TerriTool/App/components/` for mobile; the full map is [mobile screens](../code/mobile-screens.md). Strings are copied from code on 2026-09-22; a loading cell that reads `screen.x.loading` is the `testID` on that screen's `ActivityIndicator`. Copy these strings; do not write new ones.
+Per surface. "File" is under `TerriTool/App/components/` for mobile; the full map is [mobile screens](../code/mobile-screens.md). Strings are copied from code on 2026-09-22, and the mobile strings were checked again against TT_80 on 2026-11-02 ([live code 2026-11-02](../reviews/live-code-2026-11-02.md)); a loading cell that reads `screen.x.loading` is the `testID` on that screen's `ActivityIndicator`. Copy these strings; do not write new ones.
 
 | Surface | Screen | File / still | Primary action | Loading | Empty | Error |
 |---|---|---|---|---|---|---|

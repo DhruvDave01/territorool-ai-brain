@@ -1,6 +1,6 @@
 # Web code
 
-Reviewed 2026-09-22 against `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool`. File-level notes: [code/web-review.md](../code/web-review.md). Pixels: [web design](web-design.md). HTTP: [API](api.md).
+Reviewed 2026-09-22 against `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool`, and again on 2026-11-02 against `master` `d3f75449` (production) and `beta_react` `929f0c7f` (development) ([review](../reviews/live-code-2026-11-02.md)). Facts are for `master` unless a line names `beta_react`. The local checkout can be stale: read with `git show "origin/master:<path>"`. File-level notes: [code/web-review.md](../code/web-review.md). Pixels: [web design](web-design.md). HTTP: [API](api.md).
 
 ## Stack lock
 
@@ -18,6 +18,8 @@ Reviewed 2026-09-22 against `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_
 | Manager | `routes/web.php` prefix `manager`, middleware `web`, `auth`, `manager.only`, namespace `Manager`. React islands in `resources/manager-portal/`, entry `main.jsx`. |
 | HQ | `routes/web.php` prefix `hq`, middleware `web`, `role`, namespace `Admin`. Backpack. Not the manager portal. |
 | Roles | Spatie roles. A manager may touch self plus users whose `parent_id` is that manager. |
+| Errors | `routes/web.php:14-16` turns off notices and warnings on PHP 7.2 and later, so an undefined variable fails silently. Most caught failures only call `Log::error`. See Error reporting below. |
+| Crons | `app/Console/Kernel.php:25-29` `schedule()` is empty. Every cron is a public GET in `routes/web.php` (for example `:41-46`) that an outside scheduler calls. Opening one runs the job. |
 
 ## Where a new URL goes
 
@@ -30,6 +32,22 @@ Reviewed 2026-09-22 against `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_
 | Manager island | a new JSX file registered from `resources/manager-portal/main.jsx` onto a `#manager-*-root` node |
 
 Manager routes that exist today include `/manager/dashboard`, `/manager/ai-find-leads`, `/manager/salespeople`, `/manager/activity`, `/manager/support`, `/manager/settings`, and `/manager/api/dashboard-data`, `kpis`, `team`, `feed`, `territory`, `find-leads`.
+
+## Error reporting
+
+- `sentry/sentry-laravel` 2.5.1 with `sentry/sentry` 3.2.1 (`composer.lock`), in the app since `441954f0` (2021). `config/sentry.php` takes the DSN from `SENTRY_LARAVEL_DSN` or `SENTRY_DSN` (`:5`), leaves `release` commented out (`:8`), and sets `sql_bindings` true (`:21`), `send_default_pii` false (`:48`) and `traces_sample_rate` 1.0 (`:50`).
+- `master`: `app/Exceptions/Handler.php:35-46` sends reported exceptions to Sentry and, when `POSTHOG_API_KEY` is set (`config/services.php:61-67`), to PostHog. The front layouts load the PostHog browser snippet (`front/layout.blade.php:118`, `front/company/layout_main.blade.php:56`, `front/android_layout.blade.php:59`). `UserMcpTelemetry` sends MCP usage to PostHog (`app/UserMcp/Services/UserMcpTelemetry.php:96-114`).
+- `beta_react` (`929f0c7f`, 2 Nov) removes PostHog from the handler, `AppServiceProvider`, `config/services.php` and the layouts. It adds browser Sentry with session replay in `front/partials/sentry_replay.blade.php`, with text, input and media masking off (`:13-17`), 10% of sessions and every session with an error by default (`config/services.php:59-61`). It is included at `front/layout.blade.php:118` and `front/company/layout_main.blade.php:56`; manager portal pages extend `front.layout`. `UserMcpTelemetry` sends a Sentry `captureMessage` instead (`:95-119`), switched by `USER_MCP_SENTRY_ENABLED` and `USER_MCP_SENTRY_QUERY_ENABLED` (`config/services.php:68-70`).
+- `app/` has about 154 `Log::error` calls and one `captureException` (`Handler.php:38`). A failure that is caught and logged reaches only the Laravel log in `storage/logs/` (`config/app.php:124`, default `single`). Triage: [On-call](on-call.md).
+
+## Hard-coded key fallbacks
+
+Do not copy these. Move them to `.env`. The values are deliberately not recorded here.
+
+- Gemini: `app/Helpers/helpers.php:919` and `:1050` (`:952` and `:1085` on `beta_react`), and the `env()` default at `app/Http/Controllers/AILeadFinderController.php:44`.
+- Google Maps Platform (Places, Address Validation): `app/Helpers/helpers.php:83`, `:542`, `:726`, `:728`, `:810` (in the request URLs), the `env('GOOGLE_KEY', …)` defaults at `AILeadFinderController.php:45` and `app/Services/Manager/ManagerFindLeadsService.php:63`, and `config/googlemaps.php:17`.
+- FullEnrich: `config('services.fullenrich.api_key', …)` defaults at `app/Globals/Helper.php:1007`, `:2282`, `:2332`, `:2915`, `:3282`, and `app/Services/PaidApiUsageReport.php:124` (`beta_react` only).
+- Others: the `JWT_SECRET` default at `config/jwt.php:24`, the `TIKTOK_EVENTS_ACCESS_TOKEN` default at `config/tiktok.php:19`, and `dataerror_ai_key` at `config/settings.php:23`.
 
 ## Review credits
 

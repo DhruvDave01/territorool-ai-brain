@@ -10,6 +10,7 @@ Review the diff against the live file and the [code gate](../gates/code-gate.md)
 2. **Contract** — mobile uses `API.post` with FormData; web uses the classic, `manager`, or `hq` group that owns the page; credits match `contactBuyCredits.js`
 3. **Runtime** — PHP stays compatible with Laravel 5.3.31 and PHP 7.2
 4. **Blast radius** — unrelated controllers, the commented v1 API block, and the duplicate sidebar links stay as they are
+5. **Judgment** — the edge cases the sibling handles (empty, offline, expired token, 0 credits, a second tap) are handled here too, and the pattern is the sibling's pattern, not a tidier one from another codebase. The [draft review](draft-review.md) handoff is attached
 
 ## Comment shape
 

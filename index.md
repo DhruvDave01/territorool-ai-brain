@@ -5,7 +5,8 @@
 | How to work | [AGENTS.md](AGENTS.md) |
 | Product | [product/overview.md](product/overview.md) |
 | Public site | [product/public-site.md](product/public-site.md) |
-| Six mini brains | [brains/README.md](brains/README.md) |
+| Seven mini brains | [brains/README.md](brains/README.md) |
+| On-call, production fixes, Sentry | [brains/on-call.md](brains/on-call.md) |
 | User | [roles/user.md](roles/user.md) |
 | Manager | [roles/manager.md](roles/manager.md) |
 | Admin | [roles/admin.md](roles/admin.md) |
@@ -24,6 +25,7 @@
 | Mobile components, props | [code/mobile-components.md](code/mobile-components.md) |
 | API endpoints, v2 route table | [brains/api-endpoints.md](brains/api-endpoints.md) |
 | Render a still | [methods/render-still.md](methods/render-still.md) |
+| Draft review | [methods/draft-review.md](methods/draft-review.md) |
 | Design gate | [gates/design-gate.md](gates/design-gate.md) |
 | Methods | [methods/README.md](methods/README.md) |
 | Code gate | [gates/code-gate.md](gates/code-gate.md) |
@@ -31,3 +33,4 @@
 | Oversized videos, watched | [reviews/oversized-video-watch-2026-09-23.md](reviews/oversized-video-watch-2026-09-23.md) |
 | Live code, 2026-09-28 | [reviews/live-code-2026-09-28.md](reviews/live-code-2026-09-28.md) |
 | Live code, 2026-09-29 — Voice Mode, web chat revert | [reviews/live-code-2026-09-29.md](reviews/live-code-2026-09-29.md) |
+| Live code, 2026-11-02 — Sentry, Bulk Contacts, Calendar sync, plugins | [reviews/live-code-2026-11-02.md](reviews/live-code-2026-11-02.md) |

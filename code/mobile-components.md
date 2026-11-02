@@ -1,6 +1,6 @@
 # Mobile components — props and call shapes
 
-Read 2026-09-22 from `TerriTool/App/components/`. Voice pieces read 2026-09-29. When this page and the file disagree, the file wins. Screen files: [mobile screens](mobile-screens.md). Pixels: [mobile UI](../brains/mobile-ui.md).
+Read 2026-09-22 from `TerriTool/App/components/`. Voice pieces read 2026-09-29. Read again on 2026-11-02 on `TT_80` `daf50eeb` and `Production` `6973a30d` ([review](../reviews/live-code-2026-11-02.md)); facts are for `TT_80` unless a line names `Production`. When this page and the file disagree, the file wins. Screen files: [mobile screens](mobile-screens.md). Pixels: [mobile UI](../brains/mobile-ui.md).
 
 Every new logged-in screen is built from these five pieces in this order: `CustomHeader`, the curved body, content, `AppButton` for actions, `AppConfirmModal` for confirms, `CustomFooter` only if the screen is one of the six footer sections.
 
@@ -40,8 +40,11 @@ Class `PureComponent`. Fetches credits itself on mount with `API.get(GET_CREDIT_
 | `rightContent` | — | Node in the right slot. Use `HeaderIconButton` from the same folder (`name` is an Ionicons name). |
 | `leftContent` | — | Replaces the arrow. `BasicRouteDetail` passes a back `HeaderIconButton` plus `VoiceHeaderButton` here, because share and edit fill the right slot. |
 | `showCredit` | `false` | Credits pill (Dashboard style) |
+| `creditBalance` | — | Shown in the credits pill instead of the fetched balance (`customheader/index.js:86-90`). The contact-buy screens pass it. Also on `Production`. |
 | `subText` | — | Line under the title |
 | `titleStyle` | — | Override for the title only |
+| `titleAccessory` | — | Node in a row right after the title (`:165-175`). `VoiceScreen` passes one. |
+| `sideSlotWidth` | — | Width of the right slot (`:106`). `CalendarActivity` passes 176. |
 | `topInset` | `0` | Extra top padding; safe-area is handled inside |
 | `showBuildMetadataStrip` | `true` | The "App 42.32 (1) · iOS / Development (S)" strip under the gradient |
 
@@ -71,7 +74,7 @@ On the Settings still: Cancel is `variant="danger"`, Upgrade is `variant="primar
 
 Centered `react-native-modal`. Replaces `Alert.alert`. Two-button row, single OK, or a third stacked action.
 
-The home review offer is not this modal. It is the bottom sheet `dashboard/ReviewRewardsModal.js`.
+The home review offer is not this modal. It is the bottom sheet `dashboard/ReviewRewardsModal.js`. Only `Production` has the banner that opens it; `fe2e3254` removed it on `TT_80`.
 
 | Prop | Default | Meaning |
 |---|---|---|
@@ -92,7 +95,7 @@ A delete confirm is `primaryTone="danger"` with `primaryLabel="Delete"`. A plain
 
 ## `CustomFooter` — `customfooter/index.js`
 
-Six image tabs. Pass `selectedIndex` 1–6 and the screen's `props` so it can navigate. Index 2 pushes `AIFindLeadsChat` with `{ fromDashboard: true, latitude, longitude }`. There is no index 0. Dashboard and both Find Leads screens render no footer.
+Six image tabs. Pass `selectedIndex` 1–6 and the screen's `props` so it can navigate. Index 2 pushes `MultipleAIWaypoint` with `{ fromDashboard: true, latitude, longitude }` (`customfooter/index.js:283-287`). There is no index 0. Dashboard and both Find Leads screens render no footer.
 
 `onVoiceScreen` (new 2026-09-29) is set only by `VoiceScreen` and `VoiceHistory` with `selectedIndex={4}`. Routes is lit, but tapping it still opens `Routes`, so voice keeps running. Without that prop, the footer renders `VoiceMiniBar` above the tabs while a voice session runs. It reports focus to `setFooterFocused` so the floating bar steps aside.
 
@@ -105,18 +108,41 @@ Function components. Each returns nothing when `VOICE_MODE_ENABLED` is false. Th
 | `VoiceMiniBarHost` | `navigationRef`, `children` | `App/App.js`, around `NavigationContainer`. On a screen without a focused footer it shows the mini-bar below the navigator and gives screens a bottom inset of 0. |
 | `VoiceMiniBar` | `navigation` | `CustomFooter`, and the host above |
 | `VoiceHeaderButton` | `navigation`, `routeId` | `BasicRouteDetail` (left slot), `ActiveRouteMap` (right slot). Also runs the “Start when I open a route” auto-start for the active route. |
-| `DriveWithVoiceRow` | `onPress` | `Dashboard`, first scroll row. Renders only while a route is active. |
+| `DriveWithVoiceRow` | `onPress` | `Dashboard`, first scroll row. Since `fa925407` it renders with or without an active route; the comment above it (`VoiceParts.js:332`) still says otherwise. |
 | `FirstRunSheet` | `visible`, `onClose`, `onTurnedOn` | `Dashboard`, `VoiceScreen`. A `react-native-modal` bottom sheet. The mic permission is asked on “Turn on Voice Mode”. |
 | `VoiceSettingsCard` | `navigation` | `EditStatus`, between the profile card and Tags |
 | `ActionButton` | `icon`, `label`, `variant`, `onPress`, `disabled`, `loading`, `testID` | The voice action bar. `AppButton` with an Ionicons icon, `minHeight` 52, radius 12. |
 | `Bubble` | `who` (`rep` / `agent`), `text`, `live` | Voice screen and history |
 | `MicBadge` | `size` | Dashboard row, first-run sheet |
-| `openVoice(navigation)` | — | Navigates to `VoiceScreen` with `{ start: true }` |
+| `openVoice(navigation, { routeId })` | — | Async. With a `routeId`, makes that route active first (`VoiceParts.js:28-37`), then navigates to `VoiceScreen` with `{ start: true }` |
 | `setFooterFocused(footer, focused)` | — | Called by `CustomFooter` on focus and blur |
+
+## `CalendarSyncPopup` — `dashboard/CalendarSyncPopup.js`
+
+Function component, `TT_80` only. A centered `react-native-modal` card mounted by `CalendarActivityScreen.js:837`. Strings: "Connect your calendar", a Google option, "Continue with Google", and "Meetings and appointments only." over "One-way sync from TerriTool." It closes itself before the sync and toasts "Google Calendar synced." on success. The Microsoft code in `App/utils/calendarSync.js` has no option in this card. Flow: [23 — Calendar Sync](../features/23-Calendar-Sync.md).
+
+| Prop | Default | Meaning |
+|---|---|---|
+| `visible` | — | |
+| `onClose` | — | Close control, backdrop and Android back; ignored while busy |
+| `onConnected` | — | Called with the provider after the sync |
+| `apiProps` | — | Props passed to `API.post` |
+| `message` | "Sign in with Google to sync your calendar." | Subtitle |
+| `onSyncingChange` | — | `true` while `google-calendar/sync` runs, then `false` |
+
+## `BulkCartButton` — `route/contact/cartButton.js`
+
+Function component over `Pressable`, also on `Production` (`c04e1fd7`). A white 32 pt `cart-outline` icon in a 44 pt hit area, with a white badge in primary blue that shows "99+" above 99. It is the `CustomHeader` `rightContent` on "Find Contacts" (`route/contact/index.js:629-635`) and `BulkContactPeople` (`people.js:285-291`), and both open `BulkContactReview`.
+
+| Prop | Default | Meaning |
+|---|---|---|
+| `count` | — | Badge number; 0 or less disables the button |
+| `onPress` | — | |
+| `testID` | — | |
 
 ## Data and state
 
-- `API.post(url, formdata, props, signal, options)` and `API.get(url, props)` from `App/utils/API.js`. FormData only. Copy `formdata.append` keys from the sibling screen; the endpoint list is [API endpoints](../brains/api-endpoints.md). The one exception is Voice Mode: `App/voice/voiceApi.js` sends JSON with `fetch` to `voice/session` and `voice/tool`.
+- `API.post(url, formdata, props, signal, options)` and `API.get(url, props)` from `App/utils/API.js`. FormData only. Copy `formdata.append` keys from the sibling screen; the endpoint list is [API endpoints](../brains/api-endpoints.md). Exceptions: Voice Mode's `App/voice/voiceApi.js` sends JSON with `fetch` to `voice/session` and `voice/tool`, and on `TT_80` `App/utils/calendarSync.js` posts JSON through `API.post(..., { asJson: true })` to `google-calendar/connection` and `google-calendar/sync`.
 - Loader: `ActivityIndicator` with `testID="screen.<screenKey>.loading"`. Second loader on the same screen is `loadingB`.
 - Error toast: `Toast.show({ type: "error", text1: "…", visibilityTime: 4000, position: "top" })`. The shared string is "Oops! Something went wrong. Please check your internet connection or try again."
 - Empty copy per screen is on the feature page's Screens block, for example "No lists yet. Create one to get started." on Lists and "No Routes Found" on Routes.

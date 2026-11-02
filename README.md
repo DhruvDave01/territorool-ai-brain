@@ -12,7 +12,7 @@ One TerriTool brain. Start at [AGENTS.md](AGENTS.md).
 | [screenshots](screenshots/REVIEW.md) | Stills and the pixel review |
 | [code](code/mobile-review.md) | Live reviews of the mobile and web repos |
 | [gates](gates/design-gate.md) | Design gate and code gate |
-| [methods](methods/README.md) | Six check habits. They never override the brains. |
+| [methods](methods/README.md) | Eight check habits, the draft review among them. They never override the brains. |
 | [assets](assets/logos/territool-wordmark-blue.png) | Wordmarks, fonts, icons |
 | [archive](archive/README.md) | The earlier full notes, images, and videos |
 

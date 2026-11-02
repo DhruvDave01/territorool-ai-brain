@@ -1,6 +1,6 @@
 # Mobile screens — name to file
 
-Generated 2026-09-22 from the `lazy(() => import(...))` lines and `<Stack.Screen>` registrations in `TerriTool/App/App.js`. Updated 2026-09-29: 52 screens, with the two Voice Mode screens and the three bulk-contact screens (`Contact`, `BulkContactPeople`, `BulkContactReview`). When this page and that file disagree, the file wins. Regenerate by reading `App/App.js` again; do not edit by hand from memory.
+Generated 2026-09-22 from the `lazy(() => import(...))` lines and `<Stack.Screen>` registrations in `TerriTool/App/App.js`. Updated 2026-11-02 against TT_80 `daf50eeb` ([live code 2026-11-02](../reviews/live-code-2026-11-02.md)): 51 screens. `AIFindLeadsChat` was removed in `5865546a`, and no screen was added. The store build branch, Production (`6973a30d`), has 49: the same list without `VoiceScreen` and `VoiceHistory`. When this page and that file disagree, the file wins. Regenerate by reading `App/App.js` again; do not edit by hand from memory.
 
 Paths are under `TerriTool/App/components/`. Every screen is registered on the one native stack in `App/App.js` with `headerShown: false`. "Footer" is the `CustomFooter` index the screen renders, or "none". "Still" is the folder under `screenshots/mobile-owner/` to open first; [flows/mobile.md](../flows/mobile.md) names the first clean frame in each.
 
@@ -8,12 +8,12 @@ Paths are under `TerriTool/App/components/`. Every screen is registered on the o
 
 | Screen name | File | Footer | Still | Notes |
 |---|---|---|---|---|
-| `Dashboard` | `dashboard/index.js` | none | Dashboard | Six tiles. `gestureEnabled: false`. The banner “Want 50 more credits?” opens `dashboard/ReviewRewardsModal.js`. The AI Find Leads tile calls `navigation.navigate("AIFindLeadsChat")`. Other tiles push `BusinessCard`, `CreateCompany`, `Routes`, `Lists`, `ListCompany`. In staging and dev builds, while a route is active, the first scroll row is “Drive with Voice Mode” (`DriveWithVoiceRow`). The first-run sheet opens over this screen. |
+| `Dashboard` | `dashboard/index.js` | none | Dashboard | Six tiles. `gestureEnabled: false`. The AI Find Leads tile calls `navigation.navigate("MultipleAIWaypoint", { fromDashboard: true })` (line 1048). Other tiles push `BusinessCard`, `CreateCompany`, `Routes`, `Lists`, `ListCompany`. TT_80 has no review banner (`fe2e3254`); on Production the banner “Unlock 50 Credits.” opens `dashboard/ReviewRewardsModal.js`. On TT_80 the first scroll row is always “Voice Mode” (`DriveWithVoiceRow`). The Upcoming tab's “Calendar” button opens `CalendarActivity`. |
 | `RecentActivity` | `dashboard/RecentActivityScreen.js` | none | ActivityCalendar | |
-| `CalendarActivity` | `dashboard/CalendarActivityScreen.js` | none | ActivityCalendar | |
+| `CalendarActivity` | `dashboard/CalendarActivityScreen.js` | none | ActivityCalendar | Opened from the Dashboard “Calendar” button. On TT_80 it has the Google Calendar “Sync” button; see [23 — Calendar Sync](../features/23-Calendar-Sync.md). |
 | `Notifications` | `dashboard/NotificationsScreen.js` | none | — | |
 | `QrCodeScanner` | `dashboard/QrCodeScannerScreen.js` | none | Dashboard | |
-| `EditStatus` | `dashboard/editstatus.js` | 6 | Setting | **This is the Settings screen.** Profile, credits, subscription, Tags / Edit Status, app update, version. Styles in `dashboard/editstatus.styles.js`. In staging and dev builds, the Voice Mode card (`VoiceSettingsCard`) sits between the profile card and Tags. |
+| `EditStatus` | `dashboard/editstatus.js` | 6 | Setting | **This is the Settings screen.** Profile, credits, subscription, Tags / Edit Status, app update, version. Styles in `dashboard/editstatus.styles.js`. On TT_80, the Voice Mode card (`VoiceSettingsCard`) sits between the profile card and Tags. |
 
 ## Auth and subscription — folders `login/`, `register/`
 
@@ -29,8 +29,7 @@ Paths are under `TerriTool/App/components/`. Every screen is registered on the o
 
 | Screen name | File | Footer | Still | Notes |
 |---|---|---|---|---|
-| `MultipleAIWaypoint` | `findLeads/aiFindLeads.js` | none | AIFindLeadsFlow | Older city/ZIP search. Still registered. The chat screen links here with “Type a city or ZIP instead”. No footer. |
-| `AIFindLeadsChat` | `findLeads/aiFindLeadsChat.js` | none | — | Default AI Find Leads. Dashboard tile and footer index 2 open it. Lazy-loaded in `App.js`. No footer. |
+| `MultipleAIWaypoint` | `findLeads/aiFindLeads.js` | none | AIFindLeadsFlow | AI Find Leads: city or ZIP, then ideal businesses. Dashboard tile and footer index 2 open it with `fromDashboard: true`. No footer. |
 | `MultipleWaypoint` | `findLeads/index.js` | none | AIFindLeadsFlow | Older multi-waypoint search. `gestureEnabled: false`. |
 
 ## Address Book — folder `company/`
@@ -42,7 +41,7 @@ Paths are under `TerriTool/App/components/`. Every screen is registered on the o
 | `CreateCompany` | `company/create/index.js` | none | AddCompany | |
 | `EditCompany` | `company/edit.js` | none | AddressBookFlow | |
 | `BusinessCard` | `company/businessCard/index.js` | none | ScanCardFlow | Card scan |
-| `CustomCompany` | `customcompany/index.js` | none | ScanCardFlow | Custom company from a scanned card |
+| `CustomCompany` | `customcompany/index.js` | none | ScanCardFlow | Company detail body. `ViewCompany`, `CompanyView` and `WaypointDetail` render it inside their screens; no code navigates to this stack entry by name. |
 
 ## Contacts — folders `contacts/`, `route/bizContact/`, `route/congContact/`
 
@@ -69,10 +68,10 @@ Paths are under `TerriTool/App/components/`. Every screen is registered on the o
 | `EditRoute` | `route/edit.js` | none | RouteFlow | |
 | `EditSelectStartEndPoints` | `route/edit/edit-select-start-end-points.js` | none | RouteFlow | |
 | `EditPublishRoute` | `route/edit/edit-publish-route.js` | none | RouteFlow | `gestureEnabled: false` |
-| `BasicRouteDetail` | `route/basic/index.js` | 4 | RouteFlow | Import name is `RouteDetail`. In staging and dev builds the header’s left slot is back plus the voice mic (`VoiceHeaderButton`). |
+| `BasicRouteDetail` | `route/basic/index.js` | 4 | RouteFlow | Import name is `RouteDetail`. On TT_80 the header’s left slot is back plus the voice mic (`VoiceHeaderButton`). |
 | `CompanyView` | `route/basic/company-view.js` | 4 | RouteFlow | Company inside a route. Not `ViewCompany`. |
 | `RouteSwipe` | `route/basic/goswipe.js` | none | RouteFlow | Stub. Not shipping chrome. |
-| `ActiveRouteMap` | `activeroutemap/index.js` | none | RouteFlow | Map. `gestureEnabled` default. In staging and dev builds the header’s right slot is the voice mic, then filter. |
+| `ActiveRouteMap` | `activeroutemap/index.js` | none | RouteFlow | Map. `gestureEnabled` default. On TT_80 the header’s right slot is the voice mic, then filter. |
 | `WaypointDetail` | `activeroutemap/waypointdetail.js` | none | RouteFlow | |
 | `LassoMap` | `route/lassoMap.js` | none | RouteFlow | `gestureEnabled: false` |
 | `FilterModule` | `filterModule/index.js` | none | RouteFlow / List | The live filter |
@@ -91,7 +90,7 @@ Paths are under `TerriTool/App/components/`. Every screen is registered on the o
 
 ## Voice Mode — folder `voice/`
 
-Both are lazy in `App.js`, and both are function components that read `useVoice()`. Staging and dev builds only (`VOICE_MODE_ENABLED`). Page: [22 — Voice Mode](../features/22-Voice-Mode.md).
+Both are lazy in `App.js`, and both are function components that read `useVoice()`. TT_80 only: `VOICE_MODE_ENABLED` is `true` there for every build (`App/config/index.js:34`), and the Production branch has neither screen. Page: [22 — Voice Mode](../features/22-Voice-Mode.md).
 
 | Screen name | File | Footer | Still | Notes |
 |---|---|---|---|---|
@@ -111,17 +110,17 @@ Both are lazy in `App.js`, and both are function components that read `useVoice(
 | Index | Screen name |
 |---|---|
 | 1 | `Dashboard` |
-| 2 | `AIFindLeadsChat` |
+| 2 | `MultipleAIWaypoint` |
 | 3 | `ListCompany` |
 | 4 | `Routes` |
 | 5 | `Lists` |
 | 6 | `EditStatus` |
 
-Screens that render `<CustomFooter>` on 2026-09-29: `company/list.js`, `company/view.js`, `contacts/view.js`, `dashboard/editstatus.js`, `list/index.js`, `list/basic/index.js`, `route/index.js`, `route/basic/index.js`, `route/basic/company-view.js`, `voice/VoiceScreen.js`, `voice/VoiceHistory.js`. On these the voice mini-bar docks inside the footer. On every other screen, apart from sign-in and paywall, it sits below the navigator.
+Screens that render `<CustomFooter>` on TT_80, 2026-11-02 (unchanged since 2026-09-29): `company/list.js`, `company/view.js`, `contacts/view.js`, `dashboard/editstatus.js`, `list/index.js`, `list/basic/index.js`, `route/index.js`, `route/basic/index.js`, `route/basic/company-view.js`, `voice/VoiceScreen.js`, `voice/VoiceHistory.js`. On these the voice mini-bar docks inside the footer. On every other screen, apart from sign-in and paywall, it sits below the navigator.
 
 ## Loading test IDs
 
-Every data screen marks its loader with `testID="screen.<screenKey>.loading"` and a letter suffix for a second loader (`loadingB`, `loadingC`). Empty states that exist as test IDs: `screen.companyList.loadingEmpty`, `screen.companyList.loadingEmptyContacts`, `screen.calendarActivity.monthEmpty`. Keep the pattern on a new screen.
+Every data screen marks its loader with `testID="screen.<screenKey>.loading"` and a letter suffix for a second loader (`loadingB`, `loadingC`). Empty states that exist as test IDs: `screen.companyList.loadingEmpty`, `screen.companyList.loadingEmptyContacts`, `screen.calendarActivity.monthEmpty`. Keep the pattern on a new screen. TT_80 adds `screen.dashboard.creditsLoading` (credits pill spinner), `screen.findLeadsAi.closeSavedLeadsLoader` (close X on the saved-leads loader) and `component.findContactsFetchModal.close` (close X on the Find Contacts loader).
 
 Voice Mode test IDs, as the Maestro flows use them:
 

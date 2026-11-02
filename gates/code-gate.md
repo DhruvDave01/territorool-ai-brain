@@ -5,9 +5,10 @@ Run this before calling new code done. Reviews: [mobile](../code/mobile-review.m
 | Check | Pass when |
 |---|---|
 | Repo | Mobile edits are under `TerriTool/`. Web edits are under `webterritool/`. |
-| Mobile screen | Class component, registered in `App/App.js`, calls `API.post` with FormData. Voice Mode is the one exception: its screens are function components on `useVoice()`, and its calls go through `App/voice/voiceApi.js` as JSON. |
-| Realm | A table change raises `schemaVersion` in all three places in `App/storage/realm.js`. It is 19 on 2026-09-29. |
-| Mobile URL | Uses a constant from `App/config/index.js`. Base stays staging unless the task says otherwise. |
+| Mobile screen | Class component, registered in `App/App.js`, calls `API.post` with FormData. Voice Mode is the one exception: its screens are function components on `useVoice()`, and its calls go through `App/voice/voiceApi.js` as JSON. The Google Calendar calls also send JSON, through `API.post(…, { asJson: true })` in `calendarSync.js` (`TT_80`). |
+| Realm | A table change raises `schemaVersion` in all three places in `App/storage/realm.js`. On 2026-11-02 it is 20 on `TT_80` and 18 on `Production`. |
+| Mobile URL | Uses a constant from `App/config/index.js`. Tests run against staging: `URL_BASE` is committed pointing at production, so switch it for the run and leave it out of the diff. |
+| Production fix | Starts on its own hotfix branch from `origin/Production` (mobile) or `origin/master` (web) and follows [On-call](../brains/on-call.md). A change to credits, billing, login, payments, or deleting data has a named person’s approval. |
 | Web route | Added in the classic, `manager`, or `hq` group that matches the page |
 | Web controller | Companies use `CompanylController`. Manager uses `App\Http\Controllers\Manager`. |
 | Web stack | Blade page does not import manager-portal CSS. Manager page does not add an AdminLTE widget set. |
@@ -17,6 +18,7 @@ Run this before calling new code done. Reviews: [mobile](../code/mobile-review.m
 | States | Loading `testID="screen.<key>.loading"`, and empty and error copy from the feature page's Screens block |
 | Credits | Search 0, save AI lead 1, buy contact 2 or 1 as in `contactBuyCredits.js` |
 | Scope | No drive-by rewrite of an unrelated controller, and the commented v1 API block stays commented |
+| Draft read | The generated diff was read line by line against the sibling file. Architecture, logic, one failure path, and the edge cases handled or skipped are named in the [draft review](../methods/draft-review.md). A green lint or test alone is not a pass |
 | Mobile checks ran | `yarn lint` passes on the touched files. `npx jest` ran if a test under `__tests__` covers the area. A Maestro flow from `.maestro/` ran on the simulator when login, register, or onboarding changed (`yarn maestro:login:staging:ios`, `yarn maestro:register:staging:ios`). When `App/voice/` or `App/components/voice/` changed: `./node_modules/.bin/jest __tests__/voiceSession.test.js qa/voiceSession.regression.test.js --runInBand` and `.maestro/voice-mode-ios.yaml` (or `voice-mode-android.yaml`). Only the `qa/` test is committed; `.gitignore` excludes `__tests__`, so the first file exists only on the machine that wrote it. Speech itself is checked by hand. |
 | Web checks ran | `vendor/bin/phpunit` ran on the matching test in `tests/` (12 files, manager dashboard and Find Leads services among them). `npm run build` succeeded when any file under `resources/manager-portal/` changed |
 | Behavior exercised | The changed screen or control was opened and used once, and the result was recorded with the [evidence collector](../methods/evidence-collector.md) |

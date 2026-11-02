@@ -38,6 +38,10 @@ Sales Agent, Business Sales Agent. Managers assign leads into a **rep’s** book
 
 **Optional:** annual revenue, website, industry, phone, LinkedIn, employees, status, category.
 
+Mobile, both branches: since `e91a86c9`, a picked address with no postal code leaves `postal_code` null instead of "", so the client check no longer stops the save with “Please provide precise company address.” (`company/create/index.js:2448`, `company/edit.js:506`).
+
+Mobile status defaults to the user's “Unclassified” status once the status list loads. If that request fails, the strip still reads “Unclassified” but Add Company stops with “Please select company status.” (`company/create/index.js:266-269`). Since `6da57043` (“Patch for the add company is not working after internet fluctuation”, on Production), Add Company and Edit Company fetch the status list again when the connection returns (`company/create/index.js:780`, `company/edit.js:310`). The Address Book list does the same for statuses and for an empty company or contact list (`company/list.js:202`), and the filter screen for statuses and industries (`filterModule/index.js:53`).
+
 On save, the company can be attached to a list and/or a route immediately.
 
 Duplicates are handled mainly in CSV import (merge / append / delete). Manual add creates a row unless existing checks fire.
@@ -55,6 +59,8 @@ Temp/import rows (`is_temp_company`) stay out of the live book until committed.
 - Social URLs
 - Report incorrect company
 - Activity timeline
+
+On mobile the detail body is `CustomCompany` (`customcompany/index.js`), which `ViewCompany`, a route stop (`CompanyView`) and `WaypointDetail` all render. On TT_80 its Find Contacts loader has a close X (`component.findContactsFetchModal.close`) that stops the search (`customcompany/index.js:1379`, `customcompany/FindContactsFetchModal.js`, `d615df40`).
 
 ### Notes
 
@@ -106,7 +112,7 @@ From the list, detail, or Find Leads. Adding or removing route stops flags the r
 
 ## Screens
 
-Per surface. "File" is under `TerriTool/App/components/` for mobile; the full map is [mobile screens](../code/mobile-screens.md). Strings are copied from code on 2026-09-22; a loading cell that reads `screen.x.loading` is the `testID` on that screen's `ActivityIndicator`. Copy these strings; do not write new ones.
+Per surface. "File" is under `TerriTool/App/components/` for mobile; the full map is [mobile screens](../code/mobile-screens.md). Strings are copied from code on 2026-09-22, and the mobile strings were checked again against TT_80 on 2026-11-02 ([live code 2026-11-02](../reviews/live-code-2026-11-02.md)); a loading cell that reads `screen.x.loading` is the `testID` on that screen's `ActivityIndicator`. Copy these strings; do not write new ones.
 
 | Surface | Screen | File / still | Primary action | Loading | Empty | Error |
 |---|---|---|---|---|---|---|
@@ -116,6 +122,8 @@ Per surface. "File" is under `TerriTool/App/components/` for mobile; the full ma
 | Mobile | `EditCompany` | `company/edit.js` | Save | — | — | "Oops! Something went wrong. Please check your internet connection or try again." (toast) |
 | Classic web | `/company` | [web_03_company](../screenshots/web/sales-agent/web_03_company_w1440.png), [classic company list](../screenshots/web-stills/04-classic-company-list.png) | jqxGrid row actions | `#cover-spin` | jqxGrid "No data to display" | Flash message |
 | Manager | Rep's companies inside `/manager/salespeople/{id}` | [Anna's profile](../screenshots/web-owner/Manager/Anna-s-Profile-TerriTool-09-15-2026_01_27_PM.png) | Open the rep | "Loading companies…" | "No companies found." | "Could not load companies. Please refresh the page." |
+
+Header titles: on TT_80 every `CustomHeader` title is padded equally on both sides, so it sits at the screen center (`customheader/index.js:111-117`, `0ff59cdc`). Production pads each side by its own button width, so a title can sit off center.
 
 ## Screenshots in this brain
 

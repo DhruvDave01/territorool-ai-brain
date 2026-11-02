@@ -69,8 +69,8 @@ Copy [the 1:45 home still](<../screenshots/mobile-owner/Dashboard/Simulator Scre
 |---|---|
 | Status bar | Time on the left of the island, signal and battery on the right. The island stays in this bar, with a gap under it before the logo. Content is inset from the corner radius so Calendar, Address Book, and Settings are fully visible. |
 | Header | White rounded square with the cube, first name, credits pill, QR, settings. Gradient from `#124ac6`. |
-| Banner | Same `referralBanner` slot: `#E0E7FF`, gift icon, chevron. Title “Want 50 more credits?” at 12/16, weight 600, `#124ac6`. Subtitle “G2: 30 · Product Hunt: 20” is DIN Condensed Regular, 10/13, `#124ac6`. The 1:45 still still says “Want 20 more credits?”. The live string is the 50 line. |
-| Tags | Corner tags sit under the label. A tile that also has a subtitle, such as Routes, keeps a gap between “New route ready” and “Powered by AI.” |
+| Banner | Same `referralBanner` slot: `#E0E7FF`, gift icon, chevron. Title “Unlock 50 Credits.” at 12/16, weight 600, `#124ac6`, in the store build (`Production`, `e91a86c9`). Its subtitle “G2: 30 · Product Hunt: 20” (DIN Condensed Regular, 10/13, `#124ac6`) is commented out. `TT_80` removed the banner (`fe2e3254`). The 1:45 still says “Want 20 more credits?” and predates both. |
+| Tags | Corner tags sit under the label. A tile that also has a subtitle, such as Routes, keeps a gap between “New route ready” and “Powered by AI.” `TT_80` removed the “LEADS & CONTACTS” and “Powered by AI” tags (`75839e87`); the store build still shows them. |
 | Tiles | Six, two columns. Labels are dark, not blue. Corner tags are `#E0E7FF`. Unread tiles are `#F0F4FF` with a `#124ac6` border and a blue count badge. |
 | Tile icons | The PNGs in `App/images`, tinted `#124ac6`: `ai_findleads`, `scan_card`, `recently_added`, `icon_routes`, `Supply3`, `icon_company`. |
 | Activity | Title, the date line, outline Calendar button, Upcoming / Recent. Empty upcoming copy is “No upcoming activities yet.” |

@@ -58,6 +58,7 @@ Extracted from `routes/web.php`, group `prefix('hq')`, `namespace('Admin')`. Gro
 |---|---|---|
 | Dashboard | `GET /hq` | `HomeController@index` |
 | Dashboard | `GET /hq/dashboard` | `HomeController@dashboard` |
+| Manager demo data (rewrites a team's data; see [warning](#danger-hqdemo-data-read-2026-11-02)) | `GET /hq/demo-data?email={manager email}` | `ManagerDemoDataController@run` |
 | Subscription dashboard | `GET /hq/subscription/dashboard` | `HomeController@subscriptionDashboard` |
 | Cancelled billing | `GET /hq/subscription/cancelled-users` | `HomeController@cancelledSubscriptionUsers` |
 | Cancelled billing | `GET /hq/subscription/cancelled-revenuecat-trials` | `HomeController@cancelledRevenueCatTrialUsers` |
@@ -109,13 +110,25 @@ Device tokens and city lat/lng maintenance exist as separate controllers (`Userd
 - A credit grant here must write `total_credit` / `used_credit` (or `BusinessclientSalesagentCredit` for a manager's team) — the same fields `SalespersonController@creditupdate` reads, and the same fields the app reads elsewhere. Do not add a parallel credit field.
 - `SubscriptionController@extendDays` and the activate/deactivate actions change the same subscription row the rep's own Settings/Billing screen reads — a change here must be visible there immediately, not just in HQ.
 
+## Danger: `/hq/demo-data` (read 2026-11-02)
+
+**Never open `/hq/demo-data?email=…` with a real customer's manager email on production. It rewrites that team's data at once and cannot be undone.**
+
+Added by Mehul on 28 Oct 2026 in `0456a72a`, then `046876c8` and `b1730c6c`. It is on master (production) and beta_react. Source: [live code 2026-11-02](../reviews/live-code-2026-11-02.md). File: `app/Http/Controllers/Admin/ManagerDemoDataController.php`.
+
+- **Gate:** `routes/web.php:115`, inside the `hq` group with middleware `['web','role']` (`routes/web.php:109`). `run()` aborts with 403 "Admin login required." unless the user is an Admin (`ManagerDemoDataController.php:21-23`). It is a plain GET with no confirmation step, no environment check and no backup, so opening the link runs it. Without `email` it shows a help page.
+- **Who:** the user with that email must have `role_id` 3 (manager). Every user whose `parent_id` is that manager is changed, all in one `DB::beginTransaction()` (`:42-86`).
+- **Dates:** every third rep by id, starting with the first, keeps its dates. For the others, 5–10 or 10–15 of their oldest accounts get a new `created_at` and `updated_at` in `companies`. Each re-dated account's latest `company_notes` row (`date_time`) and up to two of its `contacts` (`created_at`) get the same date, and the rep's first two `user_routes` and first two `user_lists` are re-dated too (`:88-130`, `:243-318`). Some dates fall later in the current quarter, which can be in the future (`:372-375`).
+- **Visits, for every rep:** each company on the rep's routes is set visited (`companies.is_visited`, `visited_at`, `user_route_companies.is_visited`). Its `user_visited_companies` rows are updated or inserted, its rows for other route IDs are deleted, and notes dated after the visit are moved back to it. Every other company the rep owns is set not visited, and all of its `user_visited_companies` rows are deleted (`:135-238`).
+- The summary page says accounts not on a route "were left unvisited" (`:416`). In fact their visited flags were cleared and their visit history deleted.
+
 ## Evidence gap
 
 21 browser captures of HQ exist in evidence.md (15 Sep 2026), but their filenames carry no screen name and nobody has matched them to the `UC-ADM-*` use cases in use-cases.md — so they prove the screens were reachable, not what each one shows. The routes above are verified against `routes/web.php` directly; behavior details (form fields, validation copy) still need a catalogued walkthrough to confirm pixel-for-pixel.
 
 ## Code
 
-`app/Http/Controllers/Admin/*` (`HomeController`, `PromocodeController`, `SalespersonController`, `BusinessclientController`, `SubscriptionController`, `SpecialdiscountController`, `SupportController`, `SettingController`, `UserController`, `UserdevicesController`, `CitiesCrudController`), Backpack views.
+`app/Http/Controllers/Admin/*` (`HomeController`, `PromocodeController`, `SalespersonController`, `BusinessclientController`, `SubscriptionController`, `SpecialdiscountController`, `SupportController`, `SettingController`, `UserController`, `UserdevicesController`, `CitiesCrudController`, `ManagerDemoDataController`), Backpack views.
 
 ## Related
 

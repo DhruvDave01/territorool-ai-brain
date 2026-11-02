@@ -50,6 +50,12 @@ Not the rep Find Leads screen. The manager searches, then **assigns** companies 
 - Creating a salesperson must respect licenses and send the same activate email as the older team screens.
 - Assigned leads’ `user_id` is the **rep**, not the manager.
 
+## Changes since 29 September (read 2026-11-02)
+
+No manager-portal code changed between the last training (`fcf62d0d`, 29 September) and master `d3f75449`: `ManagerDashboardController`, `app/Services/Manager/*`, `EnsureManagerRole`, `resources/views/front/manager/*`, `resources/manager-portal/*.jsx`, `public/js/manager-portal.js` and the `manager` route group are unchanged. Source: [live code 2026-11-02](../reviews/live-code-2026-11-02.md).
+
+The new HQ tool `/hq/demo-data?email=…` (on master) rewrites the account, note, contact, route, list and visit data that `ManagerDashboardService` reads, for one manager's whole team. Never run it with a real customer's manager email on production: [warning in 17 — Admin HQ](17-Admin-HQ.md#danger-hqdemo-data-read-2026-11-02).
+
 ## Verified routes
 
 Extracted from `routes/web.php`, group `prefix(‘manager’)`, controller `ManagerDashboardController` unless noted.

@@ -9,7 +9,7 @@ Both land on the rep home. They share the classic web app and the mobile app.
 | Wallet | Own subscription credits | Credits allocated by the Business Agent |
 | Empty wallet | Upgrade or add-on | Tell them to contact the manager. Not Stripe. |
 | Find Leads | Mobile V2 / classic `/findleads` | Same |
-| Review rewards | Home banner “Want 50 more credits?” opens the sheet | `/reviews/credits` from the day-two email. Not a home card. |
+| Review rewards | Store build: Home banner “Unlock 50 Credits.” opens the sheet (`Production`, `e91a86c9`). `TT_80` removed the banner (`fe2e3254`) | `/reviews/credits` from the day-two email. Not a home card. |
 | MCP | User MCP and Find MCP if status is Active | Same |
 
 ## Stack to copy

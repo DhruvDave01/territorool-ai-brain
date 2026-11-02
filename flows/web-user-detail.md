@@ -41,6 +41,18 @@ Stills:
 - **Next** — the page stays here. The button becomes “Submitted” and the row shows “Pending verification”. The credit number comes off that row. Both submitted shows “Back to dashboard”. Both verified shows “You unlocked 50 credits. They are already in your balance.”
 - **Stop** — do not add this panel to the home cards. Do not build it as a manager or HQ page. The POST records the attempt. It does not add the credits
 
+## 2c. Calendar and Google Calendar sync
+
+- **From** — home, the “Calendar” button in the header of the Activity panel. It shows on the Upcoming tab only
+- **Do** — pick a day in “Calendar Activity”, or press “Sync”. Not connected: “Connect your calendar”, then “Continue with Google” (`GET /calendar/google/connect`), Google consent, and back to `/dashboard` (`/calendar/google/callback`), where the modal reopens with “Google Calendar connected. Click Sync to send meetings and appointments.” Connected: “Sync” posts `/calendar/google/sync`
+- **Copy** — the modal “Calendar Activity”, “Your scheduled visits, calls, and reminders.”, a month grid, the day list, and “Times shown in your account timezone.” The connect modal has one provider, Google, and “Meetings and appointments only.” / “One-way sync from TerriTool.”
+- **Next** — the status line under the title: “Google Calendar is up to date.” or “Google Calendar: {n} activities sent, {n} removed, {n} failed.” (only the non-zero parts), then “Last sync”. An expired Google connection shows “Connect Google Calendar again.” and the connect modal
+- **Stop** — sync is one-way and on demand; only Meetings and Appointments with a date go to Google, while the grid shows every dated activity. There is no Settings entry and no disconnect. Do not add a Microsoft option; it is commented out. See [23 — Calendar Sync](../features/23-Calendar-Sync.md)
+
+Stills:
+
+- None of the modals yet. The [Dashboard](../screenshots/web/sales-agent/web_01_dashboard_w1440.png) still (15 September) predates the button; on the live page it sits before the “Activity” title (`front/dashboard.blade.php:759`).
+
 ## 3. Find Leads, then the company
 
 - **From** — home card

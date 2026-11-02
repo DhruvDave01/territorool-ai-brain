@@ -1,12 +1,14 @@
 # Web code review
 
-Reviewed 2026-09-22 by reading `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool`. When this page and that tree disagree, the tree wins. Hub: [web code brain](../brains/web-code.md). Pixels: [web design](../brains/web-design.md).
+Reviewed 2026-09-22 by reading `/Users/dhruvdave/Dhurv/Project_TerriTool/Territool_web/webterritool`. Read again on 2026-11-02 from `origin/master` `d3f75449` (production) and `origin/beta_react` `929f0c7f` (development) ([review](../reviews/live-code-2026-11-02.md)); facts are for `master` unless a line names `beta_react`. When this page and that tree disagree, the tree wins. Hub: [web code brain](../brains/web-code.md). Pixels: [web design](../brains/web-design.md).
 
 ## Lockfile
 
 `composer.lock` name `laravel/framework` version **v5.3.31** (around the laravel/framework package entry). `composer.json` says `"php": "^7.2"` and `"laravel/framework": "^7.0|5.3.31"`. Write PHP 7.2. Do not add scalar type hints that 7.2 rejects in a way the file’s neighbors don’t already use, and do not use PHP 8 or Laravel 8+ APIs.
 
 API package in use: Dingo (`dingo/api` 1.0) in `routes/api.php`.
+
+Sentry: `sentry/sentry-laravel` 2.5.1 and `sentry/sentry` 3.2.1 (`composer.json:32` asks for `^2.5`). Settings and the PostHog split between `master` and `beta_react`: [web code brain](../brains/web-code.md#error-reporting).
 
 ## How to add a classic page
 
@@ -47,10 +49,14 @@ The v1 block in `routes/api.php` is commented out. Leave it commented.
 | Support | `SupportController.php` |
 | Manager cockpit | `app/Http/Controllers/Manager/ManagerDashboardController.php` |
 | HQ | `app/Http/Controllers/Admin/` |
-| Cron | `CronController.php` (public GET, not `Kernel::schedule()` only) |
-| User MCP | `app/UserMcp/` |
+| HQ demo data | `Admin/ManagerDemoDataController.php`, `GET /hq/demo-data?email=` (`routes/web.php:115`). Warning: Admin-only, but it rewrites dates and deletes visit history for one manager's whole team in one transaction, with no confirmation and no environment check, and it is live on `master`. [17 — Admin HQ](../features/17-Admin-HQ.md). |
+| Cron | `CronController.php`. Every cron is a public GET in `routes/web.php`; `app/Console/Kernel.php:25-29` `schedule()` is empty. `cron/paid-api-usage` (`routes/web.php:46`, `beta_react` only, `dc07b901`) runs `paidApiUsageReport` (`:732-762`), which counts yesterday's paid API calls from `storage/logs/laravel-<date>.log` with `app/Services/PaidApiUsageReport.php` and mails `app.support_email_1`. That file exists only when `APP_LOG` is `daily`; `config/app.php:124` defaults to `single`. |
+| Google Calendar | `GoogleCalendarController.php` (web connect, callback, sync), `app/Api/V2/Controllers/GoogleCalendarController.php` (`store`, `sync`), `app/Services/GoogleCalendarSync.php`, `app/Models/GoogleCalendarConnection.php`, `GoogleCalendarEventMap.php`, `config/google_calendar.php` (`GOOGLE_CALENDAR_CLIENT_ID`, `GOOGLE_CALENDAR_CLIENT_SECRET`, `GOOGLE_CALENDAR_REDIRECT_URI`). No migration is committed for `google_calendar_connections` or `google_calendar_event_maps`; `GoogleCalendarSync.php:380-388` checks they exist. [23 — Calendar Sync](../features/23-Calendar-Sync.md). |
+| Mobile app keys | `config/appkeys.php` and `AuthController@appKeys` (`app/Api/V2/Controllers/AuthController.php:921-930`), v2 `GET appkeys-<suffix>` |
+| User MCP | `app/UserMcp/`. `Services/McpOperationGuard.php` makes `find_ai_leads`, `save_ai_leads`, `buy_contacts`, `create_route` and `create_route_from_list` safe to retry with an `idempotency_key` claim in `user_mcp_operations` (`:13-72`). Its migration is `app/UserMcp/database/migrations/2026_10_05_120000_create_user_mcp_operations_table.php`, outside `database/migrations`, applied with `--path` (`docs/plugin-submission/README.md:27-33`). Without the table, `save_ai_leads` and `buy_contacts` return `server_misconfigured` and the free tools run unguarded (`:34-44`). |
+| ChatGPT and Claude plugins | `ChatGptPluginController.php`, `ClaudePluginController.php` and `ManagerPluginController.php` serve the HTML pages in `public/chatgpt-plugin/`, `public/claude-plugin/` and `public/manager-plugin/` (`routes/web.php:20-30`). Packages are in `plugins/` (marketplace `plugins/.claude-plugin/marketplace.json`), built by `scripts/build_chatgpt_plugin.py` and `scripts/build_claude_plugin.py`. `/.well-known/openai-apps-challenge` is in `app/UserMcp/routes/app_mcp_wellknown.php:42`. |
 
-v2 controllers present: `AuthController`, `CityController`, `CompanyController`, `ContactSellController`, `InviteController`, `ListController`, `ProfileController`, `RouteController`, `SupportController`, `UserDataController`, `WebhookController`.
+v2 controllers present: `AuthController`, `CityController`, `CompanyController`, `ContactSellController`, `GoogleCalendarController`, `InviteController`, `ListController`, `ProfileController`, `RouteController`, `SupportController`, `UserDataController`, `WebhookController`.
 
 ## Manager routes present
 

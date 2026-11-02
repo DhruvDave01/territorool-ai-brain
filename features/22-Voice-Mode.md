@@ -2,16 +2,18 @@
 
 ## Purpose
 
-A rep turns Voice Mode on for a drive and runs the active route by talking: next stop, last stop, tick a stop off, log or edit an activity, notes, saved-company lookups, lists and routes. V1 is the driving scope only. Finding new leads and looking up new contacts are refused by the assistant and blocked by the voice server (403). Voice never spends credits in V1.
+A rep turns Voice Mode on for a drive and runs the active route by talking: next stop, last stop, tick a stop off, log or edit an activity, notes, saved-company lookups, lists and routes. On `TT_80` the rep can also skip a stop, undo the last visit, switch the active route and start a HubSpot sync. V1 is the driving scope only. Finding new leads and looking up new contacts are refused by the assistant and blocked by the voice server (403). Voice never spends credits in V1.
 
-## Status, 2026-09-29
+## Status, 2026-11-02
 
-Built in mobile commit `49c6ad7f` on branch `VoiceAgent`. It is not merged to `main`. Review: [live code 2026-09-29](../reviews/live-code-2026-09-29.md).
+Read against mobile `TT_80` `daf50eeb` and `Production` `6973a30d`, and web `beta_react` `929f0c7f` and `master` `d3f75449`, on 2026-11-02. Source: [live code, 2026-11-02](../reviews/live-code-2026-11-02.md). Earlier pass: [live code 2026-09-29](../reviews/live-code-2026-09-29.md).
 
-- Only staging and dev builds show it: `VOICE_MODE_ENABLED = IS_STAGING_OR_DEV_BUILD` in `App/config/index.js`. A production build shows no row, mic, card or mini-bar.
-- In those builds the voice server is the reference demo, `VOICE_DEMO_URL = 'https://territool-voice-demo.vercel.app/'`. Laravel does not serve `voice/session` or `voice/tool` yet. There is no route in `routes/api.php`, and staging answered 404 on 2026-09-28.
-- QA ran on the iOS simulator against staging on 2026-09-28: `TerriTool/qa/voice-mode-2026-09-28/REPORT.md`. All 22 tools ran. Open issues are listed below.
-- A rep guide and quick-start sheet dated 2026-09-29 are below. They describe one uncommitted setting, “Use the phone speaker”.
+- Built on branch `VoiceAgent` (reviewed at `49c6ad7f` on 2026-09-29), then merged into `Calendar_Google_Microsoft` and the dev branch `TT_80`. The store build branch `Production` has no voice code, so store users do not have Voice Mode yet.
+- On in every `TT_80` build since `ce2104d0` (15 Oct): `VOICE_MODE_ENABLED = true` (`App/config/index.js:34`). Staging and production builds both show the row, the mics, the Settings card and the mini-bar.
+- The voice server is still the reference demo on Vercel. `VOICE_DEMO_URL` (`App/config/index.js:43-45`, since `85b58f60`) is `https://stage-territool-voice-demo.vercel.app/` when `URL_BASE` contains “staging”, and `https://territool-voice-demo.vercel.app/` otherwise. It is never null. Laravel has no voice routes (`routes/api.php` on `beta_react` and `master`).
+- A build uses whatever `URL_BASE` it was built with (`App/config/index.js:8` staging, `:12` production). At `daf50eeb` it is production, but it flipped between staging and production in six `TT_80` commits from 16 to 28 Oct (`201e596a`, `5df33a2f`, `d615df40`, `f766dcd2`, `7c389031`, `0ff59cdc`). Testers must check `URL_BASE` before a voice test: it decides where the rep signs in and which voice host the build uses.
+- QA ran on the iOS simulator against staging on 2026-09-28. The report and the regression test are in `49c6ad7f` (`git show 49c6ad7f:qa/voice-mode-2026-09-28/REPORT.md`). The `qa/` folder is not in the `TT_80` tree; `.gitignore` lists `qa` since `39f52ea4`.
+- A rep guide and quick-start sheet dated 2026-09-29 are below. The “Use the phone speaker” setting they describe was committed in `5fb2eae7` (30 Sep).
 
 Design and architecture: `Project_TerriTool/aj_voice_demo/territool-voice-agent-main/MOBILE-VOICE-SPEC.md`. Build plan, and what the build changed from it: [22-Voice-Mode-mobile-plan](22-Voice-Mode-mobile-plan.md).
 
@@ -21,20 +23,23 @@ Audio goes between the phone and OpenAI Realtime over WebRTC (`https://api.opena
 
 `App/voice/voiceApi.js` sends JSON with `fetch`, not `API.post`. A barred tool answers 403 on purpose, and `API.post` would log the rep out on that.
 
-- **Sign-in:** with `VOICE_DEMO_URL` set, it signs in with a `voice_session` cookie (base64 JSON of the Realm JWT and profile). Without it, it sends `Authorization: Bearer`.
+- **Sign-in:** `VOICE_DEMO_URL` is never null on `TT_80`, so every build signs in with a `voice_session` cookie (base64 JSON of the Realm JWT and profile, `voiceApi.js:38-48`). The `Authorization: Bearer` branch runs only if `VOICE_DEMO_URL` is set to null.
 - **Time limits:** 30 s for the key, 15 s to connect to OpenAI, 45 s per tool, and 210 s for `create_route` and `create_route_from_list`.
+- **Phone-side tools:** five tools are answered on the phone, not by the voice server. See the tools section below.
 
 ## Where it starts
 
 | Entry | Screen | File | Shown |
 |---|---|---|---|
-| “Drive with Voice Mode” row | `Dashboard` | `dashboard/index.js`, `DriveWithVoiceRow` | Only while a route is active (`routelist`, `is_active` 1). First row above the six tiles. Sub-line “{route} is active · {n} stops left”. |
+| “Voice Mode” row | `Dashboard` | `dashboard/index.js:1419`, `DriveWithVoiceRow` (`VoiceParts.js:332-360`) | Always, with or without an active route (since `fa925407`). First row above the six tiles. Title “Voice Mode” with a “Beta” pill, sub-line “Best to use on Speaker mode instead of Bluetooth”. |
 | Mic, 44 pt | `BasicRouteDetail` | `route/basic/index.js` | Left slot, beside back. Share and edit fill the right slot. |
 | Mic, 44 pt | `ActiveRouteMap` | `activeroutemap/index.js` | Right slot, before the filter button |
 | Voice Mode card | `EditStatus` (Settings) | `dashboard/editstatus.js`, `VoiceSettingsCard` | Between the profile card and Tags |
 | Mini-bar | Every other screen while a session runs | `VoiceMiniBar` inside `CustomFooter`, or `VoiceMiniBarHost` below the navigator | Not on `VoiceScreen`, `VoiceHistory`, `Login`, `Register`, `SubscriptionGate`, `SubscriptionScreen` |
 
-The Dashboard row opens the first-run sheet over Dashboard if Voice Mode was never turned on. Otherwise it opens `VoiceScreen` with `{ start: true }`, which connects. The header mic and the Settings pill (when Off) open `VoiceScreen` with `{ start: true }`. That screen shows the first-run sheet if Voice Mode was never turned on.
+The Dashboard row, the header mic and the Settings pill (when Off) all open `VoiceScreen` with `{ start: true }` (`openVoice`, `VoiceParts.js:27-37`). The header mic first makes its route the active route (`ensureActiveRoute`). `VoiceScreen` shows the first-run sheet if Voice Mode was never turned on, and connects otherwise. There is no sheet over Dashboard any more.
+
+With no active route, opening `VoiceScreen` or starting a session makes the newest published route active on the server (`updaterouteactive`), so the voice tools have a route to drive (`loadActiveRoute({ fallbackLatest: true })`, `VoiceSession.js:450-463`, called from `VoiceScreen.js:615-617` and `VoiceSession.js:677`).
 
 ## Screens
 
@@ -42,25 +47,25 @@ The Dashboard row opens the first-run sheet over Dashboard if Voice Mode was nev
 
 Layout, top to bottom:
 
-- Header “Voice Mode” with back, and a history button (MaterialCommunityIcons `history`) that opens `VoiceHistory`.
+- Header “Voice Mode” with a “Beta” pill (`VoiceScreen.js:647-653`), back, and a history button (MaterialCommunityIcons `history`) that opens `VoiceHistory`.
 - The curved body, holding the state card (orb, pill, hint), then the exchange (tool chips, transcript, cards), then the action bar.
-- `CustomFooter` index 4 with `onVoiceScreen`. Routes is lit, and tapping Routes still opens it, so voice keeps running.
+- `CustomFooter` index 4 with `onVoiceScreen`. Routes is lit, and tapping Routes still opens it. The session stays open there but pauses (see “Leaving the screen” under Session rules).
 
 | State | Pill | Hint |
 |---|---|---|
 | Off | Off | Turn on Voice Mode to start. |
 | Connecting | Connecting… | Getting the line ready. |
-| Listening | Listening | Just talk. No button to hold. Interrupt any time. |
+| Listening | Listening | Just talk. No button to hold. Interrupt any time. With Bluetooth connected: “Using the phone mic and speaker. Just talk.” (speaker setting on) or “Bluetooth is on — responses may be a little slow.” (off). |
 | Hearing you | Hearing you | Go ahead. I’m listening. |
 | Thinking | Thinking… | One moment. While rate-limited: Busy. Trying again in a moment. |
-| Working | Working | One line per tool, for example “Checking the route.”, “Logging it.”, “Building the route. This can take a minute.” |
+| Working | Working | One line per tool, for example “Checking the route.”, “Logging it.”, “Building the route. This can take a minute.” The phone-side tools read “Starting the CRM sync.”, “Switching the route.”, “Skipping that stop.” and “Checking who you have not seen.” (`VoiceScreen.js:67-70`). |
 | Speaking | Speaking | Talk over it to interrupt. |
 | Paused | Paused | The microphone is off. The session stays open. |
 | Error | Connection lost | Tap Reconnect to carry on. Your history is kept. While retrying: Reconnecting. Your history is kept. |
 
 **Buttons:** Off shows “Turn on Voice Mode”. Every other state shows “End” (danger) plus “Pause”, “Resume” when paused, or “Reconnect” on error. There is no push-to-talk and no text box.
 
-**Greeting before the first turn:** “Voice is on, {first name}. You’re on {route}. Ask for the next stop or tell me what happened.” With no active route, it ends “Ask for your routes, or tell me what happened.”
+**Greeting before the first turn:** “Voice is on, {first name}. You’re on {route}. Ask for the next stop or tell me what happened.” With no active route, it ends “Ask for your routes, or tell me what happened.” With Bluetooth connected it adds “Using the phone mic and speaker to talk — Bluetooth is connected.” or “Bluetooth is on — responses may be a little slow.”
 
 Cards come from the latest exchange only:
 
@@ -70,10 +75,12 @@ Cards come from the latest exchange only:
 | LOGGED | `add_activity`, `edit_activity` | “{type} · {company}”, when, quoted note | `ViewCompany` |
 | ACTIVITIES | `view_activities` | Today and upcoming, plus past when a company or date was asked. Up to 20 (“20 OF n”). | `ViewCompany` |
 | RECENT | `recent_activity` | The Dashboard Recent rows | — Shows only once the server has `recent_activity`. The demo server does not have it. |
-| ROUTE / ROUTES | `view_routes` (newest three), `get_active_route`, `view_route` | “{n} stops · {m} left”, button Open | `BasicRouteDetail` |
-| IN THE APP | An assistant line matching “can’t search for new leads” or “can’t look up new contacts” | AI Find Leads, “Voice keeps running while you search.”, button Open | `AIFindLeadsChat` |
+| NOT SEEN | `list_unseen` | Skipped stops not yet visited, up to 20, each “Not seen” (`VoiceScreen.js:502-513`) | — |
+| ROUTE / ROUTES | `view_routes` (newest three), `get_active_route`, `view_route`, and since `b99a7c6b` `create_route` and `create_route_from_list` | “{n} stops · {m} left”, button Open | `BasicRouteDetail` |
+| PICK A ROUTE | `set_active_route` with no route name | The newest published routes, up to 10, right label “LATEST {n}”. Each row “{n} stops · {m} left · {MMM D}”, then “Use”, or “Active” on the active route (`VoiceScreen.js:537-561`). | “Use” sends “Switch to the route called {title}.” into the session as the rep’s turn |
+| IN THE APP | An assistant line matching “can’t search for new leads” or “can’t look up new contacts” | AI Find Leads, “Voice keeps running while you search.”, button Open | `MultipleAIWaypoint` (`VoiceScreen.js:571`) |
 | CHECK BEFORE REPEATING | A write tool whose request was lost | “That last one may not have saved”, then “The network dropped while “{what was said}” was running. Open the company before saying it again.” | “Open {company}” or “Open Address Book” |
-| NEXT STOP / LAST STOP / ACTIVE ROUTE | Otherwise. From `next_waypoint`, `last_stop`, `mark_visited`, `open_route`, or the first unvisited stop. ACTIVE ROUTE while Off. | The route-detail stop row, compact. Right label “{left} OF {total} LEFT” or “VISITED h:mm”. | `WaypointDetail` |
+| NEXT STOP / LAST STOP / ACTIVE ROUTE | Otherwise. From `next_waypoint`, `last_stop`, `mark_visited`, `skip_waypoint`, `go_back`, `open_route`, or the first stop not visited or skipped. While Off the title is the route name, or ACTIVE ROUTE without one. | The route-detail stop row, compact. Right label “{left} OF {total} LEFT”, plus “· {miles} MI” when the rep’s distance is known, or “VISITED h:mm”. A skipped stop reads “Not seen”. | `WaypointDetail` |
 
 In dev builds, a long press on the orb asks “How many credits do I have?” through the live session (`debugAsk`).
 
@@ -88,12 +95,13 @@ In dev builds, a long press on the orb asks “How many credits do I have?” th
 ### First-run sheet — `FirstRunSheet`
 
 - **Title:** “Voice for the drive”, sub-line “Talk to TerriTool. Keep your eyes on the road.”
-- **Three rows:**
+- **Four rows:**
   - “What’s next, and what the last stop was”: “Reads the active route. Ticks stops off when you say you’ve been in.”
   - “Log a visit, call, meeting, reminder or appointment”: ““Nobody there, back next Tuesday at ten” logs both.”
   - “Your chat stays on this phone”: “New leads and contacts stay in the app.”
+  - “Uses the phone speaker and mic”: “Voice hears you better than over Bluetooth or car audio. Change it in Settings.”
 - **Note:** “TerriTool needs the microphone while Voice Mode is on. The mic stays open, so you never press to talk.”
-- **Buttons:** “Not now” (danger) and “Turn on Voice Mode”. The microphone permission is asked on that button, never at launch.
+- **Buttons:** “Not now” (danger) and “Turn on Voice Mode”. The microphone permission is asked on that button, never at launch. The sheet closes first and the OS prompt follows, because iOS will not show it over the sheet (`VoiceParts.js:97-114`).
 
 ### Mini-bar — `VoiceMiniBar`
 
@@ -104,8 +112,9 @@ In dev builds, a long press on the orb asks “How many credits do I have?” th
 
 ### Settings card — `VoiceSettingsCard`
 
-- **Header:** “Voice Mode” with an On / Off pill. Turning it Off ends the session.
-- **“Keep listening with the screen off”:** “Runs as background audio while you drive”. Default on.
+- **Header:** “Voice Mode” with a “Beta” pill and an On / Off pill. Turning it Off ends the session.
+- **“Use the phone speaker”:** default on. Sub-line “Voice hears you better than over Bluetooth or car audio” when on, “Uses Bluetooth when connected — responses may be a little slow” when off (`VoiceParts.js:418-425`).
+- **“Keep listening with the screen off”:** “Android: stays on while you drive. iPhone pauses when the screen locks so noise cannot log visits.” Default on. On iPhone, locking the screen or leaving the app always pauses the session, whatever this switch says.
 - **“Start when I open a route”:** “Only for the active route”. Default off.
 - **“Voice history”:** “500 latest turns · this phone only”, with a Clear button. It uses the same confirm as the history screen.
 - **Storage:** AsyncStorage `voice.settings.v1`.
@@ -113,13 +122,16 @@ In dev builds, a long press on the orb asks “How many credits do I have?” th
 ## Session rules — `App/voice/VoiceSession.js`
 
 - **One session:** it serves the whole app and lives outside navigation. Opening a card or another screen never ends it.
+- **Leaving the screen:** leaving `VoiceScreen` for any screen except `VoiceHistory` pauses the session, and coming back resumes it. A pause the rep made before leaving stays (`VoiceScreen.js:629-637`, `VoiceParts.js:266-276`, `VoiceSession.js:802-818`).
 - **Open mic:** Pause turns the mic track off, cancels the reply, and keeps the session. Talking over the assistant interrupts it.
 - **Tool order:** tool calls run one at a time, in order. The model context is cut to 12 items (`history.js`).
 - **Rate limit:** wait the seconds OpenAI names plus 300 ms (5 s if it names none), then ask again.
 - **Drops and renewal:** a drop longer than 5 s gets one silent reconnect, then “Connection lost” with Reconnect. At 55 minutes the key is renewed and the session reconnects. The transcript carries on.
-- **Lost writes:** when the request for a write tool is lost, the model is told the result is unknown, and CHECK BEFORE REPEATING appears. The write tools are `set_company_status`, `add_contact`, `add_note`, `create_list`, `add_activity`, `edit_activity`, `create_route`, `create_route_from_list`, `open_route` and `mark_visited`.
-- **Interruptions:** a call, Siri or another app taking the audio pauses the session, and it resumes when they finish. With “Keep listening” off, going to the background pauses it too.
-- **Audio output:** the loudspeaker unless Bluetooth, CarPlay or a headset is connected. Never the earpiece. This is incall-manager media `video`.
+- **Lost writes:** when the request for a write tool is lost, the model is told the result is unknown, and CHECK BEFORE REPEATING appears. The write tools are `set_company_status`, `add_contact`, `add_note`, `create_list`, `add_activity`, `edit_activity`, `create_route`, `create_route_from_list`, `open_route`, `mark_visited` and `go_back` (`VoiceSession.js:44-46`).
+- **Interruptions:** a call, Siri or another app taking the audio pauses the session, and it resumes when they finish. On iPhone, locking the screen or sending the app to the background always pauses it. On Android that happens only with “Keep listening” off (`VoiceSession.js:831-842`).
+- **Audio output:** incall-manager media `video`: the loudspeaker unless Bluetooth, CarPlay or a headset is connected, never the earpiece. With “Use the phone speaker” on (the default), `setForceSpeakerphoneOn(true)` keeps the phone’s own speaker and mic even with Bluetooth connected (`audioSession.js:42-44`).
+- **Microphone check:** every connect the rep starts checks the permission. On denial it does not connect, and the screen shows the Error state with “Microphone access is needed for Voice Mode.” (`VoiceSession.js:655-658`).
+- **Rep location:** while a session is live, a low-power location watch runs if location access was already granted. It never asks (`repLocation.js:37-50`). The phone sends the rep’s position with `next_waypoint`, `last_stop`, `view_company` and `search_companies`, and adds `distance_from_you_miles` (straight-line), `distance_kind` and `location_age_minutes` to their results (`repLocation.js:93-104`).
 - **Android screen off:** a notifee microphone foreground service keeps listening. Its notification reads “Voice Mode is on” / “TerriTool is listening while you drive.” on the channel “Voice Mode”.
 - **History storage:** Realm `VoiceTurn`, scope `${URL_BASE}:${user_id}`, latest 500 kept. Signing out on any path deletes every `VoiceTurn` row on the phone and ends the session (`SIGNED_OUT_EVENT` from `deleteJWTToken`).
 
@@ -128,6 +140,18 @@ In dev builds, a long press on the orb asks “How many credits do I have?” th
 Twenty-two, from `local-demo/server/brain.mjs` `VOICE_TOOLS`: `get_credits`, `search_companies`, `view_company`, `set_company_status`, `add_contact`, `add_note`, `get_notes`, `create_list`, `add_activity`, `view_activities`, `edit_activity`, `create_route`, `create_route_from_list`, `view_routes`, `view_route`, `open_route`, `get_active_route`, `next_waypoint`, `last_stop`, `mark_visited`, `view_lists`, `view_list`.
 
 Anything else answers 403 “{name} is not in the voice whitelist.” or “{name} is not allowed by voice.” (`local-demo/server/tools.mjs`).
+
+### Tools the phone adds (`TT_80`)
+
+Once the session lists its tools, the phone appends five more with `session.update` (`crmTool.js:103-150`) and answers them itself (`VoiceSession.js:1074-1092`):
+
+| Tool | Does | Calls |
+|---|---|---|
+| `sync_crm` | Starts a HubSpot companies-and-contacts sync and returns at once. A phone notification reports the end. Not connected: “HubSpot is not connected. Connect it in Settings, then ask me to sync.” | `hubspot-last-sync`, then `hubspot-both-sync` on `URL_BASE` |
+| `set_active_route` | Makes the named published route active. With no name it shows PICK A ROUTE. | `routelist`, `updaterouteactive` |
+| `skip_waypoint` | Passes stops without marking them visited. Skipped ids are kept on this phone only (AsyncStorage `voice.skipped.v1:{scope}:{route id}`), so another phone still offers those stops. | none |
+| `list_unseen` | Names the skipped stops not yet visited (NOT SEEN). | none |
+| `go_back` (write) | Unmarks the most recent visit, or a named one, so that company is the next stop again. | voice server `mark_visited` with `visited: false` |
 
 ## Rules that shape the screens
 
@@ -140,14 +164,16 @@ Anything else answers 403 “{name} is not in the voice whitelist.” or “{nam
 
 ## Known issues
 
-From the QA report of 2026-09-28 and the code:
+From the QA report of 2026-09-28 and the code, re-checked against `TT_80` `daf50eeb` on 2026-11-02:
 
-1. Unticking a visit (`mark_visited` with `visited: false`) fails on the demo server path, and on the web reference too.
-2. After another client switches the route, the phone’s cached route can disagree with `get_active_route`. `applyStopResult()` does not refresh for that tool. `open_route` does.
-3. There is no “Open the route” card after `create_route` or `create_route_from_list`.
-4. A contact-lookup refusal hands off to AI Find Leads, because one refusal matcher covers both. It is not a contact flow.
-5. Not certified: real speech, road noise, Bluetooth and CarPlay, calls, screen lock, background audio, and the 55-minute renewal.
-6. `GEMINI_API_KEY` is still hard-coded in `App/config/index.js`. The plan item to move it is open.
+1. Unticking a visit (`mark_visited` with `visited: false`) fails on the demo server path, and on the web reference too. The phone’s `go_back` sends this same call (`VoiceSession.js:415-419`). Not re-tested in this pass.
+2. After another client switches the route, the phone’s cached route can disagree with `get_active_route`. `applyStopResult()` (`VoiceSession.js:561-582`) still has no case for that tool. `open_route` and `set_active_route` refresh it.
+3. Fixed in `b99a7c6b`: `create_route` and `create_route_from_list` now show the ROUTE card with Open (`VoiceScreen.js:370`).
+4. A contact-lookup refusal still hands off to AI Find Leads, because one refusal matcher covers both (`REFUSAL`, `VoiceScreen.js:431`). It is not a contact flow.
+5. Not certified: real speech, road noise, Bluetooth and CarPlay, calls, background audio, and the 55-minute renewal. No field-test record is in the `TT_80` tree. On iPhone, screen lock now pauses by design.
+6. Fixed on `TT_80`: `GEMINI_API_KEY` left `App/config/index.js` in `85b58f60`. The app now loads it with the other map and AI keys from `URL_APP_KEYS` (web `GET appkeys-<suffix>`, `AuthController@appKeys`, `routes/api.php:111` on `beta_react` and `master`) into the Realm `AppKeys` table, schema 20 (`fa925407`). `Production` still has it hard-coded (`App/config/index.js:210` on that branch).
+7. A debug `console.log("DriveWithVoiceRow", …)` remains in `VoiceParts.js:335` and logs on every render of the Dashboard row.
+8. The IN THE APP card says “Voice keeps running while you search.”, but opening AI Find Leads leaves `VoiceScreen`, which pauses the session.
 
 ## Screens (strings)
 
@@ -155,15 +181,15 @@ Copy these strings. Do not write new ones.
 
 | Surface | Screen | File / still | Primary action | Loading | Empty | Error |
 |---|---|---|---|---|---|---|
-| Mobile | `VoiceScreen` | `voice/VoiceScreen.js` · [listening](../screenshots/mobile-owner/VoiceMode/04-mobile-answers.jpg) | Talk; Pause / Resume; End | Pill “Connecting…”, hint “Getting the line ready.” | Greeting bubble before the first turn | Pill “Connection lost” and the hints above. The detail line can also read “No signal right now. Tap Reconnect when you have one.”, “Voice took too long to connect.”, “Voice could not start ({status}).” or “Sign in again to use Voice Mode.” |
+| Mobile | `VoiceScreen` | `voice/VoiceScreen.js` · [listening](../screenshots/mobile-owner/VoiceMode/04-mobile-answers.jpg) | Talk; Pause / Resume; End | Pill “Connecting…”, hint “Getting the line ready.” | Greeting bubble before the first turn | Pill “Connection lost” and the hints above. The detail line can also read “No signal right now. Tap Reconnect when you have one.”, “Voice took too long to connect.”, “Voice could not start ({status}).”, “Sign in again to use Voice Mode.” or “Microphone access is needed for Voice Mode.” |
 | Mobile | `VoiceHistory` | `voice/VoiceHistory.js` · [history](../screenshots/mobile-owner/VoiceMode/16-fixed-clean-history.jpg) · [empty](../screenshots/mobile-owner/VoiceMode/02-history-empty.jpg) | Clear | — | “Nothing yet. Try “What’s next?”” | — |
 | Mobile | First-run sheet | `voice/VoiceParts.js` `FirstRunSheet` | Turn on Voice Mode | Button spinner while the mic is asked | — | OS settings prompt: “Turn on the microphone” / “Microphone access is turned off for TerriTool. Open Settings to enable it, then return to the app.” |
 | Mobile | Mini-bar | `VoiceMiniBar` · [on route detail](../screenshots/mobile-owner/VoiceMode/15-auto-start.jpg) | Pause / Resume / Reconnect; expand | “Voice on · Connecting” | — | “Voice on · Connection lost” |
-| Mobile | Settings card | `VoiceSettingsCard` · [Settings](../screenshots/mobile-owner/VoiceMode/14-settings-enabled.jpg) | On / Off; two switches; Clear | — | — | — |
+| Mobile | Settings card | `VoiceSettingsCard` · [Settings](../screenshots/mobile-owner/VoiceMode/14-settings-enabled.jpg) | On / Off; three switches; Clear | — | — | — |
 
 ## Shipped stills
 
-Captured on the iOS simulator against staging during QA on 2026-09-28. Folder: [screenshots/mobile-owner/VoiceMode](../screenshots/mobile-owner/VoiceMode). They are 368 × 800. The “Refreshing…” strip at the top of several is the dev build’s refresh banner. It is not part of the design.
+Captured on the iOS simulator against staging during QA on 2026-09-28. Folder: [screenshots/mobile-owner/VoiceMode](../screenshots/mobile-owner/VoiceMode). They are 368 × 800. The “Refreshing…” strip at the top of several is the dev build’s refresh banner. It is not part of the design. They predate the `TT_80` changes above: they have no “Beta” pill, no NOT SEEN or PICK A ROUTE card, and the Settings card has no speaker switch. Where they differ, the code wins.
 
 | Still | Shows |
 |---|---|
@@ -200,17 +226,19 @@ The six journeys in the guide. The guide says its phrases are illustrative, and 
 
 Checked against the code on 2026-09-29. Both files match commit `49c6ad7f` and the QA report, except in five places:
 
-1. **Phone speaker:** the guide’s “Use the phone speaker” setting (default on) and the sheet’s “Use your phone speaker & mic” banner describe uncommitted work (below). The committed app has no such setting.
-2. **Onboarding sentence:** the guide’s “For the best Voice Mode experience, use your phone’s speaker and microphone. Bluetooth or car audio may affect recognition and response time.” is a suggestion. The app’s own line, also uncommitted, is “Voice hears you better than over Bluetooth or car audio. Change it in Settings.”
+1. **Phone speaker:** the guide’s “Use the phone speaker” setting (default on) and the sheet’s “Use your phone speaker & mic” banner describe work that was uncommitted on 2026-09-29. It was committed in `5fb2eae7` (below).
+2. **Onboarding sentence:** the guide’s “For the best Voice Mode experience, use your phone’s speaker and microphone. Bluetooth or car audio may affect recognition and response time.” is a suggestion. The app’s own line, committed in `5fb2eae7`, is “Voice hears you better than over Bluetooth or car audio. Change it in Settings.”
 3. **Sheet step 3:** it shows the hint “Note saved for Harbor HVAC.” and a “Note saved · Send pricing” row. The app has neither. While speaking, the hint is “Talk over it to interrupt.” `add_note` shows only its tool chip and the spoken answer.
 4. **Stop rows on the sheet:** they use a map-pin icon. The app’s stop row shows the route-order number and “Not visited yet”.
 5. **Error state:** the guide calls it “Error”. The pill on screen reads “Connection lost”.
 
 The state strip colours on the sheet match `TONES`: Listening teal, Working amber, Speaking blue, and Paused as a red pill on a grey orb.
 
-### Phone speaker setting — uncommitted on 2026-09-29
+Since then `TT_80` pauses the session when the rep leaves `VoiceScreen`, so the sheet’s “Voice stays on as you move between TerriTool screens.” now means the session stays open, paused, with the mini-bar to resume it.
 
-This is in the mobile working tree, not in `49c6ad7f` (files `VoiceParts.js`, `VoiceScreen.js`, `VoiceSession.js`, `audioSession.js`). The strings are recorded here because the guide describes them. Treat them as live only once they are committed.
+### Phone speaker setting — committed in `5fb2eae7`
+
+This was in the mobile working tree on 2026-09-29 and was committed on 2026-09-30 in `5fb2eae7` (files `VoiceParts.js`, `VoiceScreen.js`, `VoiceSession.js`, `audioSession.js`). It is on `TT_80`, not on `Production`.
 
 - **Settings switch:** “Use the phone speaker”, default on (`settings.speaker`), test ID `screen.editStatus.voiceSpeaker`.
   - Sub-line when on: “Voice hears you better than over Bluetooth or car audio”.
@@ -220,28 +248,28 @@ This is in the mobile working tree, not in `49c6ad7f` (files `VoiceParts.js`, `V
   - The Listening hint reads “Using the phone mic and speaker. Just talk.” with the setting on, or “Bluetooth is on — responses may be a little slow.” with it off.
   - The greeting adds “Using the phone mic and speaker to talk — Bluetooth is connected.” or “Bluetooth is on — responses may be a little slow.”
 - **Behaviour:** with the setting on, `InCallManager.setForceSpeakerphoneOn(true)` keeps the phone’s own speaker and mic even with Bluetooth connected. The code comment says Voice mishears over Bluetooth’s phone-call audio.
-- **Also uncommitted:** a microphone permission check on every connect the rep starts.
+- **Same commit:** a microphone permission check on every connect the rep starts. On denial: “Microphone access is needed for Voice Mode.”
 
 ## Design renders, 2026-09-28 (before the build)
 
-Rendered with [render a still](../methods/render-still.md) before the code existed. Where a render and a shipped still differ, the shipped still wins. There are no shipped stills yet of the Dashboard row, the first-run sheet, the Working and Paused states, or the map mini-bar. Use these renders for those, with the strings above.
+Rendered with [render a still](../methods/render-still.md) before the code existed. Where a render and a shipped still differ, the shipped still wins. None of the renders has the “Beta” pill that `TT_80` shows beside “Voice Mode”. There are no shipped stills yet of the Dashboard row, the first-run sheet, the Working and Paused states, or the map mini-bar. Use these renders for those, with the strings above.
 
 Chrome is cropped from the owner stills (Settings 19.37.23 for the header and footer, Route detail 20.07.14 for the Routes footer, Map 20.16.46, Dashboard 19.36.33). Only the voice regions are drawn, with the two DIN files and the app icons from `assets/`.
 
 | Still | Screen | Region |
 |---|---|---|
-| [Overview sheet](voice-mode-mobile-all.png) | the eleven renders below, at once | |
-| [dashboard-entry](voice-mode-mobile-dashboard-entry.png) | `Dashboard` | “Drive with Voice Mode” row, shown only while a route is active. The live row is the first row above the six tiles. |
-| [first-run-voice-screen](voice-mode-mobile-first-run-voice-screen.png) | sheet over `VoiceScreen` (Off) | The first-run sheet. Opened from a route header or Settings. Over Dashboard it is the same sheet; there is no separate render of that variant. |
-| [listening](voice-mode-mobile-listening.png) | `VoiceScreen` | State card, transcript, next-stop row, End / Pause |
-| [working](voice-mode-mobile-working.png) | `VoiceScreen` | Tool chip while a call runs; last-stop row. The live pill reads “Working”, and the hint line carries the tool. |
-| [logged](voice-mode-mobile-logged.png) | `VoiceScreen` | One sentence logs a Visit and an Appointment, then the next stop |
-| [paused](voice-mode-mobile-paused.png) | `VoiceScreen` | Mic off, session kept, Resume. The live pill reads “Paused”. |
-| [refusal](voice-mode-mobile-refusal.png) | `VoiceScreen` | Lead-search refusal with the hand-off card to AI Find Leads |
-| [connection-lost](voice-mode-mobile-connection-lost.png) | `VoiceScreen` | “May not have saved” card, Reconnect |
-| [map-minibar](voice-mode-mobile-map-minibar.png) | `ActiveRouteMap` | Mini-bar at the bottom while a session runs elsewhere |
-| [history](voice-mode-mobile-history.png) | `VoiceHistory` | Turns grouped by day, saved on this phone only |
-| [settings](voice-mode-mobile-settings.png) | `EditStatus` | Voice Mode card between the profile card and Tags |
+| [Overview sheet](<Voice Mode/voice-mode-mobile-all.png>) | the eleven renders below, at once | |
+| [dashboard-entry](<Voice Mode/voice-mode-mobile-dashboard-entry.png>) | `Dashboard` | The earlier “Drive with Voice Mode” row, drawn for “only while a route is active”. The live row reads “Voice Mode” / “Beta” / “Best to use on Speaker mode instead of Bluetooth” and always shows, as the first row above the six tiles. |
+| [first-run-voice-screen](<Voice Mode/voice-mode-mobile-first-run-voice-screen.png>) | sheet over `VoiceScreen` (Off) | The first-run sheet. Every entry opens it over `VoiceScreen`. The live sheet has a fourth row, “Uses the phone speaker and mic”. |
+| [listening](<Voice Mode/voice-mode-mobile-listening.png>) | `VoiceScreen` | State card, transcript, next-stop row, End / Pause |
+| [working](<Voice Mode/voice-mode-mobile-working.png>) | `VoiceScreen` | Tool chip while a call runs; last-stop row. The live pill reads “Working”, and the hint line carries the tool. |
+| [logged](<Voice Mode/voice-mode-mobile-logged.png>) | `VoiceScreen` | One sentence logs a Visit and an Appointment, then the next stop |
+| [paused](<Voice Mode/voice-mode-mobile-paused.png>) | `VoiceScreen` | Mic off, session kept, Resume. The live pill reads “Paused”. |
+| [refusal](<Voice Mode/voice-mode-mobile-refusal.png>) | `VoiceScreen` | Lead-search refusal with the hand-off card to AI Find Leads |
+| [connection-lost](<Voice Mode/voice-mode-mobile-connection-lost.png>) | `VoiceScreen` | “May not have saved” card, Reconnect |
+| [map-minibar](<Voice Mode/voice-mode-mobile-map-minibar.png>) | `ActiveRouteMap` | Mini-bar at the bottom while a session runs elsewhere |
+| [history](<Voice Mode/voice-mode-mobile-history.png>) | `VoiceHistory` | Turns grouped by day, saved on this phone only |
+| [settings](<Voice Mode/voice-mode-mobile-settings.png>) | `EditStatus` | Voice Mode card between the profile card and Tags. The live card adds the “Beta” pill and “Use the phone speaker”, and has the new “Keep listening” sub-line. |
 
 ## Consistency — Voice Mode
 
@@ -263,11 +291,16 @@ Chrome is cropped from the owner stills (Settings 19.37.23 for the header and fo
 | `App/voice/history.js` | Keeps the model context at 12 items |
 | `App/voice/transcript.js` | Places rep and assistant text by item id |
 | `App/voice/useVoice.js` | `useSyncExternalStore` over the session, for screens and the mini-bar |
+| `App/voice/crmTool.js` | Appends the five phone-side tools and their prompt lines (`withCrmTool`); route picking (`pickRoute`, `latestRoutes`, `pickLatestRoute`) |
+| `App/voice/skipStops.js` | `skip_waypoint` and `list_unseen`: skip plans and unseen names |
+| `App/voice/goBack.js` | `go_back`: which visit to undo, and the result |
+| `App/voice/repLocation.js` | Location watch while live; `withRepPosition`, `withDistance` |
 | `App/components/voice/VoiceScreen.js` | The voice screen and its cards |
 | `App/components/voice/VoiceHistory.js` | The history screen |
 | `App/components/voice/VoiceParts.js` | Mini-bar and its host, header mic, Dashboard row, first-run sheet, Settings card, `ActionButton`, `Bubble`, `MicBadge`, `openVoice` |
 | `App/components/voice/voice.styles.js` | `VOICE` and `TONES` tokens, card, outline button, orb |
-| `App/storage/realm.js` | `VoiceTurn`, `getVoiceTurns`, `saveVoiceTurn`, `clearVoiceTurns`; schema 19 |
+| `App/storage/realm.js` | `VoiceTurn`, `getVoiceTurns`, `saveVoiceTurn`, `clearVoiceTurns`; schema 20 on `TT_80`, which also adds `AppKeys` |
 | `App/utils/mediaPermissionAccess.js` | `ensureMicrophonePermission()` |
-| `qa/voiceSession.regression.test.js` | Committed regression tests for history clearing |
 | `.maestro/voice-mode-ios.yaml`, `.maestro/voice-mode-android.yaml` | First-run sheet, microphone prompt, Pause / Resume / End |
+
+The regression test `qa/voiceSession.regression.test.js` is in `49c6ad7f` only; `qa/` is not in the `TT_80` tree.

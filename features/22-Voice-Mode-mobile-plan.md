@@ -8,18 +8,20 @@ Written 2026-09-28. Scope is the React Native app only: `/Users/dhruvdave/Dhurv/
 
 Rule from the spec: copy, do not redesign.
 
-## Status, 2026-09-29
+## Status, 2026-11-02
 
-Mobile commit `49c6ad7f` on branch `VoiceAgent` builds Phases 0 to 4 and part of Phase 5. What shipped is on [22 — Voice Mode](22-Voice-Mode.md). This plan is kept below as written on 2026-09-28. Review: [live code 2026-09-29](../reviews/live-code-2026-09-29.md).
+Mobile commit `49c6ad7f` on branch `VoiceAgent` built Phases 0 to 4 and part of Phase 5. `VoiceAgent` has since been merged into the dev branch `TT_80` (`daf50eeb`). The store build branch `Production` has no voice code. What shipped is on [22 — Voice Mode](22-Voice-Mode.md). This plan is kept below as written on 2026-09-28; the table records what differs. Source: [live code, 2026-11-02](../reviews/live-code-2026-11-02.md). Earlier pass: [live code 2026-09-29](../reviews/live-code-2026-09-29.md).
+
+There are still no Laravel voice routes (`routes/api.php` on `beta_react` and `master`). Every `TT_80` build sends `voice/session` and `voice/tool` to `VOICE_DEMO_URL`, the staging or production demo host chosen by `URL_BASE` (`App/config/index.js:43-45`). Since the 29 September pass, `TT_80` also added five phone-side tools, the NOT SEEN and PICK A ROUTE cards, and a pause when the rep leaves the voice screen.
 
 | Phase | State | What differs from the plan |
 |---|---|---|
 | 0 — audio stack | Built | Both libraries are in, and incall-manager is patched for the iOS `AudioInterruption` event. There is no separate dev test screen. In dev builds a long press on the orb asks the credits question instead. Not yet tested on real phones or in a car. |
-| 1 — voice core | Built | All six files are in `App/voice/`, with the time limits above. Tests are `qa/voiceSession.regression.test.js` (committed) and `__tests__/voiceSession.test.js` (on disk only, because `.gitignore` excludes `__tests__`). |
+| 1 — voice core | Built | All six files are in `App/voice/`, with the time limits above; `TT_80` adds four more (`crmTool.js`, `skipStops.js`, `goBack.js`, `repLocation.js`). The regression test `qa/voiceSession.regression.test.js` was committed in `49c6ad7f`, but the `qa/` folder is not in the `TT_80` tree (`.gitignore` lists `qa` since `39f52ea4`). `__tests__/voiceSession.test.js` is on disk only, because `.gitignore` excludes `__tests__`. |
 | 2 — screen and cards | Built, changed | The pill reads the bare state (“Working”, “Paused”), and a hint line carries the rest. The stop row has no Navigate button and opens `WaypointDetail`. Activity rows open `ViewCompany`, not `CustomCompany`. Added: ACTIVITIES, RECENT, ROUTES, IN THE APP, CHECK BEFORE REPEATING. |
 | 3 — phone realities | Built in code | Info.plist, background audio, Android permissions, the notifee microphone service, and `ensureMicrophonePermission()` are in. The Android notification reads “Voice Mode is on” / “TerriTool is listening while you drive.” The real-phone checks have not been run. |
-| 4 — entry points | Built | Dashboard row, both route-header mics, mini-bar, first-run sheet, Settings card, `VoiceHistory`, Realm `VoiceTurn` at schema 19. Logout runs through the new `SIGNED_OUT_EVENT` from `deleteJWTToken`, which covers every path. |
-| 5 — release | Part | Done: the flag (`VOICE_MODE_ENABLED`), both Maestro flows, and `captureSentryError(…, 'voice', …)`. Open: the Laravel `voice/session` and `voice/tool` endpoints (the app uses `VOICE_DEMO_URL` until then), store paperwork, the field test, and moving `GEMINI_API_KEY` out of `App/config/index.js`. |
+| 4 — entry points | Built | Dashboard row, both route-header mics, mini-bar, first-run sheet, Settings card, `VoiceHistory`, Realm `VoiceTurn` at schema 19 (schema 20 on `TT_80`, which adds `AppKeys`). Logout runs through the new `SIGNED_OUT_EVENT` from `deleteJWTToken`, which covers every path. On `TT_80` the Dashboard row shows with or without an active route (`fa925407`), and the first-run sheet shows only over `VoiceScreen`. |
+| 5 — release | Part | Done: the flag (`VOICE_MODE_ENABLED`), both Maestro flows, and `captureSentryError(…, 'voice', …)`. The flag is `true` in every `TT_80` build since `ce2104d0`. `GEMINI_API_KEY` left `App/config/index.js` in `85b58f60`. Open: the Laravel `voice/session` and `voice/tool` endpoints (the app uses `VOICE_DEMO_URL` until then), store paperwork, and the field test. |
 
 Defaults, as decided in code:
 

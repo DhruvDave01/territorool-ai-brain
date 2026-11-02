@@ -1,15 +1,16 @@
 # API endpoints — v2 route table
 
-Generated 2026-09-22 from `webterritool/routes/api.php` (the `$api->version('v2')` block) and `TerriTool/App/config/index.js`. When this page and those files disagree, the files win. Rules and credit costs: [API](api.md). Mobile call shape: [mobile components](../code/mobile-components.md).
+Generated 2026-09-22 from `webterritool/routes/api.php` (the `$api->version('v2')` block) and `TerriTool/App/config/index.js`. Recounted 2026-11-02 from `routes/api.php` on `master` `d3f75449` and `beta_react` `929f0c7f` (the two files are identical) and `App/config/index.js` on `TT_80` `daf50eeb` ([review](../reviews/live-code-2026-11-02.md)). When this page and those files disagree, the files win. Rules and credit costs: [API](api.md). Mobile call shape: [mobile components](../code/mobile-components.md).
 
-Base is `https://staging.territool.com/index.php/api/`. "jwt" means the route sits inside the `jwt.refresh` group and needs `Authorization: Bearer`. "public" means no token. "Mobile constant" is the export in `App/config/index.js` that the app appends to `URL_BASE`; a blank cell means the app does not call it today (web, cron, or webhook only). Handlers are in `app/Api/V2/Controllers/` unless marked `Http`.
+The committed `URL_BASE` is production, `https://app.territool.com/index.php/api/` (`App/config/index.js:12` on `TT_80` and `Production`). Tests use staging, `https://staging.territool.com/index.php/api/`. "jwt" means the route sits inside the `jwt.refresh` group and needs `Authorization: Bearer`. "public" means no token. "Mobile constant" is the export in `App/config/index.js` on `TT_80` that the app appends to `URL_BASE`; a blank cell means the app does not call it today (web, cron, or webhook only). Handlers are in `app/Api/V2/Controllers/` unless marked `Http`.
 
-Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
+Totals on 2026-11-02: 150 routes on both `master` and `beta_react`, 125 behind JWT, 115 with a `TT_80` mobile constant. Against `Production`'s config the figure is 112, because it lacks the app-keys and calendar constants. The five routes added since 2026-09-29 are `appkeys-<suffix>`, `getBulkContactsCompanies`, `getClaudeContactCounts`, `google-calendar/connection` and `google-calendar/sync`.
 
 ## Auth, session, profile
 
 | Path | Method | Handler | Auth | Mobile constant | Credits |
 |---|---|---|---|---|---|
+| `appkeys-<suffix>` | GET | `AuthController@appKeys` | jwt | `URL_APP_KEYS` | Returns `status` 1 with `MAPBOX_ACCESS_TOKEN`, `DIRECTION_APIKEY`, `GEMINI_API_KEY` and `GOOGLE_KEY` from `config/appkeys.php`. The suffix is in `routes/api.php:111`. |
 | `authenticate` | POST | `AuthController@authenticate` | public |  |  |
 | `downloadpdf` | POST | `CompanyController@download` | public |  |  |
 | `getUsers` | GET | `AuthController@getAllUser` | public |  |  |
@@ -38,7 +39,7 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 |---|---|---|---|---|---|
 | `cancelSubscription` | GET | `RouteController@cancelSubscribe` | jwt | `CANCEL_SUBSCRIPTION` |  |
 | `cancelSubscription` | POST | `RouteController@cancelSubscribe` | jwt | `CANCEL_SUBSCRIPTION` |  |
-| `getusercredit` | GET | `RouteController@getUserCredit` | jwt | `GET_CREDIT_INFO` | 0 |
+| `getusercredit` | GET | `RouteController@getUserCredit` | jwt | `GET_CREDIT_INFO` | 0. Also returns `has_used_ai_find_leads`, `google_calendar_connected` and `google_calendar_last_sync` (`RouteController.php:3719-3747`). |
 | `request-package-upgrade` | POST | `RouteController@requestPackageUpgrad` | jwt | `CHANGE_SUBSCRIPTION` |  |
 | `revenue-subscription-update` | POST | `WebhookController@revenueSubscriptio` | public |  |  |
 | `revenuecate-success` | POST | `AuthController@revenuecateSuccess` | public | `URL_REVENUECAT_SUCCESS` |  |
@@ -83,6 +84,8 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 | `getcompanyactivities` | POST | `CompanyController@getCompanyActiviti` | jwt | `URL_GET_COMPANY_ACTIVITIES` |  |
 | `getlogmeeting` | POST | `CompanyController@getCompanyLogMeeti` | jwt | `URL_GET_LOG_MEET` |  |
 | `getnotes` | POST | `CompanyController@getCompanyNotes` | jwt | `URL_GET_COMPANY_NOTE` |  |
+| `google-calendar/connection` | POST | `GoogleCalendarController@store` | jwt | `URL_GOOGLE_CALENDAR_CONNECTION` | The app sends JSON `accessToken`, `refreshToken`, `expiresAt` (`asJson`); a `code` is also accepted |
+| `google-calendar/sync` | POST | `GoogleCalendarController@sync` | jwt | `URL_GOOGLE_CALENDAR_SYNC` | Copies meetings and appointments to Google; `data` has `created`, `updated`, `removed`, `skipped`, `failed`, `needs_auth` |
 | `updatecompanyactivity` | POST | `CompanyController@updateCompanyActiv` | jwt | `URL_UPDATE_COMPANY_ACTIVITY` |  |
 | `updatenote` | POST | `CompanyController@updateCompanyNote` | jwt | `URL_UPDATE_NOTES` |  |
 
@@ -101,6 +104,8 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 | `fetchOpencorporatesCompany` | POST | `CompanyController@fetchOpencorporate` | jwt | `URL_FETCH_OPENCORPORATES_COMPANY` |  |
 | `getApolloContact` | POST | `CompanyController@getApolloContact` | jwt | `URL_APOLLO_CONTACT` |  |
 | `getBizpediaContact` | POST | `CompanyController@getBizpediaContact` | jwt |  |  |
+| `getBulkContactsCompanies` | POST | `CompanyController@getBulkContactsCompanies` | jwt | `URL_GET_BULK_CONTACTS_COMPANIES` | FormData `route_id` or `list_id`, `source`, `page`, `per_page` (default 10) |
+| `getClaudeContactCounts` | POST | `CompanyController@getClaudeContactCounts` | jwt | `URL_GET_CLAUDE_CONTACT_COUNTS` | At most 10 `company_ids[]`; more returns 422 "Provide up to 10 company IDs." |
 | `getCongnismContact` | POST | `CompanyController@getCongnismContact` | jwt | `URL_CONGNISUM_CONTACT` |  |
 | `getContactDetail` | POST | `RouteController@getContactDetail` | jwt | `URL_CONTACT_DETAILS` |  |
 | `getOpencorporatesCompany` | POST | `CompanyController@getOpencorporatesC` | jwt | `URL_OPENCORPORATES_COMPANY` |  |
@@ -119,7 +124,7 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 |---|---|---|---|---|---|
 | `aiLeadGoogleSearch` | POST | `CompanyController@AILeadGoogleSearch` | jwt | `URL_GET_AI_COMPANIES_LIST` |  |
 | `getAILeads` | POST | `CompanyController@getAILeads` | jwt | `URL_GET_AI_COMPANIES` |  |
-| `getAILeadsV2` | POST | `CompanyController@getAILeadsV2` | jwt | `URL_GET_AI_COMPANIES_V2` | 0. Since web commit `abe88426` (2026-09-29), a request with `radius_miles` fails. See [API](api.md). |
+| `getAILeadsV2` | POST | `CompanyController@getAILeadsV2` | jwt | `URL_GET_AI_COMPANIES_V2` | 0. Since web commit `abe88426` (2026-09-29), a request with `radius_miles` returns 422. The app no longer sends it; the MCP `find_ai_leads` tool does for a field rep. See [API](api.md). |
 | `getAiLeadData` | GET | `CompanyController@getAiLeadData` | jwt | `URL_GET_AI_LEAD_DATA` | 0 |
 | `getTop50AILeads` | POST | `CompanyController@getTop50AILeads` | jwt | `URL_GET_TOP50_AI_COMPANIES` |  |
 | `getYelpLeads` | POST | `CompanyController@getYelpLeads` | jwt |  |  |
@@ -148,7 +153,7 @@ Totals: 145 routes, 120 behind JWT, 110 with a mobile constant.
 | `routeonboardingconversion` | POST | `RouteController@storeRouteOnboarding` | jwt | `URL_ROUTE_ONBOARDING_CONVERSION` |  |
 | `routeremove` | POST | `RouteController@routeRemove` | jwt | `URL_ROUTE_REMOVE` |  |
 | `shareRouteList` | POST | `RouteController@shareRouteList` | jwt | `SHARE_ROUTE_LIST` |  |
-| `simplerouteview` | POST | `RouteController@simpleRouteView` | jwt | `URL_GET_BASIC_ROUTE` |  |
+| `simplerouteview` | POST | `RouteController@simpleRouteView` | jwt | `URL_GET_BASIC_ROUTE` | `total_contacts` skips soft-deleted contacts since `4a1856f4` |
 | `updateroute` | POST | `RouteController@updateRoute` | jwt | `URL_USER_ROUTE_UPDATE` |  |
 | `updaterouteactive` | POST | `RouteController@updateRouteActive` | jwt | `URL_UPDATE_ROUTE_ACTIVE` |  |
 
@@ -224,6 +229,6 @@ These exports exist in `App/config/index.js` but no v2 route matches. Do not cal
 | `URL_VOICE_SESSION` | `voice/session` — GET, Voice Mode key |
 | `URL_VOICE_TOOL` | `voice/tool` — POST JSON, one tool call |
 
-The two voice constants are not Laravel routes yet. Staging returned 404 on 2026-09-28. In staging and dev builds, `App/voice/voiceApi.js` sends them to the reference voice server (`VOICE_DEMO_URL`) with JSON over `fetch`, not `API.post`. Shapes: [API](api.md#voice-mode-mobile).
+The two voice constants are not Laravel routes on `master` or `beta_react`. `App/voice/voiceApi.js` sends them to the voice server at `VOICE_DEMO_URL`, which follows the build (`App/config/index.js:43-45`), with JSON over `fetch`, not `API.post`. Shapes: [API](api.md#voice-mode-mobile).
 
 Web-link constants that are not API calls: `DYNAMIC_LOGIN` (`mobilelogin/`), `DYNAMIC_CREDIT_UPGRADE_LOGIN` (`mobilelogin/credits/`), `DYNAMIC_REFERRAL_LOGIN` (`mobilelogin/referral/`). They open the web app in Safari with the JWT, for plan and credit pages.
