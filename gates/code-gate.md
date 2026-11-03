@@ -7,7 +7,7 @@ Run this before calling new code done. Reviews: [mobile](../code/mobile-review.m
 | Repo | Mobile edits are under `TerriTool/`. Web edits are under `webterritool/`. |
 | Mobile screen | Class component, registered in `App/App.js`, calls `API.post` with FormData. Voice Mode is the one exception: its screens are function components on `useVoice()`, and its calls go through `App/voice/voiceApi.js` as JSON. The Google Calendar calls also send JSON, through `API.post(…, { asJson: true })` in `calendarSync.js` (`TT_80`). |
 | Realm | A table change raises `schemaVersion` in all three places in `App/storage/realm.js`. On 2026-11-02 it is 20 on `TT_80` and 18 on `Production`. |
-| Mobile URL | Uses a constant from `App/config/index.js`. Tests run against staging: `URL_BASE` is committed pointing at production, so switch it for the run and leave it out of the diff. |
+| Mobile URL | Uses a constant from `App/config/index.js`. Tests run against staging. The committed `URL_BASE` changes whenever someone builds (production on `Production`, staging on `TT_80` since `4bfea8b0`), so check it before the run and leave it out of the diff. |
 | Production fix | Starts on its own hotfix branch from `origin/Production` (mobile) or `origin/master` (web) and follows [On-call](../brains/on-call.md). A change to credits, billing, login, payments, or deleting data has a named person’s approval. |
 | Web route | Added in the classic, `manager`, or `hq` group that matches the page |
 | Web controller | Companies use `CompanylController`. Manager uses `App\Http\Controllers\Manager`. |

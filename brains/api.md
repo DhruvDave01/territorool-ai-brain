@@ -11,7 +11,7 @@ Checked 2026-11-02 against web `master` `d3f75449` (production) and `beta_react`
 | Surface | File |
 |---|---|
 | Mobile base and path constants | `TerriTool/App/config/index.js` appended to `URL_BASE` |
-| Bases | `URL_BASE` is committed as production, `https://app.territool.com/index.php/api/`, on `TT_80` and `Production` (`App/config/index.js:12`). Tests use staging, `https://staging.territool.com/index.php/api/` (commented at `:8`). |
+| Bases | `URL_BASE` is committed as production, `https://app.territool.com/index.php/api/`, on `Production` (`App/config/index.js:12`). `TT_80` has pointed at staging, `https://staging.territool.com/index.php/api/` (`:8`), since `4bfea8b0`; the committed value changes whenever someone builds. Tests use staging. |
 | v2 URIs | `webterritool/routes/api.php` — `$api->version('v2')` |
 | JWT | middleware `jwt.refresh` on the authenticated group |
 | Web pages | `webterritool/routes/web.php` |

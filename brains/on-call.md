@@ -2,7 +2,7 @@
 
 Open this page before you change anything because of a production bug, a Sentry issue or a customer report. It says where errors land, how to triage them, which branch the fix starts from, and what an AI agent may do on its own. It does not replace the feature page or the code brain for the stack: open those next.
 
-Read against mobile `Production` `6973a30d` and `TT_80` `daf50eeb`, web `master` `d3f75449` and `beta_react` `929f0c7f`, and the Sentry org on 2026-11-02. Source: [live code, 2026-11-02](../reviews/live-code-2026-11-02.md).
+Read against mobile `Production` `6973a30d` and `TT_80` `daf50eeb`, web `master` `d3f75449` and `beta_react` `929f0c7f`, and the Sentry org on 2026-11-02. Source: [live code, 2026-11-02](../reviews/live-code-2026-11-02.md). Rechecked on 2026-11-03: `TT_80` had moved one commit, to `4bfea8b0`, and no other branch had moved ([recheck](../reviews/live-code-2026-11-02.md#recheck-3-november)).
 
 Diwali 2026: Dhanteras is Friday 6 November, Diwali Sunday 8 November, Bhai Dooj Wednesday 11 November. The team is in India and the customers are in the US. A US working day, 9 am Eastern to 6 pm Pacific, runs from 7:30 pm to 7:30 am in India.
 
@@ -13,6 +13,7 @@ Diwali 2026: Dhanteras is Friday 6 November, Diwali Sunday 8 November, Bhai Dooj
 | Store app 4.4.74 and 4.4.75 | mobile `Production`, built 7 and 8 October | Old Sentry org `o202426` (project 5867661) and PostHog | No |
 | Builds 4.4.76 to 4.4.79 | mobile `TT_80`, 21 to 28 October | PostHog only (`ae24921a` removed Sentry) | No |
 | The next mobile build | mobile `TT_80` since `948c3f4d` (30 October) | Sentry `territool-llc` / `mobile-app` only | Simulator events only |
+| TestFlight, iOS 43.0 | mobile `TT_80` `4bfea8b0` (2 November), which points at staging | Sentry `mobile-app`, as environment `staging` | Not checked |
 | Web production | web `master` (28 October) | Sentry through the DSN in the server’s `.env`, and PostHog | No production events |
 | The next web deploy | web `beta_react` (`929f0c7f`) | Sentry `web-app`, server and browser, with replay | Local and staging only |
 
@@ -31,7 +32,7 @@ Second sources:
 1. Confirm it is real. Act on environment `production` at level `error` or `fatal`. Skip `development`, `local`, `demo` and `staging`. Skip info-level messages: the new mobile code sends usage events such as `dashboard_loaded` to Sentry as messages.
 2. Find the code the user is running. Match the version or deploy to the table above, then read that branch: `git show "origin/Production:<path>"` for the store app, `git show "origin/master:<path>"` for the web. Both local checkouts can be stale, so fetch first.
 3. Open the feature page for the screen or endpoint ([features](../features/README.md)), then the code brain: [mobile code](mobile-code.md), [web code](web-code.md) or [API](api.md).
-4. Reproduce on staging, `https://staging.territool.com`. Before a mobile test run, open `App/config/index.js` and set `URL_BASE` to the staging line. It is committed pointing at production.
+4. Reproduce on staging, `https://staging.territool.com`. Before a mobile test run, open `App/config/index.js` and set `URL_BASE` to the staging line. `Production` is committed pointing at production. `TT_80` points at staging since `4bfea8b0`, but the value changes whenever someone builds, so check it.
 5. Write the root-cause note below before any fix.
 6. Choose the fix path. A server-side fix reaches every app version at once. A mobile fix needs a store release, because there is no over-the-air update tool.
 
@@ -56,10 +57,10 @@ Checked:            draft review, code gate, staging test
 Mobile, GitHub `DhruvDave01/TerriTool_Mobile`:
 
 - `Production` is the store branch: 4.4.74 (365) at `6973a30d`. `Staging` is at `6da57043`, the `TT_80` commit that `Production` merged on 7 October.
-- `TT_80` is development and the default branch: 4.4.79 (370), 51 commits ahead of `Production`. The 30 October Sentry build reused 4.4.79 (370), so bump the version before the next upload.
+- `TT_80` is development and the default branch, at `4bfea8b0` (2 November), 52 commits ahead of `Production`. Android is still 4.4.79 (370), the number the 30 October Sentry build reused, so bump it before the next Android upload. iOS is 43.0 since `4bfea8b0`, the TestFlight upload. That commit also points `URL_BASE` at staging: a store build must switch it back to production.
 - `VoiceAgent`, `Calendar_Google_Microsoft`, `TT_Functional` and the `posthog-self-driving/*` branches are not release branches.
 - A hotfix starts from `origin/Production`, then merges forward into `TT_80`. A fix made only on `TT_80` does not reach store users.
-- `TT_80` release builds upload to Sentry and need `SENTRY_AUTH_TOKEN` on the build machine.
+- `TT_80` release builds upload source maps and debug symbols to Sentry when the build machine has `SENTRY_AUTH_TOKEN` or a `.env.sentry-build-plugin` file (git-ignored). Since `4bfea8b0`, an iOS build without either still succeeds but uploads nothing, so Sentry cannot map its stack traces back to the code.
 
 Web, Bitbucket `webterritool`:
 

@@ -41,7 +41,7 @@ Map of the seven brains: [brains/README.md](brains/README.md). Product rules: [p
 
 ## Hard rules
 
-1. Staging is the only environment named for tests: `https://staging.territool.com`. The mobile `URL_BASE` in `App/config/index.js` is committed pointing at production (`https://app.territool.com/index.php/api/`) on both `TT_80` and `Production`, with the staging line commented out. Developers switch the two lines to build, so the committed value changes from commit to commit. Before any test run, set `URL_BASE` to staging. Do not point new work or tests at production, and do not put a `URL_BASE` change in a fix.
+1. Staging is the only environment named for tests: `https://staging.territool.com`. The mobile `URL_BASE` in `App/config/index.js` is switched by hand between the staging line (`:8`) and the production line (`:12`), so the committed value changes from commit to commit. On 3 November `Production` pointed at production (`https://app.territool.com/index.php/api/`) and `TT_80` at staging, since `4bfea8b0` (the 2 November TestFlight upload). Read it before any test run or build: tests use staging, and a store build must use production. Do not point new work or tests at production, and do not put a `URL_BASE` change in a fix.
 2. Copy the nearest shipped screen. Do not invent a new visual language.
 3. Classic web, manager portal, and Admin HQ are three stacks. Do not mix fonts, CSS, or components across them.
 4. `composer.lock` installs Laravel **5.3.31**. `composer.json` also mentions `^7.0`. Write PHP 7.2-compatible code. Do not use Laravel 8+ or PHP 8 syntax.
